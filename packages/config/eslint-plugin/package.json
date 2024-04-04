@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/eslint-plugin",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "private": false,
   "description": "ESLint plugin for Bob Obringer's projects",
   "main": "dist/index.js",
