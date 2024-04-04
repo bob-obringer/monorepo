@@ -1,0 +1,17 @@
+name: Publish @bob-obringer/tw-color-schemes
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/design/tw-color-schemes/**
+  workflow_dispatch:
+    branches:
+      - main
+jobs:
+  publish:
+    uses: ./.github/workflows/_reusable-publish-package.yml
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
+    with:
+      package-path: packages/design/tw-color-schemes

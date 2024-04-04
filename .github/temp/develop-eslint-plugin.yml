@@ -1,0 +1,13 @@
+name: ESLint Plugin (develop)
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - packages/config/eslint-plugin/**
+  workflow_dispatch:
+jobs:
+  develop-bump-version:
+    uses: ./.github/workflows/_reusable-bump-package-version.yml
+    with:
+      package-path: packages/config/eslint-plugin

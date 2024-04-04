@@ -1,0 +1,10 @@
+{
+  "extends": "./dev.tsconfig.json",
+  "compilerOptions": {
+    "traceResolution": true,
+    "inlineSourceMap": true,
+    "inlineSources": true
+  },
+  "listEmittedFiles": true,
+  "listFiles": true
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@bob-obringer/monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo lint",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@bob-obringer/eslint-plugin": "workspace:*",
+    "@bob-obringer/tsconfig": "workspace:*",
+    "@types/node": "20.12.4",
+    "@types/react": "18.2.74",
+    "@types/react-dom": "18.2.24",
+    "eslint": "8.57.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
+    "prettier": "3.2.5",
+    "prettier-plugin-packagejson": "2.4.14",
+    "prettier-plugin-tailwindcss": "0.5.13",
+    "rimraf": "5.0.5",
+    "turbo": "latest",
+    "typescript": "5.4.3"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=8.9.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "next": "14.1.4",
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "ts-node": "10.9.2"
+    }
+  }
+}

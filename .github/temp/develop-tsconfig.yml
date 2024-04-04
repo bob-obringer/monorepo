@@ -1,0 +1,14 @@
+name: TSConfig (develop)
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - packages/config/tsconfig/**
+  workflow_dispatch:
+jobs:
+  develop-bump-version:
+    uses: ./.github/workflows/_reusable-bump-package-version.yml
+    with:
+      package-path: packages/config/tsconfig
+      skip-build: true

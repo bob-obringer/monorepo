@@ -1,0 +1,8 @@
+{
+  "extends": "@obringer/tsconfig/frontend-library/tsconfig.dev.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*.ts*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+}

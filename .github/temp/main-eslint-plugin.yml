@@ -1,0 +1,15 @@
+name: ESLint Plugin (main)
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/config/eslint-plugin/**
+  workflow_dispatch:
+jobs:
+  publish:
+    uses: ./.github/workflows/_reusable-deploy-package.yml
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
+    with:
+      package-path: packages/config/eslint-plugin

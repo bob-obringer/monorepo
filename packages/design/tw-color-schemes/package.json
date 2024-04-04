@@ -1,0 +1,33 @@
+{
+  "name": "@bob-obringer/tw-color-schemes",
+  "version": "0.0.28",
+  "private": false,
+  "description": "Helps manage multiple color schemes for tailwind",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "color",
+    "color-schemes",
+    "theming"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bob-obringer/monorepo.git"
+  },
+  "license": "MIT",
+  "author": "Bob Obringer <bob@obringer.net>",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "tailwindcss": "3.4.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.3"
+  }
+}

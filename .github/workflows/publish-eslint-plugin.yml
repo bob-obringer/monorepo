@@ -1,0 +1,17 @@
+name: Publish @bob-obringer/eslint-plugin
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/config/eslint-plugin/**
+  workflow_dispatch:
+    branches:
+      - main
+jobs:
+  publish:
+    uses: ./.github/workflows/_reusable-publish-package.yml
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
+    with:
+      package-path: packages/config/eslint-plugin
