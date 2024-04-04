@@ -5,6 +5,6 @@
   "description": "Shared TypeScript configuration for Bob Obringer's projects",
   "license": "MIT",
   "files": [
-    "**/*tsconfig.json"
+    "**/*tsconfig*.json"
   ]
 }
