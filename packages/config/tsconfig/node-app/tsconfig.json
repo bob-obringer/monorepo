@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["es2023"],
     "module": "es2020",
-    "target": "es2023",
+    "target": "esnext",
     "moduleResolution": "node",
     "incremental": true,
     "paths": {
