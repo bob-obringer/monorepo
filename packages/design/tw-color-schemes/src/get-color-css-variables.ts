@@ -1,9 +1,4 @@
-import type {
-  BaseColorScheme,
-  ColorSchemeComponentsReturnType,
-  ColorSchemeCore,
-  CoreColorsByScheme,
-} from "./types";
+import type { ColorsByScheme, ColorScheme } from "./types";
 import { getColorValue, getSelector, toKebabCase } from "./utilities";
 
 type Variables = {
@@ -33,24 +28,21 @@ type VariablesBySchemeSelector = {
  *
  * @param params - The parameters required for creating CSS variable classes.
  * @param params.namespace - The namespace for the CSS variable classes.
- * @param params.coreColorsByScheme - The core colors for the color schemes to create CSS variable classes for.
+ * @param params.colorsByScheme - The core colors for the color schemes to create CSS variable classes for.
  * @returns An object containing the CSS variable classes for each color scheme.
  */
-export function getCoreColorCssVariables<
-  T extends ColorSchemeCore,
-  U extends ColorSchemeComponentsReturnType,
->({
-  coreColorsByScheme,
+export function getColorCssVariables<T extends ColorScheme>({
+  colorsByScheme,
   namespace,
 }: {
   namespace: string;
-  coreColorsByScheme: CoreColorsByScheme<T, U>;
+  colorsByScheme: ColorsByScheme<T>;
 }): VariablesBySchemeSelector {
-  return Object.entries(coreColorsByScheme).reduce(
-    (acc, [schemeName, coreColors]) => ({
+  return Object.entries(colorsByScheme).reduce(
+    (acc, [schemeName, colors]) => ({
       ...acc,
       [getSelector(schemeName)]: createCssVariablesForScheme({
-        coreColors,
+        colors,
         namespace,
       }),
     }),
@@ -58,19 +50,16 @@ export function getCoreColorCssVariables<
   );
 }
 
-function createCssVariablesForScheme<
-  C extends ColorSchemeCore,
-  U extends ColorSchemeComponentsReturnType,
->({
-  coreColors,
+function createCssVariablesForScheme<C extends ColorScheme>({
+  colors,
   namespace,
 }: {
   namespace: string;
-  coreColors: BaseColorScheme<C, U>["core"];
+  colors: C;
 }): {
   [variableName: string]: string;
 } {
-  return Object.entries(coreColors).reduce((acc, [color, variants]) => {
+  return Object.entries(colors).reduce((acc, [color, variants]) => {
     Object.entries(variants).forEach(([variant, value]) => {
       acc[`--${namespace}-${color}-${toKebabCase(variant)}`] =
         getColorValue(value);

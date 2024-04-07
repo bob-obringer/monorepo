@@ -1,9 +1,7 @@
 import type {
   AdditionalColorScheme,
-  BaseColorScheme,
-  ColorSchemeComponentsReturnType,
-  ColorSchemeCore,
-  CoreColorsByScheme,
+  ColorsByScheme,
+  ColorScheme,
 } from "./types";
 import { BASE_SCHEMA_NAME, deepMerge } from "./utilities";
 
@@ -41,31 +39,25 @@ import { BASE_SCHEMA_NAME, deepMerge } from "./utilities";
  * @param baseScheme
  * @param additionalSchemes
  */
-export function getCoreColorsByScheme<
-  T extends ColorSchemeCore,
-  U extends ColorSchemeComponentsReturnType,
->({
+export function getColorsByScheme<T extends ColorScheme>({
   baseScheme,
-  additionalSchemes,
+  schemes,
 }: {
-  baseScheme: BaseColorScheme<T, U>;
-  additionalSchemes?: Record<
-    string,
-    AdditionalColorScheme<BaseColorScheme<T, U>>
-  >;
-}): CoreColorsByScheme<T, U> {
-  const coreAdditionalSchemes = additionalSchemes
-    ? Object.entries(additionalSchemes).reduce(
+  baseScheme: T;
+  schemes?: Record<string, AdditionalColorScheme<T>>;
+}): ColorsByScheme<T> {
+  const additionalSchemes = schemes
+    ? Object.entries(schemes).reduce(
         (accum, [schemeName, scheme]) => ({
           ...accum,
-          [schemeName]: deepMerge(baseScheme.core, (scheme.core as T) ?? {}),
+          [schemeName]: deepMerge(baseScheme, (scheme as T) ?? {}),
         }),
         {},
       )
     : {};
 
   return {
-    [BASE_SCHEMA_NAME]: baseScheme.core,
-    ...coreAdditionalSchemes,
+    [BASE_SCHEMA_NAME]: baseScheme,
+    ...additionalSchemes,
   };
 }

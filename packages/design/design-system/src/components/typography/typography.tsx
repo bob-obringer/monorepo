@@ -5,7 +5,7 @@ const typographyVariants = tv({
   base: "text-",
   variants: {
     size: {
-      small: "bg-red",
+      small: "",
     },
   },
 });
@@ -19,7 +19,7 @@ type TypographyProps = TypographyVariants & {
 export function H1(props: TypographyProps) {
   return (
     <div>
-      <h1 className="">{props.children}</h1>
+      <h1 className="text">{props.children}</h1>
     </div>
   );
 }
