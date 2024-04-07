@@ -1,14 +1,9 @@
-import type {
-  BaseColorScheme,
-  ColorVariants,
-  ColorSchemeCore,
-  ColorSchemeComponentsReturnType,
-} from "./types";
+import type { ColorVariants, ColorScheme } from "./types";
 import { toKebabCase } from "./utilities";
 
-type ThemeCoreColors = {
-  [coreColorName: string]: {
-    [coreColorVariant: string]: string;
+type ThemeColors = {
+  [colorName: string]: {
+    [colorVariant: string]: string;
   };
 };
 
@@ -36,21 +31,18 @@ type ThemeCoreColors = {
  * @param options.namespace - The namespace for the colors.
  * @return The core colors.
  */
-export function getCoreColorConfig<
-  T extends ColorSchemeCore,
-  U extends ColorSchemeComponentsReturnType,
->({
+export function getColorConfig<T extends ColorScheme>({
   baseScheme,
   namespace,
 }: {
-  baseScheme: BaseColorScheme<T, U>;
+  baseScheme: T;
   namespace: string;
-}): ThemeCoreColors {
-  return Object.entries(baseScheme.core).reduce(
-    (coreColorAccum, [coreColorName, colorVariants]) => ({
-      ...coreColorAccum,
-      [`${coreColorName}Color`]: getCoreColorVariants({
-        coreColorName,
+}): ThemeColors {
+  return Object.entries(baseScheme).reduce(
+    (colorAccum, [colorName, colorVariants]) => ({
+      ...colorAccum,
+      [`${colorName}Color`]: getColorVariants({
+        colorName,
         colorVariants,
         namespace,
       }),
@@ -59,14 +51,14 @@ export function getCoreColorConfig<
   );
 }
 
-function getCoreColorVariants({
+function getColorVariants({
   colorVariants,
   namespace,
-  coreColorName,
+  colorName,
 }: {
   colorVariants: ColorVariants;
   namespace: string;
-  coreColorName: string;
+  colorName: string;
 }) {
   return Object.entries(colorVariants).reduce(
     (acc, [variantName, variantValue]) => {
@@ -81,8 +73,10 @@ function getCoreColorVariants({
       }
       return {
         ...acc,
-        [variantName === "default" ? "DEFAULT" : toKebabCase(variantName)]:
-          `rgb(var(--${namespace}-${coreColorName}-${toKebabCase(
+        [variantName === "default"
+          ? "DEFAULT"
+          : `color-${toKebabCase(variantName)}`]:
+          `rgb(var(--${namespace}-${colorName}-${toKebabCase(
             variantName,
           )}) / ${alpha})`,
       };

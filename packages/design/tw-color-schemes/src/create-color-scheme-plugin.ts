@@ -1,31 +1,28 @@
 import plugin from "tailwindcss/plugin";
-import type {
-  ColorSchemeCore,
-  BaseColorScheme,
-  AdditionalSchemesByName,
-  ColorSchemeComponentsReturnType,
-} from "./types";
-import { getCoreColorConfig } from "./get-core-color-config";
-import { getCoreColorsByScheme } from "./get-core-colors-by-scheme";
-import { getCoreColorCssVariables } from "./get-core-color-css-variables";
+import type { AdditionalSchemesByName, ColorScheme } from "./types";
+import { getColorConfig } from "./get-color-config";
+import { getColorsByScheme } from "./get-colors-by-scheme";
+import { getColorCssVariables } from "./get-color-css-variables";
 
-export function createColorSchemePlugin<
-  T extends ColorSchemeCore,
-  U extends ColorSchemeComponentsReturnType,
->(
-  baseScheme: BaseColorScheme<T, U>,
-  additionalSchemes?: AdditionalSchemesByName<T, U>,
-  { namespace = "twcs" }: { namespace?: string } = {},
+export function createColorSchemePlugin<T extends ColorScheme>(
+  baseScheme: T,
+  {
+    schemes = {},
+    namespace = "twcs",
+  }: {
+    schemes?: AdditionalSchemesByName<T>;
+    namespace?: string;
+  } = {},
 ) {
-  const coreColorConfig = getCoreColorConfig({ baseScheme, namespace });
+  const baseColorConfig = getColorConfig({ baseScheme, namespace });
 
-  const coreColorsByScheme = getCoreColorsByScheme({
+  const colorsByScheme = getColorsByScheme({
     baseScheme,
-    additionalSchemes,
+    schemes,
   });
 
-  const coreColorCssVariableClasses = getCoreColorCssVariables({
-    coreColorsByScheme,
+  const cssVariableClasses = getColorCssVariables({
+    colorsByScheme,
     namespace,
   });
 
@@ -35,7 +32,7 @@ export function createColorSchemePlugin<
      */
     function () {
       return function ({ addBase }) {
-        addBase([coreColorCssVariableClasses]);
+        addBase([cssVariableClasses]);
       };
     },
     /*
@@ -46,7 +43,7 @@ export function createColorSchemePlugin<
       return {
         // todo: allow direct customization of theme
         theme: {
-          extend: { ...coreColorConfig },
+          extend: { ...baseColorConfig },
         },
       };
     },

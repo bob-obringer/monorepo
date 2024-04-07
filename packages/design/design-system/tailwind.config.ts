@@ -1,12 +1,14 @@
 import {
   colorSchemePlugin,
-  themePlugin,
   themeConfig,
+  themePlugin,
 } from "@bob-obringer/theme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
   ...themeConfig,
-  content: ["./**/*.{js,ts,jsx,tsx,mdx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   plugins: [colorSchemePlugin, themePlugin],
 };
+
+// console.log(colorSchemePlugin(null));

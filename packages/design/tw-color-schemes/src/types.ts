@@ -1,11 +1,11 @@
-import type { CSSProperties } from "react";
+// import type { CSSProperties } from "react";
 
 export type ColorVariants = {
   default: string;
   [variantName: string]: string;
 };
 
-export type ColorSchemeCore = {
+export type ColorScheme = {
   accent?: ColorVariants;
   border?: ColorVariants;
   background?: ColorVariants;
@@ -24,49 +24,32 @@ export type DeepSubset<T> = {
   [K in keyof T]?: T[K] extends object ? DeepSubset<T[K]> : T[K];
 };
 
-type CSSPropertiesObject = {
-  [key in keyof CSSProperties]: string;
-};
+// type CSSPropertiesObject = {
+//   [key in keyof CSSProperties]: string;
+// };
 
-export type RecursiveCSSProperties = CSSPropertiesObject & {
-  [key: string]:
-    | CSSPropertiesObject[keyof CSSPropertiesObject]
-    | RecursiveCSSProperties;
-};
+// export type RecursiveCSSProperties = CSSPropertiesObject & {
+//   [key: string]:
+//     | CSSPropertiesObject[keyof CSSPropertiesObject]
+//     | RecursiveCSSProperties;
+// };
 
-export type ColorSchemeComponentsReturnType = {
-  [className: string]: RecursiveCSSProperties;
-};
-
-export type BaseColorScheme<
-  Core extends ColorSchemeCore,
-  Components extends ColorSchemeComponentsReturnType,
-> = {
-  core: Core;
-  components?: (core: Core) => Components;
-};
-
+// export type ColorSchemeComponentsReturnType = {
+//   [className: string]: RecursiveCSSProperties;
+// };
 export type AdditionalColorScheme<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  BaseScheme extends BaseColorScheme<any, any>,
+  BaseScheme extends ColorScheme,
 > = {
   [K in keyof BaseScheme]?: BaseScheme[K] extends object
     ? DeepSubset<BaseScheme[K]>
     : BaseScheme[K];
 };
 
-export type AdditionalSchemesByName<
-  Core extends ColorSchemeCore,
-  Components extends ColorSchemeComponentsReturnType,
-> = {
-  [schemeName: string]: AdditionalColorScheme<
-    BaseColorScheme<Core, Components>
-  >;
+export type AdditionalSchemesByName<BaseScheme extends ColorScheme> = {
+  [schemeName: string]: AdditionalColorScheme<BaseScheme>;
 };
 
-export type CoreColorsByScheme<
-  Core extends ColorSchemeCore,
-  Components extends ColorSchemeComponentsReturnType,
-> = {
-  [colorSchemeName: string]: BaseColorScheme<Core, Components>["core"];
+export type ColorsByScheme<BaseScheme extends ColorScheme> = {
+  [colorSchemeName: string]: BaseScheme;
 };
