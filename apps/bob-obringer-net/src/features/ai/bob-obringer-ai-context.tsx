@@ -25,11 +25,13 @@ export function BobObringerAiProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!isFullScreen && chat.isLoading) {
+      document.body.style.overflow = "hidden";
       setIsFullScreen(true);
     }
   }, [chat.isLoading, isFullScreen]);
 
   function close() {
+    document.body.style.overflow = "auto";
     setIsFullScreen(false);
   }
 

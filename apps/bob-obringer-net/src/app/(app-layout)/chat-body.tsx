@@ -90,9 +90,10 @@ function Info() {
             bob.obringer.net Assistant Beta
           </div>
         </div>
-        {`The bob.obringer.net AI assistant is in active development. Today, You
-        can ask it questions about Bob's bio and experience. Soon, it will also
-        include information about his tech stack, additional projets, articles
+        {`Hi, I'm bob.obringer.net's AI assistant and I'm still under development.
+        Bob needs to do much more tuning and help make me smarter, but as of today, you
+        can already ask me questions about Bob's bio and experience. Soon, I will also
+        be able to tell you more about about his tech stack, additional projets, articles
         and more. Stay tuned!`}
       </div>
     </div>
