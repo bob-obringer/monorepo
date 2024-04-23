@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     model: "claude-3-haiku-20240307",
     streaming: true,
     temperature: 0.5,
-    maxTokens: 50000,
+    maxTokens: 2048,
     apiKey:
       "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",
   });
