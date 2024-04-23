@@ -29,12 +29,10 @@ export function AppFooter({ className }: { className?: string }) {
   useEffect(scrollToBottom, [messages, isFullScreen]);
 
   return (
-    <footer
+    <div
       className={cx(
         className,
-        isFullScreen
-          ? "z-20 h-svh bg-[#0D141F]"
-          : "bg-color-primary h-28 bg-opacity-25 backdrop-blur-md md:h-40",
+        isFullScreen ? "z-20 h-svh bg-[#0D141F]" : "h-28 md:h-40",
         "fixed bottom-0 flex w-full flex-col items-center overflow-hidden transition-all duration-500 ease-in-out",
       )}
     >
@@ -56,7 +54,7 @@ export function AppFooter({ className }: { className?: string }) {
         </div>
       </div>
       <FooterFooter />
-    </footer>
+    </div>
   );
 }
 
@@ -80,7 +78,7 @@ function FooterFooter() {
           <input
             className="bg-color-secondary w-full rounded border border-[#333333] p-2 shadow-xl focus:outline-1"
             value={input}
-            placeholder="Chat with my bio!"
+            placeholder="Chat with bob.obringer.net AI assistant"
             onChange={handleInputChange}
           />
         </form>
