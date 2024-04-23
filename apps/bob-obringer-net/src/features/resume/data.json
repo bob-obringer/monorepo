@@ -1,0 +1,214 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Bob Obringer",
+    "label": "Software Engineer",
+    "email": "bob@obringer.net",
+    "url": "https://bob.obringer.net",
+    "summary": "",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "bobobringer",
+        "url": ""
+      },
+      {
+        "network": "LinkedIn",
+        "username": "bobobringer",
+        "url": ""
+      },
+      {
+        "network": "Twitter",
+        "username": "bobringer",
+        "url": ""
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "sona",
+      "company": "Sona",
+      "position": "Head of Engineering",
+      "website": "https://sonu.stream",
+      "startDate": "2023-03-01",
+      "summary": "",
+      "highlights": [
+        "Lead engineering team responsible for the streaming music app and marketplace, artist dashboard, infrastructure, and smart contract development.",
+        "Responsible for all web application architecture, including component design and page rendering, front end blockchain integration, and integration with back end services. This includes ownership of the entire Sona codebase in TurboRepo.",
+        "Migrated the music app from client rendered pages to the latest version of\nNextJS and the App Router, using React Server Components and Server\nActions, hosted on Vercel. This migration significantly improved performance,\nnearly eliminated all custom APIs and improved developer velocity and quality.",
+        "Built Sona Wallet, integrating our own embedded wallet supplied by Privy,\nand user supplied wallets via MetaMask or WalletConnect. Wallet includes\nStripe fiat to crypto onramp, and Ansible Beam crypto to fiat offramp.",
+        "Built Sona’s Reserve Auction feature, allowing Artists to auction an NFT\nrepresenting a song. In addition to all front-end features, I was responsible\nfor indexing the blockchain for all auction and NFT related events using\nPonder.",
+        "Created transactional e-mail system to automate the creation and sending of\nrich React and Tailwind based e-mails from any Sona application.",
+        "Built Tailwind and RadixUI based Design System and component library.",
+        "Built custom Redis/Upstash data caching mechanism to replace the built in\nNextJS/Vercel cache."
+      ]
+    },
+    {
+      "name": "niftys",
+      "company": "Niftys",
+      "position": "Principal Front End Engineer",
+      "startDate": "2021-01-01",
+      "endDate": "2023-01-01",
+      "summary": "",
+      "highlights": [
+        "Responsible for leading all new front end architecture at Nifty’s",
+        "Built new multi chain tools, allowing front end developers to work with one or more blockchains at any time as\neasily as they worked with traditional web technologies.",
+        "Architected new community focused section of the website, allowing communities and brands to create their own\nNFT driven experiences for their members and fans.",
+        "Architected new application engine which will allow communities to design and create their own “apps” by piecing\ntogether various mechanics around NFTs.",
+        "Integrated payment and crypto onramp systems with Stripe, Wyre, and Moonpay",
+        "Built new optimized media component which allows a developer to reference an NFT ID and automatically display\nan optimized, cropped, and scaled version of it’s image for any use case, static thumbnails for video lists, or Mux\noptimized video when viewing details."
+      ]
+    },
+    {
+      "name": "grubhub",
+      "company": "Grubhub",
+      "position": "Staff Engineer",
+      "startDate": "2019-01-01",
+      "endDate": "2021-01-01",
+      "summary": "",
+      "highlights": [
+        "Lead early development of next generation front end architecture for grubhub.com (Next.js, React, TypeScript)",
+        "Assisted LyftGrubhub team in using Next.js to develop the statically generated lyftgrubhub.com (Next.js, React,\nTypeScript)",
+        "Developed tools to help migrate grubhub.com from Preact to React (AST)",
+        "Redesigned release process to support daily releases (Pager Duty, QA, End to End Tests)",
+        "Streamlined end to end testing and analysis (TestCafe, ReportPortal)",
+        "As part of new cross organization front end platform team, developed standard libraries to be used by all web\nteams and applications (TypeScript)"
+      ]
+    },
+    {
+      "name": "jet",
+      "company": "Jet.com (Walmart Labs)",
+      "position": "Senior Systems Engineer / Architect",
+      "startDate": "2019-01-01",
+      "endDate": "2021-01-01",
+      "summary": "",
+      "highlights": [
+        "Lead experimental performance focused rearchitecture of Jet product page, cutting \"first paint\" time in half, and\n\"time to interactive\" by over 80% (Next.js, React, Apollo, GraphQL, Node.js, Sass)",
+        "Helped architect specialized experiences for different “departments” and brands such as Apple and Nike (React,\nRedux, Styled Components)",
+        "Added full WAI-ARIA Accessibility functionality for global site navigation (React, JavaScript, HTML)",
+        "Migrated significant portions of the site from legacy CMS to new Walmart CMS (React, Redux)",
+        "Responsible for tracking down memory leaks and other server side performance issues as we completed the\ntransition to Next.js (Next.js, Node.js)",
+        "Worked to ensure full PCI Security Standards compliance (React, Redux, Next.js)"
+      ]
+    },
+    {
+      "name": "national-hockey-league-2",
+      "company": "National Hockey League",
+      "position": "Senior Developer (Consultant)",
+      "startDate": "2013-01-01",
+      "endDate": "2017-01-01",
+      "summary": "",
+      "highlights": [
+        "Developed custom UI framework that provided a foundation for new applications, including components, theming\nand a universal API (ExtJS, Java, MySQL, AGRest, Sass)",
+        "Developed build tools in order to manage our homegrown package repository, including build, deploying, version\nbumping and tagging (Node.js, Sencha CMD, npm, git)",
+        "Developed suite of fully responsive applications to manage officials, including scheduling, calendars, reporting,\ncontacts, injury reporting, and several others (ExtJS, Java, MySQL, AGRest)",
+        "Developed mobile application allowing general managers to make roster changes from their phones (Sencha\nTouch, Java)",
+        "Developed application to manage and report on all league marketing spending (ExtJS, Java, MySQL)",
+        "Consulted on introduction of CI/CD tools including source management, security auditing, and build and deploy\npipelines (Bitbucket, Bamboo, Sonatype Nexus)"
+      ]
+    },
+    {
+      "name": "morgan-stanley-wealth-management",
+      "company": "Morgan Stanley Wealth Management",
+      "position": "Senior Developer (Consultant)",
+      "startDate": "2013-01-01",
+      "endDate": "2013-01-01",
+      "summary": "",
+      "highlights": [
+        "Developed reporting systems for high net worth clients, included components to allow advisers to visit with clients\nand interact directly with reports, research, and account information on tablets or laptops (ExtJS)",
+        "Modernized and redesigned project structure to encourage better decoupling of components, provide better\nscalability, and make it easier to maintain and enhance (ExtJS, Sencha CMD)",
+        "Worked with team developing REST API to standardize on a custom protocol to work well with our UI framework\n(ExtJS, JavaScript, Java)"
+      ]
+    },
+    {
+      "name": "national-hockey-league-1",
+      "company": "National Hockey League",
+      "position": "Senior Developer and Architect (Consultant)",
+      "startDate": "2005-01-01",
+      "endDate": "2013-01-01",
+      "summary": "",
+      "highlights": [
+        "Designed and managed the development of league intranet, consolidating all applications in a single, consistent\ninterface. (ExtJS, Sencha Touch, Lotus Notes and Domino, MySQL)",
+        "Developed authentication and user administration system using a combination of Domino Directory, Microsoft\nActive Directory and MySQL to provide league employees, team employees and external partners with a single sign\nin for both new and legacy applications (ExtJS, Lotus Domino Directory, Microsoft Active Directory, MySQL)",
+        "Managed migration of several applications from Lotus Notes to new ExtJS/Java environment, including Media\nGame Notes, Amateur Scouting, HR Systems, Team Finance and Analytics, Brand Asset Management and various\nother applications. (ExtJS, Java)",
+        "Developed framework to automatically generate views and data stores from Lotus Notes views, enabling the league\nto quickly deliver web based front ends to legacy Lotus Notes applications (ExtJS, Lotus Notes and Domino,\nLongana)",
+        "Developed REST based framework and API that included support for filtering, sorting, paging and all other options\nrequired by front end data store functionality (ExtJS, Java, AGRest, JaxRS, Apache Cayenne)"
+      ]
+    },
+    {
+      "name": "globecon",
+      "company": "Globecon",
+      "position": "Senior Developer, Administrator, Tech Lead (Consultant)",
+      "startDate": "2002-01-01",
+      "endDate": "2004-01-01",
+      "summary": "",
+      "highlights": [
+        "Lead a team of four in development of a financial learning management system (Lotus Notes and Domino,\nLotusScript, JavaScript, HTML, CSS)",
+        "Designed advanced menu system customized for the training needs for each client (Lotus Notes and Domino,\nJavaScript, HTML, CSS)",
+        "Designed and developed system to automatically generate nightly Excel reports for each client. (Lotus Notes and\nDomino, COM/VBA, Excel)",
+        "NT and Domino administration for approximately 15 partitioned domino servers (Windows NT, Lotus Domino)",
+        "Administered network including DNS, Firewall and user management (Unix)",
+        "Responsible for developing all internal applications (Lotus Notes and Domino, JavaScript, HTML, CSS)"
+      ]
+    },
+    {
+      "name": "jpmorgan-chase",
+      "company": "JPMorgan Chase",
+      "position": "Engineer (Consultant)",
+      "startDate": "2000-01-01",
+      "endDate": "2002-01-01",
+      "summary": "",
+      "highlights": [
+        "Designed and developed the web based intranet for the derivatives group (Lotus Notes and Domino, JavaScript,\nHTML, CSS)",
+        "Designed and developed web based front end for the base metals trading group in coordination with the\nmiddleware and back end development teams (Lotus Notes and Domino, JavaScript, HTML, CSS)",
+        "Designed and developed system for senior management to submit, discuss, review and approve new financial\nproducts (Lotus Notes and Domino)",
+        "Maintained approximately 35 operational applications for the wholesale bank (Lotus Notes and Domino)"
+      ]
+    },
+    {
+      "name": "broadview",
+      "company": "Broadview",
+      "position": "Senior Developer, Administrator, Team Lead",
+      "startDate": "1999-01-01",
+      "endDate": "2000-01-01",
+      "summary": "",
+      "highlights": [
+        "Maintained various applications used to collect and analyze data on thousands of telecommunications, media and\ninternet companies to assist in advising clients and structuring mergers and acquisitions (Lotus Notes)",
+        "Created process to automate presentation generation for M&A proposals (Lotus Notes, COM/VBA, PowerPoint)",
+        "Implemented a new, independent domain for a new venture capital group and migrated all users and applications\nto the new environment (Lotus Domino)",
+        "Supervised a junior developer and junior administrator (Lotus Notes and Domino)"
+      ]
+    },
+    {
+      "name": "bestfoods",
+      "company": "Bestfoods",
+      "position": "Developer, Administrator",
+      "startDate": "1998-01-01",
+      "endDate": "1999-01-01",
+      "summary": "",
+      "highlights": [
+        "Developed a flexible web based intranet for the North American Marketing group (Lotus Notes and Domino,\nJavaScript, HTML, CSS)",
+        "Developed back office inventory system (Lotus Notes)",
+        "Trained end users on the use of Lotus Notes as we introduced it for mail, calendaring and applications. (Lotus\nNotes)",
+        "Developed and maintained internal applications for 4,000 users in North America (Lotus Notes)",
+        "Implemented mail, calendaring at a new joint venture between Bestfoods and Betty Crocker (Lotus Domino)"
+      ]
+    },
+    {
+      "name": "prudential-healthcare",
+      "company": "Prudential Healthcare",
+      "position": "Senior Developer, Administrator, Team Lead",
+      "startDate": "1991-01-01",
+      "endDate": "1998-01-01",
+      "summary": "",
+      "highlights": [
+        "Spent three years processing health and dental insurance claims before moving to engineering to work on the\nclaims systems.",
+        "Worked as a liaison between business units and programming staff to specify changes and enhancements to the\nclaims systems.",
+        "Developed test plans and performed quality assurance for those changes.",
+        "Developed reports detailing production and quality of 48 claims offices throughout the United States, used to assist\nin analysis during consolidation of offices to 4 regional centers (Microsoft Access)",
+        "Worked with Oracle, Netscape, Sun Microsystems and a team of four analysts in development of the healthcare\ninsurance industry’s first web based benefits management system (Java, HTML)",
+        "Worked closely with clients such as Cincinnati Bell, Johnson and Johnson, and PSE&G to analyze methods for\nintegrating our platform with their internal systems"
+      ]
+    }
+  ]
+}

@@ -1,10 +1,9 @@
 {
   "name": "@bob-obringer/tsconfig",
-  "version": "0.0.28",
-  "private": false,
-  "description": "Shared TypeScript configuration for Bob Obringer's projects",
+  "version": "0.0.1",
+  "private": true,
   "license": "MIT",
   "files": [
-    "**/*tsconfig*.json"
+    "**/*tsconfig.json"
   ]
 }
