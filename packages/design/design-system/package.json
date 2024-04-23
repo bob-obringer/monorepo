@@ -2,6 +2,7 @@
   "name": "@bob-obringer/design-system",
   "version": "0.0.1",
   "description": "Bob Obringer Design System",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -11,6 +12,7 @@
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "@react-aria/button": "3.9.3",
     "@react-aria/focus": "3.16.2",
     "@react-aria/interactions": "3.21.1",
@@ -20,7 +22,10 @@
     "@react-stately/data": "3.11.2",
     "@react-stately/utils": "3.9.1",
     "@react-types/button": "3.9.2",
-    "@react-types/shared": "3.22.1"
+    "@react-types/shared": "3.22.1",
+    "clsx": "^2.1.0",
+    "react-aria-components": "^1.1.1",
+    "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@bob-obringer/theme": "workspace:*",

@@ -1,5 +1,5 @@
 {
-  "extends": "@bob-obringer/tsconfig/frontend-library/tsconfig.dev.json",
+  "extends": "@bob-obringer/tsconfig/backend-library/tsconfig.dev.json",
   "compilerOptions": {
     "outDir": "./dist"
   },

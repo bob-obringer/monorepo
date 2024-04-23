@@ -1,35 +1,60 @@
 import { createColorSchemePlugin } from "@bob-obringer/tw-color-schemes";
+import darkMode from "./color/dark-mode.json";
 
-export const colorSchemePlugin = createColorSchemePlugin(
-  {
-    background: {
-      default: "#888888",
-      primary: "#333333",
-      secondary: "#444444",
-    },
-    text: {
-      default: "#ffffff",
-      primary: "#000000",
-      secondary: "#888888",
-      tertiary: "#aaaaaa",
-      disabled: "#dddddd",
-    },
+export const colorSchemePlugin = createColorSchemePlugin({
+  background: {
+    default: darkMode.mauve["1"].value,
+    primary: darkMode.mauve["1"].value,
+    secondary: darkMode.mauve["2"].value,
+    tertiary: darkMode.mauve["3"].value,
+    alt: darkMode.sky["1"].value,
+    altSecondary: darkMode.sky["2"].value,
+    transparent: "rgba(0, 0, 0, 0.0)",
+    // Buttons
+    button: darkMode.mauve["12"].value,
+    buttonHover: darkMode.mauve["11"].value,
+    buttonSecondary: darkMode.mauve["2"].value,
+    buttonSecondaryHover: darkMode.mauve["1"].value,
+    buttonNegative: darkMode.ruby["2"].value,
+    buttonNegativeHover: darkMode.ruby["1"].value,
+    buttonPositive: darkMode.grass["2"].value,
+    buttonPositiveHover: darkMode.grass["1"].value,
+    buttonWarning: darkMode.orange["2"].value,
+    buttonWarningHover: darkMode.orange["1"].value,
+    buttonDisabled: "rgba(255, 255, 255, 0.03)",
   },
-  {
-    schemes: {
-      light: {
-        background: {
-          default: "#ffffff",
-          primary: "#f9f9f9",
-        },
-        text: {
-          default: "#000000",
-          primary: "#000000",
-          secondary: "#444444",
-          tertiary: "#666666",
-          disabled: "#888888",
-        },
-      },
-    },
+  text: {
+    default: darkMode.mauve["12"].value,
+    primary: darkMode.mauve["12"].value,
+    secondary: darkMode.mauve["11"].value,
+    tertiary: darkMode.mauve["10"].value,
+    positive: darkMode.grass["11"].value,
+    negative: darkMode.ruby["11"].value,
+    warning: darkMode.orange["11"].value,
+    link: darkMode.sky["8"].value,
+    linkHover: darkMode.sky["9"].value,
+    disabled: "rgba(255, 255, 255, 0.19)",
+    // Buttons
+    button: darkMode.mauve["1"].value,
+    buttonSecondary: darkMode.mauve["9"].value,
   },
-);
+  border: {
+    default: "rgba(255, 255, 255, 0.82)",
+    primary: "rgba(255, 255, 255, 0.82)",
+    secondary: "rgba(255, 255, 255, 0.29)",
+    tertiary: "rgba(255, 255, 255, 0.19)",
+    disabled: "rgba(255, 255, 255, 0.11)",
+    // Buttons
+    button: "rgba(255, 255, 255, 0.29)",
+    buttonHover: "rgba(255, 255, 255, 0.52)",
+    buttonSecondary: "rgba(255, 255, 255, 0.19)",
+    buttonSecondaryHover: "rgba(255, 255, 255, 0.29)",
+    buttonNegative: darkMode.ruby["8"].value,
+    buttonNegativeHover: darkMode.ruby["9"].value,
+    buttonPositive: darkMode.grass["11"].value,
+    buttonPositiveHover: darkMode.grass["11"].value,
+    buttonWarning: darkMode.orange["11"].value,
+    buttonWarningHover: darkMode.orange["11"].value,
+    buttonDisabled: "rgba(255, 255, 255, 0.03)",
+  },
+});
