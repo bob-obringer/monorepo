@@ -49,16 +49,19 @@ export const typography = {
   ".typography-display-large": {
     ...defaults,
     ...mediumFontWeight,
+    ...expandedFontFamily,
     ...fontAndLineSize(57, 64),
   },
   ".typography-display-medium": {
     ...defaults,
     ...mediumFontWeight,
+    ...expandedFontFamily,
     ...fontAndLineSize(45, 52),
   },
   ".typography-display-small": {
     ...defaults,
     ...mediumFontWeight,
+    ...expandedFontFamily,
     ...fontAndLineSize(36, 44),
   },
 

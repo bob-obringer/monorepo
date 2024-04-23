@@ -1,0 +1,19 @@
+{
+  "name": "@bob-obringer/nextjs-fonts",
+  "version": "0.0.1",
+  "description": "Bob Obringer's NextJS Fonts",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist node_modules .turbo",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "devDependencies": {
+    "next": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": "workspace:*"
+  }
+}
