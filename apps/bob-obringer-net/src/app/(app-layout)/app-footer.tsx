@@ -33,7 +33,7 @@ export function AppFooter({ className }: { className?: string }) {
       className={cx(
         className,
         isFullScreen
-          ? "z-20 h-screen bg-[#0D141F]"
+          ? "z-20 h-svh bg-[#0D141F]"
           : "bg-color-primary h-28 bg-opacity-25 backdrop-blur-md md:h-40",
         "fixed bottom-0 flex w-full flex-col items-center overflow-hidden transition-all duration-500 ease-in-out",
       )}
