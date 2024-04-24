@@ -52,7 +52,7 @@ export function ExperienceLayoutNav({
       }
     >
       {!selectedCompany && <ExperienceSubTitle />}
-      <ExperienceList />
+      <ExperienceList selectedCompany={selectedCompany} />
     </nav>
   );
 }
