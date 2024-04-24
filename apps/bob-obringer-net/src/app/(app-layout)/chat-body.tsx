@@ -15,7 +15,9 @@ export function ChatBody() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
   };
-  useEffect(scrollToBottom, [messages]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <>

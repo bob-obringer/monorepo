@@ -4,6 +4,17 @@ import { ReactNode, useEffect, useState } from "react";
 import { useBobObringerAi } from "@/features/ai/bob-obringer-ai-context";
 import NextLink from "next/link";
 
+function debounce<F extends (...args: never[]) => unknown>(
+  func: F,
+  delay: number,
+) {
+  let debounceTimer: number | undefined;
+  return (...args: Parameters<F>): ReturnType<F> | void => {
+    clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => func(...args), delay);
+  };
+}
+
 export function ExperienceLayoutNav({
   selectedCompany,
 }: {
@@ -13,22 +24,21 @@ export function ExperienceLayoutNav({
 
   const [navLeft, setNavLeft] = useState<number | null>(null);
 
-  // Function to handle resize
-  function handleResize() {
+  const handleResize = debounce(() => {
     const padding = Math.max((window.innerWidth - 768 - 192 - 30) / 2, 4);
     setNavLeft(padding);
-  }
+  }, 5);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [handleResize]);
 
   useEffect(() => {
     handleResize();
-  }, [selectedCompany]);
+  }, [handleResize, selectedCompany]);
 
   return (
     <nav
