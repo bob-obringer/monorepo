@@ -3,7 +3,7 @@
 import { useBobObringerAi } from "@/features/ai/bob-obringer-ai-context";
 import { Button, cx, Text } from "@bob-obringer/design-system";
 import NextLink from "next/link";
-import { ReactNode } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import {
   faUser,
   faHistory,
@@ -78,6 +78,11 @@ function Footer() {
   const segments = useSelectedLayoutSegments();
   const segment = segments[0] ?? "";
 
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    handleInputChange(event);
+    event.target.blur();
+  }
+
   return (
     <footer className="mx-auto flex h-28 w-full max-w-screen-sm flex-col justify-around py-3 md:h-40">
       <form onSubmit={handleSubmit} className="w-full">
@@ -85,7 +90,7 @@ function Footer() {
           className="bg-color-secondary w-full rounded border border-[#333333] p-2 shadow-xl focus:outline-1"
           value={input}
           placeholder="Chat with bob.obringer.net AI assistant"
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
       </form>
       <Nav activeSegment={segment} />

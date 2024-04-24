@@ -10,7 +10,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     <div className="min-h-svh">
       {alertMessage && <Alert>{alertMessage}</Alert>}
       <AppHeader className={cx(alertMessage ? "mt-10" : "mt-0")} />
-      <div className="pb-28 md:pb-40">{children}</div>
+      <div className="min-h-full overflow-hidden pb-28 md:pb-40">
+        {children}
+      </div>
       <AppFooter />
     </div>
   );
