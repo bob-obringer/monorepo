@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={bobObringerFontClasses}>
-      <body className="bg text">
+      <body className="bg text min-h-dvh">
         <BobObringerAiProvider>{children}</BobObringerAiProvider>
       </body>
     </html>
