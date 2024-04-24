@@ -34,10 +34,20 @@ export function AppFooter({ className }: { className?: string }) {
         "bg-opacity-40 backdrop-blur-md transition-all duration-500 ease-in-out",
       )}
     >
-      <div className={cx(!isOpen && "hidden", "w-full flex-1 overflow-scroll")}>
+      <div
+        className={cx(
+          !isOpen && "hidden",
+          "w-full flex-1 overflow-scroll bg-[#0D141F]",
+        )}
+      >
         <AiSection />
       </div>
-      <div className={"fixed bottom-0 w-full px-5"}>
+      <div
+        className={cx(
+          isOpen ? "bg-[#0D141F]" : "h-28 md:h-40",
+          "fixed bottom-0 w-full px-5",
+        )}
+      >
         <Footer />
       </div>
     </div>

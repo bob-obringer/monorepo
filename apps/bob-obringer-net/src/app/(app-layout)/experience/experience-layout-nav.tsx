@@ -25,7 +25,7 @@ export function ExperienceLayoutNav({
   const [navLeft, setNavLeft] = useState<number | null>(null);
 
   const handleResize = debounce(() => {
-    const padding = Math.max((window.innerWidth - 768 - 192 - 30) / 2, 4);
+    const padding = Math.max((window.innerWidth - 768 - 192 - 30) / 2, 10);
     setNavLeft(padding);
   }, 5);
 
