@@ -50,7 +50,7 @@ export function AppFooter({ className }: { className?: string }) {
         className={cx(
           isOpen
             ? "bg-[#0D141F] bg-opacity-40 backdrop-blur-lg"
-            : "h-28 md:h-40",
+            : "h-32 md:h-40",
           "fixed bottom-0 w-full px-5",
         )}
       >
@@ -94,7 +94,7 @@ function Footer() {
   return (
     <footer
       className={cx(
-        "mx-auto flex h-28 w-full max-w-screen-sm flex-col justify-around py-3 md:h-40",
+        "mx-auto flex h-32 w-full max-w-screen-sm flex-col justify-around pb-4 md:h-40",
       )}
     >
       <form onSubmit={handleFormSubmit} className="w-full">
@@ -103,7 +103,7 @@ function Footer() {
             ref={inputRef}
             className="bg-color-transparent flex-1 p-0 pl-2 shadow-xl focus:outline-0"
             value={input}
-            placeholder="Chat with bob.obringer.net's AI assistant"
+            placeholder="obringer.net Assistant"
             onChange={handleInputChange}
           />
           {input && (
@@ -182,7 +182,7 @@ function MenuItem({
           "typography-label-small flex flex-col items-center space-y-2 transition-colors duration-300 ease-in-out",
         )}
       >
-        <FontAwesomeIcon icon={icon} className="md: h-6 h-8" />
+        <FontAwesomeIcon icon={icon} className="h-8 md:h-6" />
         <div className="hidden md:inline-block">{children}</div>
       </NextLink>
     </Text>

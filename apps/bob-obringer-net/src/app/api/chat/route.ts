@@ -18,8 +18,6 @@ export async function POST(req: Request) {
   const body = await req.json();
   const messages = body.messages ?? [];
   const userPrompt = messages[messages.length - 1].content;
-  // const results = await issuesEmbeddingClient.similaritySearch(userPrompt, 10);
-  // const positions = results.map((r) => r.pageContent).join("\n\n");
 
   const model = new ChatAnthropic({
     model: "claude-3-haiku-20240307",
