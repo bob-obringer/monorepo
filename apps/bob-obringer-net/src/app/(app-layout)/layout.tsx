@@ -8,11 +8,9 @@ const alertMessage = "";
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <div>
-        {alertMessage && <Alert>{alertMessage}</Alert>}
-        <AppHeader className={cx(alertMessage ? "mt-10" : "mt-0")} />
-        <div className="pb-28 md:pb-40">{children}</div>
-      </div>
+      {alertMessage && <Alert>{alertMessage}</Alert>}
+      <AppHeader className={cx(alertMessage ? "mt-10" : "mt-0")} />
+      <div className="pb-28 md:pb-40">{children}</div>
       <AppFooter />
     </>
   );

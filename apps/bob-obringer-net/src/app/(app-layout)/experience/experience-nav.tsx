@@ -1,42 +1,19 @@
 import { cx, Text } from "@bob-obringer/design-system";
 import resume from "@/features/resume/data.json";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { useBobObringerAi } from "@/features/ai/bob-obringer-ai-context";
 import NextLink from "next/link";
+import { useUiContext } from "@/features/ui/ui-context";
 
-function debounce<F extends (...args: never[]) => unknown>(
-  func: F,
-  delay: number,
-) {
-  let debounceTimer: number | undefined;
-  return (...args: Parameters<F>): ReturnType<F> | void => {
-    clearTimeout(debounceTimer);
-    debounceTimer = window.setTimeout(() => func(...args), delay);
-  };
-}
-
-export function ExperienceLayoutNav({
+export function ExperienceNav({
   selectedCompany,
 }: {
   selectedCompany?: string;
 }) {
-  const [navLeft, setNavLeft] = useState<number | null>(null);
-
-  const handleResize = debounce(() => {
-    const padding = Math.max((window.innerWidth - 768 - 192 - 30) / 2, 10);
-    setNavLeft(padding);
-  }, 5);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
-
-  useEffect(() => {
-    handleResize();
-  }, [handleResize, selectedCompany]);
+  const { viewportWidth } = useUiContext();
+  const navLeft = viewportWidth
+    ? Math.max((viewportWidth - 768 - 192 - 30) / 2, 10)
+    : null;
 
   return (
     <nav

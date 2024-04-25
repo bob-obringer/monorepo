@@ -13,6 +13,7 @@ type BobObringerAiContextType = {
   chat: UseChatHelpers;
   isOpen: boolean;
   close: () => void;
+  open: () => void;
 };
 
 const BobObringerAiContext = createContext<
@@ -25,8 +26,7 @@ export function BobObringerAiProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!isOpen && chat.isLoading) {
-      document.body.style.overflow = "hidden";
-      setIsOpen(true);
+      open();
     }
   }, [chat.isLoading, isOpen]);
 
@@ -35,8 +35,13 @@ export function BobObringerAiProvider({ children }: { children: ReactNode }) {
     setIsOpen(false);
   }
 
+  function open() {
+    document.body.style.overflow = "hidden";
+    setIsOpen(true);
+  }
+
   return (
-    <BobObringerAiContext.Provider value={{ chat, isOpen, close }}>
+    <BobObringerAiContext.Provider value={{ chat, isOpen, close, open }}>
       {children}
     </BobObringerAiContext.Provider>
   );

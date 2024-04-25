@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { ReactNode } from "react";
 import { BobObringerAiProvider } from "@/features/ai/bob-obringer-ai-context";
 import { bobObringerFontClasses } from "@bob-obringer/nextjs-fonts";
+import { UiContextProvider } from "@/features/ui/ui-context";
 
 export const metadata: Metadata = {
   title: "Bob Obringer",
@@ -12,8 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={bobObringerFontClasses}>
-      <body className="bg text min-h-dvh">
-        <BobObringerAiProvider>{children}</BobObringerAiProvider>
+      <body className="bg text">
+        <UiContextProvider>
+          <BobObringerAiProvider>{children}</BobObringerAiProvider>
+        </UiContextProvider>
       </body>
     </html>
   );
