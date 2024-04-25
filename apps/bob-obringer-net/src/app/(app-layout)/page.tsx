@@ -19,7 +19,7 @@ const bio = [
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-screen-sm flex-col text-balance px-5 pt-14 md:px-0 md:pt-24">
+    <main className="mx-auto w-full max-w-screen-sm flex-col text-balance px-5 pt-5 md:px-0 md:pt-24">
       <Text
         as="h1"
         variant="display-medium"

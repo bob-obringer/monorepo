@@ -1,9 +1,9 @@
 "use client";
 
 import { useSelectedLayoutSegments } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { cx } from "@bob-obringer/design-system";
-import { ExperienceLayoutNav } from "@/app/(app-layout)/experience/experience-layout-nav";
+import { ExperienceNav } from "@/app/(app-layout)/experience/experience-nav";
 
 export default function ResumeLayout({ children }: { children: ReactNode }) {
   const segments = useSelectedLayoutSegments();
@@ -12,7 +12,9 @@ export default function ResumeLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex w-full flex-col justify-center overflow-hidden md:flex-row">
-      <ExperienceLayoutNav selectedCompany={selectedCompany} />
+      <Suspense>
+        <ExperienceNav selectedCompany={selectedCompany} />
+      </Suspense>
       <div
         className={cx(
           hasSelectedCompany

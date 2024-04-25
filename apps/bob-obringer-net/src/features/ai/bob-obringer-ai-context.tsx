@@ -11,8 +11,9 @@ import { useChat, UseChatHelpers } from "ai/react";
 
 type BobObringerAiContextType = {
   chat: UseChatHelpers;
-  isFullScreen: boolean;
+  isOpen: boolean;
   close: () => void;
+  open: () => void;
 };
 
 const BobObringerAiContext = createContext<
@@ -20,23 +21,27 @@ const BobObringerAiContext = createContext<
 >(undefined);
 
 export function BobObringerAiProvider({ children }: { children: ReactNode }) {
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const chat = useChat();
 
   useEffect(() => {
-    if (!isFullScreen && chat.isLoading) {
-      document.body.style.overflow = "hidden";
-      setIsFullScreen(true);
+    if (!isOpen && chat.isLoading) {
+      open();
     }
-  }, [chat.isLoading, isFullScreen]);
+  }, [chat.isLoading, isOpen]);
 
   function close() {
     document.body.style.overflow = "auto";
-    setIsFullScreen(false);
+    setIsOpen(false);
+  }
+
+  function open() {
+    document.body.style.overflow = "hidden";
+    setIsOpen(true);
   }
 
   return (
-    <BobObringerAiContext.Provider value={{ chat, isFullScreen, close }}>
+    <BobObringerAiContext.Provider value={{ chat, isOpen, close, open }}>
       {children}
     </BobObringerAiContext.Provider>
   );
