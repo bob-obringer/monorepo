@@ -3,14 +3,14 @@ import resume from "@/features/resume/data.json";
 import { ReactNode } from "react";
 import { useBobObringerAi } from "@/features/ai/bob-obringer-ai-context";
 import NextLink from "next/link";
-import { useUiContext } from "@/features/ui/ui-context";
+import { useUiState } from "@/features/ui/ui-state-context";
 
 export function ExperienceNav({
   selectedCompany,
 }: {
   selectedCompany?: string;
 }) {
-  const { viewportWidth } = useUiContext();
+  const { viewportWidth } = useUiState();
   const navLeft = viewportWidth
     ? Math.max((viewportWidth - 768 - 192 - 30) / 2, 10)
     : null;

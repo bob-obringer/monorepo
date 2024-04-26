@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist node_modules .turbo",
+    "clean": "rimraf dist node_modules .turbo",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },

@@ -17,7 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { ChatBody } from "@/features/ai/components/chat-body/chat-body";
-import { useUiContext } from "@/features/ui/ui-context";
+import { useUiState } from "@/features/ui/ui-state-context";
 
 const menuItems = [
   { href: "", icon: faUser, text: "Bob" },
@@ -84,7 +84,7 @@ function Footer() {
   const segments = useSelectedLayoutSegments();
   const segment = segments[0] ?? "";
   const inputRef = useRef<HTMLInputElement>(null);
-  const { viewportWidth } = useUiContext();
+  const { viewportWidth } = useUiState();
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     handleSubmit(event);
