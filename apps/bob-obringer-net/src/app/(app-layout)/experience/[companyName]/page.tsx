@@ -12,7 +12,7 @@ export default function ResumePage({
   if (!work) return <div>Company not found</div>;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pb-8">
       <div>
         <Text as="h3" variant="title-large">
           {work.company}

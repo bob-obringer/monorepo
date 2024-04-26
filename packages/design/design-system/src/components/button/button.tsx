@@ -37,7 +37,7 @@ function border(color: Color, colorClass: string, hoverColorClass: string) {
 }
 
 const buttonVariants = tv({
-  base: "button appearance-none cursor-pointer transition-colors duration-200 ease-in-out",
+  base: "button appearance-none cursor-pointer transition-colors duration-200 ease-in-out py-0",
   variants: {
     style: {
       solid: "border-0 text-color-button bg-color-button",
@@ -52,9 +52,9 @@ const buttonVariants = tv({
       warning: "text-color-warning",
     },
     size: {
-      small: "button-size-small",
-      medium: "button-size-medium",
-      large: "button-size-large",
+      small: "h-6 px-2 font-family-mono uppercase text-size-sm leading-widest",
+      medium: "h-8 px-4 font-family-mono uppercase text-size-md leading-wider",
+      large: "h-12 px-6 font-family-body text-size-lg font-weight-medium",
     },
   },
   compoundVariants: [

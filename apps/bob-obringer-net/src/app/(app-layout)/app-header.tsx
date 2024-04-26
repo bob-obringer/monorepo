@@ -23,10 +23,10 @@ export function AppHeader({ className }: { className?: string }) {
         "flex h-24 flex-col items-center justify-center px-5",
       )}
     >
-      <Text as="h2" variant="display-small">
+      <Text as="h2" variant="display-medium">
         Bob Obringer
       </Text>
-      <Text as="h1" variant="title-expanded-medium" color="secondary">
+      <Text as="h1" variant="headline-large" color="secondary">
         {titles[segments[0]] ?? ""}
       </Text>
     </header>

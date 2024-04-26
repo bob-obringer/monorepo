@@ -1,26 +1,26 @@
-import { Unbounded, Montserrat, Reddit_Mono } from "next/font/google";
+import { Montserrat, Reddit_Mono, Ysabeau_SC } from "next/font/google";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-body",
-});
-
-const unbounded = Unbounded({
+const display = Ysabeau_SC({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-expanded",
 });
 
-const redditMono = Reddit_Mono({
+const body = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
+});
+
+const mono = Reddit_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono",
 });
 
 export const bobObringerFontClasses = [
-  montserrat.className,
-  montserrat.variable,
-  unbounded.variable,
-  redditMono.variable,
+  body.className,
+  body.variable,
+  display.variable,
+  mono.variable,
 ].join(" ");

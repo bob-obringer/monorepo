@@ -1,169 +1,142 @@
 import { themeConfig } from "../theme-config";
+import defaultConfig from "tailwindcss/defaultConfig";
+import resolveConfig from "tailwindcss/resolveConfig";
 
 const {
-  theme: { fontWeight, fontFamily },
+  theme: { letterSpacing, lineHeight },
+} = resolveConfig(defaultConfig);
+
+const {
+  theme: {
+    fontWeight: {
+      ["weight-normal"]: weightNormal,
+      ["weight-medium"]: weightMedium,
+      ["weight-bold"]: weightBold,
+    },
+    fontFamily: {
+      "family-body": bodyArray,
+      "family-expanded": expandedArray,
+      "family-mono": monoArray,
+    },
+    fontSize: {
+      ["size-xs"]: sizeXS,
+      ["size-sm"]: sizeSM,
+      ["size-md"]: sizeMD,
+      ["size-lg"]: sizeLG,
+      ["size-xl"]: sizeXL,
+      ["size-2xl"]: size2XL,
+      ["size-3xl"]: size3XL,
+    },
+  },
 } = themeConfig;
-const expandedFontFamily = {
-  "font-family": fontFamily["family-expanded"].join(", "),
+
+const fontFamilyExpanded = expandedArray.join(", ");
+const fontFamilyMono = monoArray.join(", ");
+const fontFamilyBody = bodyArray.join(", ");
+
+const displayBase = {
+  "line-height": lineHeight.none,
+  "font-family": fontFamilyExpanded,
+  "font-weight": weightMedium,
+};
+const display = {
+  ".typography-display-large": { ...displayBase, "font-size": size3XL },
+  ".typography-display-medium": { ...displayBase, "font-size": size2XL },
+  ".typography-display-small": { ...displayBase, "font-size": sizeXL },
 };
 
-const monoFontFamily = {
-  "font-family": fontFamily["family-mono"].join(", "),
+const headingBase = {
+  "line-height": lineHeight.none,
+  "font-family": fontFamilyExpanded,
+  "font-weight": weightBold,
+};
+const heading = {
+  ".typography-headline-large": { ...headingBase, "font-size": sizeXL },
+  ".typography-headline-medium": { ...headingBase, "font-size": sizeLG },
+  ".typography-headline-small": { ...headingBase, "font-size": sizeMD },
 };
 
-const mediumFontWeight = {
-  "font-weight": fontWeight["weight-medium"],
+const titleBase = {
+  "line-height": lineHeight.tight,
+  "font-family": fontFamilyBody,
+  "font-weight": weightMedium,
+};
+const title = {
+  ".typography-title-large": { ...titleBase, "font-size": sizeLG },
+  ".typography-title-medium": { ...titleBase, "font-size": sizeMD },
+  ".typography-title-small": { ...titleBase, "font-size": sizeSM },
 };
 
-const boldFontWeight = {
-  "font-weight": fontWeight["weight-bold"],
+const labelBase = {
+  "line-height": lineHeight.none,
+  "font-family": fontFamilyBody,
+  "letter-spacing": letterSpacing.wide,
 };
 
-const uppercase = {
-  "text-transform": "uppercase",
-};
-
-const defaults = {
-  "font-style": "normal",
-  "font-family": fontFamily["family-body"].join(", "),
-  "font-weight": fontWeight["weight-normal"],
-};
-
-function fontAndLineSize(fontSize: number, lineHeight: number) {
-  return {
-    "font-size": `${fontSize}px`,
-    "line-height": `${lineHeight}px`,
-  };
-}
-
-function letterSpacing(letterSpacing: number) {
-  return {
-    "letter-spacing": `${letterSpacing}px`,
-  };
-}
-
-export const typography = {
-  /*
-      Display
-     */
-  ".typography-display-large": {
-    ...defaults,
-    ...mediumFontWeight,
-    ...expandedFontFamily,
-    ...fontAndLineSize(57, 64),
-  },
-  ".typography-display-medium": {
-    ...defaults,
-    ...mediumFontWeight,
-    ...expandedFontFamily,
-    ...fontAndLineSize(45, 52),
-  },
-  ".typography-display-small": {
-    ...defaults,
-    ...mediumFontWeight,
-    ...expandedFontFamily,
-    ...fontAndLineSize(36, 44),
-  },
-
-  /*
-      Headline
-     */
-  ".typography-headline-large": {
-    ...defaults,
-    ...fontAndLineSize(32, 40),
-  },
-  ".typography-headline-medium": {
-    ...defaults,
-    ...fontAndLineSize(28, 36),
-  },
-  ".typography-headline-small": {
-    ...defaults,
-    ...fontAndLineSize(24, 32),
-  },
-
-  /*
-      Title Expanded
-     */
-  ".typography-title-expanded-large": {
-    ...defaults,
-    ...expandedFontFamily,
-    ...boldFontWeight,
-    ...fontAndLineSize(22, 28),
-  },
-  ".typography-title-expanded-medium": {
-    ...defaults,
-    ...expandedFontFamily,
-    ...boldFontWeight,
-    ...fontAndLineSize(16, 24),
-  },
-  ".typography-title-expanded-small": {
-    ...defaults,
-    ...expandedFontFamily,
-    ...boldFontWeight,
-    ...fontAndLineSize(14, 20),
-  },
-
-  /*
-    Title
-   */
-  ".typography-title-large": {
-    ...defaults,
-    ...fontAndLineSize(22, 28),
-  },
-  ".typography-title-medium": {
-    ...defaults,
-    ...fontAndLineSize(16, 24),
-  },
-  ".typography-title-small": {
-    ...defaults,
-    ...fontAndLineSize(14, 20),
-  },
-
-  /*
-      Label
-     */
+const label = {
   ".typography-label-large": {
-    ...defaults,
-    ...fontAndLineSize(14, 20),
-    ...letterSpacing(0.1),
+    ...labelBase,
+    "font-size": sizeMD,
+  },
+  ".typography-label-medium": {
+    ...labelBase,
+    "font-size": sizeSM,
   },
   ".typography-label-small": {
-    ...defaults,
-    ...uppercase,
-    ...fontAndLineSize(12, 16),
-    ...letterSpacing(0.5),
+    ...labelBase,
+    "text-transform": "uppercase",
+    "font-size": sizeXS,
   },
+};
 
-  /*
-      Label Mono
-     */
+const labelMonoBase = {
+  "line-height": lineHeight.none,
+  "font-family": fontFamilyMono,
+  "letter-spacing": letterSpacing.wide,
+};
+
+const labelMono = {
   ".typography-label-mono-large": {
-    ...defaults,
-    ...monoFontFamily,
-    ...fontAndLineSize(14, 20),
-    ...letterSpacing(0.2),
+    ...labelMonoBase,
+    "font-size": sizeMD,
+  },
+  ".typography-label-mono-medium": {
+    ...labelMonoBase,
+    "font-size": sizeSM,
   },
   ".typography-label-mono-small": {
-    ...defaults,
-    ...monoFontFamily,
-    ...uppercase,
-    ...fontAndLineSize(12, 16),
-    ...letterSpacing(0.5),
+    ...labelMonoBase,
+    "text-transform": "uppercase",
+    "font-size": sizeXS,
   },
+};
 
-  /*
-      Body
-     */
+const bodyBase = {
+  "line-height": lineHeight.normal,
+  "font-family": fontFamilyBody,
+  "font-weight": weightNormal,
+};
+
+const body = {
   ".typography-body-large": {
-    ...defaults,
-    ...fontAndLineSize(16, 24),
+    ...bodyBase,
+    "font-size": sizeMD,
   },
   ".typography-body-medium": {
-    ...defaults,
-    ...fontAndLineSize(14, 20),
+    ...bodyBase,
+    "font-size": sizeSM,
   },
   ".typography-body-small": {
-    ...defaults,
-    ...fontAndLineSize(12, 16),
+    ...bodyBase,
+    "font-size": sizeXS,
   },
+};
+
+export const typography = {
+  ...display,
+  ...heading,
+  ...title,
+  ...label,
+  ...labelMono,
+  ...body,
 };
