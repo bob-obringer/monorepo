@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "build:local": "pnpm build",
-    "clean": "rm -rf dist node_modules",
+    "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },

@@ -6,6 +6,7 @@ export default function StackPage() {
       <Image
         src="/under-construction.gif"
         alt="Under Construction"
+        unoptimized
         width={100}
         height={100}
       />
