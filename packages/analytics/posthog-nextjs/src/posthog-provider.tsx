@@ -2,7 +2,7 @@
 
 import posthog from "posthog-js";
 import { PostHogProvider as OriginalProvider } from "posthog-js/react";
-import type { ReactNode } from "react";
+import { type ReactNode, Suspense } from "react";
 import { PostHogPageView } from "./posthog-pageview";
 
 let isInitialized = false;
@@ -26,7 +26,9 @@ export function PosthogProvider({
 
   return (
     <OriginalProvider client={posthog}>
-      <PostHogPageView />
+      <Suspense>
+        <PostHogPageView />
+      </Suspense>
       {children}
     </OriginalProvider>
   );
