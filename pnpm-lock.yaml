@@ -184,6 +184,9 @@ importers:
       '@bob-obringer/tw-color-schemes':
         specifier: workspace:*
         version: link:../tw-color-schemes
+      '@radix-ui/colors':
+        specifier: ^3.0.0
+        version: 3.0.0
       tailwindcss:
         specifier: 3.4.3
         version: 3.4.3
@@ -646,6 +649,10 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     dev: true
+
+  /@radix-ui/colors@3.0.0:
+    resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
+    dev: false
 
   /@radix-ui/react-compose-refs@1.0.1(@types/react@18.3.0)(react@18.3.0):
     resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}

@@ -14,5 +14,14 @@ export const themeConfig = {
       "weight-medium": "500",
       "weight-bold": "700",
     },
+    fontSize: {
+      "size-xs": "12px",
+      "size-sm": "14px",
+      "size-md": "16px",
+      "size-lg": "22px",
+      "size-xl": "32px",
+      "size-2xl": "48px",
+      "size-3xl": "64px",
+    },
   },
 } satisfies Partial<Config>;

@@ -10,5 +10,3 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   plugins: [colorSchemePlugin, themePlugin],
 };
-
-// console.log(colorSchemePlugin(null));
