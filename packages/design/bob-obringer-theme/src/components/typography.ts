@@ -37,7 +37,7 @@ const fontFamilyBody = bodyArray.join(", ");
 const displayBase = {
   "line-height": lineHeight.none,
   "font-family": fontFamilyExpanded,
-  "font-weight": weightMedium,
+  "font-weight": weightBold,
 };
 const display = {
   ".typography-display-large": { ...displayBase, "font-size": size3XL },
