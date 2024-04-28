@@ -13,6 +13,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@bob-obringer/eslint-plugin": "workspace:*",
     "next": "workspace:*",
     "posthog-js": "workspace:*",
     "react": "workspace:*",

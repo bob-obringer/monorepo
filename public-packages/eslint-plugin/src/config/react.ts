@@ -14,7 +14,7 @@ export const react = {
         patterns: [
           {
             group: ["./..*"],
-            message: "Path's beginning with `./..` are not allowed. ",
+            message: "Path's beginning with `./..` are not allowed.",
           },
         ],
         paths: [
@@ -22,10 +22,6 @@ export const react = {
             name: "react",
             importNames: ["default"],
             message: "No need to import React directly. ",
-          },
-          {
-            name: "next/router",
-            message: "Use `next/navigation` instead. ",
           },
         ],
       },

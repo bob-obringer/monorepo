@@ -27,12 +27,4 @@ export const next = {
       },
     ],
   },
-  overrides: [
-    {
-      files: ["*.js"],
-      rules: {
-        "@typescript-eslint/no-var-requires": "off",
-      },
-    },
-  ],
 };
