@@ -247,12 +247,6 @@ importers:
         specifier: '>=8.57.0'
         version: 8.57.0
 
-  public-packages/nextjs-tw-fonts:
-    devDependencies:
-      next:
-        specifier: 14.2.3
-        version: 14.2.3(react-dom@18.3.0)(react@18.3.0)
-
   public-packages/posthog-nextjs:
     devDependencies:
       '@bob-obringer/eslint-plugin':
