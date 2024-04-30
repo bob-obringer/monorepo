@@ -16,6 +16,7 @@
     "@changesets/cli": "^2.27.1"
   },
   "devDependencies": {
+    "@bob-obringer/conventional-changeset": "workspace:*",
     "@bob-obringer/eslint-plugin": "workspace:*",
     "@bob-obringer/tsconfig": "workspace:*",
     "@types/node": "20.12.7",

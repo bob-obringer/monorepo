@@ -5,55 +5,6 @@ on:
       - main
 
 jobs:
-  changeset:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Install dependencies
-        run: pnpm install
-          
-      - name: Detect package changes
-        id: changed-packages
-        run: |
-          changed_packages=$(pnpm ls --filter "...[origin/main]" --depth -1 --parseable)
-          echo "CHANGED_PACKAGES<<EOF" >> $GITHUB_OUTPUT
-          echo "$changed_packages" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Get commit messages
-        id: commit-messages
-        run: |
-          commit_messages=$(git log --format=%B origin/main..HEAD)
-          echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_OUTPUT
-          echo "$commit_messages" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Create changeset
-        if: steps.changed-packages.outputs.CHANGED_PACKAGES
-        run: |
-          pnpm changeset add --empty
-          pnpm changeset --since origin/main --message "${{ steps.commit-messages.outputs.COMMIT_MESSAGES }}"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add .
-          git commit -m "chore: create changeset"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   release:
     needs: changeset
     runs-on: ubuntu-latest
@@ -66,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 18.x
           registry-url: 'https://registry.npmjs.org'
 
       - name: Setup pnpm
