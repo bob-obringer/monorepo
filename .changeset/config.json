@@ -4,7 +4,7 @@
   "packages": ["public-packages"],
   "commit": false,
   "fixed": [],
-  "linked": [],
+  "linked": [["@bob-obringer/eslint-plugin"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",

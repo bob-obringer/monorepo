@@ -1,10 +1,5 @@
 export const recommended = {
-  plugins: [
-    "@typescript-eslint",
-    "unused-imports",
-    "simple-import-sort",
-    "import",
-  ],
+  plugins: ["@typescript-eslint", "unused-imports", "import"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
