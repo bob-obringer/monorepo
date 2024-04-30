@@ -26,7 +26,6 @@
     "build": "tsc",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
-    "generate-changeset": "node ./dist/cli.js",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
     "start": "tsx ./src/generate-changeset.ts"
   },

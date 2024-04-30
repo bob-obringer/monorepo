@@ -29,7 +29,7 @@ jobs:
         run: pnpm install
 
       - name: Run changeset generation
-        run: pnpm generate-changeset
+        run: pnpm run generate-changeset
 
       - name: Install GitHub CLI
         run: |

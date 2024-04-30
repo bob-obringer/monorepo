@@ -8,6 +8,7 @@
     "deploy": "turbo run deploy --filter=docs^...",
     "dev": "turbo dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "generate-changeset": "generate-changeset",
     "lint": "turbo lint",
     "prepare": "husky",
     "release": "turbo run build --filter=docs^... && changeset publish"
