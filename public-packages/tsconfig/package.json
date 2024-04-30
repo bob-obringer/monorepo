@@ -1,8 +1,20 @@
 {
   "name": "@bob-obringer/tsconfig",
   "version": "0.0.1",
-  "private": true,
+  "description": "A collection of strict typescript configurations for my projects",
+  "keywords": [
+    "typescript",
+    "tsconfig",
+    "bob-obringer"
+  ],
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/tsconfig",
+  "bugs": "https://github.com/bob-obringer/monorepo/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bob-obringer/monorepo.git"
+  },
   "license": "MIT",
+  "author": "Bob Obringer <bob@obringer.net>",
   "files": [
     "**/*tsconfig.json"
   ]

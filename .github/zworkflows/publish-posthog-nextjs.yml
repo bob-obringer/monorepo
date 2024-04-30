@@ -1,10 +1,10 @@
-name: Publish @bob-obringer/eslint-plugin
+name: Publish @bob-obringer/tw-color-schemes
 on:
   push:
     branches:
       - main
     paths:
-      - packages/config/eslint-plugin/**
+      - public-packages/tw-color-schemes/**
   workflow_dispatch:
     branches:
       - main
@@ -14,4 +14,4 @@ jobs:
     secrets:
       npm-token: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
     with:
-      package-path: packages/config/eslint-plugin
+      package-path: public-packages/tw-color-schemes

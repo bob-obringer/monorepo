@@ -106,3 +106,7 @@ export default function Root() {
   );
 }
 ```
+
+## Status
+
+Tailwind 4 is going to change both the need and approach to this. I don't plan on making any significant changes to this package until Tailwind 4 is further along.

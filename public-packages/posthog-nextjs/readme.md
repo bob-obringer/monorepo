@@ -24,10 +24,11 @@ The package provides a `PosthogProvider` component that should be
 wrapped around your NextJS application (generally with other providers)
 
 ```tsx
+import { type ReactNode } from 'react';
 import { PosthogProvider } from '@bob-obringer/posthog-nextjs'
 import { env } from '@/config/client';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
 return (
   <html>
     <body>
@@ -45,4 +46,4 @@ return (
 
 ## TODO:
 
-This is very crude for now. It just removes some setup boilerplate. I will be adding more features as I need them.
+This is very crude for now. It just removes some setup boilerplate for new projects. I will be adding more features as I need them.

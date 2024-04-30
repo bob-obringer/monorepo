@@ -1,0 +1,52 @@
+name: Bump Version
+on:
+  workflow_call:
+    inputs:
+      package-path:
+        description: 'Path to the package directory'
+        default: '.'
+        required: false
+        type: string
+      dev-branch:
+        description: 'Name of the development branch'
+        default: 'develop'
+        required: false
+        type: string
+
+jobs:
+  bump-version:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Bump version and generate changelog
+        run: npx standard-version
+
+      - name: Push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'chore(release): Bump version and update changelog'
+          add: 'package.json CHANGELOG.md'
+          branch: main
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.bump-version.outputs.tag }}
+          release_name: ${{ steps.bump-version.outputs.tag }}
+          body: ${{ steps.bump-version.outputs.changelog }}
+
+      - name: Update dev branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.dev-branch }}
+      - run: |
+          git merge main
+          git push origin ${{ inputs.dev-branch }}

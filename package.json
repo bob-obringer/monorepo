@@ -5,10 +5,15 @@
   "scripts": {
     "build": "turbo build",
     "clean": "turbo clean && rimraf node_modules",
+    "deploy": "turbo run deploy --filter=docs^...",
     "dev": "turbo dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "turbo run build --filter=docs^... && changeset publish"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.27.1"
   },
   "devDependencies": {
     "@bob-obringer/eslint-plugin": "workspace:*",
@@ -17,6 +22,7 @@
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
     "eslint": "8.57.0",
+    "eslint-config-turbo": "1.13.3",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",

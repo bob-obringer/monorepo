@@ -25,13 +25,13 @@ yarn add --dev @bob-obringer/tsconfig
 
 The library includes several TypeScript configurations for different types of projects:
 
-- `tsconfig.base.json`: The base configuration for all TypeScript projects.
-- `tsconfig.library-base.json`: The base configuration for library projects.
-- `node-app/tsconfig.json`: The configuration for Node.js applications.
-- `nextjs-app/tsconfig.json`: The configuration for Next.js applications.
-- `isomorphic-library/tsconfig.json`: The configuration for isomorphic libraries.
-- `frontend-library/tsconfig.json`: The configuration for frontend libraries.
-- `backend-library/tsconfig.json`: The configuration for backend libraries.
+- `tsconfig.base.json`
+- `tsconfig.library-base.json`
+- `node-app/tsconfig.json`
+- `nextjs-app/tsconfig.json`
+- `isomorphic-library/tsconfig.json`
+- `frontend-library/tsconfig.json`
+- `backend-library/tsconfig.json`
 
 To use a configuration, extend your `tsconfig.json` file like so:
 
@@ -53,7 +53,7 @@ defines the paths, so they must be included in each individual package.
 
 ## NextJS
 
-NextJS is opinionated about the tsconfig file it uses. To use the `nextjs-app`
+NextJS requires some additional configuration. To use the `nextjs-app`
 configuration, use the following configuration:
 
 ```json
@@ -74,7 +74,7 @@ configuration, use the following configuration:
 }
 ```
 
-## Additional configurations
+## Development and Debug Configurations
 
 In addition to each of the standard configurations, there are `dev` and
 `debug` versions which include additional settings for development and debugging:
