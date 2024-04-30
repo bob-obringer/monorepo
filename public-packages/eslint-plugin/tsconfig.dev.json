@@ -5,6 +5,6 @@
     "module": "CommonJS",
     "verbatimModuleSyntax": false
   },
-  "include": ["src/**/*.ts*"],
+  "include": ["src/**/*.ts*", "custom.d.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

@@ -1,10 +1,10 @@
-name: Publish @bob-obringer/tw-color-schemes
+name: Publish @bob-obringer/tsconfig
 on:
   push:
     branches:
       - main
     paths:
-      - packages/design/tw-color-schemes/**
+      - public-packages/tsconfig/**
   workflow_dispatch:
     branches:
       - main
@@ -14,4 +14,4 @@ jobs:
     secrets:
       npm-token: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
     with:
-      package-path: packages/design/tw-color-schemes
+      package-path: public-packages/tsconfig

@@ -8,7 +8,6 @@ export const recommended = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "turbo",
     "prettier",
   ],
   parserOptions: {
@@ -26,6 +25,10 @@ export const recommended = {
     node: true,
   },
   rules: {
+    "unused-imports/no-unused-imports": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "@bob-obringer/no-process-env": ["error"],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -35,10 +38,6 @@ export const recommended = {
         argsIgnorePattern: "^_",
       },
     ],
-    "unused-imports/no-unused-imports": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error",
-    "@typescript-eslint/no-var-requires": "off",
     "no-restricted-imports": [
       "error",
       {

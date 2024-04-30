@@ -2,14 +2,17 @@
   "name": "@bob-obringer/tw-color-schemes",
   "version": "0.0.33",
   "private": false,
-  "description": "Helps manage multiple color schemes for tailwind",
+  "description": "Helps manage tailwind color schemes",
   "keywords": [
     "tailwind",
     "tailwindcss",
     "color",
     "color-schemes",
-    "theming"
+    "theming",
+    "bob-obringer"
   ],
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/tw-color-schemes",
+  "bugs": "https://github.com/bob-obringer/monorepo/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/bob-obringer/monorepo.git"
@@ -18,16 +21,17 @@
   "author": "Bob Obringer <bob@obringer.net>",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
-  "dependencies": {
-    "tailwindcss": "3.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "tailwindcss": "3.4.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.4"
   }
 }

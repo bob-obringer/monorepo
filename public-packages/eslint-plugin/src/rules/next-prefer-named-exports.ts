@@ -15,8 +15,11 @@ const rule: TSESLint.RuleModule<"preferNamedExports"> = {
   meta: {
     type: "suggestion",
     docs: {
-      description:
-        "Disallow the use of default exports other than the app router conventions",
+      description: `Prefer named exports over default exports in TypeScript files. Named exports
+are more explicit and can help avoid confusion when importing modules or refactoring code.
+This can make your code easier to read and maintain.
+However, some Next.js conventions require default exports, and this rule allows for those
+exceptions.`,
     },
     schema: [],
     messages: {
@@ -25,10 +28,11 @@ const rule: TSESLint.RuleModule<"preferNamedExports"> = {
   },
 
   create(context) {
-    const fn = context.getFilename() || "";
+    const fn = context.filename || "";
 
     return {
       ExportDefaultDeclaration(node) {
+        // if the file is a nextjs default export, ignore
         if (nextJsDefaultExports.some((f) => fn.match(f))) return;
 
         const { declaration } = node;

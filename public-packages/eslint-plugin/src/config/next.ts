@@ -1,7 +1,6 @@
 export const next = {
-  extends: ["next/core-web-vitals", "plugin:@bob-obringer/recommended"],
+  extends: ["plugin:@bob-obringer/recommended", "next/core-web-vitals"],
   rules: {
-    "@next/next/no-html-link-for-pages": "off",
     "@bob-obringer/next-prefer-named-exports": "error",
     "no-restricted-imports": [
       "error",
@@ -27,12 +26,4 @@ export const next = {
       },
     ],
   },
-  overrides: [
-    {
-      files: ["*.js"],
-      rules: {
-        "@typescript-eslint/no-var-requires": "off",
-      },
-    },
-  ],
 };

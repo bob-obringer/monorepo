@@ -1,0 +1,40 @@
+{
+  "name": "@bob-obringer/posthog-nextjs",
+  "version": "0.0.1",
+  "description": "Bob Obringer Posthog NextJS Client",
+  "keywords": [
+    "posthog",
+    "nextjs",
+    "analytics",
+    "bob-obringer"
+  ],
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/posthog-nextjs",
+  "bugs": "https://github.com/bob-obringer/monorepo/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bob-obringer/monorepo.git"
+  },
+  "license": "MIT",
+  "author": "Bob Obringer <bob@obringer.net>",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "next": "14.2.3",
+    "posthog-js": "1.130.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "peerDependencies": {
+    "next": ">=14.2",
+    "posthog-js": ">=1.130",
+    "react": ">=18.2",
+    "react-dom": ">=18.2"
+  }
+}
