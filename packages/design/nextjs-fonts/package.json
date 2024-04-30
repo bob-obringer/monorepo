@@ -1,6 +1,7 @@
 {
   "name": "@bob-obringer/nextjs-fonts",
   "version": "0.0.1",
+  "private": true,
   "description": "Bob Obringer's NextJS Fonts",
   "type": "module",
   "main": "dist/index.js",
