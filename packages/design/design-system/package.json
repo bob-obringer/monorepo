@@ -1,6 +1,7 @@
 {
   "name": "@bob-obringer/design-system",
   "version": "0.0.1",
+  "private": true,
   "description": "Bob Obringer Design System",
   "type": "module",
   "main": "dist/index.js",
