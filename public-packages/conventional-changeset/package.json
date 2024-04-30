@@ -1,0 +1,41 @@
+{
+  "name": "@bob-obringer/conventional-changeset",
+  "version": "0.0.01",
+  "private": false,
+  "description": "Automate the creation of changesets from conventional commits",
+  "keywords": [
+    "git",
+    "versioning",
+    "conventional-commits",
+    "changesets"
+  ],
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/eslint-plugin",
+  "bugs": "https://github.com/bob-obringer/monorepo/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bob-obringer/monorepo.git"
+  },
+  "license": "MIT",
+  "author": "Bob Obringer <bob@obringer.net>",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "start": "tsx ./src/generate-changeset.ts"
+  },
+  "dependencies": {
+    "conventional-changelog-angular": "^7.0.0",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "conventional-commits-parser": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/conventional-commits-parser": "^5.0.0",
+    "tsx": "^4.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

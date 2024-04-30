@@ -25,18 +25,32 @@ jobs:
       - name: Install dependencies
         run: pnpm install
           
-      - name: Create Changeset
+      - name: Detect package changes
+        id: changed-packages
         run: |
-          if pnpm changeset status --since=origin/main; then
-            echo "Skipping changeset creation, no changes detected"
-          else
-            pnpm changeset version
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git config --global user.name "github-actions[bot]"
-            git add .
-            git commit -m "chore: create changeset"
-            git push
-          fi
+          changed_packages=$(pnpm ls --filter "...[origin/main]" --depth -1 --parseable)
+          echo "CHANGED_PACKAGES<<EOF" >> $GITHUB_OUTPUT
+          echo "$changed_packages" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Get commit messages
+        id: commit-messages
+        run: |
+          commit_messages=$(git log --format=%B origin/main..HEAD)
+          echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_OUTPUT
+          echo "$commit_messages" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create changeset
+        if: steps.changed-packages.outputs.CHANGED_PACKAGES
+        run: |
+          pnpm changeset add --empty
+          pnpm changeset --since origin/main --message "${{ steps.commit-messages.outputs.COMMIT_MESSAGES }}"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "chore: create changeset"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
