@@ -28,11 +28,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build TypeScript code
-        run: pnpm run build
-
       - name: Run changeset generation
-        run: pnpm run generate-changeset
+        run: pnpm generate-changeset
 
       - name: Install GitHub CLI
         run: |
