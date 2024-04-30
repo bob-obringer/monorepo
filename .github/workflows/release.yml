@@ -24,6 +24,24 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Publish Packages
+        run: |
+          pnpm recursive exec --filter "./packages/*" -- '
+            package_name=$(jq -r ".name" package.json)
+            package_version=$(jq -r ".version" package.json)
+            if [ -n "$package_name" ]; then
+              if ! npm view "$package_name@$package_version" > /dev/null 2>&1; then
+                npm publish --access public
+              else
+                echo "Skipping publish for $package_name@$package_version (already exists)"
+              fi
+            else
+              echo "Skipping publish for $(pwd) (missing package name)"
+            fi
+          '
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         
       - name: Create Changeset
         run: |
@@ -65,7 +83,7 @@ jobs:
         uses: changesets/action@v1
         id: changesets
         with:
-          publish: pnpm release --tag next
+          publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
