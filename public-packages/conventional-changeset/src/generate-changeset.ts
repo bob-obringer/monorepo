@@ -36,8 +36,6 @@ const upgradeTypeMap: Record<string, UpgradeType> = {
 
 export async function generateChangeset(): Promise<void> {
   const commits = await getCommitsSinceMain();
-  console.log(commits);
-  return;
   const commitsWithPackages = await getCommitsWithPackages(commits);
   // const packageUpgrades = getPackageUpgrades(commitsWithPackages);
   // if (Object.keys(packageUpgrades).length === 0) {
@@ -85,7 +83,7 @@ async function getCommitsSinceMain(): Promise<CommitInfo[]> {
   // await execAsync("git checkout main");
   // await execAsync("git fetch");
   // await execAsync("git checkout develop");
-  const { stdout } = await execAsync('git log --format="%H %B" main..HEAD');
+  const { stdout } = await execAsync('git log --format="%H %B" main..develop');
   return stdout
     .trim()
     .split("\n")
