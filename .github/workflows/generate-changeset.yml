@@ -54,5 +54,12 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .changeset
-          git commit -m 'ci: update changeset'
-          git push          
+          # Check if there are changes to commit
+          if git diff-index --quiet HEAD --; then
+          # No changes to commit
+            echo "No changes to commit"
+          else
+          # Changes to commit
+            git commit -m 'ci: update changeset'
+            git push
+          fi        
