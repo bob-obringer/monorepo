@@ -12,6 +12,7 @@
 
 ## Other Changes
 
+- prop release workflow
 - updated conventional-changeset readme
 - simplified workflow
 - simplified workflow
