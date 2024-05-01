@@ -32,51 +32,52 @@ const upgradeTypeMap: Record<string, UpgradeType> = {
   chore: "none",
 };
 
-// const priority = ["patch", "minor", "major"];
+const priority = ["patch", "minor", "major"];
 
 export async function generateChangeset(): Promise<void> {
   const commits = await getCommitsSinceMaster();
   const commitsWithPackages = await getCommitsWithPackages(commits);
-  // const packageUpgrades = getPackageUpgrades(commitsWithPackages);
-  // if (Object.keys(packageUpgrades).length === 0) {
-  //   console.log("No package upgrades found");
-  //   return;
-  // }
-  // const releaseNotes = generateReleaseNotes(commitsWithPackages);
+  const packageUpgrades = getPackageUpgrades(commitsWithPackages);
+  if (Object.keys(packageUpgrades).length === 0) {
+    console.log("No package upgrades found");
+    return;
+  }
+  const releaseNotes = generateReleaseNotes(commitsWithPackages);
   if (commitsWithPackages.length === 0) {
     console.log("No package upgrades found");
     return;
   }
 
-  await createChangesets(commitsWithPackages);
+  await createChangesets(packageUpgrades, releaseNotes);
+
   await commitChangesets();
 }
 
-// function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
-//   const packageUpgradeTypes: Record<string, UpgradeType> = {};
-//
-//   for (const commit of commits) {
-//     for (const packageName of commit.changedPackages) {
-//       const upgradeType = commit.upgradeType;
-//       if (upgradeType === null) continue;
-//
-//       const currentUpgradeType = packageUpgradeTypes[packageName];
-//
-//       if (currentUpgradeType) {
-//         const currentPriority = priority.indexOf(currentUpgradeType);
-//         const newPriority = priority.indexOf(upgradeType);
-//
-//         if (newPriority > currentPriority) {
-//           packageUpgradeTypes[packageName] = upgradeType;
-//         }
-//       } else {
-//         packageUpgradeTypes[packageName] = upgradeType;
-//       }
-//     }
-//   }
-//
-//   return packageUpgradeTypes;
-// }
+function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
+  const packageUpgradeTypes: Record<string, UpgradeType> = {};
+
+  for (const commit of commits) {
+    for (const packageName of commit.changedPackages) {
+      const upgradeType = commit.upgradeType;
+      if (upgradeType === null) continue;
+
+      const currentUpgradeType = packageUpgradeTypes[packageName];
+
+      if (currentUpgradeType) {
+        const currentPriority = priority.indexOf(currentUpgradeType);
+        const newPriority = priority.indexOf(upgradeType);
+
+        if (newPriority > currentPriority) {
+          packageUpgradeTypes[packageName] = upgradeType;
+        }
+      } else {
+        packageUpgradeTypes[packageName] = upgradeType;
+      }
+    }
+  }
+
+  return packageUpgradeTypes;
+}
 
 async function getCommitsSinceMaster(): Promise<CommitInfo[]> {
   await execAsync("git checkout main");
@@ -148,7 +149,94 @@ async function getChangedPackages(commitSha: string): Promise<string[]> {
 }
 
 // https://github.com/changesets/changesets/issues/862
-// function generateReleaseNotes(commits: CommitInfoWithPackages[]): string {
+function generateReleaseNotes(commits: CommitInfoWithPackages[]): string {
+  const releaseNotes = {
+    breaking: [] as Array<string>,
+    feat: [] as Array<string>,
+    fix: [] as Array<string>,
+    other: [] as Array<string>,
+  };
+
+  for (const commit of commits) {
+    const {
+      isBreakingChange,
+      parsedMessage: { type, subject, scope },
+    } = commit;
+
+    if (!subject) continue;
+
+    const scopeString = scope ? `${scope}: ` : "";
+    const changeItem = `- ${scopeString}${subject}`;
+
+    if (isBreakingChange) {
+      releaseNotes.breaking.push(changeItem);
+    } else if (type === "feat") {
+      releaseNotes.feat.push(changeItem);
+    } else if (type === "fix") {
+      releaseNotes.fix.push(changeItem);
+    } else {
+      releaseNotes.other.push(changeItem);
+    }
+  }
+
+  let releaseNotesString = "";
+
+  if (releaseNotes.breaking.length > 0) {
+    releaseNotesString += "## Breaking Changes\n";
+    releaseNotesString += releaseNotes.breaking.join("\n");
+    releaseNotesString += "\n\n";
+  }
+
+  if (releaseNotes.feat.length > 0) {
+    releaseNotesString += "## New Features\n";
+    releaseNotesString += releaseNotes.feat.join("\n");
+    releaseNotesString += "\n\n";
+  }
+
+  if (releaseNotes.fix.length > 0) {
+    releaseNotesString += "## Bug Fixes\n";
+    releaseNotesString += releaseNotes.fix.join("\n");
+    releaseNotesString += "\n\n";
+  }
+
+  if (releaseNotes.other.length > 0) {
+    releaseNotesString += "## Other Changes\n";
+    releaseNotesString += releaseNotes.other.join("\n");
+    releaseNotesString += "\n\n";
+  }
+
+  return releaseNotesString.trim();
+}
+
+async function createChangesets(
+  packageUpgrades: Record<string, unknown>,
+  releaseNotes: string,
+): Promise<void> {
+  const changesetDir = join(process.cwd(), ".changeset");
+  const changesetFile = join(changesetDir, `${Date.now()}.md`);
+
+  const headerContent = Object.entries(packageUpgrades)
+    .filter(([_, upgradeType]) => upgradeType !== "none")
+    .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
+    .join("\n");
+
+  const changesetContent = `---
+${headerContent}
+---
+
+${releaseNotes}
+`;
+
+  try {
+    await mkdir(changesetDir, { recursive: true });
+    await writeFile(changesetFile, changesetContent, "utf8");
+    console.log(`Created changeset: ${changesetFile}`);
+  } catch (error) {
+    console.error("Error creating changeset:", error);
+  }
+}
+
+// function generateReleaseNotes(commit: CommitInfoWithPackages[]): string {
 //   const releaseNotes = {
 //     breaking: [] as Array<string>,
 //     feat: [] as Array<string>,
@@ -206,72 +294,44 @@ async function getChangedPackages(commitSha: string): Promise<string[]> {
 //
 //   return releaseNotesString.trim();
 // }
-
+//
 // async function createChangesets(
-//   packageUpgrades: Record<string, UpgradeType>,
-//   releaseNotes: string,
+//   commitsWithPackages: CommitInfoWithPackages[],
 // ): Promise<void> {
 //   const changesetDir = join(process.cwd(), ".changeset");
-//   const changesetFile = join(changesetDir, `${Date.now()}.md`);
 //
-//   const headerContent = Object.entries(packageUpgrades)
-//     .filter(([_, upgradeType]) => upgradeType !== "none")
-//     .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
-//     .join("\n");
+//   for (const commit of commitsWithPackages) {
+//     const { sha, parsedMessage, upgradeType } = commit;
+//     const { subject } = parsedMessage;
 //
-//   const changesetContent = `---
+//     const packageUpgrades: Record<string, UpgradeType> = {};
+//     for (const packageName of commit.changedPackages) {
+//       packageUpgrades[packageName] = upgradeType;
+//     }
+//
+//     const headerContent = Object.entries(packageUpgrades)
+//       .filter(([_, upgradeType]) => upgradeType !== "none")
+//       .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
+//       .join("\n");
+//
+//     const changesetContent = `---
 // ${headerContent}
 // ---
 //
-// ${releaseNotes}
+// - ${subject}
 // `;
 //
-//   try {
-//     await mkdir(changesetDir, { recursive: true });
-//     await writeFile(changesetFile, changesetContent, "utf8");
-//     console.log(`Created changeset: ${changesetFile}`);
-//   } catch (error) {
-//     console.error("Error creating changeset:", error);
+//     const changesetFile = join(changesetDir, `${sha}.md`);
+//
+//     try {
+//       await mkdir(changesetDir, { recursive: true });
+//       await writeFile(changesetFile, changesetContent, "utf8");
+//       console.log(`Created changeset: ${changesetFile}`);
+//     } catch (error) {
+//       console.error(`Error creating changeset for commit ${sha}:`, error);
+//     }
 //   }
 // }
-
-async function createChangesets(
-  commitsWithPackages: CommitInfoWithPackages[],
-): Promise<void> {
-  const changesetDir = join(process.cwd(), ".changeset");
-
-  for (const commit of commitsWithPackages) {
-    const { sha, parsedMessage, upgradeType } = commit;
-    const { subject } = parsedMessage;
-
-    const packageUpgrades: Record<string, UpgradeType> = {};
-    for (const packageName of commit.changedPackages) {
-      packageUpgrades[packageName] = upgradeType;
-    }
-
-    const headerContent = Object.entries(packageUpgrades)
-      .filter(([_, upgradeType]) => upgradeType !== "none")
-      .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
-      .join("\n");
-
-    const changesetContent = `---
-${headerContent}
----
-
-- ${subject}
-`;
-
-    const changesetFile = join(changesetDir, `${sha}.md`);
-
-    try {
-      await mkdir(changesetDir, { recursive: true });
-      await writeFile(changesetFile, changesetContent, "utf8");
-      console.log(`Created changeset: ${changesetFile}`);
-    } catch (error) {
-      console.error(`Error creating changeset for commit ${sha}:`, error);
-    }
-  }
-}
 
 async function commitChangesets(): Promise<void> {
   await execAsync('git config user.name "GitHub Actions"');
