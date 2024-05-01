@@ -1,5 +1,11 @@
 # @bob-obringer/conventional-changeset
 
+## 0.1.1
+
+### Patch Changes
+
+- 1a2da2c: - improved dependencies
+
 ## 0.1.0
 
 ### Minor Changes
