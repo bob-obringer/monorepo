@@ -1,5 +1,11 @@
 # @bob-obringer/conventional-changeset
 
+## 0.0.5
+
+### Patch Changes
+
+- d65afa9: - fixed issue with empty commits
+
 ## 0.0.4
 
 ### Patch Changes
