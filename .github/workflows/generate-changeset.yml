@@ -35,7 +35,7 @@ jobs:
 #        run: git checkout main  
         
       - name: Fetch latest changes
-        run: git fetch origin
+        run: git fetch origin/main
         
 #      - name: Checkout pull request merge commit
 #        run: git checkout develop
