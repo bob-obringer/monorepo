@@ -33,12 +33,21 @@ type CommitInfoWithPackages = CommitInfo & {
   changedPackages: string[];
 };
 
-export async function generateChangeset(): Promise<void> {
+export async function generateChangeset({
+  id,
+}: {
+  id?: string;
+} = {}): Promise<void> {
   const commits = await getCommitsSinceMaster();
   const commitsWithPackages = await getCommitsWithPackages(commits);
   const packageUpgrades = getPackageUpgrades(commitsWithPackages);
+  if (Object.keys(packageUpgrades).length === 0) {
+    console.log("No package upgrades found");
+    return;
+  }
   const releaseNotes = generateReleaseNotes(commitsWithPackages);
-  await createChangesets(packageUpgrades, releaseNotes);
+  await createChangesets(packageUpgrades, releaseNotes, id);
+  await commitChangesets();
 }
 
 function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
@@ -68,7 +77,10 @@ function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
 }
 
 async function getCommitsSinceMaster(): Promise<CommitInfo[]> {
-  const { stdout } = await execAsync('git log --format="%H %B" main..HEAD');
+  await execAsync("git checkout main");
+  await execAsync("git fetch");
+  await execAsync("git checkout develop");
+  const { stdout } = await execAsync('git log --format="%H %B" main..develop');
   return stdout
     .trim()
     .split("\n")
@@ -196,15 +208,23 @@ function generateReleaseNotes(commits: CommitInfoWithPackages[]): string {
 async function createChangesets(
   packageUpgrades: Record<string, UpgradeType>,
   releaseNotes: string,
+  id?: string,
 ): Promise<void> {
   const changesetDir = join(process.cwd(), ".changeset");
-  const changesetID = Date.now().toString();
-  const changesetFile = join(changesetDir, `${changesetID}.md`);
+  const changesetID = id ?? Date.now().toString();
+  const changesetFile = join(changesetDir, `${changesetID}-changeset.md`);
 
-  const changesetContent = generateChangesetContent(
-    packageUpgrades,
-    releaseNotes,
-  );
+  const headerContent = Object.entries(packageUpgrades)
+    .filter(([_, upgradeType]) => upgradeType !== "none")
+    .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
+    .join("\n");
+
+  const changesetContent = `---
+${headerContent}
+---
+
+${releaseNotes}
+`;
 
   try {
     await mkdir(changesetDir, { recursive: true });
@@ -215,19 +235,10 @@ async function createChangesets(
   }
 }
 
-function generateChangesetContent(
-  packageUpgrades: Record<string, UpgradeType>,
-  releaseNotes: string,
-): string {
-  const headerContent = Object.entries(packageUpgrades)
-    .filter(([_, upgradeType]) => upgradeType !== "none")
-    .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
-    .join("\n");
-
-  return `---
-${headerContent}
----
-
-${releaseNotes}
-`;
+async function commitChangesets(): Promise<void> {
+  await execAsync('git config user.name "GitHub Actions"');
+  await execAsync('git config user.email "actions@github.com"');
+  await execAsync("git add .changeset");
+  await execAsync('git commit -m "ci: update changeset"');
+  await execAsync("git push");
 }

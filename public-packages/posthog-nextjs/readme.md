@@ -24,24 +24,21 @@ The package provides a `PosthogProvider` component that should be
 wrapped around your NextJS application (generally with other providers)
 
 ```tsx
-import { type ReactNode } from 'react';
-import { PosthogProvider } from '@bob-obringer/posthog-nextjs'
-import { env } from '@/config/client';
+import { type ReactNode } from "react";
+import { PosthogProvider } from "@bob-obringer/posthog-nextjs";
+import { env } from "@/config/client";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-return (
-  <html>
-    <body>
-      <PosthogProvider
-        token={env.posthog.apiKey}
-        host={env.posthog.host}
-        >
-        {children}
-      </PosthogProvider>
-    </body>
-  </html>
-
-)
+  return (
+    <html>
+      <body>
+        <PosthogProvider token={env.posthog.apiKey} host={env.posthog.host}>
+          {children}
+        </PosthogProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
 ## TODO:

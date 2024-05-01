@@ -1,5 +1,5 @@
 export const next = {
-  extends: ["plugin:@bob-obringer/recommended", "next/core-web-vitals"],
+  extends: ["next/core-web-vitals", "plugin:@bob-obringer/recommended"],
   rules: {
     "@bob-obringer/next-prefer-named-exports": "error",
     "no-restricted-imports": [
