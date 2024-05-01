@@ -25,6 +25,14 @@ jobs:
         with:
           version: 8
 
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
       - name: Install dependencies
         run: pnpm install
 
@@ -35,7 +43,7 @@ jobs:
 #        run: git checkout main  
         
       - name: Fetch latest changes
-        run: git fetch origin/main
+        run: git fetch origin main
         
 #      - name: Checkout pull request merge commit
 #        run: git checkout develop
