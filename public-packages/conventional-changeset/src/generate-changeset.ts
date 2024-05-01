@@ -33,12 +33,16 @@ type CommitInfoWithPackages = CommitInfo & {
   changedPackages: string[];
 };
 
-export async function generateChangeset(): Promise<void> {
+export async function generateChangeset({
+  id,
+}: {
+  id?: string;
+} = {}): Promise<void> {
   const commits = await getCommitsSinceMaster();
   const commitsWithPackages = await getCommitsWithPackages(commits);
   const packageUpgrades = getPackageUpgrades(commitsWithPackages);
   const releaseNotes = generateReleaseNotes(commitsWithPackages);
-  await createChangesets(packageUpgrades, releaseNotes);
+  await createChangesets(packageUpgrades, releaseNotes, id);
 }
 
 function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
@@ -199,15 +203,23 @@ function generateReleaseNotes(commits: CommitInfoWithPackages[]): string {
 async function createChangesets(
   packageUpgrades: Record<string, UpgradeType>,
   releaseNotes: string,
+  id?: string,
 ): Promise<void> {
   const changesetDir = join(process.cwd(), ".changeset");
-  const changesetID = Date.now().toString();
-  const changesetFile = join(changesetDir, `${changesetID}.md`);
+  const changesetID = id ?? Date.now().toString();
+  const changesetFile = join(changesetDir, `${changesetID}-changeset.md`);
 
-  const changesetContent = generateChangesetContent(
-    packageUpgrades,
-    releaseNotes,
-  );
+  const headerContent = Object.entries(packageUpgrades)
+    .filter(([_, upgradeType]) => upgradeType !== "none")
+    .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
+    .join("\n");
+
+  const changesetContent = `---
+${headerContent}
+---
+
+${releaseNotes}
+`;
 
   try {
     await mkdir(changesetDir, { recursive: true });
@@ -216,21 +228,4 @@ async function createChangesets(
   } catch (error) {
     console.error("Error creating changeset:", error);
   }
-}
-
-function generateChangesetContent(
-  packageUpgrades: Record<string, UpgradeType>,
-  releaseNotes: string,
-): string {
-  const headerContent = Object.entries(packageUpgrades)
-    .filter(([_, upgradeType]) => upgradeType !== "none")
-    .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
-    .join("\n");
-
-  return `---
-${headerContent}
----
-
-${releaseNotes}
-`;
 }
