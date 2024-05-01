@@ -130,7 +130,3 @@ Rules:
 ## TODO:
 
 ESLint 9 is here, including a new config system. Most of the ecosystem has not caught up yet, including our dependencies. Once our dependencies are ready, we'll bump this to 9 and upgrade to the new config system. If they drag, we'll create our own version of the old rules.
-
-## Package Bumping
-
-bump5
