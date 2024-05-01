@@ -41,8 +41,13 @@ export async function generateChangeset({
   const commits = await getCommitsSinceMaster();
   const commitsWithPackages = await getCommitsWithPackages(commits);
   const packageUpgrades = getPackageUpgrades(commitsWithPackages);
+  if (Object.keys(packageUpgrades).length === 0) {
+    console.log("No package upgrades found");
+    return;
+  }
   const releaseNotes = generateReleaseNotes(commitsWithPackages);
   await createChangesets(packageUpgrades, releaseNotes, id);
+  await commitChangesets();
 }
 
 function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
@@ -228,4 +233,12 @@ ${releaseNotes}
   } catch (error) {
     console.error("Error creating changeset:", error);
   }
+}
+
+async function commitChangesets(): Promise<void> {
+  await execAsync('git config user.name "GitHub Actions"');
+  await execAsync('git config user.email "actions@github.com"');
+  await execAsync("git add .changeset");
+  await execAsync('git commit -m "ci: update changeset"');
+  await execAsync("git push");
 }
