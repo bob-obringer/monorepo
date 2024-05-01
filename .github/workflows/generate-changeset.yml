@@ -39,14 +39,9 @@ jobs:
 
       - name: Fetch origin
         run: |
-          git fetch origin main
+          git checkout main
+          git fetch
           git checkout develop
-          
-#          git fetch origin main:main
-#          git fetch origin develop:develop
-#          git checkout main
-#          git fetch
-#          git checkout develop
 
       - name: Run @bob-obringer/conventional-changeset
         run: node public-packages/conventional-changeset/dist/cli.js
