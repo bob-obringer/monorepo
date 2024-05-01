@@ -31,8 +31,17 @@ jobs:
       - name: List branches
         run: git branch --all
         
-      - name: Show current branch
-        run: git rev-parse --abbrev-ref HEAD        
+      - name: Checkout main branch
+        run: git checkout main  
+        
+      - name: Fetch latest changes
+        run: git fetch origin
+        
+      - name: Checkout pull request merge commit
+        run: git checkout ${{ github.sha }}
+
+      - name: Get commit history
+        run: git log --format="%H %B" main..HEAD
 
       - name: Build conventional-changeset
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
