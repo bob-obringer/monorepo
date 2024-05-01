@@ -14,7 +14,7 @@
     "release": "turbo run build --filter=docs^... && changeset publish"
   },
   "dependencies": {
-    "@changesets/cli": "^2.27.1"
+    "@changesets/cli": "2.27.1"
   },
   "devDependencies": {
     "@bob-obringer/conventional-changeset": "workspace:*",
@@ -32,7 +32,7 @@
     "prettier-plugin-tailwindcss": "0.5.14",
     "rimraf": "5.0.5",
     "tailwindcss": "workspace:*",
-    "tsx": "^4.7.3",
+    "tsx": "4.8.2",
     "turbo": "1.13.3",
     "typescript": "5.4.5"
   },
