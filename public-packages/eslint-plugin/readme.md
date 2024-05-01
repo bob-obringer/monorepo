@@ -133,4 +133,4 @@ ESLint 9 is here, including a new config system. Most of the ecosystem has not c
 
 ## Package Bumping
 
-bump5
+bump6
