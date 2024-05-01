@@ -1,4 +1,4 @@
-name: Changeset Generation
+name: Generate Changeset
 
 on:
   pull_request:
@@ -8,7 +8,6 @@ on:
 jobs:
   generate-changeset:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,25 +27,24 @@ jobs:
       - name: Cache pnpm modules
         uses: actions/cache@v3
         with:
-          path: |
-            node_modules
+          path: node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+          restore-keys: ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Dogfood conventional-changeset 
-        run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
+      - name: Build @bob-obringer/conventional-changeset 
+        run: pnpx turbo run build --filter=@bob-obringer/conventional-changeset
 
-      - name: Make sure we're up to date
+      - name: Fetch origin
         run: |
-          git checkout main
-          git fetch
-          git checkout develop
+          git fetch origin
+#          git checkout main
+#          git fetch
+#          git checkout develop
 
-      - name: Run changeset generation
+      - name: Run @bob-obringer/conventional-changeset
         run: node public-packages/conventional-changeset/dist/cli.js
         
       - name: Add changeset to PR

@@ -1,10 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
   "changelog": "@changesets/cli/changelog",
-  "packages": ["public-packages"],
   "commit": false,
   "fixed": [],
-  "linked": [["@bob-obringer/eslint-plugin"]],
+  "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
