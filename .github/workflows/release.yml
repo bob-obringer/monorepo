@@ -43,7 +43,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
           
       - name: Enable Pull Request Automerge
-        if: steps.changesets.outputs.publishedPackages
+        if: steps.changesets.outputs.pullRequestNumber
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
