@@ -39,7 +39,8 @@ jobs:
 
       - name: Fetch origin
         run: |
-          git fetch origin
+          git fetch origin main:main
+          git fetch origin develop:develop
 #          git checkout main
 #          git fetch
 #          git checkout develop
