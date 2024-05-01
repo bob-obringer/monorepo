@@ -27,3 +27,8 @@ color schemes using centralized semantic colors instead of explicitly referencin
 ### [@bob-obringer/posthog-nextjs](public-packages/posthog-nextjs)
 
 A simple wrapper around the PostHog JS library to make it easier to use with Next.js.
+
+```
+corepack enable pnpm
+corepack use pnpm@8.x
+```
