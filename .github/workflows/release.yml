@@ -56,5 +56,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git checkout develop
-          git merge --no-ff main
+          git fetch origin main
+          git rebase origin/main
           git push origin develop
