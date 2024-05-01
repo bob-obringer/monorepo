@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.1.0
+
+### Minor Changes
+
+- d9f19d2: - patched
+
 ## 0.0.40
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/eslint-plugin",
-  "version": "0.0.40",
+  "version": "0.1.0",
   "private": false,
   "description": "ESLint plugin for Bob Obringer's projects",
   "keywords": [
