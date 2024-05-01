@@ -28,8 +28,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build conventional-changeset
+        run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
+
       - name: Run changeset generation
-        run: pnpm run generate-changeset
+        run: node public-packages/conventional-changeset/dist/cli.js
 
       - name: Install GitHub CLI
         run: |

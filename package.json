@@ -8,7 +8,7 @@
     "deploy": "turbo run deploy --filter=docs^...",
     "dev": "turbo dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "generate-changeset": "pnpm -C public-packages/conventional-changeset generate-changeset",
+    "generate-changeset": "pnpm --filter @bob-obringer/conventional-changeset run generate-changeset",
     "lint": "turbo lint",
     "prepare": "husky",
     "release": "turbo run build --filter=docs^... && changeset publish"
