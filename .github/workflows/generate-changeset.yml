@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: List branches
+        run: git branch --all
+        
+      - name: Show current branch
+        run: git rev-parse --abbrev-ref HEAD        
+
       - name: Build conventional-changeset
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
 
