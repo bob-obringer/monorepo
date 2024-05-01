@@ -26,7 +26,7 @@ jobs:
           version: 8
 
       - name: Install dependencies
-        run: pnpm install -r public-packages/conventional-changeset
+        run: pnpm install
 
 #      - name: List branches
 #        run: git branch --all
