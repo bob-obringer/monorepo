@@ -40,7 +40,7 @@ jobs:
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
 
       - name: Run changeset generation
-        run: node public-packages/conventional-changeset/dist/cli.js --id ${{ github.event.pull_request.number }}
+        run: node public-packages/conventional-changeset/dist/cli.js --id pr-${{ github.event.pull_request.number }}
 
 #      - name: Install GitHub CLI
 #        run: |
