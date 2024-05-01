@@ -39,7 +39,7 @@ jobs:
 
       - name: Fetch origin
         run: |
-          git fetch origin
+          git fetch origin main
           git checkout develop
           
 #          git fetch origin main:main
