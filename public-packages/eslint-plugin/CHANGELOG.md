@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.0.38
+
+### Patch Changes
+
+- f0757ed: - updated multiple packages
+
 ## 0.0.37
 
 ### Patch Changes
