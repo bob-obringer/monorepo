@@ -40,21 +40,18 @@ jobs:
       - name: Checkout pull request merge commit
         run: git checkout ${{ github.sha }}
 
-      - name: Get commit history
-        run: git log --format="%H %B" main..HEAD
-
       - name: Build conventional-changeset
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
 
       - name: Run changeset generation
         run: node public-packages/conventional-changeset/dist/cli.js
 
-      - name: Install GitHub CLI
-        run: |
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          sudo apt update
-          sudo apt install gh
+#      - name: Install GitHub CLI
+#        run: |
+#          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+#          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+#          sudo apt update
+#          sudo apt install gh
 
       - name: Add changeset to PR
         env:
@@ -62,8 +59,8 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git checkout -b changeset-update
+#          git checkout -b changeset-update
           git add .changeset
-          git commit -m "chore: Update changeset"
-          git push origin changeset-update
-          gh pr edit ${{ github.event.pull_request.number }} --body "$(cat .changeset/*.md)"
+          git commit -m "ci: Update changeset"
+          git push
+#          gh pr edit ${{ github.event.pull_request.number }} --body "$(cat .changeset/*.md)"
