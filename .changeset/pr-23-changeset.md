@@ -12,6 +12,7 @@
 
 ## Other Changes
 
+- updated conventional-changeset readme
 - simplified workflow
 - simplified workflow
 - simplified workflow
