@@ -1,5 +1,13 @@
 # @bob-obringer/conventional-changeset
 
+## 0.0.3
+
+### Patch Changes
+
+- 429ba60: ## Other Changes
+
+  - testing package bump and deploy
+
 ## 0.0.2
 
 ### Patch Changes
