@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "author": "Bob Obringer <bob@obringer.net>",
-  "type": "commonjs",
+  "type": "module",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
