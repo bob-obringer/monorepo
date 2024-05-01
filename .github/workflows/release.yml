@@ -41,14 +41,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
-          
-#      - name: Enable Pull Request Automerge
-#        if: steps.changesets.outputs.pullRequestNumber
-#        uses: peter-evans/enable-pull-request-automerge@v2
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          pull-request-number: ${{ steps.changesets.outputs.pullRequestNumber }}
-#          merge-method: squash
 
   merge-back:
     needs: release
