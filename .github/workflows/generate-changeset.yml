@@ -24,12 +24,12 @@ jobs:
         with:
           version: 8
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
+#      - name: Cache pnpm modules
+#        uses: actions/cache@v3
+#        with:
+#          path: node_modules
+#          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+#          restore-keys: ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
         run: pnpm install
