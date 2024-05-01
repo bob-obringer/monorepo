@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.0.36
+
+### Patch Changes
+
+- 5111edc: - testing updating 2 packages
+
 ## 0.0.35
 
 ### Patch Changes

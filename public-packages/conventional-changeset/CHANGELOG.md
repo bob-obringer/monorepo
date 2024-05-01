@@ -1,5 +1,13 @@
 # @bob-obringer/conventional-changeset
 
+## 0.0.4
+
+### Patch Changes
+
+- 5111edc: - improved generate-changeset
+- 5111edc: - testing updating 2 packages
+- 5111edc: - simplified changesets
+
 ## 0.0.3
 
 ### Patch Changes
