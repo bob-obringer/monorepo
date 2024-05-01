@@ -35,7 +35,9 @@ const upgradeTypeMap: Record<string, UpgradeType> = {
 // const priority = ["patch", "minor", "major"];
 
 export async function generateChangeset(): Promise<void> {
-  const commits = await getCommitsSinceMaster();
+  const commits = await getCommitsSinceMain();
+  console.log(commits);
+  return;
   const commitsWithPackages = await getCommitsWithPackages(commits);
   // const packageUpgrades = getPackageUpgrades(commitsWithPackages);
   // if (Object.keys(packageUpgrades).length === 0) {
@@ -79,11 +81,11 @@ export async function generateChangeset(): Promise<void> {
 //   return packageUpgradeTypes;
 // }
 
-async function getCommitsSinceMaster(): Promise<CommitInfo[]> {
-  await execAsync("git checkout main");
-  await execAsync("git fetch");
-  await execAsync("git checkout develop");
-  const { stdout } = await execAsync('git log --format="%H %B" main..develop');
+async function getCommitsSinceMain(): Promise<CommitInfo[]> {
+  // await execAsync("git checkout main");
+  // await execAsync("git fetch");
+  // await execAsync("git checkout develop");
+  const { stdout } = await execAsync('git log --format="%H %B" main..HEAD');
   return stdout
     .trim()
     .split("\n")
