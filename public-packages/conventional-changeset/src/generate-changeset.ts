@@ -68,7 +68,9 @@ function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
 }
 
 async function getCommitsSinceMaster(): Promise<CommitInfo[]> {
+  await execAsync("git checkout main");
   await execAsync("git fetch");
+  await execAsync("git checkout develop");
   const { stdout } = await execAsync('git log --format="%H %B" main..develop');
   return stdout
     .trim()
