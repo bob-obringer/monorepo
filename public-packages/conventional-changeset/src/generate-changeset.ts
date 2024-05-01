@@ -8,19 +8,6 @@ const execAsync = promisify(exec);
 
 type UpgradeType = "breaking" | "major" | "minor" | "patch" | "none";
 
-const upgradeTypeMap: Record<string, UpgradeType> = {
-  feat: "minor",
-  fix: "patch",
-  docs: "none",
-  refactor: "patch",
-  perf: "patch",
-  test: "none",
-  ci: "none",
-  chore: "none",
-};
-
-const priority = ["patch", "minor", "major"];
-
 type CommitInfo = {
   sha: string;
   message: string;
@@ -33,11 +20,21 @@ type CommitInfoWithPackages = CommitInfo & {
   changedPackages: string[];
 };
 
-export async function generateChangeset({
-  id,
-}: {
-  id?: string;
-} = {}): Promise<void> {
+const upgradeTypeMap: Record<string, UpgradeType> = {
+  feat: "minor",
+  patch: "patch",
+  fix: "patch",
+  docs: "none",
+  refactor: "patch",
+  perf: "patch",
+  test: "none",
+  ci: "none",
+  chore: "none",
+};
+
+const priority = ["patch", "minor", "major"];
+
+export async function generateChangeset(): Promise<void> {
   const commits = await getCommitsSinceMaster();
   const commitsWithPackages = await getCommitsWithPackages(commits);
   const packageUpgrades = getPackageUpgrades(commitsWithPackages);
@@ -46,7 +43,7 @@ export async function generateChangeset({
     return;
   }
   const releaseNotes = generateReleaseNotes(commitsWithPackages);
-  await createChangesets(packageUpgrades, releaseNotes, id);
+  await createChangesets(packageUpgrades, releaseNotes);
   await commitChangesets();
 }
 
@@ -205,33 +202,69 @@ function generateReleaseNotes(commits: CommitInfoWithPackages[]): string {
   return releaseNotesString.trim();
 }
 
+// async function createChangesets(
+//   packageUpgrades: Record<string, UpgradeType>,
+//   releaseNotes: string,
+// ): Promise<void> {
+//   const changesetDir = join(process.cwd(), ".changeset");
+//   const changesetFile = join(changesetDir, `${Date.now()}.md`);
+//
+//   const headerContent = Object.entries(packageUpgrades)
+//     .filter(([_, upgradeType]) => upgradeType !== "none")
+//     .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
+//     .join("\n");
+//
+//   const changesetContent = `---
+// ${headerContent}
+// ---
+//
+// ${releaseNotes}
+// `;
+//
+//   try {
+//     await mkdir(changesetDir, { recursive: true });
+//     await writeFile(changesetFile, changesetContent, "utf8");
+//     console.log(`Created changeset: ${changesetFile}`);
+//   } catch (error) {
+//     console.error("Error creating changeset:", error);
+//   }
+// }
+
 async function createChangesets(
-  packageUpgrades: Record<string, UpgradeType>,
-  releaseNotes: string,
-  id?: string,
+  commitsWithPackages: CommitInfoWithPackages[],
 ): Promise<void> {
   const changesetDir = join(process.cwd(), ".changeset");
-  const changesetID = id ?? Date.now().toString();
-  const changesetFile = join(changesetDir, `${changesetID}-changeset.md`);
 
-  const headerContent = Object.entries(packageUpgrades)
-    .filter(([_, upgradeType]) => upgradeType !== "none")
-    .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
-    .join("\n");
+  for (const commit of commitsWithPackages) {
+    const { sha, parsedMessage, upgradeType } = commit;
+    const { subject } = parsedMessage;
 
-  const changesetContent = `---
+    const packageUpgrades: Record<string, UpgradeType> = {};
+    for (const packageName of commit.changedPackages) {
+      packageUpgrades[packageName] = upgradeType;
+    }
+
+    const headerContent = Object.entries(packageUpgrades)
+      .filter(([_, upgradeType]) => upgradeType !== "none")
+      .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
+      .join("\n");
+
+    const changesetContent = `---
 ${headerContent}
 ---
 
-${releaseNotes}
+- ${subject}
 `;
 
-  try {
-    await mkdir(changesetDir, { recursive: true });
-    await writeFile(changesetFile, changesetContent, "utf8");
-    console.log(`Created changeset: ${changesetFile}`);
-  } catch (error) {
-    console.error("Error creating changeset:", error);
+    const changesetFile = join(changesetDir, `${sha}.md`);
+
+    try {
+      await mkdir(changesetDir, { recursive: true });
+      await writeFile(changesetFile, changesetContent, "utf8");
+      console.log(`Created changeset: ${changesetFile}`);
+    } catch (error) {
+      console.error(`Error creating changeset for commit ${sha}:`, error);
+    }
   }
 }
 
