@@ -10,8 +10,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "generate-changeset": "pnpm --filter @bob-obringer/conventional-changeset run generate-changeset",
     "lint": "turbo lint",
-    "prepare": "husky",
-    "release": "turbo run build --filter=docs^... && changeset publish"
+    "prepare": "husky"
   },
   "dependencies": {
     "@changesets/cli": "^2.27.1"
@@ -32,6 +31,7 @@
     "prettier-plugin-tailwindcss": "0.5.14",
     "rimraf": "5.0.5",
     "tailwindcss": "workspace:*",
+    "tsx": "^4.7.3",
     "turbo": "1.13.3",
     "typescript": "5.4.5"
   },

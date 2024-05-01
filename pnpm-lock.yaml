@@ -64,6 +64,9 @@ importers:
       tailwindcss:
         specifier: 3.4.3
         version: 3.4.3
+      tsx:
+        specifier: ^4.7.3
+        version: 4.7.3
       turbo:
         specifier: 1.13.3
         version: 1.13.3

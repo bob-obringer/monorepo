@@ -35,7 +35,7 @@ const upgradeTypeMap: Record<string, UpgradeType> = {
 // const priority = ["patch", "minor", "major"];
 
 export async function generateChangeset(): Promise<void> {
-  const commits = await getCommitsSinceMaster();
+  const commits = await getCommitsSinceMain();
   const commitsWithPackages = await getCommitsWithPackages(commits);
   // const packageUpgrades = getPackageUpgrades(commitsWithPackages);
   // if (Object.keys(packageUpgrades).length === 0) {
@@ -43,13 +43,14 @@ export async function generateChangeset(): Promise<void> {
   //   return;
   // }
   // const releaseNotes = generateReleaseNotes(commitsWithPackages);
-  if (commitsWithPackages.length === 0) {
-    console.log("No package upgrades found");
-    return;
-  }
+  // if (commitsWithPackages.length === 0) {
+  //   console.log("No package upgrades found");
+  //   return;
+  // }
 
   await createChangesets(commitsWithPackages);
-  await commitChangesets();
+
+  // await commitChangesets();
 }
 
 // function getPackageUpgrades(commits: CommitInfoWithPackages[]) {
@@ -78,10 +79,10 @@ export async function generateChangeset(): Promise<void> {
 //   return packageUpgradeTypes;
 // }
 
-async function getCommitsSinceMaster(): Promise<CommitInfo[]> {
-  await execAsync("git checkout main");
-  await execAsync("git fetch");
-  await execAsync("git checkout develop");
+async function getCommitsSinceMain(): Promise<CommitInfo[]> {
+  // await execAsync("git checkout main");
+  // await execAsync("git fetch");
+  // await execAsync("git checkout develop");
   const { stdout } = await execAsync('git log --format="%H %B" main..develop');
   return stdout
     .trim()
@@ -206,9 +207,9 @@ async function getChangedPackages(commitSha: string): Promise<string[]> {
 //
 //   return releaseNotesString.trim();
 // }
-
+//
 // async function createChangesets(
-//   packageUpgrades: Record<string, UpgradeType>,
+//   packageUpgrades: Record<string, unknown>,
 //   releaseNotes: string,
 // ): Promise<void> {
 //   const changesetDir = join(process.cwd(), ".changeset");
@@ -235,6 +236,65 @@ async function getChangedPackages(commitSha: string): Promise<string[]> {
 //   }
 // }
 
+// function generateReleaseNotes(commit: CommitInfoWithPackages[]): string {
+//   const releaseNotes = {
+//     breaking: [] as Array<string>,
+//     feat: [] as Array<string>,
+//     fix: [] as Array<string>,
+//     other: [] as Array<string>,
+//   };
+//
+//   for (const commit of commits) {
+//     const {
+//       isBreakingChange,
+//       parsedMessage: { type, subject, scope },
+//     } = commit;
+//
+//     if (!subject) continue;
+//
+//     const scopeString = scope ? `${scope}: ` : "";
+//     const changeItem = `- ${scopeString}${subject}`;
+//
+//     if (isBreakingChange) {
+//       releaseNotes.breaking.push(changeItem);
+//     } else if (type === "feat") {
+//       releaseNotes.feat.push(changeItem);
+//     } else if (type === "fix") {
+//       releaseNotes.fix.push(changeItem);
+//     } else {
+//       releaseNotes.other.push(changeItem);
+//     }
+//   }
+//
+//   let releaseNotesString = "";
+//
+//   if (releaseNotes.breaking.length > 0) {
+//     releaseNotesString += "## Breaking Changes\n";
+//     releaseNotesString += releaseNotes.breaking.join("\n");
+//     releaseNotesString += "\n\n";
+//   }
+//
+//   if (releaseNotes.feat.length > 0) {
+//     releaseNotesString += "## New Features\n";
+//     releaseNotesString += releaseNotes.feat.join("\n");
+//     releaseNotesString += "\n\n";
+//   }
+//
+//   if (releaseNotes.fix.length > 0) {
+//     releaseNotesString += "## Bug Fixes\n";
+//     releaseNotesString += releaseNotes.fix.join("\n");
+//     releaseNotesString += "\n\n";
+//   }
+//
+//   if (releaseNotes.other.length > 0) {
+//     releaseNotesString += "## Other Changes\n";
+//     releaseNotesString += releaseNotes.other.join("\n");
+//     releaseNotesString += "\n\n";
+//   }
+//
+//   return releaseNotesString.trim();
+// }
+//
 async function createChangesets(
   commitsWithPackages: CommitInfoWithPackages[],
 ): Promise<void> {
@@ -273,10 +333,10 @@ ${headerContent}
   }
 }
 
-async function commitChangesets(): Promise<void> {
-  await execAsync('git config user.name "GitHub Actions"');
-  await execAsync('git config user.email "actions@github.com"');
-  await execAsync("git add .changeset");
-  await execAsync('git commit -m "ci: update changeset"');
-  await execAsync("git push");
-}
+// async function commitChangesets(): Promise<void> {
+//   await execAsync('git config user.name "GitHub Actions"');
+//   await execAsync('git config user.email "actions@github.com"');
+//   await execAsync("git add .changeset");
+//   await execAsync('git commit -m "ci: update changeset"');
+//   await execAsync("git push");
+// }
