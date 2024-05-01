@@ -36,17 +36,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-#      - name: List branches
-#        run: git branch --all
-#        
-#      - name: Checkout main branch
-#        run: git checkout main  
+      - name: Checkout main branch
+        run: git checkout main  
         
       - name: Fetch latest changes
         run: git fetch origin main
         
-#      - name: Checkout pull request merge commit
-#        run: git checkout develop
+      - name: Checkout pull request merge commit
+        run: git checkout develop
 
       - name: Build conventional-changeset
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
