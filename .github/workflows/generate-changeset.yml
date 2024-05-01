@@ -59,8 +59,11 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-#          git checkout -b changeset-update
           git add .changeset
-          git commit -m 'ci:: Update changeset'
+          git commit -m 'ci: eUpdate changeset'
           git push
+          
+          
+#          git checkout -b changeset-update
+          
 #          gh pr edit ${{ github.event.pull_request.number }} --body "$(cat .changeset/*.md)"
