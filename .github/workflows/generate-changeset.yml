@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build conventional-changeset
+      - name: Dogfood conventional-changeset 
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
 
       - name: Make sure we're up to date
