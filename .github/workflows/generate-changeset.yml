@@ -26,19 +26,19 @@ jobs:
           version: 8
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install -r public-packages/conventional-changeset
 
-      - name: List branches
-        run: git branch --all
-        
-      - name: Checkout main branch
-        run: git checkout main  
+#      - name: List branches
+#        run: git branch --all
+#        
+#      - name: Checkout main branch
+#        run: git checkout main  
         
       - name: Fetch latest changes
         run: git fetch origin
         
-      - name: Checkout pull request merge commit
-        run: git checkout develop
+#      - name: Checkout pull request merge commit
+#        run: git checkout develop
 
       - name: Build conventional-changeset
         run: pnpx turbo run build --scope=@bob-obringer/conventional-changeset
@@ -60,10 +60,6 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .changeset
-          git commit -m 'ci: eUpdate changeset'
-          git push
-          
-          
-#          git checkout -b changeset-update
-          
+          git commit -m 'ci: update changeset'
+          git push          
 #          gh pr edit ${{ github.event.pull_request.number }} --body "$(cat .changeset/*.md)"
