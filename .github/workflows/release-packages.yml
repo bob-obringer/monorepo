@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  release:
+  release-packages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -50,21 +50,3 @@ jobs:
           git fetch origin main
           git rebase origin/main
           git push origin develop
-
-#  merge-back:
-#    needs: release
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v3
-#        with:
-#          fetch-depth: 0
-#          
-#      - name: Merge main into develop
-#        run: |
-#          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-#          git config --global user.name "github-actions[bot]"
-#          git checkout develop
-#          git fetch origin main
-#          git rebase origin/main
-#          git push origin develop
