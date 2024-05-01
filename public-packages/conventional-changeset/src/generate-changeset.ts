@@ -43,6 +43,11 @@ export async function generateChangeset(): Promise<void> {
   //   return;
   // }
   // const releaseNotes = generateReleaseNotes(commitsWithPackages);
+  if (commitsWithPackages.length === 0) {
+    console.log("No package upgrades found");
+    return;
+  }
+
   await createChangesets(commitsWithPackages);
   await commitChangesets();
 }
