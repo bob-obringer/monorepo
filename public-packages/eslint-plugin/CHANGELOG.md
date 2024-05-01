@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.0.37
+
+### Patch Changes
+
+- 68cab56: - bumped multiple versions
+
 ## 0.0.36
 
 ### Patch Changes
