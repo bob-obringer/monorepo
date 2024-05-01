@@ -1,11 +1,11 @@
-name: Release
+name: Release Packages
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  release:
+  release-packages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,14 +26,14 @@ jobs:
       - name: Cache pnpm modules
         uses: actions/cache@v3
         with:
-          path: ~/.pnpm-store
+          path: node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Create Release Pull Request
+      - name: Run Changesets
         uses: changesets/action@v1
         id: changesets
         with:
@@ -42,16 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN_BOB_OBRINGER }}
 
-  merge-back:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Merge main into develop
+      - name: Rebase main into develop
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
