@@ -1,5 +1,11 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.0.3
+
+### Patch Changes
+
+- 4d642df: - everything
+
 ## 0.0.2
 
 ### Patch Changes
