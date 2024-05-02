@@ -1,6 +1,7 @@
 {
   "name": "@bob-obringer/posthog-nextjs",
   "version": "0.0.2",
+  "private": false,
   "description": "Bob Obringer Posthog NextJS Client",
   "keywords": [
     "posthog",
@@ -18,6 +19,7 @@
   "author": "Bob Obringer <bob@obringer.net>",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist node_modules",
@@ -26,15 +28,18 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "next": "14.2.3",
-    "posthog-js": "1.130.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "next": "workspace:*",
+    "posthog-js": "workspace:*",
+    "react": "workspace:*",
+    "react-dom": "workspace:*"
   },
   "peerDependencies": {
     "next": ">=14.2",
     "posthog-js": ">=1.130",
     "react": ">=18.2",
     "react-dom": ">=18.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

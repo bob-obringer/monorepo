@@ -5,8 +5,9 @@ export const recommended = {
     "plugin:@typescript-eslint/recommended",
     "prettier",
   ],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2023,
     sourceType: "module",
     allowImportExportEverywhere: true,
     ecmaFeatures: {
@@ -20,11 +21,12 @@ export const recommended = {
     node: true,
   },
   rules: {
-    "unused-imports/no-unused-imports": "error",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@bob-obringer/no-process-env": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
-    "@bob-obringer/no-process-env": ["error"],
-    "@typescript-eslint/no-unused-vars": [
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
       "error",
       {
         vars: "all",

@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "author": "Bob Obringer <bob@obringer.net>",
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -29,9 +30,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "tailwindcss": "3.4.3"
+    "tailwindcss": "workspace:*"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
