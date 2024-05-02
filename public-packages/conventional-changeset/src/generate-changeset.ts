@@ -74,35 +74,61 @@ async function getCommitsWithPackages(commits: CommitInfo[]) {
 
 async function getChangedPackages(commitSha: string): Promise<string[]> {
   const { stdout } = await execAsync(
-    `git show --name-only --pretty=format: ${commitSha}`,
+    `git diff --name-only --diff-filter=d ${commitSha}^ ${commitSha}`,
   );
   const changedFiles = stdout.trim().split("\n");
   const changedPackages = new Set<string>();
-  const processedPackages = new Set<string>();
 
-  for (const file of changedFiles) {
-    const parts = file.split("/");
-
-    for (let i = 0; i < parts.length; i++) {
-      const packagePath = parts.slice(0, i + 1).join("/");
-      const packageJsonPath = `${packagePath}/package.json`;
-
+  for (const filePath of changedFiles) {
+    if (filePath.endsWith("package.json")) {
+      const packagePath = filePath.substring(0, filePath.lastIndexOf("/"));
       try {
-        const { stdout } = await execAsync(
-          `git show ${commitSha}:${packageJsonPath}`,
-        );
+        const { stdout } = await execAsync(`git show ${commitSha}:${filePath}`);
         const packageJson = JSON.parse(stdout);
         changedPackages.add(packageJson.name);
-        processedPackages.add(packagePath);
-        break;
-      } catch (_) {
-        // execAsync throws if package.json doesn't exist
+      } catch (error) {
+        console.error(
+          `Error reading package.json at ${packagePath} in commit ${commitSha}:`,
+          error,
+        );
       }
     }
   }
 
   return Array.from(changedPackages);
 }
+
+// async function getChangedPackages(commitSha: string): Promise<string[]> {
+//   const { stdout } = await execAsync(
+//     `git show --name-only --pretty=format: ${commitSha}`,
+//   );
+//   const changedFiles = stdout.trim().split("\n");
+//   const changedPackages = new Set<string>();
+//   const processedPackages = new Set<string>();
+//
+//   for (const changedFilePath of changedFiles) {
+//     const changedFilePathParts = changedFilePath.split("/");
+//
+//     for (let i = 0; i < changedFilePathParts.length; i++) {
+//       const changedPackagePath = changedFilePathParts.slice(0, i + 1).join("/");
+//       if (processedPackages.has(changedPackagePath)) break;
+//
+//       try {
+//         const { stdout } = await execAsync(
+//           `git show ${commitSha}:${changedPackagePath}/package.json`,
+//         );
+//         const packageJson = JSON.parse(stdout);
+//         changedPackages.add(packageJson.name);
+//         processedPackages.add(packagePath);
+//         break;
+//       } catch (_) {
+//         // execAsync throws if package.json doesn't exist
+//       }
+//     }
+//   }
+//
+//   return Array.from(changedPackages);
+// }
 
 // https://github.com/changesets/changesets/issues/862
 
