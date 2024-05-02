@@ -19,9 +19,9 @@ importers:
         specifier: 2.27.1
         version: 2.27.1
     devDependencies:
-      '@bob-obringer/conventional-changeset':
+      '@bob-obringer/conventional-changesets':
         specifier: workspace:*
-        version: link:public-packages/conventional-changeset
+        version: link:public-packages/conventional-changesets
       '@bob-obringer/eslint-plugin':
         specifier: workspace:*
         version: link:public-packages/eslint-plugin
@@ -29,8 +29,8 @@ importers:
         specifier: workspace:*
         version: link:public-packages/tsconfig
       '@types/node':
-        specifier: 20.12.7
-        version: 20.12.7
+        specifier: 20.12.8
+        version: 20.12.8
       '@types/react':
         specifier: 18.3.1
         version: 18.3.1
@@ -187,7 +187,7 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
 
-  public-packages/conventional-changeset:
+  public-packages/conventional-changesets:
     dependencies:
       commander:
         specifier: 12.0.0
@@ -2378,7 +2378,7 @@ packages:
   /@types/conventional-commits-parser@5.0.0:
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==}
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
     dev: true
 
   /@types/estree@1.0.5:
@@ -2400,7 +2400,7 @@ packages:
   /@types/node-fetch@2.6.11:
     resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
       form-data: 4.0.0
     dev: false
 
@@ -2414,8 +2414,8 @@ packages:
       undici-types: 5.26.5
     dev: false
 
-  /@types/node@20.12.7:
-    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+  /@types/node@20.12.8:
+    resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
     dependencies:
       undici-types: 5.26.5
 
