@@ -115,7 +115,7 @@ async function createChangesets(
     const {
       sha,
       upgradeType,
-      parsedMessage: { subject, body, header, footer },
+      parsedMessage: { subject, body, footer },
     } = commit;
 
     const packageUpgrades: Record<string, UpgradeType> = {};
@@ -128,9 +128,7 @@ async function createChangesets(
       .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
       .join("\n");
 
-    const message = [subject, header, body, footer]
-      .filter(Boolean)
-      .join("\n\n");
+    const message = [subject, body, footer].filter(Boolean).join("\n\n");
 
     const changesetContent = `---
 ${headerContent}
