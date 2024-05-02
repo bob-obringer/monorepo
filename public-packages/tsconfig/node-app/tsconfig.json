@@ -2,14 +2,12 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "lib": ["es2023"],
-    "module": "es2020",
+    "module": "CommonJS",
+    "verbatimModuleSyntax": false,
     "target": "es2022",
     "moduleResolution": "node",
-    "incremental": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "incremental": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

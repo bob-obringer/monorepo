@@ -1,5 +1,5 @@
 {
-  "name": "@bob-obringer/conventional-changeset",
+  "name": "@bob-obringer/conventional-changesets",
   "version": "0.1.2",
   "private": false,
   "description": "Automate the creation of changesets from conventional commits",

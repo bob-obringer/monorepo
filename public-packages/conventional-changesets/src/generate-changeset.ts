@@ -35,8 +35,17 @@ const bumpMap: Record<string, UpgradeType> = {
 /**
  * Main function to generate changesets based on version bump commits.
  */
-export async function generateChangeset(): Promise<void> {
-  const versionBumpCommits = getVersionBumpCommitsSinceMain();
+export async function generateChangeset({
+  productionBranch = "main",
+  integrationBranch = "develop",
+}: {
+  productionBranch?: string;
+  integrationBranch?: string;
+} = {}): Promise<void> {
+  const versionBumpCommits = getVersionBumpCommitsSinceMain({
+    productionBranch,
+    integrationBranch,
+  });
   await createChangesets(versionBumpCommits);
 }
 
@@ -44,18 +53,23 @@ export async function generateChangeset(): Promise<void> {
  * Retrieves version bump commits since the main branch.
  * @returns An array of CommitInfo objects representing version bump commits.
  */
-function getVersionBumpCommitsSinceMain(): CommitInfo[] {
-  // Retrieve commits between main and develop branches using git log
-  return (
-    execSync('git log --format="%H %B" main..develop')
-      .toString()
-      .trim()
-      .split("\n")
-      // ensure we're trying to process only commits with a valid SHA
-      .filter((commitText) => commitText.trim().match(/^[0-9a-f]{40}/))
-      .map(parseCommit)
-      .filter(({ upgradeType }) => upgradeType !== null)
-  );
+function getVersionBumpCommitsSinceMain({
+  productionBranch,
+  integrationBranch,
+}: {
+  productionBranch: string;
+  integrationBranch: string;
+}): CommitInfo[] {
+  const delimiter = "<!--|COMMIT|-->";
+  return execSync(
+    `git log --format="%H %B${delimiter}" ${productionBranch}..${integrationBranch}`,
+  )
+    .toString()
+    .trim()
+    .split(delimiter)
+    .slice(0, -1)
+    .map(parseCommit)
+    .filter(({ upgradeType }) => upgradeType !== null);
 }
 
 /**

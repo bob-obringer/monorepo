@@ -1,3 +1,0 @@
-# conventional-changeset
-
-More docs
