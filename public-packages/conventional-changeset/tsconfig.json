@@ -1,7 +1,9 @@
 {
   "extends": ["@bob-obringer/tsconfig/backend-library/tsconfig.json"],
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "verbatimModuleSyntax": false
   },
   "include": ["src/**/*.ts*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
