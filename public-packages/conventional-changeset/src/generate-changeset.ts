@@ -128,14 +128,14 @@ async function createChangesets(
       .map(([packageName, upgradeType]) => `"${packageName}": ${upgradeType}`)
       .join("\n");
 
+    const message = [subject, header, body, footer]
+      .filter(Boolean)
+      .join("\n\n");
+
     const changesetContent = `---
 ${headerContent}
 ---
-
-- ${subject ?? ""}
-${header}
-${body}
-${footer}
+${message}
 `;
 
     const changesetFile = join(changesetDir, `${sha}.md`);
