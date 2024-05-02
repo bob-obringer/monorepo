@@ -1,5 +1,14 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [4d642df]
+  - @bob-obringer/posthog-nextjs@0.0.3
+  - @bob-obringer/theme@0.0.3
+  - @bob-obringer/design-system@0.0.2
+
 ## 0.1.2
 
 ### Patch Changes

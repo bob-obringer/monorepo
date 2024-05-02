@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.1.2
+
+### Patch Changes
+
+- 4d642df: - everything
+
 ## 0.1.1
 
 ### Patch Changes

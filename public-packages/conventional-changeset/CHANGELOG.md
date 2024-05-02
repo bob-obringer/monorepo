@@ -1,5 +1,23 @@
 # @bob-obringer/conventional-changeset
 
+## 0.1.2
+
+### Patch Changes
+
+- 4d642df: - fixed changesets
+- b7addf5: fixed changesets
+- 4d642df: - null
+- 4d642df: - null
+- 4d642df: - null
+- 4d642df: - null
+- 4d642df: - everything
+- 069c2ca: - fixed changesets
+  patch: fixed changesets
+  null
+  null
+- 4d642df: - null
+- b7addf5: fixed changesets 2
+
 ## 0.1.1
 
 ### Patch Changes
