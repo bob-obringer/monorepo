@@ -112,8 +112,11 @@ async function createChangesets(
   const changesetDir = join(process.cwd(), ".changeset");
 
   for (const commit of commitsWithPackages) {
-    const { sha, parsedMessage, upgradeType } = commit;
-    const { subject } = parsedMessage;
+    const {
+      sha,
+      upgradeType,
+      parsedMessage: { subject, body, header, footer },
+    } = commit;
 
     const packageUpgrades: Record<string, UpgradeType> = {};
     for (const packageName of commit.changedPackages) {
@@ -129,7 +132,10 @@ async function createChangesets(
 ${headerContent}
 ---
 
-- ${subject}
+- ${subject ?? ""}
+${header}
+${body}
+${footer}
 `;
 
     const changesetFile = join(changesetDir, `${sha}.md`);
