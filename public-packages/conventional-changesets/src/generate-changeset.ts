@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import commitParser, { type Commit } from "conventional-commits-parser";
 
-type UpgradeType = "major" | "minor" | "patch" | null;
+type UpgradeType = "major" | "minor" | "patch" | "none";
 
 type CommitInfo = {
   sha: string;
@@ -22,14 +22,9 @@ const BREAKING_PATTERN = "BREAKING CHANGE";
 // Mapping of commit types to corresponding upgrade types
 const bumpMap: Record<string, UpgradeType> = {
   feat: "minor",
-  patch: "patch",
   fix: "patch",
-  docs: null,
   refactor: "patch",
   perf: "patch",
-  test: null,
-  ci: null,
-  chore: null,
 };
 
 /**
@@ -88,7 +83,7 @@ function parseCommit(commitText: string): CommitInfo {
   );
   const upgradeType = isBreakingChange
     ? "major"
-    : bumpMap[commitMessage.type ?? ""] || "patch";
+    : bumpMap[commitMessage.type ?? ""] || "none";
   const changedPackages = getChangedPackagesForCommit(sha);
   return {
     changedPackages,
