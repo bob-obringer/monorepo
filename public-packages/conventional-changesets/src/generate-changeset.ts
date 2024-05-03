@@ -107,11 +107,20 @@ function getChangedPackagesForCommit(commitSha: string): string[] {
   const changedPackages = new Set<string>();
   const processedPaths = new Set<string>();
 
+  // Read the top-level package.json file
+  const topLevelPackageJson = JSON.parse(readFileSync("package.json", "utf8"));
+
+  // Flag to track if any file outside of packages has been changed
+  let hasRootLevelChanges = false;
+
   // Iterate over the changed files and find the corresponding package.json files
   for (const file of changedFiles) {
     let dir = dirname(file);
+    let packageFound = false;
+
     while (dir !== ".") {
       if (processedPaths.has(dir)) {
+        packageFound = true;
         break;
       }
       const packageJsonPath = join(dir, "package.json");
@@ -119,10 +128,21 @@ function getChangedPackagesForCommit(commitSha: string): string[] {
         const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
         changedPackages.add(packageJson.name);
         processedPaths.add(dir);
+        packageFound = true;
         break;
       }
       dir = dirname(dir);
     }
+
+    // If no package.json found for the changed file, consider it a root-level change
+    if (!packageFound) {
+      hasRootLevelChanges = true;
+    }
+  }
+
+  // If there are root-level changes, add the top-level package to the changed packages
+  if (hasRootLevelChanges) {
+    changedPackages.add(topLevelPackageJson.name);
   }
 
   return [...changedPackages];
