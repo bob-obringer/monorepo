@@ -3,7 +3,7 @@
 import { useBobObringerAi } from "@/features/ai/bob-obringer-ai-context";
 import { cx, Text } from "@bob-obringer/design-system";
 import NextLink from "next/link";
-import { FormEvent, ReactNode, useRef } from "react";
+import { FormEvent, ReactNode, useEffect, useRef } from "react";
 import {
   faUser,
   faHistory,
@@ -90,6 +90,18 @@ function Footer() {
     handleSubmit(event);
     if ((viewportWidth ?? 0) < 768) inputRef.current?.blur();
   }
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen) {
+        close();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, close]);
 
   return (
     <footer

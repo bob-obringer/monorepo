@@ -10,6 +10,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "0.0.9",
+    "@ai-sdk/openai": "^0.0.9",
+    "@aws-sdk/client-s3": "^3.568.0",
     "@bob-obringer/design-system": "workspace:*",
     "@bob-obringer/nextjs-fonts": "workspace:*",
     "@bob-obringer/posthog-nextjs": "workspace:*",
@@ -17,15 +20,14 @@
     "@fortawesome/fontawesome-svg-core": "6.5.2",
     "@fortawesome/free-solid-svg-icons": "6.5.2",
     "@fortawesome/react-fontawesome": "0.2.0",
-    "@langchain/anthropic": "0.1.16",
-    "@langchain/core": "0.1.61",
     "@vercel/analytics": "1.2.2",
     "@vercel/speed-insights": "1.0.10",
-    "ai": "2.2.37",
+    "ai": "3.1.1",
     "next": "workspace:*",
     "posthog-js": "workspace:*",
     "react": "workspace:*",
-    "react-dom": "workspace:*"
+    "react-dom": "workspace:*",
+    "zod": "3.23.6"
   },
   "devDependencies": {
     "autoprefixer": "10.4.19",
