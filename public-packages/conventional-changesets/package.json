@@ -1,5 +1,5 @@
 {
-  "name": "@bob-obringer/conventional-changeset",
+  "name": "@bob-obringer/conventional-changesets",
   "version": "0.1.2",
   "private": false,
   "description": "Automate the creation of changesets from conventional commits",
@@ -20,10 +20,10 @@
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "generate-changeset": "./dist/cli.js"
+    "generate-changeset": "./dist/cli/cli.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc -p tsconfig.cli.json",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'",

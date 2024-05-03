@@ -24,18 +24,18 @@ jobs:
         with:
           version: 8
 
-#      - name: Cache pnpm modules
-#        uses: actions/cache@v3
-#        with:
-#          path: node_modules
-#          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-#          restore-keys: ${{ runner.os }}-pnpm-
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build @bob-obringer/conventional-changeset 
-        run: pnpx turbo run build --filter=@bob-obringer/conventional-changeset
+      - name: Build @bob-obringer/conventional-changesets
+        run: pnpx turbo run build --filter=@bob-obringer/conventional-changesets
 
       - name: Fetch origin
         run: |
@@ -43,8 +43,8 @@ jobs:
           git fetch
           git checkout develop
 
-      - name: Run @bob-obringer/conventional-changeset
-        run: node public-packages/conventional-changeset/dist/cli.js
+      - name: Run @bob-obringer/conventional-changesets
+        run: node public-packages/conventional-changesets/dist/cli/cli.js
         
       - name: Add changeset to PR
         env:
