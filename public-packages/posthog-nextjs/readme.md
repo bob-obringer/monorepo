@@ -43,4 +43,4 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
 ## TODO:
 
-This is very crude for now. It just removes some setup boilerplate for new projects. I will be adding more features as I need them.
+This is very crude for now. It just removes some setup boilerplate for new projects.
