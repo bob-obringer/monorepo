@@ -28,7 +28,6 @@ color schemes using centralized semantic colors instead of explicitly referencin
 
 A simple wrapper around the PostHog JS library to make it easier to use with Next.js.
 
-```
-corepack enable pnpm
-corepack use pnpm@8.x
-```
+### [@bob-obringer/conventional-changesets](public-packages/conventional-changeset)
+
+Automates the process of independently bumping semantic versions of multiple packages within a monorepo.
