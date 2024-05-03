@@ -1,5 +1,11 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.0.4
+
+### Patch Changes
+
+- 13ffe1e: testing changesets autodeploy
+
 ## 0.0.3
 
 ### Patch Changes
