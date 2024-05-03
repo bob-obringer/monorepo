@@ -1,5 +1,11 @@
 # @bob-obringer/conventional-changeset
 
+## 0.1.3
+
+### Patch Changes
+
+- 8f4fe8d: fixed changeset config
+
 ## 0.1.2
 
 ### Patch Changes
