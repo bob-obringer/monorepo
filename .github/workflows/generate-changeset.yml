@@ -43,8 +43,8 @@ jobs:
           git fetch
           git checkout develop
 
-      - name: Run @bob-obringer/conventional-changeset
-        run: node public-packages/conventional-changeset/dist/cli/cli.js
+      - name: Run @bob-obringer/conventional-changesets
+        run: node public-packages/conventional-changesets/dist/cli/cli.js
         
       - name: Add changeset to PR
         env:
