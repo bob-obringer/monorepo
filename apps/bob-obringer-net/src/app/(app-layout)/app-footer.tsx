@@ -33,24 +33,19 @@ export function AppFooter({ className }: { className?: string }) {
     <div
       className={cx(
         className,
-        isOpen ? "z-20 h-svh bg-[#0D141F]" : "h-32 md:h-40",
         "fixed bottom-0 flex w-full flex-col items-center overflow-hidden",
-        "bg-opacity-40 backdrop-blur-md transition-all duration-500 ease-in-out",
+        "bg-opacity-50 backdrop-blur-2xl transition-all duration-500 ease-in-out",
+        isOpen
+          ? "z-20 h-svh bg-[#0D141F] bg-opacity-50 backdrop-blur-xl"
+          : "border-color-tertiary h-32 border-t md:h-40",
       )}
     >
-      <div
-        className={cx(
-          !isOpen && "hidden",
-          "w-full flex-1 overflow-scroll bg-[#0D141F]",
-        )}
-      >
+      <div className={cx(!isOpen && "hidden", "w-full flex-1 overflow-scroll")}>
         <AiSection />
       </div>
       <div
         className={cx(
-          isOpen
-            ? "bg-[#0D141F] bg-opacity-40 backdrop-blur-lg"
-            : "h-32 md:h-40",
+          isOpen ? "" : "h-32 md:h-40",
           "fixed bottom-0 w-full px-5",
         )}
       >
@@ -106,7 +101,7 @@ function Footer() {
   return (
     <footer
       className={cx(
-        "mx-auto flex h-32 w-full max-w-screen-sm flex-col justify-around pb-4 md:h-40",
+        "mx-auto flex h-32 w-full max-w-screen-sm flex-col justify-between py-5 md:h-40",
       )}
     >
       <form onSubmit={handleFormSubmit} className="w-full">
@@ -183,17 +178,17 @@ function MenuItem({
   const { close } = useBobObringerAi();
 
   return (
-    <Text variant="label-small">
-      <NextLink
-        href={`/${href}`}
-        onClick={close}
-        className={cx(
-          isActive
-            ? "text-color-primary"
-            : "text-color-link hover:text-color-link-hover",
-          "typography-label-small flex flex-col items-center space-y-2 transition-colors duration-300 ease-in-out",
-        )}
-      >
+    <Text
+      variant="label-small"
+      asChild
+      className={cx(
+        isActive
+          ? "bg-[#112840] outline outline-1 -outline-offset-1 outline-[#154467] transition-colors"
+          : "text-color-secondary hover:text-color-primary",
+        "typography-label-small flex min-w-20 flex-col items-center space-y-2 rounded p-2 transition-colors duration-300 ease-in-out",
+      )}
+    >
+      <NextLink href={`/${href}`} onClick={close}>
         <FontAwesomeIcon icon={icon} className="h-8 md:h-6" />
         <div className="hidden md:inline-block">{children}</div>
       </NextLink>

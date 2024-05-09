@@ -1,3 +1,6 @@
+/* eslint-disable @bob-obringer/no-process-env */
+import bundleAnalyzer from "@next/bundle-analyzer";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
@@ -16,4 +19,7 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
 };
 
-export default nextConfig;
+// eslint-disable-next-line @bob-obringer/next-prefer-named-exports
+export default process.env.ANALYZE === "true"
+  ? bundleAnalyzer()(nextConfig)
+  : nextConfig;
