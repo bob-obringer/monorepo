@@ -21,20 +21,16 @@
     "sanity:typegen": "sanity typegen generate"
   },
   "dependencies": {
-    "@sanity/orderable-document-list": "^1.2.1",
-    "@sanity/vision": "^3.40.0",
-    "groq": "^3.40.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "@sanity/orderable-document-list": "1.2.1",
+    "@sanity/vision": "3.40.0",
+    "groq": "3.40.0",
+    "react": "workspace:*",
+    "react-dom": "workspace:*",
     "sanity": "3.40.0",
     "styled-components": "6.1.9"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
-    "@types/react": "^18.0.25",
-    "concurrently": "^8.2.2",
-    "eslint": "^8.6.0",
-    "prettier": "^3.0.2",
-    "typescript": "^5.1.6"
+    "concurrently": "^8.2.2"
   }
 }

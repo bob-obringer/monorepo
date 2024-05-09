@@ -33,11 +33,11 @@ export function AppFooter({ className }: { className?: string }) {
     <div
       className={cx(
         className,
-        "fixed bottom-0 flex w-full flex-col items-center overflow-hidden",
+        "fixed bottom-0 flex w-full flex-col items-center justify-between overflow-hidden",
         "bg-opacity-50 backdrop-blur-2xl transition-all duration-500 ease-in-out",
         isOpen
           ? "z-20 h-svh bg-[#0D141F] bg-opacity-50 backdrop-blur-xl"
-          : "border-color-tertiary h-32 border-t md:h-40",
+          : "border-color-tertiary h-36 border-t md:h-40",
       )}
     >
       <div className={cx(!isOpen && "hidden", "w-full flex-1 overflow-scroll")}>
@@ -45,7 +45,7 @@ export function AppFooter({ className }: { className?: string }) {
       </div>
       <div
         className={cx(
-          isOpen ? "" : "h-32 md:h-40",
+          isOpen ? "" : "h-36 md:h-40",
           "fixed bottom-0 w-full px-5",
         )}
       >
@@ -101,7 +101,7 @@ function Footer() {
   return (
     <footer
       className={cx(
-        "mx-auto flex h-32 w-full max-w-screen-sm flex-col justify-between py-5 md:h-40",
+        "mx-auto flex h-36 w-full max-w-screen-sm flex-col justify-between pb-5 pt-3 md:h-40 md:pt-5",
       )}
     >
       <form onSubmit={handleFormSubmit} className="w-full">
