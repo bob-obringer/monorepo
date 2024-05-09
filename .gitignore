@@ -46,3 +46,6 @@ drizzle/
 
 # terraform
 .terraform/
+
+#apps
+/packages/data/bob-obringer-net-cms/types/

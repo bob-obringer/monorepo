@@ -1,0 +1,10 @@
+{
+  "extends": "@bob-obringer/tsconfig/backend-library/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "build",
+    "rootDir": "src",
+    "tsBuildInfoFile": "build/.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts*"],
+  "exclude": ["node_modules", "dist", "build", "**/*.test.ts", "**/*.spec.ts"]
+}

@@ -20,7 +20,7 @@ export function AppHeader({ className }: { className?: string }) {
     <header
       className={cx(
         className,
-        "flex h-24 flex-col items-center justify-center px-5",
+        "flex h-28 flex-col items-center justify-center px-5",
       )}
     >
       <Text as="h2" variant="display-medium">
