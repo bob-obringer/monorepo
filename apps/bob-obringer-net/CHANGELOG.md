@@ -1,5 +1,16 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.3.0
+
+### Minor Changes
+
+- c5165c3: moved content to cms
+
+### Patch Changes
+
+- Updated dependencies [c5165c3]
+  - @bob-obringer/bob-obringer-net-cms@0.1.0
+
 ## 0.2.0
 
 ### Minor Changes
