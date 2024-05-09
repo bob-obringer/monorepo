@@ -1,5 +1,14 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.3.1
+
+### Patch Changes
+
+- 62e2bf0: fixed spacing on mobile nav
+- Updated dependencies [62e2bf0]
+- Updated dependencies [0f9b41d]
+  - @bob-obringer/bob-obringer-net-cms@0.1.0
+
 ## 0.3.0
 
 ### Minor Changes
