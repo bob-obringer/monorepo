@@ -49,3 +49,6 @@ drizzle/
 
 #apps
 /packages/data/bob-obringer-net-cms/types/
+
+# edgedb
+/packages/data/edge-db/dbschema/edgeql-js

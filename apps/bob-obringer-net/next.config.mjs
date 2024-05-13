@@ -1,8 +1,22 @@
 /* eslint-disable @bob-obringer/no-process-env */
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { nextjsWebpackConfigFix } from "@bob-obringer/chroma-nextjs-fix";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: nextjsWebpackConfigFix,
+
+  // experimental: {
+  //   turbo: {
+  //     rules: {
+  //       "*.node": {
+  //         loaders: ["node-loader"],
+  //         as: "*.js",
+  //       },
+  //     },
+  //   },
+  // },
+
   async rewrites() {
     return [
       {

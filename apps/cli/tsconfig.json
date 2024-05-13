@@ -1,0 +1,9 @@
+{
+  "extends": ["@bob-obringer/tsconfig/node-app/tsconfig.json"],
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*.ts*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+}

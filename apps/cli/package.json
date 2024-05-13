@@ -1,0 +1,23 @@
+{
+  "name": "@bob-obringer/cli",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "chroma": "pnpm start chroma",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "start": "tsx ./src/index.ts"
+  },
+  "dependencies": {
+    "@bob-obringer/chroma-voyager": "workspace:^",
+    "chromadb": "1.8.1",
+    "chromadb-default-embed": "2.13.2",
+    "commander": "12.0.0",
+    "zod": "3.23.8"
+  }
+}

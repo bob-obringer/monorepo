@@ -5,7 +5,7 @@ import type {
 } from "@bob-obringer/bob-obringer-net-cms/types";
 import groq from "groq";
 
-export const client = createClient({
+export const sanityClient = createClient({
   projectId: "gkf7pxwm",
   dataset: "production",
   useCdn: false,
@@ -15,7 +15,7 @@ export const client = createClient({
 export const resumeCompanies = groq`*[_type == "resumeCompany"] | order(startDate desc)`;
 
 export async function getResumeCompanies() {
-  return await client.fetch<ResumeCompaniesResult>(resumeCompanies);
+  return await sanityClient.fetch<ResumeCompaniesResult>(resumeCompanies);
 }
 
 export type ResumeCompanyResult = Omit<
@@ -56,11 +56,31 @@ export const resumeCompany = groq`*[_type == "resumeCompany" && slug == $slug]{
 }`;
 
 export async function getResumeCompany({ slug }: { slug: string }) {
-  const companies = await client.fetch<Array<ResumeCompanyResult>>(
+  const companies = await sanityClient.fetch<Array<ResumeCompanyResult>>(
     resumeCompany,
     {
       slug,
     },
   );
   return companies?.[0];
+}
+
+export type ResumeSkill = {
+  _id: string;
+  name: string | null;
+  category: {
+    name: string | null;
+  } | null;
+};
+
+export async function getResumeSkills() {
+  return await sanityClient.fetch<
+    Array<ResumeSkill>
+  >(groq`*[_type == "resumeSkill"]{
+    _id,
+    name,
+    category->{
+      name
+    }
+  }`);
 }

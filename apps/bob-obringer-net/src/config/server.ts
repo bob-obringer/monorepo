@@ -12,6 +12,9 @@ const envSchema = z.object({
   openAI: z.object({
     apiKey: z.string(),
   }),
+  voyager: z.object({
+    apiKey: z.string(),
+  }),
 });
 
 export const env = envSchema.parse({
@@ -25,5 +28,8 @@ export const env = envSchema.parse({
   },
   openAI: {
     apiKey: process.env.OPEN_AI_API_KEY,
+  },
+  voyager: {
+    apiKey: process.env.VOYAGER_API_KEY,
   },
 });
