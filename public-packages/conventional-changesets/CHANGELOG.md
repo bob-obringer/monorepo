@@ -1,5 +1,11 @@
 # @bob-obringer/conventional-changeset
 
+## 0.2.0
+
+### Minor Changes
+
+- c023d2e: wired up rag
+
 ## 0.1.3
 
 ### Patch Changes
