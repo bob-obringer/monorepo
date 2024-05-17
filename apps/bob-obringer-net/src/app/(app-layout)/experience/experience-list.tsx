@@ -4,12 +4,12 @@ import { cx, Text } from "@bob-obringer/design-system";
 import { ReactNode } from "react";
 import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
-import { ResumeCompaniesResult } from "@bob-obringer/bob-obringer-net-cms/types";
+import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
 
 export function ExperienceList({
   resumeCompanies,
 }: {
-  resumeCompanies: ResumeCompaniesResult;
+  resumeCompanies: ResumeCompany[];
 }) {
   const segments = useSelectedLayoutSegments();
   const selectedCompany = segments[0];
@@ -29,11 +29,7 @@ export function ExperienceList({
   );
 }
 
-function ExperienceListItem({
-  company,
-}: {
-  company: ResumeCompaniesResult[number];
-}) {
+function ExperienceListItem({ company }: { company: ResumeCompany }) {
   const segments = useSelectedLayoutSegments();
   const slug = segments[0];
 

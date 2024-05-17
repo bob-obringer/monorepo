@@ -5,9 +5,9 @@
   "description": "Bob Obringer Design System",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "build:local": "pnpm build",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
@@ -15,16 +15,15 @@
   "dependencies": {
     "@radix-ui/react-slot": "1.0.2",
     "clsx": "2.1.1",
-    "react-aria-components": "1.1.1",
+    "react-aria-components": "1.2.0",
     "tailwind-merge": "2.3.0",
     "tailwind-variants": "0.2.1"
   },
   "devDependencies": {
     "@bob-obringer/theme": "workspace:*",
-    "postcss": "8.4.38",
-    "postcss-cli": "^11.0.0",
     "react": "workspace:*",
-    "react-dom": "workspace:*"
+    "react-dom": "workspace:*",
+    "tailwindcss": "workspace:*"
   },
   "peerDependencies": {
     "react": "workspace:*",

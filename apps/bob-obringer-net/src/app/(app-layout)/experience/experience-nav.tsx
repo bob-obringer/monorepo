@@ -1,7 +1,7 @@
 import { cx } from "@bob-obringer/design-system";
 import { ExperienceList } from "@/app/(app-layout)/experience/experience-list";
-import { getResumeCompanies } from "@/services/sanity";
 import { ExperienceUseAiCopy } from "@/app/(app-layout)/experience/experience-use-ai-copy";
+import { getResumeCompanies } from "@/services/sanity-io/resume-company-helpers";
 
 export async function ExperienceNav({ className }: { className?: string }) {
   const resumeCompanies = await getResumeCompanies();
