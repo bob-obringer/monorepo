@@ -11,9 +11,9 @@ const envSchema = z.object({
 
 export const env = envSchema.parse({
   voyager: {
-    apiKey: "pa-WsdkaiKzTrrrYhndXThsP3EQfMSBV2HUBf1sUpOY6-o",
+    apiKey: "",
   },
   openAI: {
-    apiKey: "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",
+    apiKey: "",
   },
 });

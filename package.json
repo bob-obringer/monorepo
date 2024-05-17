@@ -6,7 +6,7 @@
     "build": "turbo build",
     "clean": "turbo clean && rimraf node_modules",
     "deploy": "turbo run deploy --filter=docs^...",
-    "dev": "turbo dev",
+    "dev": "turbo dev --concurrency=30",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "generate-changeset": "pnpm --filter @bob-obringer/conventional-changeset run generate-changeset",
     "lint": "turbo lint",
@@ -21,7 +21,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/types": "^19.0.3",
     "@types/node": "20.12.8",
-    "@types/react": "18.3.1",
+    "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
     "commitlint": "^19.3.0",
     "eslint": "8.57.0",
@@ -31,8 +31,7 @@
     "prettier": "3.2.5",
     "prettier-plugin-packagejson": "2.5.0",
     "prettier-plugin-tailwindcss": "0.5.14",
-    "rimraf": "5.0.5",
-    "tailwindcss": "workspace:*",
+    "rimraf": "5.0.7",
     "tsx": "4.9.3",
     "turbo": "1.13.3",
     "typescript": "5.4.5"
@@ -44,11 +43,14 @@
   },
   "pnpm": {
     "overrides": {
+      "commander": "12.0.0",
+      "neverthrow": "6.2.1",
       "next": "14.2.3",
-      "posthog-js": "1.129.0",
+      "posthog-js": "1.131.4",
       "react": "18.3.1",
       "react-dom": "18.3.1",
-      "tailwindcss": "3.4.3"
+      "tailwindcss": "3.4.3",
+      "zod": "3.23.8"
     }
   }
 }

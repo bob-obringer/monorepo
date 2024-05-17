@@ -30,7 +30,7 @@
     "start": "tsx ./src/generate-changeset.ts"
   },
   "dependencies": {
-    "commander": "12.0.0",
+    "commander": "workspace:*",
     "conventional-commits-parser": "5.0.0"
   },
   "devDependencies": {

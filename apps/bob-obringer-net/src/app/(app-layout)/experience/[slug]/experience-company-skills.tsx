@@ -1,7 +1,7 @@
-import { ResumeCompanyResult } from "@/services/sanity";
+import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
 import { Text } from "@bob-obringer/design-system";
 
-export function Skills({ company }: { company: ResumeCompanyResult }) {
+export function Skills({ company }: { company: ResumeCompany }) {
   // this is terrible, I need to load sorted categories differently
   const categorizedSkills =
     company.highlights?.reduce(

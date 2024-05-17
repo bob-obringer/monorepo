@@ -1,0 +1,4 @@
+{
+  "generates": "src/index.ts",
+  "schema": "build/sanity.schema.json"
+}
