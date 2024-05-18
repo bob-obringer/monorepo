@@ -1,12 +1,16 @@
 import groq from "groq";
 import { sanityClient } from "@/services/sanity-io/sanity-client";
-import { ResumeCompany as SanityResumeCompany } from "@bob-obringer/sanity-io";
+import {
+  SanityImageAsset,
+  ResumeCompany as SanityResumeCompany,
+} from "@bob-obringer/sanity-io";
 import { SanityDocument } from "@sanity/client";
 
 export type ResumeCompany = Omit<
   SanityResumeCompany,
   "highlights" | "industry"
 > & {
+  logo: SanityImageAsset | null;
   industry: {
     name: string | null;
   } | null;
@@ -28,6 +32,13 @@ export type ResumeCompany = Omit<
  */
 const resumeCompaniesQuery = groq`*[_type == "resumeCompany"]{
   ...,
+    logo {
+    ...,
+    asset->{
+      ...,
+      metadata
+    }
+  },
   industry->{
     name
   },
@@ -54,6 +65,13 @@ export async function getResumeCompanies() {
 
 const resumeCompanyQuery = groq`*[_type == "resumeCompany" && slug == $slug]{
   ...,
+  logo {
+    ...,
+    asset->{
+      ...,
+      metadata
+    }
+  },
   industry->{
     name
   },

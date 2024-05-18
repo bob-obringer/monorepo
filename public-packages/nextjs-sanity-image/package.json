@@ -1,0 +1,45 @@
+{
+  "name": "@bob-obringer/nextjs-sanity-image",
+  "version": "0.0.1",
+  "private": false,
+  "description": "NextJS Sanity.io Image Component",
+  "keywords": [
+    "sanity.io",
+    "nextjs",
+    "images",
+    "bob-obringer"
+  ],
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/nextjs-sanity-image",
+  "bugs": "https://github.com/bob-obringer/monorepo/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bob-obringer/monorepo.git"
+  },
+  "license": "MIT",
+  "author": "Bob Obringer <bob@obringer.net>",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "zod": "workspace:*"
+  },
+  "devDependencies": {
+    "next": "workspace:*",
+    "react": "workspace:*",
+    "react-dom": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": ">=14.2",
+    "react": ">=18.2",
+    "react-dom": ">=18.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -13,6 +13,8 @@
     "deploy:production": "dotenv -e .env.production -- sanity deploy --workspace=production",
     "dev": "sanity dev",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "migration": "sanity migration run migration",
+    "migration:no-dry-run": "sanity migration run migration --no-dry-run",
     "start": "sanity start"
   },
   "dependencies": {

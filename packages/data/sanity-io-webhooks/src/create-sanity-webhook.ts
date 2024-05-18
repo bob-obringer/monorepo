@@ -39,7 +39,6 @@ export function createSanityWebhook<T extends SanityDocument>({
 
       try {
         for (const handler of handlers) {
-          console.log("Checking Handler", handler.documentType, doc._type);
           if (
             handler.documentType === doc._type &&
             isDocument<T>(doc, handler.documentType)
