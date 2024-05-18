@@ -17,14 +17,17 @@ export default async function ResumePage({
 
   return (
     <div className="space-y-5 px-5 pb-8 md:pl-0">
-      <div>
-        <Text as="h3" variant="title-large">
-          {company.name}
-        </Text>
-        <Text as="h4" variant="title-medium" color="secondary">
-          {company.position}
-        </Text>
+      <div className="flex items-center justify-between space-x-4">
+        <div>
+          <Text as="h3" variant="title-large">
+            {company.name}
+          </Text>
+          <Text as="h4" variant="title-medium" color="secondary">
+            {company.position}
+          </Text>
+        </div>
       </div>
+
       <hr className="h-px border-0 bg-[#ffffff22]" />
       <div className="flex flex-1 flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0">
         <ul className="flex-[2] space-y-5">
