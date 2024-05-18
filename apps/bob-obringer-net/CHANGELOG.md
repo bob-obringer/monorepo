@@ -1,5 +1,23 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.4.0
+
+### Minor Changes
+
+- c023d2e: wired up rag
+- c023d2e: added chroma
+
+### Patch Changes
+
+- Updated dependencies [c023d2e]
+- Updated dependencies [c023d2e]
+  - @bob-obringer/ai-embedding@0.1.0
+  - @bob-obringer/ai-pinecone@0.1.0
+  - @bob-obringer/sanity-io-webhooks@0.1.0
+  - @bob-obringer/sanity-io@0.2.0
+  - @bob-obringer/design-system@0.1.0
+  - @bob-obringer/http-errors@0.1.0
+
 ## 0.3.1
 
 ### Patch Changes
