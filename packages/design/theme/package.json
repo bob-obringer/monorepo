@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/theme",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "description": "Theme for Bob Obringer's apps",
   "main": "dist/index.js",
