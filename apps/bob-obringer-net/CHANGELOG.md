@@ -1,5 +1,21 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.5.0
+
+### Minor Changes
+
+- 67e028e: added nextjs sanity image package
+
+### Patch Changes
+
+- Updated dependencies [67e028e]
+  - @bob-obringer/sanity-io-webhooks@0.2.0
+  - @bob-obringer/sanity-io@0.3.0
+  - @bob-obringer/nextjs-sanity-image@0.1.0
+  - @bob-obringer/posthog-nextjs@0.1.0
+  - @bob-obringer/theme@0.0.4
+  - @bob-obringer/design-system@0.1.0
+
 ## 0.4.0
 
 ### Minor Changes

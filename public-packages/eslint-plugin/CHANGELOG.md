@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.3.0
+
+### Minor Changes
+
+- 67e028e: added nextjs sanity image package
+
 ## 0.2.0
 
 ### Minor Changes
