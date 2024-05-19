@@ -1,5 +1,16 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.6.0
+
+### Minor Changes
+
+- f066e27: switched to vercel ai/rsc
+
+### Patch Changes
+
+- Updated dependencies [f066e27]
+  - @bob-obringer/sanity-io@0.4.0
+
 ## 0.5.0
 
 ### Minor Changes
