@@ -1,29 +1,16 @@
 import { ReactNode } from "react";
-import { AppFooter } from "@/app/(app-layout)/app-footer";
+import { AppFooter } from "@/app/(app-layout)/_layout/app-footer";
 import { AppHeader } from "@/app/(app-layout)/app-header";
-import { cx, Text } from "@bob-obringer/design-system";
-
-const alertMessage = "";
+import { ChatbotContextProvider } from "@/features/ai-chatbot";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      {alertMessage && <Alert>{alertMessage}</Alert>}
-      <AppHeader className={cx(alertMessage ? "mt-10" : "mt-0")} />
+      <AppHeader />
       <div className="pb-40 md:pb-44">{children}</div>
-      <AppFooter />
+      <ChatbotContextProvider>
+        <AppFooter />
+      </ChatbotContextProvider>
     </>
-  );
-}
-
-function Alert({ children }: { children: ReactNode }) {
-  return (
-    <Text
-      variant="body-large"
-      as="div"
-      className="bg-color-tertiary text-color-warning fixed left-0 right-0 top-0 z-10 flex h-10 items-center justify-center bg-opacity-50 backdrop-blur-md"
-    >
-      {children}
-    </Text>
   );
 }

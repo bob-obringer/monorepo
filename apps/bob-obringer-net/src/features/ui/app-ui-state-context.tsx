@@ -9,13 +9,13 @@ import {
   useState,
 } from "react";
 
-type UIContextType = {
+type AppUIContext = {
   viewportWidth: number | null;
 };
 
-const UiStateContext = createContext<UIContextType | undefined>(undefined);
+const AppUIContext = createContext<AppUIContext | undefined>(undefined);
 
-export function UiStateProvider({ children }: { children: ReactNode }) {
+export function AppUIProvider({ children }: { children: ReactNode }) {
   const [viewportWidth, setViewportWidth] = useState<number | null>(null);
 
   const handleResize = useCallback(function handleResize() {
@@ -31,14 +31,14 @@ export function UiStateProvider({ children }: { children: ReactNode }) {
   }, [handleResize]);
 
   return (
-    <UiStateContext.Provider value={{ viewportWidth }}>
+    <AppUIContext.Provider value={{ viewportWidth }}>
       {children}
-    </UiStateContext.Provider>
+    </AppUIContext.Provider>
   );
 }
 
-export const useUiState = () => {
-  const context = useContext(UiStateContext);
+export const useAppUI = () => {
+  const context = useContext(AppUIContext);
   if (context === undefined) {
     throw new Error("useUiContext must be used within a UIContext");
   }

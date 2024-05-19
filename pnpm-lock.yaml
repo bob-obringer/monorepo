@@ -142,11 +142,14 @@ importers:
         specifier: 1.0.10
         version: 1.0.10(next@14.2.3)(react@18.3.1)(svelte@4.2.15)(vue@3.4.26)
       ai:
-        specifier: 3.1.9
-        version: 3.1.9(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.15)(vue@3.4.26)(zod@3.23.8)
+        specifier: 3.1.5
+        version: 3.1.5(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.15)(vue@3.4.26)(zod@3.23.8)
       groq:
         specifier: 3.42.1
         version: 3.42.1
+      nanoid:
+        specifier: ^5.0.7
+        version: 5.0.7
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
@@ -159,6 +162,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      server-only:
+        specifier: ^0.0.1
+        version: 0.0.1
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -169,6 +175,9 @@ importers:
       '@pinecone-database/pinecone':
         specifier: ^2.2.1
         version: 2.2.1
+      '@types/wtfnode':
+        specifier: ^0.7.3
+        version: 0.7.3
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -181,6 +190,9 @@ importers:
       tailwindcss-react-aria-components:
         specifier: 1.1.2
         version: 1.1.2(tailwindcss@3.4.3)
+      wtfnode:
+        specifier: ^0.9.2
+        version: 0.9.2
 
   apps/cli:
     dependencies:
@@ -439,8 +451,8 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /@ai-sdk/provider-utils@0.0.8(zod@3.23.8):
-    resolution: {integrity: sha512-J/ZNvFhORd3gCeK3jFvNrxp1Dnvy6PvPq21RJ+OsIEjsoHeKQaHALCWG0aJunXDuzd+Mck/lCg7LqA0qmIbHIg==}
+  /@ai-sdk/provider-utils@0.0.6(zod@3.23.8):
+    resolution: {integrity: sha512-SxOZgSxnaVlW04/SjfMoAD45kWOWTWx0QcZrHaQnePooLhyk5AqQpgauPijL803uoJPCKfzd0UBv1gSKvWiU0A==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: 3.23.8
@@ -448,7 +460,7 @@ packages:
       zod:
         optional: true
     dependencies:
-      '@ai-sdk/provider': 0.0.5
+      '@ai-sdk/provider': 0.0.3
       eventsource-parser: 1.1.2
       nanoid: 3.3.6
       secure-json-parse: 2.7.0
@@ -457,13 +469,6 @@ packages:
 
   /@ai-sdk/provider@0.0.3:
     resolution: {integrity: sha512-0B8P6VZpJ6F9yS9BpmJBYSqIaIfeRtL5tD5SP+qgR8y0pPwalIbRMUFiLz9YUT6g70MJsCLpm/2/fX3cfAYCJw==}
-    engines: {node: '>=18'}
-    dependencies:
-      json-schema: 0.4.0
-    dev: false
-
-  /@ai-sdk/provider@0.0.5:
-    resolution: {integrity: sha512-TZDldBZ5clAsNwJ2PSeo/b1uILj9a2lvi0rnOj2RCNZDgaVqFRVIAnKyeHusCRv2lzhPIw03B3fiGI6VoLzOAA==}
     engines: {node: '>=18'}
     dependencies:
       json-schema: 0.4.0
@@ -6851,6 +6856,10 @@ packages:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: false
 
+  /@types/wtfnode@0.7.3:
+    resolution: {integrity: sha512-UMkHpx+o2xRWLJ7PmT3bBzvIA9/0oFw80oPtY/xO4jfdq+Gznn4wP7K9B/JjMxyxy+wF+5oRPIykxeBbEDjwRg==}
+    dev: true
+
   /@typescript-eslint/eslint-plugin@7.8.0(@typescript-eslint/parser@7.8.0)(eslint@8.57.0)(typescript@5.4.5):
     resolution: {integrity: sha512-gFTT+ezJmkwutUPmB0skOj3GZJtlEGnlssems4AjkVweUPGj7jRwwqg0Hhg7++kPGJqKtTYx+R05Ftww372aIg==}
     engines: {node: ^18.18.0 || >=20.0.0}
@@ -7272,8 +7281,8 @@ packages:
       indent-string: 5.0.0
     dev: false
 
-  /ai@3.1.9(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.15)(vue@3.4.26)(zod@3.23.8):
-    resolution: {integrity: sha512-H52qz9bl1TJaodCKawmblXdGO6Fahdb4vi9nuInZPcvihlCtUvt0vNsclVKs93IdwVuc0y+jq68xHp0evC47iQ==}
+  /ai@3.1.5(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.15)(vue@3.4.26)(zod@3.23.8):
+    resolution: {integrity: sha512-uE8EfcigIoep4NCqIOWsNUP/alyZ93XtsDsLjiop51y4lEtgJg0GzpbBRfYKaEK1O74HiQ2CmaeOOBlNVBBiIQ==}
     engines: {node: '>=18'}
     peerDependencies:
       openai: ^4.42.0
@@ -7296,8 +7305,8 @@ packages:
       zod:
         optional: true
     dependencies:
-      '@ai-sdk/provider': 0.0.5
-      '@ai-sdk/provider-utils': 0.0.8(zod@3.23.8)
+      '@ai-sdk/provider': 0.0.3
+      '@ai-sdk/provider-utils': 0.0.6(zod@3.23.8)
       eventsource-parser: 1.1.2
       json-schema: 0.4.0
       jsondiffpatch: 0.6.0
@@ -15048,6 +15057,11 @@ packages:
       utf-8-validate:
         optional: true
     dev: false
+
+  /wtfnode@0.9.2:
+    resolution: {integrity: sha512-AzGy/MOGmzufyHDKHwuZeuqaqslGIPuwxDAhdmUUJ91Ak22Ynxry8quXNR/cZZIaSs5T+C+LNS3W9AcMzJXhMw==}
+    hasBin: true
+    dev: true
 
   /xdg-basedir@4.0.0:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}
