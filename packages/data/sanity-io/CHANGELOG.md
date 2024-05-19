@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.4.0
+
+### Minor Changes
+
+- f066e27: switched to vercel ai/rsc
+
 ## 0.3.0
 
 ### Minor Changes
