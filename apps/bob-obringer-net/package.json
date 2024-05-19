@@ -7,7 +7,8 @@
     "build": "next build",
     "chroma": "tsx ./scripts/chroma",
     "clean": "rimraf .next node_modules",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
+    "dev2": "NODE_OPTIONS='--inspect' next dev",
     "lint": "next lint",
     "start": "next start"
   },
@@ -31,20 +32,24 @@
     "@sanity/client": "6.18.2",
     "@vercel/analytics": "1.2.2",
     "@vercel/speed-insights": "1.0.10",
-    "ai": "3.1.9",
+    "ai": "3.1.5",
     "groq": "3.42.1",
+    "nanoid": "^5.0.7",
     "next": "workspace:*",
     "posthog-js": "workspace:*",
     "react": "workspace:*",
     "react-dom": "workspace:*",
+    "server-only": "^0.0.1",
     "zod": "workspace:*"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.3",
     "@pinecone-database/pinecone": "^2.2.1",
+    "@types/wtfnode": "^0.7.3",
     "autoprefixer": "10.4.19",
     "postcss": "8.4.38",
     "tailwindcss": "workspace:*",
-    "tailwindcss-react-aria-components": "1.1.2"
+    "tailwindcss-react-aria-components": "1.1.2",
+    "wtfnode": "^0.9.2"
   }
 }
