@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.4.1
+
+### Patch Changes
+
+- 30fb785: missing src folder for sanity-io
+
 ## 0.4.0
 
 ### Minor Changes
