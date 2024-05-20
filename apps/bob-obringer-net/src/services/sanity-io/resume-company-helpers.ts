@@ -3,7 +3,7 @@ import { sanityClient } from "@/services/sanity-io/sanity-client";
 import {
   SanityImageAsset,
   ResumeCompany as SanityResumeCompany,
-} from "@bob-obringer/sanity-io";
+} from "@/services/sanity-io/source-types";
 import { SanityDocument } from "@sanity/client";
 
 export type ResumeCompany = Omit<

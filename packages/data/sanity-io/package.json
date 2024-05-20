@@ -5,8 +5,8 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "build": "sanity build && pnpm build:extract && pnpm build:typegen && tsc -p tsconfig.package.json",
     "build:extract": "mkdir -p build && sanity schema extract --path ./build/sanity.schema.json --workspace=production",
+    "build:manual": "sanity build && pnpm build:extract && pnpm build:typegen && tsc -p tsconfig.package.json",
     "build:typegen": "sanity typegen generate",
     "clean": "rimraf dist build node_modules .sanity",
     "deploy:development": "dotenv -e .env.development -- sanity deploy --workspace=development",

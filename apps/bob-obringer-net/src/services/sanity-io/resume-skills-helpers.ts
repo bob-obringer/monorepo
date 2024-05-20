@@ -1,4 +1,4 @@
-import { ResumeCompanyHighlight } from "@bob-obringer/sanity-io";
+import { ResumeCompanyHighlight } from "@/services/sanity-io/source-types";
 import groq from "groq";
 import { sanityClient } from "@/services/sanity-io/sanity-client";
 
