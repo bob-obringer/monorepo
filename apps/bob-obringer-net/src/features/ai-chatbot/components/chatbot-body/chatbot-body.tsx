@@ -32,7 +32,7 @@ export function ChatbotBody() {
     if (ragStatus !== "idle") {
       interval = setInterval(() => {
         scrollToBottom();
-      }, 1) as unknown as number;
+      }, 10) as unknown as number;
       return () => clearInterval(interval);
     } else if (interval) {
       clearInterval(interval);
