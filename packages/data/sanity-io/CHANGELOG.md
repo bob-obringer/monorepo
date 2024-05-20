@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.4.2
+
+### Patch Changes
+
+- b2b2ef9: vercel timeout
+
 ## 0.4.1
 
 ### Patch Changes
