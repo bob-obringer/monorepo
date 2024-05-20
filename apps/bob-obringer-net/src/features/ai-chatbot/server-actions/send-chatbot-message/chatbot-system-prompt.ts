@@ -29,8 +29,17 @@ ${highlights}
 
 Biography:
 ${promptBio}  
+
+FINAL INSTRUCTIONS:
+When returning markdown, do not wrap with any html or other content that specifically marks
+it as markdown. Just return the markdown
 `;
 }
+// leave final instructions here, as they are low level instructions related to how our code
+// processes the response.
+//
+// Ultimately, we should strip out any html or other content that marks it as markdown
+// but for now, lets just hope the llm listens to us
 
 export function getFormattedJobs(resumeCompanies: ResumeCompany[]) {
   return resumeCompanies

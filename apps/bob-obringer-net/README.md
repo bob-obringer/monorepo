@@ -31,3 +31,7 @@ const nextConfig = {
 ```bash
 pnpm install openai @xenova/transformers
 ```
+
+## TODO
+
+CI Runs way too much, including on ci automated prs. Need to fix this.

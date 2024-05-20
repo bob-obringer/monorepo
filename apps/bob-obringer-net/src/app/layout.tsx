@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { env } from "@/config/client";
 import { PosthogProvider } from "@bob-obringer/posthog-nextjs";
+import { ChatbotContextProvider } from "@/features/ai-chatbot";
 
 export const metadata: Metadata = {
   title: "Bob Obringer",
@@ -18,7 +19,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={bobObringerFontClasses}>
       <body className="bg text">
         <PosthogProvider token={env.posthog.key} host={env.posthog.host}>
-          <AppUIProvider>{children}</AppUIProvider>
+          <AppUIProvider>
+            <ChatbotContextProvider>{children}</ChatbotContextProvider>
+          </AppUIProvider>
         </PosthogProvider>
         <SpeedInsights />
         <Analytics />

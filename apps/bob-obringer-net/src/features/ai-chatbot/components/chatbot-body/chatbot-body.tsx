@@ -1,53 +1,57 @@
 import "@/features/ai-chatbot/components/chatbot-body/loading-color-bar.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import {
-  faInfoCircle,
-  faRobot,
-  faUser,
   faCheck,
-  faSpinner,
+  faInfoCircle,
   faPauseCircle,
+  faRobot,
+  faSpinner,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cx, Text } from "@bob-obringer/design-system";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
+import { MessageRole } from "@/features/ai-chatbot";
 
 export function ChatbotBody() {
-  const { messages, isLoading } = useChatbot();
+  const { messages, ragStatus, streamEventCount } = useChatbot();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
   };
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const lastMessage = messages[messages.length - 1];
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [streamEventCount, ragStatus, messages.length]);
+
+  useEffect(() => {
+    let interval: number = 0;
+    if (ragStatus !== "idle") {
+      interval = setInterval(() => {
+        scrollToBottom();
+      }, 1) as unknown as number;
+      return () => clearInterval(interval);
+    } else if (interval) {
+      clearInterval(interval);
+    }
+  });
+
   return (
     <div className="space-y-4">
-      {/*{info && <Message role="_info">{info}</Message>}*/}
       {messages.map((m) => (
         <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === "user" ? (
-            <Message role="user">{m.content}</Message>
-          ) : (
-            <Message
-              role="ai"
-              isLastMessage={m.id === lastMessage?.id}
-              isLoading={isLoading}
-            >
-              {m.content}
-            </Message>
-          )}
+          <Message
+            role={m.role}
+            isLastMessage={m.id === lastMessage?.id}
+            isLoading={["retrieving", "generating"].includes(ragStatus)}
+          >
+            {m.ui}
+          </Message>
         </div>
       ))}
-      {isLoading && lastMessage.role === "user" && (
-        <Message role="ai" isLastMessage={true} isLoading={true}>
-          {""}
-        </Message>
-      )}
       <div ref={messagesEndRef} className="pb-6" />
     </div>
   );
@@ -60,7 +64,7 @@ const messageRoleInfo = {
     className: "",
     titleClassName: "text-color-secondary",
   },
-  ai: {
+  assistant: {
     icon: faRobot,
     roleName: "obringer.net Assistant",
     className: "bg-opacity-5 bg-[#ffffff]",
@@ -81,30 +85,19 @@ function Message({
   isLoading = false,
 }: {
   children: ReactNode;
-  role: "user" | "ai" | "_info";
+  role: MessageRole;
   isLastMessage?: boolean;
   isLoading?: boolean;
 }) {
-  const { icon, roleName, className, titleClassName } = messageRoleInfo[role];
+  const { className } = messageRoleInfo[role];
   const isActiveMessage = isLastMessage && isLoading;
 
   return (
-    <div className={cx(className, "relative flex-col gap-3 overflow-x-hidden")}>
-      <div
-        className={cx(
-          titleClassName,
-          "font-weight-medium relative flex items-center justify-between space-x-3 p-5 text-sm",
-        )}
-      >
-        <div className="space-x-2">
-          <FontAwesomeIcon icon={icon} size="lg" />
-          <span className="typography-title-medium !font-weight-medium">
-            {roleName}
-          </span>
-        </div>
-        {isLastMessage && <MessageState />}
+    <div className={cx(className, "relative overflow-x-hidden")}>
+      <div className="flex flex-col gap-5 p-5">
+        <MessageTitle isLastMessage={isLastMessage} messageRole={role} />
+        {children}
       </div>
-      <div className="p-5 pt-0">{children}</div>
       {isActiveMessage && (
         <div className="loading-color-bar-wrapper">
           <div className="loading-color-bar" />
@@ -114,69 +107,93 @@ function Message({
   );
 }
 
-function MessageState() {
-  const {
-    isBioLoaded,
-    isInstructionsLoaded,
-    isSkillsLoaded,
-    isJobsLoaded,
-    isLoading,
-  } = useChatbot();
-
-  const [hide, setHide] = useState(false);
-
-  const isRetrieved =
-    isBioLoaded && isInstructionsLoaded && isSkillsLoaded && isJobsLoaded;
-  const isGenerating = isRetrieved && isLoading;
-  const isDone = isRetrieved && !isLoading;
-
-  useEffect(() => {
-    if (isDone) {
-      const timeout = setTimeout(() => {
-        setHide(true);
-      }, 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [isDone]);
+function MessageTitle({
+  messageRole,
+  isLastMessage,
+}: {
+  messageRole: MessageRole;
+  isLastMessage: boolean;
+}) {
+  const { icon, roleName, titleClassName } = messageRoleInfo[messageRole];
 
   return (
     <div
       className={cx(
-        "flex items-center space-x-0.5 rounded-lg bg-[#004400] p-px transition-opacity duration-500",
-        hide ? "opacity-0" : "opacity-100",
+        titleClassName,
+        "flex items-center justify-between space-x-3 text-sm",
+      )}
+    >
+      <FontAwesomeIcon icon={icon} size="lg" />
+      <div className="typography-title-medium flex-1">{roleName}</div>
+      {isLastMessage && <MessageState />}
+    </div>
+  );
+}
+
+function MessageState() {
+  const { ragStatus, setRagStatus } = useChatbot();
+
+  const [hide, setHide] = useState(false);
+
+  useEffect(() => {
+    if (ragStatus === "done") {
+      const timeout = setTimeout(() => {
+        setHide(true);
+        setRagStatus("idle");
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [ragStatus, setRagStatus]);
+
+  return (
+    <div
+      className={cx(
+        "flex flex-col items-center space-y-1 transition-opacity duration-500 md:flex-row md:space-x-2",
+        hide ? "opacity-0" : "opacity-75",
       )}
     >
       <Text
         as="div"
         variant="label-mono-small"
         className={cx(
-          "text-color-primary flex items-center space-x-2 rounded-l-md px-2 py-1 transition-colors",
-          isRetrieved ? "bg-[#003300]" : "bg-[#112211]",
+          "flex items-center gap-2 px-2 transition-colors md:flex-row-reverse",
+          "text-color-tertiary",
+          ragStatus === "retrieving" && "text-color-primary",
+          (ragStatus === "generating" || ragStatus === "done") &&
+            "text-[#66CC66]",
         )}
       >
+        <div>Retrieving</div>
         <FontAwesomeIcon
-          icon={isRetrieved ? faCheck : faSpinner}
+          icon={ragStatus === "retrieving" ? faSpinner : faCheck}
           size="lg"
-          spin={!isRetrieved}
+          spin={ragStatus === "retrieving"}
+          className="w-4"
         />
-        <div>Augmenting</div>
       </Text>
       <Text
         as="div"
         variant="label-mono-small"
         className={cx(
-          "text-color-primary flex items-center space-x-2 rounded-r-md px-2 py-1 transition-colors",
-          isDone && "bg-[#003300]",
-          isGenerating && "bg-[#112211]",
-          !isRetrieved && "text-color-tertiary bg-[#222222]",
+          "flex items-center gap-2 px-2 transition-colors md:flex-row-reverse",
+          "text-color-tertiary",
+          ragStatus === "generating" && "text-color-primary",
+          ragStatus === "done" && "text-[#66CC66]",
         )}
       >
-        <FontAwesomeIcon
-          icon={isDone ? faCheck : isGenerating ? faSpinner : faPauseCircle}
-          size="lg"
-          spin={isGenerating}
-        />
         <div>Generating</div>
+        <FontAwesomeIcon
+          icon={
+            ["done", "idle"].includes(ragStatus)
+              ? faCheck
+              : ragStatus === "generating"
+                ? faSpinner
+                : faPauseCircle
+          }
+          size="lg"
+          spin={ragStatus === "generating"}
+          className="w-4"
+        />
       </Text>
     </div>
   );

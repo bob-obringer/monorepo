@@ -1,6 +1,6 @@
 import groq from "groq";
-import { type ObringerAssistant, type Homepage } from "@bob-obringer/sanity-io";
 import { sanityClient } from "@/services/sanity-io/sanity-client";
+import { Homepage, ObringerAssistant } from "@bob-obringer/sanity-io";
 
 type SettingsTypes = {
   homepage: Homepage;

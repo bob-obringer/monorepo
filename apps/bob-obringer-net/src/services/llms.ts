@@ -15,7 +15,9 @@ export const openAI = createOpenAI({
 });
 
 export const gpt35Turbo = openAI("gpt-3.5-turbo");
-export const gpt4 = openAI("gpt-4");
-export const gpt4Turbo = openAI("gpt-4-turbo");
+export const gpt4o = openAI("gpt-4o");
+// do not use
+// export const gpt4 = openAI("gpt-4");
+// export const gpt4Turbo = openAI("gpt-4-turbo");
 
-export const defaultModel = haiku;
+export const defaultModel = gpt4o;

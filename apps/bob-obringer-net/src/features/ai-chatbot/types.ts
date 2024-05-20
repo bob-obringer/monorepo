@@ -1,19 +1,24 @@
 import { CoreMessage } from "ai";
-import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
 import { ReactNode } from "react";
 import { StreamableValue } from "ai/rsc";
+import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/context/chatbot-vercel-ai-context";
+import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
+
+export type ChatbotVercelAIContext = typeof ChatbotVercelAIContextProvider;
 
 /*
   Messages
  */
+export type MessageRole = "user" | "assistant";
+
 type ChatbotVercelAIMessage = CoreMessage & {
   id: string;
 };
 
-export type ChatbotVercelUIMessage = CoreMessage & {
+export type ChatbotVercelUIMessage = Omit<CoreMessage, "content"> & {
   id: string;
-  role: "user" | "assistant";
-  content: ReactNode;
+  role: MessageRole;
+  ui: ReactNode;
 };
 
 /*
@@ -24,13 +29,12 @@ export type ChatbotVercelAIStateContext = {
   promptBio: string | null;
   promptJobs: string | null;
   promptSkills: string | null;
-  resumeCompanies: ResumeCompany[];
+  resumeCompanies: Array<ResumeCompany>;
 };
 
 export type ChatbotVercelAIState = {
   id: string;
   context: ChatbotVercelAIStateContext;
-  // status: "augmenting" | "generating" | "done";
   messages: ChatbotVercelAIMessage[];
 };
 
@@ -42,16 +46,20 @@ export type ChatbotVercelUIState = Array<ChatbotVercelUIMessage>;
 /*
   Actions
  */
+export type RagStatus = "idle" | "retrieving" | "generating" | "done";
+
 export type SendChatbotMessageResponse = {
-  responseMessageText: StreamableValue<string>;
-  bioStatus: StreamableValue<boolean>;
-  instructionsStatus: StreamableValue<boolean>;
-  skillsStatus: StreamableValue<boolean>;
-  jobsStatus: StreamableValue<boolean>;
-  relevantHighlightsStatus: StreamableValue<boolean>;
-  isLoading: StreamableValue<boolean>;
+  ragStatus: StreamableValue<RagStatus>;
+  streamEventCount: StreamableValue<number>;
+  message: {
+    id: string;
+    role: "user" | "assistant";
+    ui: ReactNode;
+  };
 };
 
 export type ChatbotVercelActions = {
-  sendChatbotMessage: (message: string) => Promise<SendChatbotMessageResponse>;
+  sendChatbotMessage: (
+    message: string,
+  ) => Promise<SendChatbotMessageResponse | null>;
 };
