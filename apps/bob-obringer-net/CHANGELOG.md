@@ -1,5 +1,13 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.7.1
+
+### Patch Changes
+
+- b2b2ef9: vercel timeout
+- Updated dependencies [b2b2ef9]
+  - @bob-obringer/sanity-io@0.4.2
+
 ## 0.7.0
 
 ### Minor Changes
