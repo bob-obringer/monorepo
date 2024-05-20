@@ -29,6 +29,7 @@ export type ChatbotContext = {
   messages: ChatbotVercelUIMessage[];
   ragStatus: RagStatus;
   setRagStatus: Dispatch<SetStateAction<RagStatus>>;
+  streamEventCount: number;
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   inputRef: RefObject<HTMLInputElement>;
   inputValue: string;
@@ -54,6 +55,7 @@ export function ChatbotInnerContextProvider({
   const { sendChatbotMessage } = useActions<ChatbotVercelAIContext>();
 
   const [ragStatus, setRagStatus] = useState<RagStatus>("idle");
+  const [streamEventCount, setStreamEventCount] = useState(0);
 
   useEffect(() => {
     if (ragStatus !== "idle") {
@@ -109,11 +111,18 @@ export function ChatbotInnerContextProvider({
     }
 
     // read the stream values and update when they're ready
-    dontBlock(async () => {
-      for await (const value of readStreamableValue(resp.ragStatus)) {
-        if (value) setRagStatus(value);
-      }
-    });
+    dontBlock(
+      async () => {
+        for await (const value of readStreamableValue(resp.ragStatus)) {
+          if (value) setRagStatus(value);
+        }
+      },
+      async () => {
+        for await (const value of readStreamableValue(resp.streamEventCount)) {
+          if (value) setStreamEventCount(value);
+        }
+      },
+    );
 
     setMessages((prev: Array<ChatbotVercelUIMessage>) => [
       ...prev.slice(0, -1),
@@ -136,6 +145,7 @@ export function ChatbotInnerContextProvider({
         messages,
         ragStatus,
         setRagStatus,
+        streamEventCount,
         onFormSubmit,
         inputValue,
         setInputValue,

@@ -32,14 +32,14 @@ export function AppFooter({ className }: { className?: string }) {
       )}
     >
       <div className={cx(!isOpen && "hidden", "w-full flex-1 overflow-scroll")}>
-        <div className="mx-auto w-full max-w-screen-md flex-1 overflow-hidden text-balance px-2 pb-28 pt-5 md:px-5 md:pb-40">
+        <div className="mx-auto w-full max-w-screen-md flex-1 overflow-hidden text-balance px-2 pb-28 pt-5 md:px-5 md:pb-44">
           <ChatbotBody />
         </div>
       </div>
       <footer
         className={cx(
-          "border-color-tertiary fixed bottom-0 flex w-full flex-col items-center justify-end space-y-3 border-t bg-opacity-90 pb-5 backdrop-blur-2xl",
-          isOpen ? "bg-color-primary h-44" : "h-36 md:h-40",
+          "border-color-tertiary fixed bottom-0 flex h-36 w-full flex-col items-center justify-end space-y-3 border-t pb-5 backdrop-blur-2xl md:h-40",
+          isOpen ? "bg-color-primary" : "",
         )}
       >
         <div className="w-full max-w-screen-md space-y-4 px-5">

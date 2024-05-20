@@ -36,6 +36,7 @@ export async function sendChatbotMessage(
     promptInstructions,
   } = aiState.get().context || {};
 
+  const streamEventCount = createStreamableValue(0);
   const ragStatus = createStreamableValue<RagStatus>("retrieving");
 
   const promises: Array<Promise<void>> = [];
@@ -90,6 +91,7 @@ export async function sendChatbotMessage(
       highlights,
     });
 
+    let streamEvents = 0;
     const ui = await streamUI({
       model: defaultModel,
       system: systemPrompt,
@@ -134,6 +136,8 @@ export async function sendChatbotMessage(
         },
       },
       text: async ({ content, done }) => {
+        streamEventCount.update((streamEvents += 1));
+
         if (done) {
           aiState.done({
             ...aiState.get(),
@@ -155,6 +159,7 @@ export async function sendChatbotMessage(
           });
 
           ragStatus.done("done");
+          streamEventCount.done((streamEvents += 1));
         }
 
         return await parseMarkdown(content);
@@ -163,6 +168,7 @@ export async function sendChatbotMessage(
 
     return {
       ragStatus: ragStatus.value,
+      streamEventCount: streamEventCount.value,
       message: {
         ui: ui.value,
         role: "assistant",

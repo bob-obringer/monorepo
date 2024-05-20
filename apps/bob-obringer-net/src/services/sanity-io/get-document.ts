@@ -1,5 +1,4 @@
 import groq from "groq";
-import { type ObringerAssistant, type Homepage } from "@bob-obringer/sanity-io";
 import { sanityClient } from "@/services/sanity-io/sanity-client";
 
 type SettingsTypes = {
@@ -20,3 +19,24 @@ export async function getDocument<K extends SettingsKey>(
   );
   return settings[0];
 }
+
+export type Homepage = {
+  _id: string;
+  _type: "homepage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  bio?: string;
+};
+
+export type ObringerAssistant = {
+  _id: string;
+  _type: "obringerAssistant";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  systemPrompt?: string;
+};

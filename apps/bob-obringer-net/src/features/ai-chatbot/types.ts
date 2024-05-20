@@ -50,6 +50,7 @@ export type RagStatus = "idle" | "retrieving" | "generating" | "done";
 
 export type SendChatbotMessageResponse = {
   ragStatus: StreamableValue<RagStatus>;
+  streamEventCount: StreamableValue<number>;
   message: {
     id: string;
     role: "user" | "assistant";

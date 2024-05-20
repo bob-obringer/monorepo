@@ -14,17 +14,30 @@ import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context"
 import { MessageRole } from "@/features/ai-chatbot";
 
 export function ChatbotBody() {
-  const { messages, ragStatus } = useChatbot();
+  const { messages, ragStatus, streamEventCount } = useChatbot();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
   };
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const lastMessage = messages[messages.length - 1];
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [streamEventCount, ragStatus, messages.length]);
+
+  useEffect(() => {
+    let interval: number = 0;
+    if (ragStatus !== "idle") {
+      interval = setInterval(() => {
+        scrollToBottom();
+      }, 1) as unknown as number;
+      return () => clearInterval(interval);
+    } else if (interval) {
+      clearInterval(interval);
+    }
+  });
 
   return (
     <div className="space-y-4">
@@ -76,31 +89,43 @@ function Message({
   isLastMessage?: boolean;
   isLoading?: boolean;
 }) {
-  const { icon, roleName, className, titleClassName } = messageRoleInfo[role];
+  const { className } = messageRoleInfo[role];
   const isActiveMessage = isLastMessage && isLoading;
 
   return (
-    <div className={cx(className, "relative flex-col gap-3 overflow-x-hidden")}>
-      <div
-        className={cx(
-          titleClassName,
-          "font-weight-medium relative flex items-center justify-between space-x-3 p-5 text-sm",
-        )}
-      >
-        <div className="space-x-2">
-          <FontAwesomeIcon icon={icon} size="lg" />
-          <span className="typography-title-medium !font-weight-medium">
-            {roleName}
-          </span>
-        </div>
-        {isLastMessage && <MessageState />}
+    <div className={cx(className, "relative overflow-x-hidden")}>
+      <div className="flex flex-col gap-5 p-5">
+        <MessageTitle isLastMessage={isLastMessage} messageRole={role} />
+        {children}
       </div>
-      <div className="p-5 pt-0">{children}</div>
       {isActiveMessage && (
         <div className="loading-color-bar-wrapper">
           <div className="loading-color-bar" />
         </div>
       )}
+    </div>
+  );
+}
+
+function MessageTitle({
+  messageRole,
+  isLastMessage,
+}: {
+  messageRole: MessageRole;
+  isLastMessage: boolean;
+}) {
+  const { icon, roleName, titleClassName } = messageRoleInfo[messageRole];
+
+  return (
+    <div
+      className={cx(
+        titleClassName,
+        "flex items-center justify-between space-x-3 text-sm",
+      )}
+    >
+      <FontAwesomeIcon icon={icon} size="lg" />
+      <div className="typography-title-medium flex-1">{roleName}</div>
+      {isLastMessage && <MessageState />}
     </div>
   );
 }
@@ -123,47 +148,43 @@ function MessageState() {
   return (
     <div
       className={cx(
-        "flex items-center space-x-2 rounded-lg",
-        hide ? "opacity-0" : "opacity-100",
+        "flex flex-col items-center space-y-1 transition-opacity duration-500 md:flex-row md:space-x-2",
+        hide ? "opacity-0" : "opacity-75",
       )}
     >
       <Text
         as="div"
         variant="label-mono-small"
         className={cx(
-          "flex items-center space-x-2 rounded-l-md px-2 py-1 transition-colors",
+          "flex items-center gap-2 px-2 transition-colors md:flex-row-reverse",
           "text-color-tertiary",
           ragStatus === "retrieving" && "text-color-primary",
           (ragStatus === "generating" || ragStatus === "done") &&
-            "text-[#00AA00]",
+            "text-[#66CC66]",
         )}
       >
+        <div>Retrieving</div>
         <FontAwesomeIcon
-          icon={
-            ragStatus === "idle"
-              ? faPauseCircle
-              : ragStatus === "retrieving"
-                ? faSpinner
-                : faCheck
-          }
+          icon={ragStatus === "retrieving" ? faSpinner : faCheck}
           size="lg"
           spin={ragStatus === "retrieving"}
+          className="w-4"
         />
-        <div>Retrieving</div>
       </Text>
       <Text
         as="div"
         variant="label-mono-small"
         className={cx(
-          "flex items-center space-x-2 rounded-r-md px-2 py-1 transition-colors",
+          "flex items-center gap-2 px-2 transition-colors md:flex-row-reverse",
           "text-color-tertiary",
           ragStatus === "generating" && "text-color-primary",
-          ragStatus === "done" && "text-[#00AA00]",
+          ragStatus === "done" && "text-[#66CC66]",
         )}
       >
+        <div>Generating</div>
         <FontAwesomeIcon
           icon={
-            ragStatus === "done"
+            ["done", "idle"].includes(ragStatus)
               ? faCheck
               : ragStatus === "generating"
                 ? faSpinner
@@ -171,8 +192,8 @@ function MessageState() {
           }
           size="lg"
           spin={ragStatus === "generating"}
+          className="w-4"
         />
-        <div>Generating</div>
       </Text>
     </div>
   );
