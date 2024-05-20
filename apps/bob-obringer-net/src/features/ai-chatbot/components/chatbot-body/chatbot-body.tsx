@@ -1,19 +1,20 @@
 import "@/features/ai-chatbot/components/chatbot-body/loading-color-bar.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import {
-  faInfoCircle,
-  faRobot,
-  faUser,
   faCheck,
-  faSpinner,
+  faInfoCircle,
   faPauseCircle,
+  faRobot,
+  faSpinner,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cx, Text } from "@bob-obringer/design-system";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
+import { MessageRole } from "@/features/ai-chatbot";
 
 export function ChatbotBody() {
-  const { messages, isLoading } = useChatbot();
+  const { messages, ragStatus } = useChatbot();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollToBottom = () => {
@@ -27,27 +28,17 @@ export function ChatbotBody() {
 
   return (
     <div className="space-y-4">
-      {/*{info && <Message role="_info">{info}</Message>}*/}
       {messages.map((m) => (
         <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === "user" ? (
-            <Message role="user">{m.content}</Message>
-          ) : (
-            <Message
-              role="ai"
-              isLastMessage={m.id === lastMessage?.id}
-              isLoading={isLoading}
-            >
-              {m.content}
-            </Message>
-          )}
+          <Message
+            role={m.role}
+            isLastMessage={m.id === lastMessage?.id}
+            isLoading={["retrieving", "generating"].includes(ragStatus)}
+          >
+            {m.ui}
+          </Message>
         </div>
       ))}
-      {isLoading && lastMessage.role === "user" && (
-        <Message role="ai" isLastMessage={true} isLoading={true}>
-          {""}
-        </Message>
-      )}
       <div ref={messagesEndRef} className="pb-6" />
     </div>
   );
@@ -60,7 +51,7 @@ const messageRoleInfo = {
     className: "",
     titleClassName: "text-color-secondary",
   },
-  ai: {
+  assistant: {
     icon: faRobot,
     roleName: "obringer.net Assistant",
     className: "bg-opacity-5 bg-[#ffffff]",
@@ -81,7 +72,7 @@ function Message({
   isLoading = false,
 }: {
   children: ReactNode;
-  role: "user" | "ai" | "_info";
+  role: MessageRole;
   isLastMessage?: boolean;
   isLoading?: boolean;
 }) {
@@ -115,34 +106,24 @@ function Message({
 }
 
 function MessageState() {
-  const {
-    isBioLoaded,
-    isInstructionsLoaded,
-    isSkillsLoaded,
-    isJobsLoaded,
-    isLoading,
-  } = useChatbot();
+  const { ragStatus, setRagStatus } = useChatbot();
 
   const [hide, setHide] = useState(false);
 
-  const isRetrieved =
-    isBioLoaded && isInstructionsLoaded && isSkillsLoaded && isJobsLoaded;
-  const isGenerating = isRetrieved && isLoading;
-  const isDone = isRetrieved && !isLoading;
-
   useEffect(() => {
-    if (isDone) {
+    if (ragStatus === "done") {
       const timeout = setTimeout(() => {
         setHide(true);
+        setRagStatus("idle");
       }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [isDone]);
+  }, [ragStatus, setRagStatus]);
 
   return (
     <div
       className={cx(
-        "flex items-center space-x-0.5 rounded-lg bg-[#004400] p-px transition-opacity duration-500",
+        "flex items-center space-x-2 rounded-lg",
         hide ? "opacity-0" : "opacity-100",
       )}
     >
@@ -150,31 +131,46 @@ function MessageState() {
         as="div"
         variant="label-mono-small"
         className={cx(
-          "text-color-primary flex items-center space-x-2 rounded-l-md px-2 py-1 transition-colors",
-          isRetrieved ? "bg-[#003300]" : "bg-[#112211]",
+          "flex items-center space-x-2 rounded-l-md px-2 py-1 transition-colors",
+          "text-color-tertiary",
+          ragStatus === "retrieving" && "text-color-primary",
+          (ragStatus === "generating" || ragStatus === "done") &&
+            "text-[#00AA00]",
         )}
       >
         <FontAwesomeIcon
-          icon={isRetrieved ? faCheck : faSpinner}
+          icon={
+            ragStatus === "idle"
+              ? faPauseCircle
+              : ragStatus === "retrieving"
+                ? faSpinner
+                : faCheck
+          }
           size="lg"
-          spin={!isRetrieved}
+          spin={ragStatus === "retrieving"}
         />
-        <div>Augmenting</div>
+        <div>Retrieving</div>
       </Text>
       <Text
         as="div"
         variant="label-mono-small"
         className={cx(
-          "text-color-primary flex items-center space-x-2 rounded-r-md px-2 py-1 transition-colors",
-          isDone && "bg-[#003300]",
-          isGenerating && "bg-[#112211]",
-          !isRetrieved && "text-color-tertiary bg-[#222222]",
+          "flex items-center space-x-2 rounded-r-md px-2 py-1 transition-colors",
+          "text-color-tertiary",
+          ragStatus === "generating" && "text-color-primary",
+          ragStatus === "done" && "text-[#00AA00]",
         )}
       >
         <FontAwesomeIcon
-          icon={isDone ? faCheck : isGenerating ? faSpinner : faPauseCircle}
+          icon={
+            ragStatus === "done"
+              ? faCheck
+              : ragStatus === "generating"
+                ? faSpinner
+                : faPauseCircle
+          }
           size="lg"
-          spin={isGenerating}
+          spin={ragStatus === "generating"}
         />
         <div>Generating</div>
       </Text>

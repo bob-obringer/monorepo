@@ -34,6 +34,8 @@
     "@vercel/speed-insights": "1.0.10",
     "ai": "3.1.5",
     "groq": "3.42.1",
+    "html-react-parser": "^5.1.10",
+    "marked": "^12.0.2",
     "nanoid": "^5.0.7",
     "next": "workspace:*",
     "posthog-js": "workspace:*",
