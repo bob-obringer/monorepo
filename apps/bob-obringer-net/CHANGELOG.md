@@ -1,5 +1,19 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.7.0
+
+### Minor Changes
+
+- afae469: added tools to the chatbot
+
+### Patch Changes
+
+- a675965: sanity-io isn't getting picked up properly
+- 30fb785: missing src folder for sanity-io
+- Updated dependencies [30fb785]
+- Updated dependencies [afae469]
+  - @bob-obringer/sanity-io@0.4.1
+
 ## 0.6.0
 
 ### Minor Changes
