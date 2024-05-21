@@ -1,5 +1,16 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.8.0
+
+### Minor Changes
+
+- f99e964: added contact cards
+
+### Patch Changes
+
+- Updated dependencies [f99e964]
+  - @bob-obringer/sanity-io@0.5.0
+
 ## 0.7.1
 
 ### Patch Changes
