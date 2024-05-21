@@ -127,7 +127,8 @@ export async function sendChatbotMessage(
               `If the user wants to communicate with bob, run this tool. If you can assume that the user
               is looking for X, linkedin, email, or phone, set the contactMethod
               parameter to the exact value we're looking for.  Remember, Twitter is X.
-              If you can't tell exactly how they want to communicate with us, run the tool and set the contactMethod to indicate all methods.`,
+              If you can't tell exactly how they want to communicate with us, run the tool and set
+              the contactMethod to indicate all methods.`,
             ),
           }),
           generate: async function* ({ contactMethod }) {
@@ -158,7 +159,6 @@ export async function sendChatbotMessage(
 
             return (
               <div className="flex h-full flex-col items-center justify-center gap-4">
-                {contactMethod}
                 {contactInfo.map((contact) => (
                   <ContactCard key={contact._id} contactInfo={contact} />
                 ))}
