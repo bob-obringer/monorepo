@@ -21,6 +21,8 @@ import {
 } from "@/features/ai-chatbot";
 import { z } from "zod";
 import { parseMarkdown } from "@/features/markdown/parse-markdown";
+import { getAllContactInfo } from "@/services/sanity-io/contact-info-helpers";
+import { ContactCard } from "@/features/contacts/contact-card";
 
 export async function sendChatbotMessage(
   message: string,
@@ -40,6 +42,27 @@ export async function sendChatbotMessage(
   const ragStatus = createStreamableValue<RagStatus>("retrieving");
 
   const promises: Array<Promise<void>> = [];
+
+  function closeAIState(content: string) {
+    aiState.done({
+      ...aiState.get(),
+      messages: [
+        ...aiState.get().messages,
+        {
+          id: nanoid(),
+          role: "assistant",
+          content,
+        },
+      ],
+      context: {
+        promptBio,
+        promptInstructions,
+        promptSkills,
+        promptJobs,
+        resumeCompanies,
+      },
+    });
+  }
 
   try {
     if (!promptBio) {
@@ -97,41 +120,50 @@ export async function sendChatbotMessage(
       system: systemPrompt,
       messages: aiState.get().messages,
       tools: {
-        deploy: {
+        contact: {
           description: "Display user contact information",
           parameters: z.object({
-            communicationMethod: z
-              .string()
-              .describe(
-                "Does the user want to communicate with bob in any way, including smoke signals or phone call?",
-              ),
+            contactMethod: z.string().describe(
+              `If the user wants to communicate with bob, run this tool. If you can assume that the user
+              is looking for X, linkedin, email, or phone, set the contactMethod
+              parameter to the exact value we're looking for.  Remember, Twitter is X.
+              If you can't tell exactly how they want to communicate with us, run the tool and set the contactMethod to indicate all methods.`,
+            ),
           }),
-          generate: async function ({ communicationMethod }) {
-            if (communicationMethod === "email") {
+          generate: async function* ({ contactMethod }) {
+            yield <div>Looking up contact info</div>;
+
+            const contactInfo = await getAllContactInfo();
+
+            ragStatus.update("generating");
+            streamEventCount.update((streamEvents += 1));
+
+            const specificContactInfo = contactInfo.find(
+              (c) =>
+                c.contactMethod?.toLowerCase() === contactMethod.toLowerCase(),
+            );
+
+            if (specificContactInfo) {
               ragStatus.done("done");
-              return (
-                <div>
-                  You can send bob a message at{" "}
-                  <a className="text-color-link" href="mailto:bob@obringer.net">
-                    bob@obringer.net
-                  </a>
-                </div>
+              streamEventCount.done((streamEvents += 1));
+              closeAIState(
+                `[Showing Contact Tool with ${specificContactInfo} contact info]`,
               );
+              return <ContactCard contactInfo={specificContactInfo} />;
             }
 
-            if (communicationMethod === "phone call") {
-              ragStatus.done("done");
-              return (
-                <div>
-                  You can call bob at{" "}
-                  <a className="text-color-link" href="tel:+1-917-656-1685">
-                    +1-917-656-1685
-                  </a>
-                </div>
-              );
-            }
+            ragStatus.done("done");
+            streamEventCount.done((streamEvents += 1));
+            closeAIState("[Showing Contact Tool with all contact info]");
 
-            return <div>Communication Method {communicationMethod}</div>;
+            return (
+              <div className="flex h-full flex-col items-center justify-center gap-4">
+                {contactMethod}
+                {contactInfo.map((contact) => (
+                  <ContactCard key={contact._id} contactInfo={contact} />
+                ))}
+              </div>
+            );
           },
         },
       },

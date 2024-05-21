@@ -5,6 +5,7 @@ import { resumeSkill } from "./resume/resume-skill";
 import { resumeIndustry } from "./resume/resume-industry";
 import { obringerAssistant } from "./ai/obringer-assistant";
 import { homepage } from "./homepage";
+import { contactInfo } from "./contact-info";
 
 export const schemaTypes = [
   resumeSkillCategory,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   resumeIndustry,
   obringerAssistant,
   homepage,
+  contactInfo,
 ];
