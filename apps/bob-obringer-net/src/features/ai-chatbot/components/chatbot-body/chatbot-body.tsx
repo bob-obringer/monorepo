@@ -148,7 +148,7 @@ function MessageState() {
   return (
     <div
       className={cx(
-        "flex flex-col items-center space-y-1 transition-opacity duration-500 md:flex-row md:space-x-2",
+        "flex flex-col items-center space-y-1 transition-opacity duration-500 md:flex-row md:justify-center md:space-x-2 md:space-y-0",
         hide ? "opacity-0" : "opacity-75",
       )}
     >
@@ -156,7 +156,7 @@ function MessageState() {
         as="div"
         variant="label-mono-small"
         className={cx(
-          "flex items-center gap-2 px-2 transition-colors md:flex-row-reverse",
+          "flex items-center gap-2 transition-colors md:flex-row-reverse",
           "text-color-tertiary",
           ragStatus === "retrieving" && "text-color-primary",
           (ragStatus === "generating" || ragStatus === "done") &&
@@ -175,7 +175,7 @@ function MessageState() {
         as="div"
         variant="label-mono-small"
         className={cx(
-          "flex items-center gap-2 px-2 transition-colors md:flex-row-reverse",
+          "flex items-center gap-2 transition-colors md:flex-row-reverse",
           "text-color-tertiary",
           ragStatus === "generating" && "text-color-primary",
           ragStatus === "done" && "text-[#66CC66]",
