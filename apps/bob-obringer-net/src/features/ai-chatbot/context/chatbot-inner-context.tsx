@@ -134,7 +134,7 @@ export function ChatbotInnerContextProvider({
     if (isOpen) {
       inputRef.current?.focus();
     }
-  }, []);
+  }, [isOpen]);
 
   return (
     <ChatbotInnerContext.Provider

@@ -18,6 +18,7 @@ export function structure(
             .schemaType("homepage")
             .documentId("homepage"),
         ),
+      S.documentTypeListItem("contactInfo").title("Contact Info"),
       S.divider(),
       S.documentTypeListItem("resumeCompany").title("Resume Companies"),
       orderableDocumentListDeskItem({

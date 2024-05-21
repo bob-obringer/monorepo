@@ -1,4 +1,4 @@
 {
-  "generates": "src/index.ts",
+  "generates": "../../../apps/bob-obringer-net/src/services/sanity-io/sanity-types.ts",
   "schema": "build/sanity.schema.json"
 }
