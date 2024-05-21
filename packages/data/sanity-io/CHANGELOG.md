@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.5.0
+
+### Minor Changes
+
+- f99e964: added contact cards
+
 ## 0.4.2
 
 ### Patch Changes
