@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.8.1
+
+### Patch Changes
+
+- 66ec64e: cleaned up chatbot
+
 ## 0.8.0
 
 ### Minor Changes
