@@ -11,11 +11,15 @@ export function PosthogProvider({
   children,
   token,
   host,
+  enabled,
 }: {
   children: ReactNode;
   token: string;
   host: string;
+  enabled: boolean;
 }) {
+  if (!enabled) return children;
+
   if (!isInitialized && typeof window !== "undefined") {
     posthog.init(token, {
       api_host: host,
