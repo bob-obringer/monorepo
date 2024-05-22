@@ -20,6 +20,7 @@ export async function handleResumeCompanyCreateOrUpdate(
     const skills = highlight.skills?.map((skill) => skill.name).join('", "');
     const text = `${startEnd} at ${company.name} in the ${industry} industry, Bob worked on "${highlight.text}" using "${skills}"`;
 
+    // todo: this id is way too specific, centralize creation and consumption
     properties.push({
       id: `ResumeCompany:${company._id}:Highlight:${highlight._key}`,
       text,
