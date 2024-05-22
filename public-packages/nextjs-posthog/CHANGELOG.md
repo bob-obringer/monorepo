@@ -1,5 +1,16 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.2.0
+
+### Minor Changes
+
+- 0ca35c5: capture pageleave in posthog
+- 3c59149: added logging
+
+### Patch Changes
+
+- 0ca35c5: disable posthog on non prod environments
+
 ## 0.1.0
 
 ### Minor Changes
