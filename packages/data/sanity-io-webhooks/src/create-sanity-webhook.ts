@@ -1,17 +1,26 @@
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import {
-  HttpError,
   HttpErrorBadRequest,
   HttpErrorForbidden,
+  getErrorResponse,
 } from "@bob-obringer/http-errors";
 import { type MutationOperation, type SanityDocument } from "@sanity/client";
 import type { ReadableStream } from "node:stream/web";
+import { revalidatePath } from "next/cache";
 
 type SanityWebhookHandler<T extends SanityDocument = SanityDocument> = {
-  handler: (doc: T, operation?: MutationOperation) => Promise<void>;
   documentType: string;
   operations?: MutationOperation | Array<MutationOperation>;
-};
+} & (
+  | {
+      handler: (doc: T, operation?: MutationOperation) => Promise<void>;
+      revalidatePath?: string | Array<string>;
+    }
+  | {
+      handler?: (doc: T, operation?: MutationOperation) => Promise<void>;
+      revalidatePath: string | Array<string>;
+    }
+);
 
 export function createSanityWebhook<T extends SanityDocument>({
   handlers,
@@ -26,45 +35,46 @@ export function createSanityWebhook<T extends SanityDocument>({
       try {
         doc = await verifyBody(req, secret);
       } catch (e) {
-        if (e instanceof HttpError)
-          return Response.json(e.message, { status: e.statusCode });
-        return Response.json(e instanceof Error ? e.message : "Unknown Error", {
-          status: 500,
-        });
+        return getErrorResponse(e);
       }
 
-      const operation = req.headers.get(
+      const sanityOperation = req.headers.get(
         "sanity-operation",
       ) as MutationOperation;
 
       try {
-        for (const handler of handlers) {
-          if (
-            handler.documentType === doc._type &&
-            isDocument<T>(doc, handler.documentType)
-          ) {
-            const operationMatch =
-              typeof handler.operations === "string"
-                ? operation === handler.operations
-                : handler.operations?.includes(operation);
-            if (operationMatch) {
-              console.log(
-                `Handling Sanity Webhook: ${operation}, ${doc._type}, ${doc._id}`,
-              );
-              await handler.handler(doc, operation);
-            }
+        for (const {
+          operations,
+          handler,
+          documentType,
+          revalidatePath: _revalidatePath,
+        } of handlers) {
+          if (!isTargetDocumentType<T>(doc, documentType)) continue;
+
+          const ops = Array.isArray(operations) ? operations : [operations];
+          if (!ops.includes(sanityOperation)) continue;
+
+          console.log(
+            `Handling Sanity Webhook: ${sanityOperation}, ${doc._type}, ${doc._id}`,
+          );
+
+          if (_revalidatePath) {
+            const paths = Array.isArray(_revalidatePath)
+              ? _revalidatePath
+              : [_revalidatePath];
+            for (const path of paths) revalidatePath(path);
           }
+          if (handler) await handler(doc, sanityOperation);
         }
         return new Response("OK", { status: 200 });
       } catch (e) {
-        console.log(e as Error);
-        return new Response("Error", { status: 500 });
+        return getErrorResponse(e);
       }
     },
   };
 }
 
-function isDocument<T extends SanityDocument>(
+function isTargetDocumentType<T extends SanityDocument>(
   doc: SanityDocument,
   documentType: string,
 ): doc is T {
@@ -72,14 +82,15 @@ function isDocument<T extends SanityDocument>(
 }
 
 async function verifyBody(req: Request, secret: string) {
+  if (!req.body) throw new HttpErrorBadRequest("Missing Body");
+
   const signature = req.headers.get(SIGNATURE_HEADER_NAME);
-  if (!req.body) {
-    throw new HttpErrorBadRequest("Missing Body");
-  }
+  if (!signature) throw new HttpErrorForbidden("Missing Signature");
+
   const body = await readBody(req.body);
-  if (!signature || !(await isValidSignature(body, signature, secret))) {
-    throw new HttpErrorForbidden("Invalid Signature");
-  }
+  const isValidRequest = await isValidSignature(body, signature, secret);
+
+  if (!isValidRequest) throw new HttpErrorForbidden("Invalid Signature");
 
   return JSON.parse(body) as SanityDocument;
 }

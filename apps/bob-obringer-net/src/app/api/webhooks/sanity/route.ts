@@ -10,6 +10,11 @@ const { POST } = createSanityWebhook({
       operations: ["create", "update"],
       handler: handleResumeCompanyCreateOrUpdate,
     },
+    {
+      documentType: "homepage",
+      operations: ["create", "update", "delete"],
+      revalidatePath: "/",
+    },
   ],
 });
 

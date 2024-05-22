@@ -18,7 +18,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={bobObringerFontClasses}>
       <body className="bg text">
-        <PosthogProvider token={env.posthog.key} host={env.posthog.host}>
+        <PosthogProvider
+          token={env.posthog.key}
+          host={env.posthog.host}
+          enabled={env.name === "production"}
+        >
           <AppUIProvider>
             <ChatbotContextProvider>{children}</ChatbotContextProvider>
           </AppUIProvider>
