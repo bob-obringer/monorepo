@@ -27,7 +27,7 @@ export function createSanityWebhook<T extends SanityDocument>({
         doc = await verifyBody(req, secret);
       } catch (e) {
         if (e instanceof HttpError)
-          return Response.json(e.message, { status: e.status });
+          return Response.json(e.message, { status: e.statusCode });
         return Response.json(e instanceof Error ? e.message : "Unknown Error", {
           status: 500,
         });

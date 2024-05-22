@@ -29,7 +29,7 @@
     "@fortawesome/fontawesome-svg-core": "6.5.2",
     "@fortawesome/free-solid-svg-icons": "6.5.2",
     "@fortawesome/react-fontawesome": "0.2.1",
-    "@logtail/next": "^0.1.5",
+    "@logtail/next": "0.1.5",
     "@sanity/client": "6.18.2",
     "@vercel/analytics": "1.2.2",
     "@vercel/speed-insights": "1.0.10",
@@ -37,12 +37,12 @@
     "groq": "3.42.1",
     "html-react-parser": "^5.1.10",
     "marked": "^12.0.2",
-    "nanoid": "^5.0.7",
+    "nanoid": "5.0.7",
     "next": "workspace:*",
     "posthog-js": "workspace:*",
     "react": "workspace:*",
     "react-dom": "workspace:*",
-    "server-only": "^0.0.1",
+    "server-only": "0.0.1",
     "zod": "workspace:*"
   },
   "devDependencies": {
