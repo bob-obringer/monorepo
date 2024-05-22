@@ -6,7 +6,7 @@ import { AppUIProvider } from "@/features/ui/app-ui-state-context";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { env } from "@/config/client";
-import { PosthogProvider } from "@bob-obringer/posthog-nextjs";
+import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { ChatbotContextProvider } from "@/features/ai-chatbot";
 
 export const metadata: Metadata = {

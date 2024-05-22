@@ -1,6 +1,6 @@
 {
-  "name": "@bob-obringer/http-errors",
-  "version": "0.1.0",
+  "name": "@bob-obringer/server-action-helpers",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "main": "dist/index.js",
@@ -10,5 +10,9 @@
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@bob-obringer/http-errors": "workspace:*",
+    "neverthrow": "workspace:*"
   }
 }
