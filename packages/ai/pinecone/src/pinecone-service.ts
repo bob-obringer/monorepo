@@ -92,9 +92,6 @@ export class PineconeService {
   ): ResultAsync<void, Error> {
     const textToEmbed = items.map(({ text }) => text);
 
-    // todo: the pinecone service shouldn't be responsible for this part
-    //  we should have an abstraction around embedding service and vector db
-    //  that lets us plug and play
     return this.embeddingService.generate(textToEmbed).map(async (vectors) => {
       if (vectors.length !== items.length) {
         throw new Error("Mismatched number of embeddings");

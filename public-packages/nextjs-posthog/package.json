@@ -1,8 +1,8 @@
 {
-  "name": "@bob-obringer/posthog-nextjs",
+  "name": "@bob-obringer/nextjs-posthog",
   "version": "0.1.0",
   "private": false,
-  "description": "Bob Obringer Posthog NextJS Client",
+  "description": "Bob Obringer NextJS Posthog Client",
   "keywords": [
     "posthog",
     "nextjs",

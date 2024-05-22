@@ -1,8 +1,9 @@
 /* eslint-disable @bob-obringer/no-process-env */
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { withLogtail } from "@logtail/next";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let nextConfig = {
   async rewrites() {
     return [
       {
@@ -18,6 +19,8 @@ const nextConfig = {
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
 };
+
+nextConfig = withLogtail(nextConfig);
 
 // eslint-disable-next-line @bob-obringer/next-prefer-named-exports
 export default process.env.ANALYZE === "true"

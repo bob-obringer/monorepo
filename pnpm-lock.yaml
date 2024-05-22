@@ -104,16 +104,16 @@ importers:
         version: link:../../packages/design/design-system
       '@bob-obringer/http-errors':
         specifier: workspace:*
-        version: link:../../packages/utilities/http-errors
+        version: link:../../public-packages/http-errors
       '@bob-obringer/nextjs-fonts':
         specifier: workspace:*
         version: link:../../packages/design/nextjs-fonts
+      '@bob-obringer/nextjs-posthog':
+        specifier: workspace:*
+        version: link:../../public-packages/nextjs-posthog
       '@bob-obringer/nextjs-sanity-image':
         specifier: workspace:*
         version: link:../../public-packages/nextjs-sanity-image
-      '@bob-obringer/posthog-nextjs':
-        specifier: workspace:*
-        version: link:../../public-packages/posthog-nextjs
       '@bob-obringer/sanity-io':
         specifier: workspace:*
         version: link:../../packages/data/sanity-io
@@ -132,6 +132,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: 0.2.1
         version: 0.2.1(@fortawesome/fontawesome-svg-core@6.5.2)(react@18.3.1)
+      '@logtail/next':
+        specifier: 0.1.5
+        version: 0.1.5(next@14.2.3)
       '@sanity/client':
         specifier: 6.18.2
         version: 6.18.2(debug@4.3.4)
@@ -154,7 +157,7 @@ importers:
         specifier: ^12.0.2
         version: 12.0.2
       nanoid:
-        specifier: ^5.0.7
+        specifier: 5.0.7
         version: 5.0.7
       next:
         specifier: 14.2.3
@@ -169,7 +172,7 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       server-only:
-        specifier: ^0.0.1
+        specifier: 0.0.1
         version: 0.0.1
       zod:
         specifier: 3.23.8
@@ -178,12 +181,6 @@ importers:
       '@next/bundle-analyzer':
         specifier: ^14.2.3
         version: 14.2.3
-      '@pinecone-database/pinecone':
-        specifier: ^2.2.1
-        version: 2.2.1
-      '@types/wtfnode':
-        specifier: ^0.7.3
-        version: 0.7.3
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -196,9 +193,6 @@ importers:
       tailwindcss-react-aria-components:
         specifier: 1.1.2
         version: 1.1.2(tailwindcss@3.4.3)
-      wtfnode:
-        specifier: ^0.9.2
-        version: 0.9.2
 
   apps/cli:
     dependencies:
@@ -268,7 +262,7 @@ importers:
     dependencies:
       '@bob-obringer/http-errors':
         specifier: workspace:*
-        version: link:../../utilities/http-errors
+        version: link:../../../public-packages/http-errors
       '@sanity/client':
         specifier: 6.18.2
         version: 6.18.2(debug@4.3.4)
@@ -329,7 +323,14 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
 
-  packages/utilities/http-errors: {}
+  packages/nextjs/server-action-helpers:
+    dependencies:
+      '@bob-obringer/http-errors':
+        specifier: workspace:*
+        version: link:../../../public-packages/http-errors
+      neverthrow:
+        specifier: 6.2.1
+        version: 6.2.1
 
   public-packages/conventional-changesets:
     dependencies:
@@ -372,6 +373,23 @@ importers:
         specifier: 8.57.0
         version: 8.57.0
 
+  public-packages/http-errors: {}
+
+  public-packages/nextjs-posthog:
+    devDependencies:
+      next:
+        specifier: 14.2.3
+        version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
+      posthog-js:
+        specifier: 1.131.4
+        version: 1.131.4
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
+
   public-packages/nextjs-sanity-image:
     dependencies:
       zod:
@@ -381,21 +399,6 @@ importers:
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@18.3.1)
-
-  public-packages/posthog-nextjs:
-    devDependencies:
-      next:
-        specifier: 14.2.3
-        version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
-      posthog-js:
-        specifier: 1.131.4
-        version: 1.131.4
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -3766,6 +3769,16 @@ packages:
       '@lezer/common': 1.2.1
     dev: false
 
+  /@logtail/next@0.1.5(next@14.2.3):
+    resolution: {integrity: sha512-J8m9jGdcGjYfKEbB1pdQj9iaBq9eNtHtqNcrHStjGI1LPiGREwk+HnnpM12yS6teiwlQepcXJDtQ8fk1QHg+jw==}
+    engines: {node: '>=15'}
+    peerDependencies:
+      next: 14.2.3
+    dependencies:
+      next: 14.2.3(react-dom@18.3.1)(react@18.3.1)
+      whatwg-fetch: 3.6.20
+    dev: false
+
   /@manypkg/find-root@1.1.0:
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
     dependencies:
@@ -4015,6 +4028,7 @@ packages:
       ajv: 8.13.0
       cross-fetch: 3.1.8(encoding@0.1.13)
       encoding: 0.1.13
+    dev: false
 
   /@pkgjs/parseargs@0.11.0:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -6188,6 +6202,7 @@ packages:
 
   /@sinclair/typebox@0.29.6:
     resolution: {integrity: sha512-aX5IFYWlMa7tQ8xZr3b2gtVReCvg7f3LEhjir/JAjX2bJCMVJA5tIPv30wTD4KDfcwMd7DDYY3hFDeGmOgtrZQ==}
+    dev: false
 
   /@sindresorhus/is@4.6.0:
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
@@ -6868,10 +6883,6 @@ packages:
   /@types/uuid@8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: false
-
-  /@types/wtfnode@0.7.3:
-    resolution: {integrity: sha512-UMkHpx+o2xRWLJ7PmT3bBzvIA9/0oFw80oPtY/xO4jfdq+Gznn4wP7K9B/JjMxyxy+wF+5oRPIykxeBbEDjwRg==}
-    dev: true
 
   /@typescript-eslint/eslint-plugin@7.8.0(@typescript-eslint/parser@7.8.0)(eslint@8.57.0)(typescript@5.4.5):
     resolution: {integrity: sha512-gFTT+ezJmkwutUPmB0skOj3GZJtlEGnlssems4AjkVweUPGj7jRwwqg0Hhg7++kPGJqKtTYx+R05Ftww372aIg==}
@@ -8268,6 +8279,7 @@ packages:
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
+    dev: false
 
   /cross-spawn@5.1.0:
     resolution: {integrity: sha512-pTgQJ5KC0d2hcY8eyL1IzlBPYjTkyH72XRZPnLyKus2mBfNjQs3klqbJU2VILqZryAZUt9JOb3h/mWMy23/f5A==}
@@ -8773,6 +8785,7 @@ packages:
     resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
     dependencies:
       iconv-lite: 0.6.3
+    dev: false
 
   /end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -10444,6 +10457,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       safer-buffer: 2.1.2
+    dev: false
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -11727,6 +11741,7 @@ packages:
     dependencies:
       encoding: 0.1.13
       whatwg-url: 5.0.0
+    dev: false
 
   /node-machine-id@1.1.12:
     resolution: {integrity: sha512-QNABxbrPa3qEIfrE6GOJ7BYIuignnJw7iQ2YPbc3Nla1HzRJjXzZOiikfF8m7eAMfichLt3M4VgLOetqgDmgGQ==}
@@ -14384,6 +14399,7 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: false
 
   /tr46@5.0.0:
     resolution: {integrity: sha512-tk2G5R2KRwBd+ZN0zaEXpmzdKyOYksXwywulIX95MBODjSzMIuQnQ3m8JxgbhnL1LeVo7lqQKsYa1O3Htl7K5g==}
@@ -14951,6 +14967,7 @@ packages:
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    dev: false
 
   /webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
@@ -14987,6 +15004,10 @@ packages:
       iconv-lite: 0.6.3
     dev: false
 
+  /whatwg-fetch@3.6.20:
+    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
+    dev: false
+
   /whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
     engines: {node: '>=18'}
@@ -15005,6 +15026,7 @@ packages:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
+    dev: false
 
   /which-boxed-primitive@1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}
@@ -15156,11 +15178,6 @@ packages:
       utf-8-validate:
         optional: true
     dev: false
-
-  /wtfnode@0.9.2:
-    resolution: {integrity: sha512-AzGy/MOGmzufyHDKHwuZeuqaqslGIPuwxDAhdmUUJ91Ak22Ynxry8quXNR/cZZIaSs5T+C+LNS3W9AcMzJXhMw==}
-    hasBin: true
-    dev: true
 
   /xdg-basedir@4.0.0:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}
