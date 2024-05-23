@@ -4,6 +4,7 @@ import {
   getHomepage,
   getResumeCompanies,
 } from "./sanity-io/queries/resume-company.js";
+import fs from "fs";
 
 function inch(n: number) {
   return n * 72;
@@ -20,9 +21,13 @@ export default async function handler(
     margin,
   });
 
-  doc.registerFont("heading", "fonts/YsabeauSC-Bold.ttf");
-  doc.registerFont("title", "fonts/ArgentumNovus-Medium.ttf");
-  doc.registerFont("body", "fonts/ArgentumNovus-Regular.ttf");
+  const heading = fs.readFileSync("./fonts/YsabeauSC-Bold.ttf");
+  const title = fs.readFileSync("./fonts/ArgentumNovus-Medium.ttf");
+  const body = fs.readFileSync("./fonts/ArgentumNovus-Regular.ttf");
+
+  doc.registerFont("heading", heading);
+  doc.registerFont("title", title);
+  doc.registerFont("body", body);
 
   const maxPageBodyHeight = doc.page.height - margin;
 
