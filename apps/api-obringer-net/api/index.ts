@@ -23,13 +23,13 @@ export default async function handler(
   });
 
   const heading = fs.readFileSync(
-    path.resolve(process.cwd(), "fonts", "YsabeauSC-Bold.ttf"),
+    path.resolve(process.cwd(), "api/fonts", "YsabeauSC-Bold.ttf"),
   );
   const title = fs.readFileSync(
-    path.resolve(process.cwd(), "fonts", "ArgentumNovus-Medium.ttf"),
+    path.resolve(process.cwd(), "api/fonts", "ArgentumNovus-Medium.ttf"),
   );
   const body = fs.readFileSync(
-    path.resolve(process.cwd(), "fonts", "ArgentumNovus-Regular.ttf"),
+    path.resolve(process.cwd(), "api/fonts", "ArgentumNovus-Regular.ttf"),
   );
 
   doc.registerFont("heading", heading);
