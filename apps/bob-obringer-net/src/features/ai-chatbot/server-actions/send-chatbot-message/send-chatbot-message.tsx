@@ -23,7 +23,7 @@ import { z } from "zod";
 import { parseMarkdown } from "@/features/markdown/parse-markdown";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { ContactCard } from "@/features/contacts/contact-card";
-import { ResumeCard } from "@/features/resume/resume-card";
+import { ResumeCard, ResumeLinkCard } from "@/features/resume/resume-card";
 
 export async function sendChatbotMessage(
   message: string,
@@ -122,13 +122,18 @@ export async function sendChatbotMessage(
       messages: aiState.get().messages,
       tools: {
         resume: {
-          description: `If user asks to download Bob's resume as pdf, run this tool.  If they want to view
-            it online, just direct them to https://bob.obringer.net/experience`,
+          description: `If user wants to download Bob's resume or get a pdf, run this tool.
+          If they just want to view bob's background, don't run the tool.`,
           parameters: z.object({}),
           generate: async function () {
             ragStatus.done("done");
             closeAIState("[Showing Resume Tool]");
-            return <ResumeCard />;
+            return (
+              <div className="justify-middle flex flex-col gap-4 align-middle md:flex-row">
+                <ResumeCard />
+                <ResumeLinkCard />
+              </div>
+            );
           },
         },
         contact: {
