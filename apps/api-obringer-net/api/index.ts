@@ -20,9 +20,9 @@ export default async function handler(
     margin,
   });
 
-  doc.registerFont("heading", "./api/fonts/YsabeauSC-Bold.ttf");
-  doc.registerFont("title", "./api/fonts/ArgentumNovus-Medium.ttf");
-  doc.registerFont("body", "./api/fonts/ArgentumNovus-Regular.ttf");
+  doc.registerFont("heading", "fonts/YsabeauSC-Bold.ttf");
+  doc.registerFont("title", "fonts/ArgentumNovus-Medium.ttf");
+  doc.registerFont("body", "fonts/ArgentumNovus-Regular.ttf");
 
   const maxPageBodyHeight = doc.page.height - margin;
 
