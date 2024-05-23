@@ -1,5 +1,26 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.9.0
+
+### Minor Changes
+
+- 0ca35c5: added route invalidation to sanity webhook
+- 3c59149: added logging
+
+### Patch Changes
+
+- 85cd174: broken build because of statusCode change
+- 0ca35c5: disable posthog on non prod environments
+- Updated dependencies [0ca35c5]
+- Updated dependencies [0ca35c5]
+- Updated dependencies [85cd174]
+- Updated dependencies [3c59149]
+- Updated dependencies [0ca35c5]
+  - @bob-obringer/sanity-io-webhooks@0.3.0
+  - @bob-obringer/http-errors@0.2.0
+  - @bob-obringer/nextjs-posthog@0.2.0
+  - @bob-obringer/ai-pinecone@0.2.0
+
 ## 0.8.1
 
 ### Patch Changes

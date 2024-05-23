@@ -1,5 +1,18 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.3.0
+
+### Minor Changes
+
+- 0ca35c5: added route invalidation to sanity webhook
+
+### Patch Changes
+
+- 85cd174: broken build because of statusCode change
+- Updated dependencies [0ca35c5]
+- Updated dependencies [3c59149]
+  - @bob-obringer/http-errors@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes
