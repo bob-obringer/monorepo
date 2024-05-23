@@ -1,11 +1,13 @@
-import express, { type Express } from "express";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import PDFDocument from "pdfkit";
 import {
   getHomepage,
   getResumeCompanies,
-} from "../sanity-io/queries/resume-company";
+} from "./sanity-io/queries/resume-company.js";
 
-const app: Express = express();
+import { ArgentumNovusMedium } from "./fonts/ArgentumNovus-Medium.js";
+import { ArgentumNovusRegular } from "./fonts/ArgentumNovus-Regular.js";
+import { YsabeauSCBold } from "./fonts/YsabeauSC-Bold.js";
 
 function inch(n: number) {
   return n * 72;
@@ -13,17 +15,20 @@ function inch(n: number) {
 
 const margin = inch(0.75);
 
-app.get("/resume", async (_, res) => {
+export default async function handler(
+  _req: VercelRequest,
+  res: VercelResponse,
+) {
   const doc = new PDFDocument({
     size: "LETTER",
     margin,
   });
 
-  doc.registerFont("heading", "src/fonts/YsabeauSC-Bold.ttf");
-  doc.registerFont("title", "src/fonts/ArgentumNovus-Medium.ttf");
-  doc.registerFont("body", "src/fonts/ArgentumNovus-Regular.ttf");
+  doc.registerFont("heading", Buffer.from(YsabeauSCBold, "base64"));
+  doc.registerFont("title", Buffer.from(ArgentumNovusMedium, "base64"));
+  doc.registerFont("body", Buffer.from(ArgentumNovusRegular, "base64"));
 
-  const maxPageBodyHeight = doc.page.height - margin;
+  const maxPageBodyHeight = doc.page.height - margin * 2;
 
   // Contact Info
   doc
@@ -102,13 +107,17 @@ app.get("/resume", async (_, res) => {
       .moveDown(1);
   }
 
-  res.contentType("application/pdf");
+  res.setHeader("Content-Type", "application/pdf");
   res.setHeader(
     "Content-Disposition",
     'inline; filename="bob-obringer-resume.pdf"',
   );
   doc.pipe(res);
   doc.end();
-});
+}
 
-export default app;
+//
+// // const port = 3000;
+// // app.listen(port, () => {
+// //   return console.log(`Server is listening on ${port}`);
+// // });
