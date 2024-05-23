@@ -3,11 +3,11 @@ import PDFDocument from "pdfkit";
 import {
   getHomepage,
   getResumeCompanies,
-} from "./sanity-io/queries/resume-company.js";
+} from "../sanity-io/queries/resume-company.js";
 
-import { ArgentumNovusMedium } from "./fonts/ArgentumNovus-Medium.js";
-import { ArgentumNovusRegular } from "./fonts/ArgentumNovus-Regular.js";
-import { YsabeauSCBold } from "./fonts/YsabeauSC-Bold.js";
+import { ArgentumNovusMedium } from "../fonts/ArgentumNovus-Medium.js";
+import { ArgentumNovusRegular } from "../fonts/ArgentumNovus-Regular.js";
+import { YsabeauSCBold } from "../fonts/YsabeauSC-Bold.js";
 
 function inch(n: number) {
   return n * 72;
