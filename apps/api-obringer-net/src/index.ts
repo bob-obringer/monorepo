@@ -13,6 +13,10 @@ function inch(n: number) {
 
 const margin = inch(0.75);
 
+app.get("/", async (_, res) => {
+  res.status(200).send("ok");
+});
+
 app.get("/resume", async (_, res) => {
   const doc = new PDFDocument({
     size: "LETTER",
