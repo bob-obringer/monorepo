@@ -5,7 +5,7 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "main": "src/api/index.ts",
+  "main": "api/api/index.ts",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
