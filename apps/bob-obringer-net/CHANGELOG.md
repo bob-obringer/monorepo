@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.11.0
+
+### Minor Changes
+
+- 4900542: added resume to chatbot
+
 ## 0.10.0
 
 ### Minor Changes
