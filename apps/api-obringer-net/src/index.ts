@@ -3,7 +3,7 @@ import PDFDocument from "pdfkit";
 import {
   getHomepage,
   getResumeCompanies,
-} from "../sanity-io/queries/resume-company";
+} from "./sanity-io/queries/resume-company";
 
 const app: Express = express();
 
@@ -111,4 +111,7 @@ app.get("/resume", async (_, res) => {
   doc.end();
 });
 
-export default app;
+const port = 8080;
+app.listen(port, () => {
+  return console.log(`Server is listening on ${port}`);
+});
