@@ -1,5 +1,11 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.3.1
+
+### Patch Changes
+
+- 879f002: improved display on sanity webhook logging)
+
 ## 0.3.0
 
 ### Minor Changes

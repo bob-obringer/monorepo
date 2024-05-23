@@ -1,5 +1,18 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.10.0
+
+### Minor Changes
+
+- 879f002: added api project
+
+### Patch Changes
+
+- 879f002: added experience and contact page revalidation
+- 879f002: improved display on sanity webhook logging)
+- Updated dependencies [879f002]
+  - @bob-obringer/sanity-io-webhooks@0.3.1
+
 ## 0.9.0
 
 ### Minor Changes
