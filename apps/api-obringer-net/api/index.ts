@@ -5,6 +5,7 @@ import {
   getResumeCompanies,
 } from "./sanity-io/queries/resume-company.js";
 import fs from "fs";
+import path from "node:path";
 
 function inch(n: number) {
   return n * 72;
@@ -21,9 +22,15 @@ export default async function handler(
     margin,
   });
 
-  const heading = fs.readFileSync("./fonts/YsabeauSC-Bold.ttf");
-  const title = fs.readFileSync("./fonts/ArgentumNovus-Medium.ttf");
-  const body = fs.readFileSync("./fonts/ArgentumNovus-Regular.ttf");
+  const heading = fs.readFileSync(
+    path.resolve(process.cwd(), "fonts", "YsabeauSC-Bold.ttf"),
+  );
+  const title = fs.readFileSync(
+    path.resolve(process.cwd(), "fonts", "ArgentumNovus-Medium.ttf"),
+  );
+  const body = fs.readFileSync(
+    path.resolve(process.cwd(), "fonts", "ArgentumNovus-Regular.ttf"),
+  );
 
   doc.registerFont("heading", heading);
   doc.registerFont("title", title);
