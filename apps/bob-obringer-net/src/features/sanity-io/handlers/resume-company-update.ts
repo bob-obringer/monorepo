@@ -1,6 +1,6 @@
-import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
+import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
 import type { EmbeddableRecord } from "@bob-obringer/ai-pinecone";
-import { getIndustryById } from "@/services/sanity-io/resume-industries-helpers";
+import { getIndustryById } from "@/features/sanity-io/queries/resume-industries";
 import { pinecone } from "@/services/pinecone";
 
 export async function handleResumeCompanyCreateOrUpdate(
@@ -20,6 +20,7 @@ export async function handleResumeCompanyCreateOrUpdate(
     const skills = highlight.skills?.map((skill) => skill.name).join('", "');
     const text = `${startEnd} at ${company.name} in the ${industry} industry, Bob worked on "${highlight.text}" using "${skills}"`;
 
+    // todo: this id is way too specific, centralize creation and consumption
     properties.push({
       id: `ResumeCompany:${company._id}:Highlight:${highlight._key}`,
       text,

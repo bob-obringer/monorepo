@@ -55,7 +55,7 @@ export function createSanityWebhook<T extends SanityDocument>({
           if (!ops.includes(sanityOperation)) continue;
 
           console.log(
-            `Handling Sanity Webhook: ${sanityOperation}, ${doc._type}, ${doc._id}`,
+            `Sanity Webhook: ${sanityOperation} ${doc._type} (${doc._id})`,
           );
 
           if (_revalidatePath) {

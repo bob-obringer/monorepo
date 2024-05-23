@@ -1,5 +1,5 @@
-import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
-import { getResumeSkills } from "@/services/sanity-io/resume-skills-helpers";
+import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
+import { getResumeSkills } from "@/features/sanity-io/queries/resume-skills";
 import { pinecone } from "@/services/pinecone";
 
 export async function getSystemPrompt({

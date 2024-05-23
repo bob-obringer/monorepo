@@ -1,6 +1,3 @@
-/*
-  Get Contact Info
- */
 import {
   ContactInfo,
   SanityImageAsset,

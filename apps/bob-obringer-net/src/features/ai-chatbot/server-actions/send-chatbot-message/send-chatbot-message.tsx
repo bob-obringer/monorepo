@@ -2,7 +2,7 @@
 
 import "server-only";
 
-import { getResumeCompanies } from "@/services/sanity-io/resume-company-helpers";
+import { getResumeCompanies } from "@/features/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io/get-document";
 import { createStreamableValue, getMutableAIState, streamUI } from "ai/rsc";
 import { addUserMessage } from "@/features/ai-chatbot/server-actions/send-chatbot-message/chatbot-ai-state-helpers";
@@ -21,8 +21,9 @@ import {
 } from "@/features/ai-chatbot";
 import { z } from "zod";
 import { parseMarkdown } from "@/features/markdown/parse-markdown";
-import { getAllContactInfo } from "@/services/sanity-io/contact-info-helpers";
+import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { ContactCard } from "@/features/contacts/contact-card";
+import { ResumeCard } from "@/features/resume/resume-card";
 
 export async function sendChatbotMessage(
   message: string,
@@ -120,13 +121,23 @@ export async function sendChatbotMessage(
       system: systemPrompt,
       messages: aiState.get().messages,
       tools: {
+        resume: {
+          description: `If user asks to download Bob's resume as pdf, run this tool.  If they want to view
+            it online, just direct them to https://bob.obringer.net/experience`,
+          parameters: z.object({}),
+          generate: async function () {
+            ragStatus.done("done");
+            closeAIState("[Showing Resume Tool]");
+            return <ResumeCard />;
+          },
+        },
         contact: {
-          description: "Display user contact information",
+          description:
+            "If the user wants to communicate with bob, run this tool",
           parameters: z.object({
             contactMethod: z.string().describe(
-              `If the user wants to communicate with bob, run this tool. If you can assume that the user
-              is looking for X, linkedin, email, or phone, set the contactMethod
-              parameter to the exact value we're looking for.  Remember, Twitter is X.
+              `If you can infer that the user is looking for x, linkedin, email, or phone,
+              set the contactMethod parameter to the exact value we're looking for.  Remember, Twitter is X.
               If you can't tell exactly how they want to communicate with us, run the tool and set
               the contactMethod to indicate all methods.`,
             ),

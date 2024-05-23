@@ -4,7 +4,7 @@ import { cx, Text } from "@bob-obringer/design-system";
 import { ReactNode } from "react";
 import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
-import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
+import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
 
 export function ExperienceList({
   resumeCompanies,
