@@ -1,4 +1,4 @@
-import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
+import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
 import { Text } from "@bob-obringer/design-system";
 
 export function Skills({ company }: { company: ResumeCompany }) {

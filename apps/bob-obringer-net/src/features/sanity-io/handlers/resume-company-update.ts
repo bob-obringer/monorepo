@@ -1,6 +1,6 @@
-import { ResumeCompany } from "@/services/sanity-io/resume-company-helpers";
+import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
 import type { EmbeddableRecord } from "@bob-obringer/ai-pinecone";
-import { getIndustryById } from "@/services/sanity-io/resume-industries-helpers";
+import { getIndustryById } from "@/features/sanity-io/queries/resume-industries";
 import { pinecone } from "@/services/pinecone";
 
 export async function handleResumeCompanyCreateOrUpdate(

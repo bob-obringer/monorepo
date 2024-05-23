@@ -1,5 +1,5 @@
 import { ContactCard } from "@/features/contacts/contact-card";
-import { getAllContactInfo } from "@/services/sanity-io/contact-info-helpers";
+import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 
 export default async function ContactPage() {
   const contacts = await getAllContactInfo();

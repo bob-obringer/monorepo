@@ -1,5 +1,5 @@
 import { Text } from "@bob-obringer/design-system";
-import { getResumeCompany } from "@/services/sanity-io/resume-company-helpers";
+import { getResumeCompany } from "@/features/sanity-io/queries/resume-company";
 import { Fragment, ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Skills } from "@/app/(app-layout)/experience/[slug]/experience-company-skills";

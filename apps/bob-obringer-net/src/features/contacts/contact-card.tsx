@@ -1,6 +1,6 @@
 import { NextJsSanityImage } from "@bob-obringer/nextjs-sanity-image";
 
-import { ContactInfoWithAsset } from "@/services/sanity-io/contact-info-helpers";
+import { ContactInfoWithAsset } from "@/features/sanity-io/queries/contact-info";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
 import { Text } from "@bob-obringer/design-system";
