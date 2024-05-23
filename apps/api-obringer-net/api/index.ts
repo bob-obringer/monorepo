@@ -22,6 +22,9 @@ export default async function handler(
     margin,
   });
 
+  console.log(fs.statSync("."));
+  console.log(fs.statSync(path.resolve("api/fonts", "YsabeauSC-Bold.ttf")));
+
   const heading = fs.readFileSync(
     path.resolve("api/fonts", "YsabeauSC-Bold.ttf"),
   );
