@@ -1,9 +1,11 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import express, { type Express } from "express";
 import PDFDocument from "pdfkit";
 import {
   getHomepage,
   getResumeCompanies,
-} from "./sanity-io/queries/resume-company.js";
+} from "./sanity-io/queries/resume-company";
+
+const app: Express = express();
 
 function inch(n: number) {
   return n * 72;
@@ -11,18 +13,19 @@ function inch(n: number) {
 
 const margin = inch(0.75);
 
-export default async function handler(
-  _req: VercelRequest,
-  res: VercelResponse,
-) {
+app.get("/", async (_, res) => {
+  res.status(200).send("ok");
+});
+
+app.get("/resume", async (_, res) => {
   const doc = new PDFDocument({
     size: "LETTER",
     margin,
   });
 
-  doc.registerFont("heading", "./api/fonts/YsabeauSC-Bold.ttf");
-  doc.registerFont("title", "./api/fonts/ArgentumNovus-Medium.ttf");
-  doc.registerFont("body", "./api/fonts/ArgentumNovus-Regular.ttf");
+  doc.registerFont("heading", "src/fonts/YsabeauSC-Bold.ttf");
+  doc.registerFont("title", "src/fonts/ArgentumNovus-Medium.ttf");
+  doc.registerFont("body", "src/fonts/ArgentumNovus-Regular.ttf");
 
   const maxPageBodyHeight = doc.page.height - margin;
 
@@ -103,17 +106,16 @@ export default async function handler(
       .moveDown(1);
   }
 
-  res.setHeader("Content-Type", "application/pdf");
+  res.contentType("application/pdf");
   res.setHeader(
     "Content-Disposition",
     'inline; filename="bob-obringer-resume.pdf"',
   );
   doc.pipe(res);
   doc.end();
-}
+});
 
-//
-// // const port = 3000;
-// // app.listen(port, () => {
-// //   return console.log(`Server is listening on ${port}`);
-// // });
+const port = 3000;
+app.listen(port, () => {
+  return console.log(`Server is listening on ${port}`);
+});

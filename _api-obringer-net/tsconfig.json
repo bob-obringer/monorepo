@@ -1,0 +1,8 @@
+{
+  "extends": "@bob-obringer/tsconfig/backend-library/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["api/**/*.ts*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+}

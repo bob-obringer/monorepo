@@ -1,5 +1,5 @@
 import groq from "groq";
-import { sanityClient } from "../sanity-client.js";
+import { sanityClient } from "../sanity-client";
 import type {
   SanityImageAsset,
   ResumeCompany as SanityResumeCompany,
