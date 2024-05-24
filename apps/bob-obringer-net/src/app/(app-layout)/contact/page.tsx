@@ -1,5 +1,11 @@
 import { ContactCard } from "@/features/contacts/contact-card";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact - Bob Obringer",
+  description: "Ways to get in touch with Bob Obringer",
+};
 
 export default async function ContactPage() {
   const contacts = await getAllContactInfo();
