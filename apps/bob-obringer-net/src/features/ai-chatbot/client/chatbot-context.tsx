@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { ChatbotInnerContextProvider } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/context/chatbot-vercel-ai-context";
+import { ChatbotInnerContextProvider } from "@/features/ai-chatbot/client/chatbot-inner-context";
+import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/client/chatbot-vercel-ai-context";
 
 /**
  * AIContext wraps Vercel's Context Provider around our own AI context provider

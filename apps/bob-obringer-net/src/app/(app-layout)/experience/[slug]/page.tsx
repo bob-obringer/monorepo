@@ -30,48 +30,50 @@ export default async function ResumePage({
   const endDate = company.endDate?.substring(0, 4) ?? "Today";
 
   return (
-    <div className="space-y-5 px-5 pb-8 md:pl-0">
-      <div className="flex items-center justify-between space-x-4">
-        <div>
-          <Text as="h3" variant="title-large">
-            {company.name}
-          </Text>
-          <Text as="h4" variant="title-medium" color="secondary">
-            {company.position}
-          </Text>
+    <div className="flex-[3]">
+      <div className="space-y-5 px-5 pb-8 md:pl-0">
+        <div className="flex items-center justify-between space-x-4">
+          <div>
+            <Text as="h3" variant="title-large">
+              {company.name}
+            </Text>
+            <Text as="h4" variant="title-medium" color="secondary">
+              {company.position}
+            </Text>
+          </div>
         </div>
-      </div>
 
-      <hr className="h-px border-0 bg-[#ffffff22]" />
-      <div className="flex flex-1 flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0">
-        <ul className="flex-[2] space-y-5">
-          {company.highlights?.map((highlight) => (
-            <Fragment key={highlight.text}>
-              <Text as="li" variant="body-large" className="text-pretty">
-                {highlight.text}
-              </Text>
-              {/*<Text variant="body-small" color="tertiary">*/}
-              {/*  {highlight.skills?.map(({ name }) => name).join(", ")}*/}
-              {/*</Text>*/}
-            </Fragment>
-          ))}
-        </ul>
-        <div className="flex flex-1 flex-col space-y-5">
-          <Skills company={company} />
-          <hr className="h-px border-0 bg-[#ffffff22]" />
-          <div className="flex flex-col space-y-5">
-            <CategorizedGroup title="Industry">
-              {company.industry?.name}
-            </CategorizedGroup>
-            <CategorizedGroup title="Size">
-              {Number(company.size).toLocaleString()}
-            </CategorizedGroup>
-            <CategorizedGroup title={startDate === endDate ? "In" : "From"}>
-              <Text variant="body-medium" color="secondary">
-                {startDate}
-                {endDate !== startDate ? ` to ${endDate}` : ""}
-              </Text>
-            </CategorizedGroup>
+        <hr className="h-px border-0 bg-[#ffffff22]" />
+        <div className="flex flex-1 flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0">
+          <ul className="flex-[2] space-y-5">
+            {company.highlights?.map((highlight) => (
+              <Fragment key={highlight.text}>
+                <Text as="li" variant="body-large" className="text-pretty">
+                  {highlight.text}
+                </Text>
+                {/*<Text variant="body-small" color="tertiary">*/}
+                {/*  {highlight.skills?.map(({ name }) => name).join(", ")}*/}
+                {/*</Text>*/}
+              </Fragment>
+            ))}
+          </ul>
+          <div className="flex flex-1 flex-col space-y-5">
+            <Skills company={company} />
+            <hr className="h-px border-0 bg-[#ffffff22]" />
+            <div className="flex flex-col space-y-5">
+              <CategorizedGroup title="Industry">
+                {company.industry?.name}
+              </CategorizedGroup>
+              <CategorizedGroup title="Size">
+                {Number(company.size).toLocaleString()}
+              </CategorizedGroup>
+              <CategorizedGroup title={startDate === endDate ? "In" : "From"}>
+                <Text variant="body-medium" color="secondary">
+                  {startDate}
+                  {endDate !== startDate ? ` to ${endDate}` : ""}
+                </Text>
+              </CategorizedGroup>
+            </div>
           </div>
         </div>
       </div>

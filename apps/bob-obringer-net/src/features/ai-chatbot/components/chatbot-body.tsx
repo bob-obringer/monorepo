@@ -1,4 +1,4 @@
-import "@/features/ai-chatbot/components/chatbot-body/loading-color-bar.css";
+import "@/features/ai-chatbot/components/loading-color-bar.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import {
   faCheck,
@@ -10,8 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cx, Text } from "@bob-obringer/design-system";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import { MessageRole } from "@/features/ai-chatbot";
+import { useChatbot } from "@/features/ai-chatbot/client/chatbot-inner-context";
+import { MessageRole } from "@/features/ai-chatbot/types";
 
 export function ChatbotBody() {
   const { messages, ragStatus, streamEventCount } = useChatbot();
@@ -96,7 +96,7 @@ function Message({
     <div className={cx(className, "relative overflow-x-hidden")}>
       <div className="flex flex-col gap-5 p-5">
         <MessageTitle isLastMessage={isLastMessage} messageRole={role} />
-        {children}
+        <div>{children}</div>
       </div>
       {isActiveMessage && (
         <div className="loading-color-bar-wrapper">

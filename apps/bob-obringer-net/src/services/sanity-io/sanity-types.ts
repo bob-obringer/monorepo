@@ -95,6 +95,7 @@ export type ContactInfo = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  orderRank?: string;
 };
 
 export type SanityImageCrop = {
@@ -162,7 +163,6 @@ export type Homepage = {
   _rev: string;
   title?: string;
   subtitle?: string;
-  description?: string;
   bio?: string;
 };
 

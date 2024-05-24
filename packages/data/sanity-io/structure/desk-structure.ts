@@ -18,7 +18,12 @@ export function structure(
             .schemaType("homepage")
             .documentId("homepage"),
         ),
-      S.documentTypeListItem("contactInfo").title("Contact Info"),
+      orderableDocumentListDeskItem({
+        type: "contactInfo",
+        title: "Contact Info",
+        S,
+        context,
+      }),
       S.divider(),
       S.documentTypeListItem("resumeCompany").title("Resume Companies"),
       orderableDocumentListDeskItem({

@@ -31,5 +31,10 @@ export const contactInfo = defineType({
       title: "Logo",
       type: "image",
     },
+    {
+      name: "orderRank",
+      type: "string",
+      hidden: true,
+    },
   ],
 });
