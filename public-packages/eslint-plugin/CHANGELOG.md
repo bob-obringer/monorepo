@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.4.0
+
+### Minor Changes
+
+- 5d2b9a5: added og image
+
 ## 0.3.0
 
 ### Minor Changes
