@@ -2,19 +2,21 @@
 
 import "server-only";
 
-import { getResumeCompanies } from "@/features/sanity-io/queries/resume-company";
+import {
+  getResumeCompanies,
+  ResumeCompany,
+} from "@/features/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io/get-document";
 import { createStreamableValue, getMutableAIState, streamUI } from "ai/rsc";
-import { addUserMessage } from "@/features/ai-chatbot/server/send-chatbot-message/chatbot-ai-state-helpers";
+import { addUserMessage } from "@/features/ai-chatbot/server/chatbot-ai-state-helpers";
 import {
   getFormattedJobs,
   getFormattedSkills,
   getRelevantCompanyHighlights,
   getSystemPrompt,
-} from "@/features/ai-chatbot/server/send-chatbot-message/chatbot-system-prompt";
+} from "@/features/ai-chatbot/server/chatbot-system-prompt";
 import { defaultModel } from "@/services/llms";
 import { nanoid } from "ai";
-import { parseMarkdown } from "@/helpers/markdown/parse-markdown";
 import {
   ChatbotVercelAIContext,
   RagStatus,
@@ -24,85 +26,111 @@ import {
 export async function sendChatbotMessage(
   message: string,
 ): Promise<SendChatbotMessageResponse | null> {
-  const aiState = getMutableAIState<ChatbotVercelAIContext>();
-  addUserMessage(aiState, message);
+  console.log("starting");
+  console.time("sendChatbotMessage");
 
-  let {
-    promptJobs,
-    promptSkills,
-    promptBio,
-    resumeCompanies,
-    promptInstructions,
-  } = aiState.get().context || {};
+  const aiState = getMutableAIState<ChatbotVercelAIContext>();
+  console.timeLog("sendChatbotMessage", "got aiState");
+  addUserMessage(aiState, message);
+  console.timeLog("sendChatbotMessage", "added user message");
+
+  let promptJobs: string | null = null;
+  let promptSkills: string | null = null;
+  let promptBio: string | null = null;
+  let resumeCompanies: Array<ResumeCompany> = [];
+  let promptInstructions: string | null = null;
+
+  // let {
+  //   promptJobs,
+  //   promptSkills,
+  //   promptBio,
+  //   resumeCompanies,
+  //   promptInstructions,
+  // } = {}; //aiState.get().context || {};
 
   const streamEventCount = createStreamableValue(0);
   const ragStatus = createStreamableValue<RagStatus>("retrieving");
 
+  console.timeLog("sendChatbotMessage", "created streamable values");
+
   const promises: Array<Promise<void>> = [];
 
-  function _closeAIState(content: string) {
-    aiState.done({
-      ...aiState.get(),
-      messages: [
-        ...aiState.get().messages,
-        {
-          id: nanoid(),
-          role: "assistant",
-          content,
-        },
-      ],
-      context: {
-        promptBio,
-        promptInstructions,
-        promptSkills,
-        promptJobs,
-        resumeCompanies,
-      },
-    });
-  }
+  // function _closeAIState(content: string) {
+  //   aiState.done({
+  //     ...aiState.get(),
+  //     messages: [
+  //       ...aiState.get().messages,
+  //       {
+  //         id: nanoid(),
+  //         role: "assistant",
+  //         content,
+  //       },
+  //     ],
+  //     // context: {
+  //     //   promptBio,
+  //     //   promptInstructions,
+  //     //   promptSkills,
+  //     //   promptJobs,
+  //     //   resumeCompanies,
+  //     // },
+  //   });
+  // }
 
   try {
     if (!promptBio) {
+      console.timeLog("sendChatbotMessage", "getting bio");
       promises.push(
         getDocument("homepage").then((homepage) => {
+          console.timeLog("sendChatbotMessage", "got bio");
           promptBio = homepage.bio ?? "";
         }),
       );
     }
 
     if (!promptInstructions) {
+      console.timeLog("sendChatbotMessage", "getting instructions");
       promises.push(
         getDocument("obringerAssistant").then(({ systemPrompt }) => {
+          console.timeLog("sendChatbotMessage", "got instructions");
           promptInstructions = systemPrompt ?? "";
         }),
       );
     }
 
     if (!promptSkills) {
+      console.timeLog("sendChatbotMessage", "getting skills");
       promises.push(
         getFormattedSkills().then((skills) => {
+          console.timeLog("sendChatbotMessage", "got skills");
           promptSkills = skills;
         }),
       );
     }
 
     if (!promptJobs || !resumeCompanies) {
+      console.timeLog("sendChatbotMessage", "getting companies");
       promises.push(
         getResumeCompanies().then((companies) => {
+          console.timeLog("sendChatbotMessage", "got companies");
           resumeCompanies = companies;
           promptJobs = getFormattedJobs(resumeCompanies);
         }),
       );
     }
 
+    console.timeLog("sendChatbotMessage", "awaiting promises");
     await Promise.all(promises);
+    console.timeLog("sendChatbotMessage", "promises done");
     ragStatus.update("generating");
 
+    console.timeLog("sendChatbotMessage", "getting highlights");
     const highlights = await getRelevantCompanyHighlights(
       resumeCompanies,
       message,
     );
+    console.timeLog("sendChatbotMessage", "got highlights");
 
+    console.timeLog("sendChatbotMessage", "getting system prompt");
     const systemPrompt = await getSystemPrompt({
       promptInstructions,
       promptSkills,
@@ -110,12 +138,51 @@ export async function sendChatbotMessage(
       promptBio,
       highlights,
     });
+    console.timeLog("sendChatbotMessage", "got system prompt");
 
     let streamEvents = 0;
+    console.timeLog("sendChatbotMessage", "streaming UI");
     const ui = await streamUI({
       model: defaultModel,
       system: systemPrompt,
       messages: aiState.get().messages,
+      text: async ({ content, done }) => {
+        console.timeLog("sendChatbotMessage", "streaming UI text");
+        streamEventCount.update((streamEvents += 1));
+        console.timeLog("sendChatbotMessage", "streamed UI text");
+
+        if (done) {
+          console.timeLog("sendChatbotMessage", "done");
+          aiState.done({
+            ...aiState.get(),
+            messages: [
+              ...aiState.get().messages,
+              {
+                id: nanoid(),
+                role: "assistant",
+                content,
+              },
+            ],
+            // context: {
+            //   promptBio,
+            //   promptInstructions,
+            //   promptSkills,
+            //   promptJobs,
+            //   resumeCompanies,
+            // },
+          });
+          console.timeLog("sendChatbotMessage", "aiState done");
+          ragStatus.done("done");
+          console.timeLog("sendChatbotMessage", "ragStatus done");
+          streamEventCount.done((streamEvents += 1));
+
+          console.timeEnd("sendChatbotMessage");
+        }
+
+        return content;
+
+        // return await parseMarkdown(content);
+      },
       // tools: {
       //   resume: {
       //     description: `If user wants to download Bob's resume or get a pdf, run this tool.
@@ -179,37 +246,9 @@ export async function sendChatbotMessage(
       //     },
       //   },
       // },
-      text: async ({ content, done }) => {
-        streamEventCount.update((streamEvents += 1));
-
-        if (done) {
-          aiState.done({
-            ...aiState.get(),
-            messages: [
-              ...aiState.get().messages,
-              {
-                id: nanoid(),
-                role: "assistant",
-                content,
-              },
-            ],
-            context: {
-              promptBio,
-              promptInstructions,
-              promptSkills,
-              promptJobs,
-              resumeCompanies,
-            },
-          });
-
-          ragStatus.done("done");
-          streamEventCount.done((streamEvents += 1));
-        }
-
-        return await parseMarkdown(content);
-      },
     });
 
+    console.timeLog("sendChatbotMessage", "returning");
     return {
       ragStatus: ragStatus.value,
       streamEventCount: streamEventCount.value,

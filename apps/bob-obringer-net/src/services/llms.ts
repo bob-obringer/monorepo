@@ -23,4 +23,4 @@ export const gpt4o = openAI("gpt-4o");
 // export const gpt4 = openAI("gpt-4");
 // export const gpt4Turbo = openAI("gpt-4-turbo");
 
-export const defaultModel = sonnet;
+export const defaultModel = haiku;
