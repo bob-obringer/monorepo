@@ -1,7 +1,7 @@
 import { CoreMessage } from "ai";
 import { ReactNode } from "react";
 import { StreamableValue } from "ai/rsc";
-import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/context/chatbot-vercel-ai-context";
+import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/client/chatbot-vercel-ai-context";
 import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
 
 export type ChatbotVercelAIContext = typeof ChatbotVercelAIContextProvider;

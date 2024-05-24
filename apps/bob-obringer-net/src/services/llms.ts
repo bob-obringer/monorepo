@@ -4,6 +4,9 @@ import { createOpenAI } from "@ai-sdk/openai";
 
 export const anthropic = createAnthropic({
   apiKey: env.anthropic.apiKey,
+  headers: {
+    "anthropic-beta": "tools-2024-05-16",
+  },
 });
 
 export const haiku = anthropic("claude-3-haiku-20240307");
@@ -20,4 +23,4 @@ export const gpt4o = openAI("gpt-4o");
 // export const gpt4 = openAI("gpt-4");
 // export const gpt4Turbo = openAI("gpt-4-turbo");
 
-export const defaultModel = gpt4o;
+export const defaultModel = sonnet;

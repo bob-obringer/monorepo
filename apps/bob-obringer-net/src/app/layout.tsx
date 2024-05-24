@@ -7,8 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { env } from "@/config/client";
 import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
-import { ChatbotContextProvider } from "@/features/ai-chatbot";
 import { getDocument } from "@/services/sanity-io/get-document";
+import { ChatbotContextProvider } from "@/features/ai-chatbot/client/chatbot-context";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, subtitle } = await getDocument("homepage");

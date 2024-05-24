@@ -10,7 +10,7 @@ import { cx, Text } from "@bob-obringer/design-system";
 import NextLink from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelectedLayoutSegments } from "next/navigation";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
+import { useChatbot } from "@/features/ai-chatbot/client/chatbot-inner-context";
 
 const menuItems = [
   { href: "", icon: faUser, text: "Bob" },

@@ -1,11 +1,11 @@
 import { createAI } from "ai/rsc";
 import { nanoid } from "ai";
-import { sendChatbotMessage } from "@/features/ai-chatbot/server-actions";
 import {
   ChatbotVercelActions,
   ChatbotVercelAIState,
   ChatbotVercelUIState,
-} from "@/features/ai-chatbot";
+} from "@/features/ai-chatbot/types";
+import { sendChatbotMessage } from "@/features/ai-chatbot/server";
 
 const initialAIState = {
   id: nanoid(),

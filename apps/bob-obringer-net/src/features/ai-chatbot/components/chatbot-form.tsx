@@ -7,7 +7,7 @@ import {
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent } from "react";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
+import { useChatbot } from "@/features/ai-chatbot/client/chatbot-inner-context";
 
 export function ChatbotForm() {
   const {

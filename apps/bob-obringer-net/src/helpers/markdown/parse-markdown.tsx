@@ -12,16 +12,16 @@ const headingLevels = [
 
 const renderer = {
   heading(text: string, level: number) {
-    return `<h${level} class="${headingLevels[level - 1]} mt-4 font-weight-bold">${text}</h${level}>`;
+    return `<h${level} data-markdown class="${headingLevels[level - 1]} mt-4 mb-1 font-weight-bold">${text}</h${level}>`;
   },
   list(body: string, ordered: boolean) {
-    return `<${ordered ? "ol" : "ul"} class="font-size:0">${body}</${ordered ? "ol" : "ul"}>`;
+    return `<${ordered ? "ol" : "ul"} data-markdown>${body}</${ordered ? "ol" : "ul"}>`;
   },
   listitem(text: string) {
-    return `<li class="text-size-md list-disc list-inside">${text}</li>`;
+    return `<li data-markdown class="text-size-md list-disc list-inside">${text}</li>`;
   },
   hr() {
-    return `<hr class="border border-[#cccccc33] my-4" />`;
+    return `<hr data-markdown class="border border-[#cccccc33] my-4" />`;
   },
 };
 

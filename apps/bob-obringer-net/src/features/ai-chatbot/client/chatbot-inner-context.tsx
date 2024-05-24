@@ -20,7 +20,7 @@ import {
   ChatbotVercelUIMessage,
   RagStatus,
   SendChatbotMessageResponse,
-} from "@/features/ai-chatbot";
+} from "@/features/ai-chatbot/types";
 
 export type ChatbotContext = {
   isOpen: boolean;
@@ -83,7 +83,12 @@ export function ChatbotInnerContextProvider({
     // initialize things
     setInputValue("");
     open();
-    if ((viewportWidth ?? 0) < 768) inputRef.current?.blur();
+    // alert(viewportWidth);
+    if ((viewportWidth ?? 0) < 768) {
+      // alert("blur");
+      console.log({ inputRef });
+      inputRef.current?.blur();
+    }
     setRagStatus("retrieving");
 
     // create a stub for the response, keep updating this

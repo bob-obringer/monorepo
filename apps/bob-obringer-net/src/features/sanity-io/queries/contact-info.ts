@@ -5,7 +5,7 @@ import {
 import groq from "groq";
 import { sanityClient } from "@/services/sanity-io/sanity-client";
 
-const contactInfoQuery = groq`*[_type == "contactInfo"]{
+const contactInfoQuery = groq`*[_type == "contactInfo"] | order(orderRank asc) {
   _id,
   contactMethod,
   text,
