@@ -16,11 +16,6 @@ export const homepage = defineType({
       type: "string",
     },
     {
-      name: "description",
-      title: "Description",
-      type: "text",
-    },
-    {
       name: "bio",
       title: "Bio",
       type: "text",

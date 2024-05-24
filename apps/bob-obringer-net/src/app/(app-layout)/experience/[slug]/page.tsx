@@ -4,6 +4,20 @@ import { Fragment, ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Skills } from "@/app/(app-layout)/experience/[slug]/experience-company-skills";
 
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
+  const company = await getResumeCompany({ slug });
+  if (!company) return notFound();
+
+  return {
+    title: `${company.name} - Bob Obringer`,
+    description: `Bob's experience at ${company.name}`,
+  };
+}
+
 export default async function ResumePage({
   params: { slug },
 }: {

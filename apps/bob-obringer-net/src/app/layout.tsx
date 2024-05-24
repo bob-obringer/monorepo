@@ -8,12 +8,33 @@ import { Analytics } from "@vercel/analytics/react";
 import { env } from "@/config/client";
 import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { ChatbotContextProvider } from "@/features/ai-chatbot";
+import { getDocument } from "@/services/sanity-io/get-document";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://bob.obringer.net"),
-  title: "Bob Obringer",
-  description: "Product Engineer",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, subtitle } = await getDocument("homepage");
+
+  return {
+    title,
+    description: subtitle,
+    applicationName: "bob.obringer.net",
+    authors: [{ name: "Bob Obringer", url: "https://bob.obringer.net" }],
+    keywords: [
+      "Bob Obringer",
+      "Front End Engineer",
+      "Product Engineer",
+      "Product Architect",
+      "Software Architect",
+      "Software Developer",
+      "Web Developer",
+      "AI Engineer",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+    },
+    metadataBase: new URL("https://bob.obringer.net"),
+  };
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

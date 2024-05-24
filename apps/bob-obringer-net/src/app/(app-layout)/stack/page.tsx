@@ -1,4 +1,10 @@
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Bob Obringer - Stack",
+  description: "Bob's Tech Stack",
+};
 
 export default function StackPage() {
   return (
