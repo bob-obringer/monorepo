@@ -7,7 +7,7 @@ function splitTitleIntoLines(routeTitle?: string): string[] | null {
   let currentLine = words[0];
 
   for (let i = 1; i < words.length; i++) {
-    if ((currentLine + " " + words[i]).length <= 25) {
+    if ((currentLine + " " + words[i]).length <= 24) {
       currentLine += " " + words[i];
     } else {
       lines.push(currentLine);
@@ -20,49 +20,49 @@ function splitTitleIntoLines(routeTitle?: string): string[] | null {
 }
 
 export async function OgImage({
-  routeParentTitle,
-  routeTitle,
+  parentTitle,
+  title,
 }: {
-  routeParentTitle?: string;
-  routeTitle?: string;
+  parentTitle?: string;
+  title?: string;
 } = {}) {
-  const titleLines = splitTitleIntoLines(routeTitle);
+  const titleLines = splitTitleIntoLines(title);
 
   return OgImageWrapper(
     <>
-      {routeTitle && routeParentTitle && (
-        <Div fontSize={50} top={50} left={65} secondary>
-          {routeParentTitle}
+      {title && parentTitle && (
+        <Div fontSize={50} top={40} left={90} secondary>
+          {parentTitle}
         </Div>
       )}
       {titleLines?.map((line, index) => (
         <Div
           key={index}
           fontSize={80}
-          top={routeParentTitle ? 100 + index * 80 : 50 + index * 80}
-          left={63}
+          top={parentTitle ? 90 + index * 80 : 40 + index * 80}
+          left={93}
         >
           {line}
         </Div>
       ))}
 
-      {routeTitle && (
+      {title && (
         <>
-          <Div fontSize={60} top={475} left={750}>
+          <Div fontSize={60} top={475} left={740}>
             Bob Obringer
           </Div>
-          <Div fontSize={30} top={550} left={675} secondary>
+          <Div fontSize={30} top={540} left={665} secondary>
             Product Engineer and Architect
           </Div>
         </>
       )}
 
-      {!routeTitle && (
+      {!title && (
         <>
-          <Div fontSize={100} top={70} left={60}>
+          <Div fontSize={100} top={40} left={90}>
             Bob Obringer
           </Div>
-          <Div fontSize={50} top={190} left={65} secondary>
+          <Div fontSize={50} top={150} left={95} secondary>
             Product Engineer and Architect
           </Div>
         </>
