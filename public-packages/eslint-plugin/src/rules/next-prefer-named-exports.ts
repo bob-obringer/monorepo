@@ -8,6 +8,8 @@ const nextJsDefaultExports = [
   /not-found\.tsx$/,
   /pages\/api\//,
   /manifest\.ts/,
+  /opengraph-image\.tsx$/,
+  /twitter-image\.tsx$/,
 ];
 
 const rule: TSESLint.RuleModule<"preferNamedExports"> = {

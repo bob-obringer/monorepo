@@ -10,6 +10,7 @@ import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { ChatbotContextProvider } from "@/features/ai-chatbot";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bob.obringer.net"),
   title: "Bob Obringer",
   description: "Product Engineer",
 };

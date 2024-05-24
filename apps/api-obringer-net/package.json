@@ -15,7 +15,7 @@
   "dependencies": {
     "@sanity/client": "6.18.2",
     "express": "^4.19.2",
-    "groq": "3.42.1",
+    "groq": "3.43.0",
     "pdfkit": "^0.15.0"
   },
   "devDependencies": {

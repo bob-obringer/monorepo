@@ -20,7 +20,7 @@ import {
   SendChatbotMessageResponse,
 } from "@/features/ai-chatbot";
 import { z } from "zod";
-import { parseMarkdown } from "@/features/markdown/parse-markdown";
+import { parseMarkdown } from "@/helpers/markdown/parse-markdown";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { ContactCard } from "@/features/contacts/contact-card";
 import { ResumeCard, ResumeLinkCard } from "@/features/resume/resume-card";
