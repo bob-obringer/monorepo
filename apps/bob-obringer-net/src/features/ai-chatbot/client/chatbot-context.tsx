@@ -3,13 +3,12 @@ import { ChatbotInnerContextProvider } from "@/features/ai-chatbot/client/chatbo
 import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/client/chatbot-vercel-ai-context";
 
 /**
- * AIContext wraps Vercel's Context Provider around our own AI context provider
+ * ChatbotContextProvider wraps Vercel's Context Provider around our own AI context provider
  * Vercel's ai context provider is programatically generated and cannot run in
- * a "use client" context, so we wrap it as a server component, and include our
- * own context (with "use client") inside of it.
+ * a "use client" context, so this wrapper cleans that all up for us
  *
  * This allows our inner context to know the state of the vercel ai context,
- * and simplifies consumption of the AI context in our apps.
+ * and simplifies consumption of both AI contexts in our apps.
  * @param children
  * @constructor
  */
