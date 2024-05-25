@@ -10,17 +10,17 @@ export function Skills({ company }: { company: ResumeCompany }) {
           const categoryName = category?.name;
           const orderRank = category?.orderRank ?? null;
           if (!name || !categoryName) return;
-          const categoryIndex = acc.findIndex(
+          const existingCategory = acc.find(
             (item) => item.name === categoryName,
           );
-          if (categoryIndex === -1) {
+          if (!existingCategory) {
             acc.push({
               name: categoryName,
               skills: new Set([name]),
               orderRank,
             });
           } else {
-            acc[categoryIndex].skills.add(name);
+            existingCategory.skills.add(name);
           }
         });
         return acc;

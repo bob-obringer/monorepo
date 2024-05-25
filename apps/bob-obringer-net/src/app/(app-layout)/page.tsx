@@ -1,8 +1,10 @@
 import { Text } from "@bob-obringer/design-system";
 import { getDocument } from "@/services/sanity-io/get-document";
+import { notFound } from "next/navigation";
 
 export default async function Home() {
   const homepage = await getDocument("homepage");
+  if (!homepage) return notFound();
 
   return (
     <main className="mx-auto w-full max-w-screen-sm flex-col text-balance px-5 pt-5 md:pt-24">

@@ -234,15 +234,6 @@ importers:
         specifier: 1.1.2
         version: 1.1.2(tailwindcss@3.4.3)
 
-  apps/cli:
-    dependencies:
-      commander:
-        specifier: 12.0.0
-        version: 12.0.0
-      zod:
-        specifier: 3.23.8
-        version: 3.23.8
-
   packages/ai/embedding:
     dependencies:
       neverthrow:

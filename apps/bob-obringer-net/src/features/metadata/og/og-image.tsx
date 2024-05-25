@@ -4,14 +4,14 @@ function splitTitleIntoLines(routeTitle?: string): string[] | null {
   if (!routeTitle) return null;
   const words = routeTitle.split(" ");
   const lines = [];
-  let currentLine = words[0];
+  let currentLine = words[0] ?? "";
 
   for (let i = 1; i < words.length; i++) {
     if ((currentLine + " " + words[i]).length <= 24) {
       currentLine += " " + words[i];
     } else {
       lines.push(currentLine);
-      currentLine = words[i];
+      currentLine = words[i] ?? "";
     }
   }
 

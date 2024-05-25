@@ -87,7 +87,7 @@ export async function sendChatbotMessage(
       promises.push(
         getDocument("homepage").then((homepage) => {
           console.timeLog("sendChatbotMessage", "got bio");
-          promptBio = homepage.bio ?? "";
+          promptBio = homepage?.bio ?? "";
         }),
       );
     }
@@ -95,9 +95,9 @@ export async function sendChatbotMessage(
     if (!promptInstructions) {
       console.timeLog("sendChatbotMessage", "getting instructions");
       promises.push(
-        getDocument("obringerAssistant").then(({ systemPrompt }) => {
+        getDocument("obringerAssistant").then((a) => {
           console.timeLog("sendChatbotMessage", "got instructions");
-          promptInstructions = systemPrompt ?? "";
+          promptInstructions = a?.systemPrompt ?? "";
         }),
       );
     }

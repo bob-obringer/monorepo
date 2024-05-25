@@ -1,6 +1,8 @@
 {
-  "extends": "./dev.tsconfig.json",
+  "extends": "./tsconfig.library.dom.json",
   "compilerOptions": {
+    "pretty": true,
+    "sourceMap": true,
     "traceResolution": true,
     "inlineSourceMap": true,
     "inlineSources": true

@@ -11,7 +11,7 @@ import { getDocument } from "@/services/sanity-io/get-document";
 import { ChatbotContextProvider } from "@/features/ai-chatbot/client/chatbot-context";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, subtitle } = await getDocument("homepage");
+  const { title, subtitle } = (await getDocument("homepage")) ?? {};
 
   return {
     title,

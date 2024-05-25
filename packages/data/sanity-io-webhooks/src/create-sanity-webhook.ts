@@ -2,7 +2,7 @@ import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import {
   HttpErrorBadRequest,
   HttpErrorForbidden,
-  getErrorResponse,
+  unstable_getErrorResponse,
 } from "@bob-obringer/http-errors";
 import { type MutationOperation, type SanityDocument } from "@sanity/client";
 import type { ReadableStream } from "node:stream/web";
@@ -35,7 +35,7 @@ export function createSanityWebhook<T extends SanityDocument>({
       try {
         doc = await verifyBody(req, secret);
       } catch (e) {
-        return getErrorResponse(e);
+        return unstable_getErrorResponse(e);
       }
 
       const sanityOperation = req.headers.get(
@@ -68,7 +68,7 @@ export function createSanityWebhook<T extends SanityDocument>({
         }
         return new Response("OK", { status: 200 });
       } catch (e) {
-        return getErrorResponse(e);
+        return unstable_getErrorResponse(e);
       }
     },
   };
