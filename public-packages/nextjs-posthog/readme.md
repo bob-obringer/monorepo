@@ -32,7 +32,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html>
       <body>
-        <PosthogProvider token={env.posthog.apiKey} host={env.posthog.host}>
+        <PosthogProvider
+          token={env.posthog.apiKey}
+          host={env.posthog.host}
+          enabled={env.posthog.enabled}
+          capturePageView={true}
+          capturePageLeave={false}
+        >
           {children}
         </PosthogProvider>
       </body>
@@ -40,7 +46,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   );
 }
 ```
-
-## TODO:
-
-This is very crude for now. It just removes some setup boilerplate for new projects.

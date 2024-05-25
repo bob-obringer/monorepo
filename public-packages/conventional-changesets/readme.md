@@ -44,9 +44,13 @@ yarn add @bob-obringer/conventional-changesets
 
 ## Usage
 
+This is intended to be run as part of a CI/CD pipeline, but can be run locally or via a script.
+
 This package provides both a CLI and a programmatic interface which take two optional parameters, `productionBranch` and `integrationBranch`. The default values are `main` and `develop` respectively.
 
 The output is a collection of changeset markdown files sent to a `.changeset` folder in the root of the repository.
+
+For an example of how it's used, see the [`.github/workflows/get-changesets.yml`](./.github/workflows/get-changesets.yml) file in this repository.
 
 ### CLI
 
