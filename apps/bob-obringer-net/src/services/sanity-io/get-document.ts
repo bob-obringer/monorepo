@@ -13,10 +13,10 @@ export const settingsQuery = groq`*[_id == $settingsId]`;
 
 export async function getDocument<K extends SettingsKey>(
   settingsId: K,
-): Promise<SettingsTypes[K]> {
+): Promise<SettingsTypes[K] | null> {
   const settings = await sanityClient.fetch<Array<SettingsTypes[K]>>(
     settingsQuery,
     { settingsId },
   );
-  return settings[0];
+  return settings[0] ?? null;
 }

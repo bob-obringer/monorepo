@@ -1,31 +1,6 @@
 {
+  "extends": "@bob-obringer/tsconfig/tsconfig.app.dom.json",
   "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "isolatedModules": false,
-    "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noUnusedParameters": true,
-    "useUnknownInCatchVariables": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-
-    "module": "es2022",
-    "target": "es2020",
-    "declaration": true,
-    "declarationMap": true,
-    "incremental": true,
-
-    "lib": ["es2022"],
-    "jsx": "preserve",
-
     "outDir": "./dist"
   },
   "include": ["api/**/*.ts*"],

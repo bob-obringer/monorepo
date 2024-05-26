@@ -1,11 +1,9 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "es2022",
-    "target": "es2020",
+    "lib": ["es2022"],
     "declaration": true,
     "declarationMap": true,
-    "incremental": true,
-    "outDir": "./dist"
+    "verbatimModuleSyntax": true
   }
 }

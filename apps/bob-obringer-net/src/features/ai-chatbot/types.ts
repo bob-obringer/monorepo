@@ -34,7 +34,7 @@ export type ChatbotVercelAIStateContext = {
 
 export type ChatbotVercelAIState = {
   id: string;
-  context: ChatbotVercelAIStateContext;
+  // context: ChatbotVercelAIStateContext;
   messages: ChatbotVercelAIMessage[];
 };
 

@@ -33,10 +33,10 @@ export function ChatbotBody() {
       interval = setInterval(() => {
         scrollToBottom();
       }, 10) as unknown as number;
-      return () => clearInterval(interval);
     } else if (interval) {
       clearInterval(interval);
     }
+    return () => clearInterval(interval);
   });
 
   return (
@@ -136,13 +136,14 @@ function MessageState() {
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
     if (ragStatus === "done") {
-      const timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setHide(true);
         setRagStatus("idle");
       }, 2000);
-      return () => clearTimeout(timeout);
     }
+    return () => clearTimeout(timeout);
   }, [ragStatus, setRagStatus]);
 
   return (

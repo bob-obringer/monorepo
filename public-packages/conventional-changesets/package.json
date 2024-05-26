@@ -17,17 +17,18 @@
   },
   "license": "MIT",
   "author": "Bob Obringer <bob@obringer.net>",
+  "type": "module",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "generate-changeset": "./dist/cli/cli.js"
+    "generate-changeset": "./dist/cli.js"
   },
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.cli.json",
+    "build": "tsc",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "start": "tsx ./src/generate-changeset.ts"
+    "zbuild": "tsc && tsc -p tsconfig.cli.json"
   },
   "dependencies": {
     "commander": "workspace:*",

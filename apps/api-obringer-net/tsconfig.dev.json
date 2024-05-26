@@ -1,9 +1,8 @@
 {
-  "extends": ["@bob-obringer/tsconfig/node-app/tsconfig.json"],
+  "extends": "@bob-obringer/tsconfig/dev/tsconfig.app.dom.json",
   "compilerOptions": {
-    "module": "esnext",
     "outDir": "./dist"
   },
-  "include": ["src/**/*.ts*"],
+  "include": ["api/**/*.ts*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

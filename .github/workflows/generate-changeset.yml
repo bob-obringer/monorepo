@@ -44,7 +44,10 @@ jobs:
           git checkout develop
 
       - name: Run @bob-obringer/conventional-changesets
-        run: node public-packages/conventional-changesets/dist/cli/cli.js
+        run: |
+          pnpm install
+          ./node_modules/.bin/generate-changeset
+        #run: node public-packages/conventional-changesets/dist/cli.js
         
       - name: Add changeset to PR
         env:

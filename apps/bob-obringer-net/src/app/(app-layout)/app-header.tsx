@@ -10,9 +10,10 @@ const titles: Record<string, string> = {
 
 export function AppHeader({ className }: { className?: string }) {
   const segments = useSelectedLayoutSegments();
+  const segment = segments[0];
 
   // don't display the header on the homepage
-  if (segments.length === 0) {
+  if (!segment) {
     return null;
   }
 
@@ -27,7 +28,7 @@ export function AppHeader({ className }: { className?: string }) {
         Bob Obringer
       </Text>
       <Text as="h1" variant="headline-large" color="secondary">
-        {titles[segments[0]] ?? ""}
+        {titles[segment] ?? ""}
       </Text>
     </header>
   );

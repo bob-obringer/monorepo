@@ -1,21 +1,24 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noUnusedParameters": true,
-    "useUnknownInCatchVariables": true,
-    "verbatimModuleSyntax": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true
+    "useUnknownInCatchVariables": true
   }
 }
