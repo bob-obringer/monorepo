@@ -173,6 +173,12 @@ export type ObringerAssistant = {
   _updatedAt: string;
   _rev: string;
   systemPrompt?: string;
+  model?:
+    | "gpt35Turbo"
+    | "gpt4o"
+    | "anthropicHaiku"
+    | "anthropicSonnet"
+    | "anthropicOpus";
 };
 
 export type ResumeCompany = {

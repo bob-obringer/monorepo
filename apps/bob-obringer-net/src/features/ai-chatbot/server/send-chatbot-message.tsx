@@ -15,7 +15,7 @@ import {
   getRelevantCompanyHighlights,
   getSystemPrompt,
 } from "@/features/ai-chatbot/server/chatbot-system-prompt";
-import { defaultModel } from "@/services/llms";
+import { Models, models } from "@/services/llms";
 import { nanoid } from "ai";
 import {
   ChatbotVercelAIContext,
@@ -44,6 +44,7 @@ export async function sendChatbotMessage(
   let promptBio: string | null = null;
   let resumeCompanies: Array<ResumeCompany> = [];
   let promptInstructions: string | null = null;
+  let model: Models = models.gpt35Turbo;
 
   // let {
   //   promptJobs,
@@ -98,6 +99,7 @@ export async function sendChatbotMessage(
         getDocument("obringerAssistant").then((a) => {
           console.timeLog("sendChatbotMessage", "got instructions");
           promptInstructions = a?.systemPrompt ?? "";
+          model = models[a?.model ?? "gpt35Turbo"];
         }),
       );
     }
@@ -148,9 +150,11 @@ export async function sendChatbotMessage(
     let streamEvents = 0;
     console.timeLog("sendChatbotMessage", "streaming UI");
     const ui = await streamUI({
-      model: defaultModel,
+      model,
       system: systemPrompt,
       messages: aiState.get().messages,
+      temperature: 0.3,
+      initial: <>Loading</>,
       text: async ({ content, done }) => {
         console.timeLog("sendChatbotMessage", "streaming UI text");
         streamEventCount.update((streamEvents += 1));
