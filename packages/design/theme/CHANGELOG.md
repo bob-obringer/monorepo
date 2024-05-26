@@ -1,5 +1,13 @@
 # @bob-obringer/theme
 
+## 0.0.5
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+- Updated dependencies [a3e87b8]
+  - @bob-obringer/tw-color-schemes@0.1.1
+
 ## 0.0.4
 
 ### Patch Changes

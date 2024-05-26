@@ -1,5 +1,12 @@
 # @bob-obringer/conventional-changeset
 
+## 0.3.1
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+- a3e87b8: improved tsconfigs
+
 ## 0.3.0
 
 ### Minor Changes

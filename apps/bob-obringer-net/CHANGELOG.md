@@ -1,5 +1,23 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.12.1
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+- Updated dependencies [a3e87b8]
+- Updated dependencies [a3e87b8]
+- Updated dependencies [a3e87b8]
+  - @bob-obringer/http-errors@0.3.0
+  - @bob-obringer/nextjs-posthog@0.2.1
+  - @bob-obringer/ai-embedding@0.1.1
+  - @bob-obringer/ai-pinecone@0.2.1
+  - @bob-obringer/sanity-io-webhooks@0.3.2
+  - @bob-obringer/design-system@0.1.1
+  - @bob-obringer/nextjs-fonts@0.0.2
+  - @bob-obringer/theme@0.0.5
+  - @bob-obringer/nextjs-sanity-image@0.1.1
+
 ## 0.12.0
 
 ### Minor Changes

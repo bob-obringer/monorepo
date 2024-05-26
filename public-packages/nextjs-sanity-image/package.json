@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/nextjs-sanity-image",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "NextJS Sanity.io Image Component",
   "keywords": [
