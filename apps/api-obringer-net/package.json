@@ -1,19 +1,11 @@
 {
   "name": "@bob-obringer/api-obringer-net",
-  "version": "1.1.1",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
-  "type": "module",
+  "version": "0.2.0",
   "files": [
     "fonts"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
-    "@sanity/client": "6.18.2",
+    "@sanity/client": "6.18.3",
     "express": "^4.19.2",
     "groq": "3.43.0",
     "pdfkit": "^0.15.0"
