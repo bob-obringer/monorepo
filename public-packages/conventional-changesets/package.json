@@ -21,14 +21,13 @@
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "generate-changeset": "./dist/cli/cli.js"
+    "generate-changeset": "./bin/cli.js"
   },
   "scripts": {
     "build": "tsc && tsc -p tsconfig.cli.json",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
-    "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "start": "tsx ./src/generate-changeset.ts"
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "commander": "workspace:*",
