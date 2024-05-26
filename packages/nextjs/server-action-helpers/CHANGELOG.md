@@ -1,5 +1,14 @@
 # @bob-obringer/server-action-helpers
 
+## 0.1.1
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+- Updated dependencies [a3e87b8]
+- Updated dependencies [a3e87b8]
+  - @bob-obringer/http-errors@0.3.0
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @bob-obringer/http-errors
 
+## 0.3.0
+
+### Minor Changes
+
+- a3e87b8: finalized http errors api
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+
 ## 0.2.0
 
 ### Minor Changes
