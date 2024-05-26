@@ -47,7 +47,6 @@ jobs:
         run: |
           pnpm install
           ./node_modules/.bin/generate-changeset
-        #run: node public-packages/conventional-changesets/dist/cli.js
         
       - name: Add changeset to PR
         env:
