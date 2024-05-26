@@ -1,7 +1,7 @@
 {
   "extends": ["@bob-obringer/tsconfig/tsconfig.library.json"],
   "compilerOptions": {
-    "outDir": "./dist/ts"
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]

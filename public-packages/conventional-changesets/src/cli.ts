@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
-import { generateChangeset } from "./generate-changeset";
+import { generateChangeset } from "./generate-changeset.js";
 
 export function run() {
   const program = new Command();
