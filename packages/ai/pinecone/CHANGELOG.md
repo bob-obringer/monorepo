@@ -1,5 +1,13 @@
 # @bob-obringer/ai-pinecone
 
+## 0.2.1
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+- Updated dependencies [a3e87b8]
+  - @bob-obringer/ai-embedding@0.1.1
+
 ## 0.2.0
 
 ### Minor Changes

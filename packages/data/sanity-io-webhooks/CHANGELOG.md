@@ -1,5 +1,14 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.3.2
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+- Updated dependencies [a3e87b8]
+- Updated dependencies [a3e87b8]
+  - @bob-obringer/http-errors@0.3.0
+
 ## 0.3.1
 
 ### Patch Changes

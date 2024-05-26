@@ -1,5 +1,11 @@
 # @bob-obringer/tsconfig
 
+## 0.2.1
+
+### Patch Changes
+
+- a3e87b8: improved tsconfigs
+
 ## 0.2.0
 
 ### Minor Changes
