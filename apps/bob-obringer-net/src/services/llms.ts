@@ -9,18 +9,16 @@ export const anthropic = createAnthropic({
   },
 });
 
-export const haiku = anthropic("claude-3-haiku-20240307");
-export const sonnet = anthropic("claude-3-sonnet-20240229");
-export const opus = anthropic("claude-3-opus-20240229");
-
 export const openAI = createOpenAI({
   apiKey: env.openAI.apiKey,
 });
 
-export const gpt35Turbo = openAI("gpt-3.5-turbo");
-export const gpt4o = openAI("gpt-4o");
-// do not use
-// export const gpt4 = openAI("gpt-4");
-// export const gpt4Turbo = openAI("gpt-4-turbo");
+export const models = {
+  gpt35Turbo: openAI("gpt-3.5-turbo"),
+  gpt4o: openAI("gpt-4o"),
+  anthropicHaiku: anthropic("claude-3-haiku-20240307"),
+  anthropicSonnet: anthropic("claude-3-sonnet-20240229"),
+  anthropicOpus: anthropic("claude-3-opus-20240229"),
+};
 
-export const defaultModel = haiku;
+export type Models = (typeof models)[keyof typeof models];

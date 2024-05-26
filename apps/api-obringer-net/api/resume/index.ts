@@ -3,17 +3,32 @@ import PDFDocument from "pdfkit";
 import {
   getHomepage,
   getResumeCompanies,
-} from "../sanity-io/queries/resume-company.js";
+} from "../sanity-io/queries/resume-company";
 
-import { ArgentumNovusMedium } from "../fonts/ArgentumNovus-Medium.js";
-import { ArgentumNovusRegular } from "../fonts/ArgentumNovus-Regular.js";
-import { YsabeauSCBold } from "../fonts/YsabeauSC-Bold.js";
+import { env } from "../config";
 
 function inch(n: number) {
   return n * 72;
 }
 
 const margin = inch(0.75);
+
+async function registerFonts(
+  doc: typeof PDFDocument,
+  fontConfigs: Array<{
+    name: string;
+    family: string;
+    style: string;
+  }>,
+) {
+  await Promise.all(
+    fontConfigs.map(({ family, name, style }) =>
+      fetch(`${env.cdnUrl}fonts/${family}/${family}-${style}.ttf`)
+        .then((font) => font.arrayBuffer())
+        .then((buffer) => doc.registerFont(name, buffer)),
+    ),
+  );
+}
 
 export default async function handler(
   _req: VercelRequest,
@@ -24,9 +39,11 @@ export default async function handler(
     margin,
   });
 
-  doc.registerFont("heading", Buffer.from(YsabeauSCBold, "base64"));
-  doc.registerFont("title", Buffer.from(ArgentumNovusMedium, "base64"));
-  doc.registerFont("body", Buffer.from(ArgentumNovusRegular, "base64"));
+  await registerFonts(doc, [
+    { name: "heading", family: "YsabeauSC", style: "Bold" },
+    { name: "title", family: "Montserrat", style: "SemiBold" },
+    { name: "body", family: "Montserrat", style: "Regular" },
+  ]);
 
   const maxPageBodyHeight = doc.page.height - margin * 2;
 
@@ -98,10 +115,10 @@ export default async function handler(
       .text(company.name ?? "", { lineGap: 4 })
       .font("title", 14)
       .text(company.position ?? "", { lineGap: 8 })
-      .font("body", 12)
+      .font("body", 11)
       .list(company.highlights?.map((highlight) => highlight.text) ?? [], {
         lineGap: 2,
-        paragraphGap: 4,
+        paragraphGap: 8,
         bulletRadius: 2,
       })
       .moveDown(1);
@@ -115,9 +132,3 @@ export default async function handler(
   doc.pipe(res);
   doc.end();
 }
-
-//
-// // const port = 3000;
-// // app.listen(port, () => {
-// //   return console.log(`Server is listening on ${port}`);
-// // });

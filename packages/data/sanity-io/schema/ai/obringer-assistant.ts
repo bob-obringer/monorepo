@@ -10,5 +10,26 @@ export const obringerAssistant = defineType({
       title: "System Prompt",
       type: "text",
     },
+    {
+      name: "model",
+      title: "LLM Model",
+      type: "string",
+      // options: {
+      //   list: [
+      //     { title: "Article", value: "article" },
+      //     { title: "Video", value: "video" },
+      //     { title: "Podcast", value: "podcast" },
+      //   ],
+      // },
+      options: {
+        list: [
+          "gpt35Turbo",
+          "gpt4o",
+          "anthropicHaiku",
+          "anthropicSonnet",
+          "anthropicOpus",
+        ],
+      },
+    },
   ],
 });
