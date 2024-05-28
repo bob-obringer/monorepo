@@ -2,41 +2,24 @@
 
 import {
   createContext,
-  Dispatch,
   FormEvent,
   ReactNode,
-  RefObject,
-  SetStateAction,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { nanoid } from "ai";
-import { readStreamableValue, useActions, useUIState } from "ai/rsc";
+import { useActions, useUIState } from "ai/rsc";
 import { useAppUI } from "@/features/ui/app-ui-state-context";
 import {
+  ChatbotContext,
   ChatbotVercelAIContext,
   ChatbotVercelUIMessage,
   RagStatus,
-  SendChatbotMessageResponse,
 } from "@/features/ai-chatbot/types";
 
-export type ChatbotContext = {
-  isOpen: boolean;
-  close: () => void;
-  open: () => void;
-  messages: ChatbotVercelUIMessage[];
-  ragStatus: RagStatus;
-  setRagStatus: Dispatch<SetStateAction<RagStatus>>;
-  streamEventCount: number;
-  onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  inputRef: RefObject<HTMLInputElement>;
-  inputValue: string;
-  setInputValue: (value: string) => void;
-};
-
-export const ChatbotInnerContext = createContext<ChatbotContext | undefined>(
+const ChatbotInnerContext = createContext<ChatbotContext | undefined>(
   undefined,
 );
 
@@ -55,7 +38,6 @@ export function ChatbotInnerContextProvider({
   const { sendChatbotMessage } = useActions<ChatbotVercelAIContext>();
 
   const [ragStatus, setRagStatus] = useState<RagStatus>("idle");
-  const [streamEventCount, setStreamEventCount] = useState(0);
 
   useEffect(() => {
     if (ragStatus !== "idle") {
@@ -83,55 +65,46 @@ export function ChatbotInnerContextProvider({
     // initialize things
     setInputValue("");
     open();
-    // alert(viewportWidth);
     if ((viewportWidth ?? 0) < 768) {
-      // alert("blur");
       console.log({ inputRef });
       inputRef.current?.blur();
     }
-    setRagStatus("retrieving");
 
     // create a stub for the response, keep updating this
     // as the response is streamed back
     const currentAssistantResponse: ChatbotVercelUIMessage = {
       id: nanoid(),
       role: "assistant",
-      ui: "",
+      display: <>Loading</>,
     };
 
     // add the new messages to the chat
     setMessages((prev: Array<ChatbotVercelUIMessage>) => [
       ...prev,
-      { id: nanoid(), role: "user", ui: inputValue },
+      { id: nanoid(), role: "user", display: inputValue },
       currentAssistantResponse,
     ]);
 
     // send the message to the server
     // todo: this response should be validated at runtime
-    const resp: SendChatbotMessageResponse | null =
-      await sendChatbotMessage(inputValue);
+    const resp = await sendChatbotMessage(inputValue);
     if (!resp) {
       // todo: handle this
       throw new Error("No response from server");
     }
 
     // read the stream values and update when they're ready
-    dontBlock(
-      async () => {
-        for await (const value of readStreamableValue(resp.ragStatus)) {
-          if (value) setRagStatus(value);
-        }
-      },
-      async () => {
-        for await (const value of readStreamableValue(resp.streamEventCount)) {
-          if (value) setStreamEventCount(value);
-        }
-      },
-    );
+    // dontBlock(async () => {
+    //   for await (const value of readStreamableValue(resp.ragStatus)) {
+    //     if (value) setRagStatus(value);
+    //   }
+    // });
 
-    setMessages((prev: Array<ChatbotVercelUIMessage>) => [
-      ...prev.slice(0, -1),
-      resp.message,
+    console.log("resp", resp);
+
+    setMessages((existingConversation: Array<ChatbotVercelUIMessage>) => [
+      ...existingConversation.slice(0, -1),
+      resp,
     ]);
   }
 
@@ -150,7 +123,6 @@ export function ChatbotInnerContextProvider({
         messages,
         ragStatus,
         setRagStatus,
-        streamEventCount,
         onFormSubmit,
         inputValue,
         setInputValue,
@@ -162,9 +134,9 @@ export function ChatbotInnerContextProvider({
   );
 }
 
-function dontBlock(...fns: Array<() => void>) {
-  fns.forEach((fn) => void fn());
-}
+// function dontBlock(...fns: Array<() => void>) {
+//   fns.forEach((fn) => void fn());
+// }
 
 export const useChatbot = () => {
   const context = useContext(ChatbotInnerContext);

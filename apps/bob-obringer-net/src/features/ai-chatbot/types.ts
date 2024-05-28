@@ -1,5 +1,11 @@
 import { CoreMessage } from "ai";
-import { ReactNode } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  ReactNode,
+  RefObject,
+  SetStateAction,
+} from "react";
 import { StreamableValue } from "ai/rsc";
 import { ChatbotVercelAIContextProvider } from "@/features/ai-chatbot/client/chatbot-vercel-ai-context";
 import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
@@ -11,14 +17,14 @@ export type ChatbotVercelAIContext = typeof ChatbotVercelAIContextProvider;
  */
 export type MessageRole = "user" | "assistant";
 
-type ChatbotVercelAIMessage = CoreMessage & {
+export type ChatbotVercelAIMessage = CoreMessage & {
   id: string;
 };
 
 export type ChatbotVercelUIMessage = Omit<CoreMessage, "content"> & {
   id: string;
   role: MessageRole;
-  ui: ReactNode;
+  display: ReactNode;
 };
 
 /*
@@ -50,16 +56,32 @@ export type RagStatus = "idle" | "retrieving" | "generating" | "done";
 
 export type SendChatbotMessageResponse = {
   ragStatus: StreamableValue<RagStatus>;
-  streamEventCount: StreamableValue<number>;
   message: {
     id: string;
     role: "user" | "assistant";
-    ui: ReactNode;
+    display: ReactNode;
   };
 };
 
 export type ChatbotVercelActions = {
   sendChatbotMessage: (
     message: string,
-  ) => Promise<SendChatbotMessageResponse | null>;
+  ) => Promise<SendChatbotMessageResponse["message"] | null>;
+};
+
+/*
+  Chatbot Context
+ */
+
+export type ChatbotContext = {
+  isOpen: boolean;
+  close: () => void;
+  open: () => void;
+  messages: ChatbotVercelUIMessage[];
+  ragStatus: RagStatus;
+  setRagStatus: Dispatch<SetStateAction<RagStatus>>;
+  onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  inputRef: RefObject<HTMLInputElement>;
+  inputValue: string;
+  setInputValue: (value: string) => void;
 };
