@@ -1,5 +1,12 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.12.2
+
+### Patch Changes
+
+- 20e8a47: removed extra streming info
+- 20e8a47: fixed streaming
+
 ## 0.12.1
 
 ### Patch Changes
