@@ -1,4 +1,4 @@
-import { list } from "@vercel/blob";
+import { list, type ListBlobResultBlob } from "@vercel/blob";
 
 export class VercelBlob {
   private readonly token: string;
@@ -7,17 +7,24 @@ export class VercelBlob {
     this.token = token;
   }
 
-  async download(path: string): Promise<ArrayBuffer> {
-    console.log(await list({ token: this.token }));
+  async getFileInfo(path: string): Promise<ListBlobResultBlob | null> {
+    const [fileName, fileExtension] = path.split(".");
 
-    return list({ prefix: path, token: this.token })
-      .then(({ blobs }) => blobs[0]?.downloadUrl)
-      .then((url) => {
-        if (!url) {
+    const { blobs } = await list({ prefix: fileName, token: this.token });
+    const matchingBlob = blobs.find((blob) =>
+      blob.pathname.endsWith(`.${fileExtension}`),
+    );
+    return matchingBlob ?? null;
+  }
+
+  async download(path: string): Promise<ArrayBuffer> {
+    return this.getFileInfo(path)
+      .then((info) => {
+        if (!info?.downloadUrl) {
           throw new Error(`Could not find file "${path}"`);
         }
-        return fetch(url);
+        return fetch(info.downloadUrl);
       })
-      .then((font) => font.arrayBuffer());
+      .then((response) => response.arrayBuffer());
   }
 }

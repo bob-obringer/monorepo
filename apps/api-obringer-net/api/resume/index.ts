@@ -21,21 +21,10 @@ async function registerFonts(
   }>,
 ) {
   await Promise.all(
-    fontConfigs.map(
-      ({ family, name, style }) =>
-        vercelBlob
-          .download(`fonts/${family}/${family}-${style}`)
-          .then((buffer) => doc.registerFont(name, buffer)),
-      // list({ prefix: `fonts/${family}/${family}-${style}` })
-      //   .then(({ blobs }) => blobs[0]?.downloadUrl)
-      //   .then((url) => {
-      //     if (!url) {
-      //       throw new Error(`Could not find font ${family}-${style}`);
-      //     }
-      //     return fetch(url);
-      //   })
-      //   .then((font) => font.arrayBuffer())
-      //   .then((buffer) => doc.registerFont(name, buffer)),
+    fontConfigs.map(({ family, name, style }) =>
+      vercelBlob
+        .download(`fonts/${family}/${family}-${style}.ttf`)
+        .then((buffer) => doc.registerFont(name, buffer)),
     ),
   );
 }
@@ -46,7 +35,7 @@ export default async function handler(
 ) {
   const doc = new PDFDocument({
     size: "LETTER",
-    margin,
+    margins: { top: margin, left: margin, right: margin, bottom: 0 },
   });
 
   await registerFonts(doc, [
