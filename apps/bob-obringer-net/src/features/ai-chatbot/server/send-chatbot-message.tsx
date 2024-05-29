@@ -27,10 +27,36 @@ import { z } from "zod";
 import { ContactCard } from "@/features/contacts/contact-card";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
+import { Ratelimit } from "@upstash/ratelimit";
+import { kv } from "@vercel/kv";
+import { headers } from "next/headers";
+
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.fixedWindow(5, "30s"),
+});
 
 export async function sendChatbotMessage(
   message: string,
 ): Promise<SendChatbotMessageResponse | null> {
+  const messageStatus = createStreamableValue<MessageStatus>("retrieving");
+
+  const h = headers();
+  const ip = h.get("x-real-ip") ?? h.get("x-forwarded-for");
+  const { success } = await ratelimit.limit(ip ?? "anonymous");
+
+  if (!success) {
+    messageStatus.done("done");
+    return {
+      messageStatus: messageStatus.value,
+      message: {
+        display: "You're sending messages too quickly.  Please slow down.",
+        role: "assistant",
+        id: nanoid(),
+      },
+    };
+  }
+
   const aiState = getMutableAIState<ChatbotAIContext>();
 
   function addMessageToAiState(
@@ -52,8 +78,6 @@ export async function sendChatbotMessage(
   let resumeCompanies: Array<ResumeCompany> = [];
   let promptInstructions: string | null = null;
   let model: Models = models.gpt35Turbo;
-
-  const messageStatus = createStreamableValue<MessageStatus>("retrieving");
 
   const promises: Array<Promise<void>> = [];
 
