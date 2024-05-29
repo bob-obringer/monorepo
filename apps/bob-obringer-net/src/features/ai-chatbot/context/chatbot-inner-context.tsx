@@ -10,14 +10,14 @@ import {
   useState,
 } from "react";
 import { nanoid } from "ai";
-import { useActions, useUIState } from "ai/rsc";
+import { readStreamableValue, useActions, useUIState } from "ai/rsc";
 import { useAppUI } from "@/features/ui/app-ui-state-context";
 import {
   ChatbotContext,
-  ChatbotVercelAIContext,
-  ChatbotVercelUIMessage,
-  RagStatus,
+  ChatbotUIMessage,
+  MessageStatus,
 } from "@/features/ai-chatbot/types";
+import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 
 const ChatbotInnerContext = createContext<ChatbotContext | undefined>(
   undefined,
@@ -34,16 +34,16 @@ export function ChatbotInnerContextProvider({
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [messages, setMessages] = useUIState<ChatbotVercelAIContext>();
-  const { sendChatbotMessage } = useActions<ChatbotVercelAIContext>();
+  const [messages, setMessages] = useUIState<ChatbotAIContext>();
+  const { sendChatbotMessage } = useActions<ChatbotAIContext>();
 
-  const [ragStatus, setRagStatus] = useState<RagStatus>("idle");
+  const [messageStatus, setMessageStatus] = useState<MessageStatus>("idle");
 
   useEffect(() => {
-    if (ragStatus !== "idle") {
+    if (messageStatus !== "idle") {
       open();
     }
-  }, [ragStatus]);
+  }, [messageStatus]);
 
   function close() {
     document.body.style.overflow = "auto";
@@ -72,14 +72,14 @@ export function ChatbotInnerContextProvider({
 
     // create a stub for the response, keep updating this
     // as the response is streamed back
-    const currentAssistantResponse: ChatbotVercelUIMessage = {
+    const currentAssistantResponse: ChatbotUIMessage = {
       id: nanoid(),
       role: "assistant",
       display: <>Loading</>,
     };
 
     // add the new messages to the chat
-    setMessages((prev: Array<ChatbotVercelUIMessage>) => [
+    setMessages((prev: Array<ChatbotUIMessage>) => [
       ...prev,
       { id: nanoid(), role: "user", display: inputValue },
       currentAssistantResponse,
@@ -94,17 +94,15 @@ export function ChatbotInnerContextProvider({
     }
 
     // read the stream values and update when they're ready
-    // dontBlock(async () => {
-    //   for await (const value of readStreamableValue(resp.ragStatus)) {
-    //     if (value) setRagStatus(value);
-    //   }
-    // });
+    dontBlock(async () => {
+      for await (const value of readStreamableValue(resp.messageStatus)) {
+        if (value) setMessageStatus(value);
+      }
+    });
 
-    console.log("resp", resp);
-
-    setMessages((existingConversation: Array<ChatbotVercelUIMessage>) => [
+    setMessages((existingConversation: Array<ChatbotUIMessage>) => [
       ...existingConversation.slice(0, -1),
-      resp,
+      resp.message,
     ]);
   }
 
@@ -121,8 +119,8 @@ export function ChatbotInnerContextProvider({
         close,
         open,
         messages,
-        ragStatus,
-        setRagStatus,
+        messageStatus,
+        setMessageStatus,
         onFormSubmit,
         inputValue,
         setInputValue,
@@ -134,9 +132,9 @@ export function ChatbotInnerContextProvider({
   );
 }
 
-// function dontBlock(...fns: Array<() => void>) {
-//   fns.forEach((fn) => void fn());
-// }
+function dontBlock(...fns: Array<() => void>) {
+  fns.forEach((fn) => void fn());
+}
 
 export const useChatbot = () => {
   const context = useContext(ChatbotInnerContext);
