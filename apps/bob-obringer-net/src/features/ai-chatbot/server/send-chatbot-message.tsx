@@ -8,7 +8,6 @@ import {
 } from "@/features/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io/get-document";
 import { createStreamableValue, getMutableAIState, streamUI } from "ai/rsc";
-import { addUserMessage } from "@/features/ai-chatbot/server/chatbot-ai-state-helpers";
 import {
   getFormattedJobs,
   getFormattedSkills,
@@ -18,6 +17,7 @@ import {
 import { Models, models } from "@/services/llms";
 import { nanoid } from "ai";
 import {
+  MessageRole,
   MessageStatus,
   SendChatbotMessageResponse,
 } from "@/features/ai-chatbot/types";
@@ -32,7 +32,19 @@ export async function sendChatbotMessage(
   message: string,
 ): Promise<SendChatbotMessageResponse | null> {
   const aiState = getMutableAIState<ChatbotAIContext>();
-  addUserMessage(aiState, message);
+
+  function addMessageToAiState(
+    role: MessageRole,
+    content: string,
+    done: boolean,
+  ) {
+    aiState[done ? "done" : "update"]({
+      ...aiState.get(),
+      messages: [...aiState.get().messages, { id: nanoid(), role, content }],
+    });
+  }
+
+  addMessageToAiState("user", message, false);
 
   let promptJobs: string | null = null;
   let promptSkills: string | null = null;
@@ -46,17 +58,7 @@ export async function sendChatbotMessage(
   const promises: Array<Promise<void>> = [];
 
   function endResponse(content: string) {
-    aiState.done({
-      ...aiState.get(),
-      messages: [
-        ...aiState.get().messages,
-        {
-          id: nanoid(),
-          role: "assistant",
-          content,
-        },
-      ],
-    });
+    addMessageToAiState("assistant", content, true);
     messageStatus.done("done");
   }
 

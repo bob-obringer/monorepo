@@ -3,9 +3,8 @@ import PDFDocument from "pdfkit";
 import {
   getHomepage,
   getResumeCompanies,
-} from "../sanity-io/queries/resume-company";
-
-import { env } from "../config";
+} from "../_services/sanity-io/queries/resume-company.js";
+import { vercelBlob } from "../_services/vercel-blob.js";
 
 function inch(n: number) {
   return n * 72;
@@ -22,10 +21,21 @@ async function registerFonts(
   }>,
 ) {
   await Promise.all(
-    fontConfigs.map(({ family, name, style }) =>
-      fetch(`${env.cdnUrl}fonts/${family}/${family}-${style}.ttf`)
-        .then((font) => font.arrayBuffer())
-        .then((buffer) => doc.registerFont(name, buffer)),
+    fontConfigs.map(
+      ({ family, name, style }) =>
+        vercelBlob
+          .download(`fonts/${family}/${family}-${style}`)
+          .then((buffer) => doc.registerFont(name, buffer)),
+      // list({ prefix: `fonts/${family}/${family}-${style}` })
+      //   .then(({ blobs }) => blobs[0]?.downloadUrl)
+      //   .then((url) => {
+      //     if (!url) {
+      //       throw new Error(`Could not find font ${family}-${style}`);
+      //     }
+      //     return fetch(url);
+      //   })
+      //   .then((font) => font.arrayBuffer())
+      //   .then((buffer) => doc.registerFont(name, buffer)),
     ),
   );
 }
