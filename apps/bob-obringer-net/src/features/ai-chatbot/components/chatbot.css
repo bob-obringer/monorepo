@@ -14,7 +14,14 @@
   width: 3000px;
   height: 1px;
   animation: rotate 2s infinite linear;
-  background: linear-gradient(to right,  rgba(48,255,144,1) 0%,rgba(237,45,237,1) 25%,rgba(201,152,38,1) 50%,rgba(48,255,230,1) 75%,rgba(48,255,144,1) 100%); /* W3C */
+  background: linear-gradient(
+      to right,
+      rgba(48,255,144,1) 0%,
+      rgba(237,45,237,1) 25%,
+      rgba(201,152,38,1) 50%,
+      rgba(48,255,230,1) 75%,
+      rgba(48,255,144,1) 100%
+  );
 }
 
 @-webkit-keyframes rotate {
@@ -22,7 +29,7 @@
     background-position: -3000px;
   }
   to {
-    background-position: 0px;
+    background-position: 0;
   }
 }
 
@@ -31,6 +38,6 @@
     background-position: -3000px;
   }
   to {
-    background-position: 0px;
+    background-position: 0;
   }
 }

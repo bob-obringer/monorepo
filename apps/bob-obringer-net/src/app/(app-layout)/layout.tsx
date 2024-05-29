@@ -11,3 +11,5 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     </>
   );
 }
+
+export const dynamic = "force-dynamic";

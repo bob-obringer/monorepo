@@ -18,26 +18,21 @@ import {
 import { Models, models } from "@/services/llms";
 import { nanoid } from "ai";
 import {
-  ChatbotVercelAIContext,
-  RagStatus,
+  MessageStatus,
   SendChatbotMessageResponse,
 } from "@/features/ai-chatbot/types";
 import { parseMarkdown } from "@/helpers/markdown/parse-markdown";
-import { z } from "zod";
 import { ResumeCard, ResumeLinkCard } from "@/features/resume/resume-card";
-import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
+import { z } from "zod";
 import { ContactCard } from "@/features/contacts/contact-card";
+import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
+import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 
 export async function sendChatbotMessage(
   message: string,
 ): Promise<SendChatbotMessageResponse | null> {
-  console.log("starting");
-  console.time("sendChatbotMessage");
-
-  const aiState = getMutableAIState<ChatbotVercelAIContext>();
-  console.timeLog("sendChatbotMessage", "got aiState");
+  const aiState = getMutableAIState<ChatbotAIContext>();
   addUserMessage(aiState, message);
-  console.timeLog("sendChatbotMessage", "added user message");
 
   let promptJobs: string | null = null;
   let promptSkills: string | null = null;
@@ -46,22 +41,11 @@ export async function sendChatbotMessage(
   let promptInstructions: string | null = null;
   let model: Models = models.gpt35Turbo;
 
-  // let {
-  //   promptJobs,
-  //   promptSkills,
-  //   promptBio,
-  //   resumeCompanies,
-  //   promptInstructions,
-  // } = {}; //aiState.get().context || {};
-
-  const streamEventCount = createStreamableValue(0);
-  const ragStatus = createStreamableValue<RagStatus>("retrieving");
-
-  console.timeLog("sendChatbotMessage", "created streamable values");
+  const messageStatus = createStreamableValue<MessageStatus>("retrieving");
 
   const promises: Array<Promise<void>> = [];
 
-  function closeAIState(content: string) {
+  function endResponse(content: string) {
     aiState.done({
       ...aiState.get(),
       messages: [
@@ -72,32 +56,22 @@ export async function sendChatbotMessage(
           content,
         },
       ],
-      // context: {
-      //   promptBio,
-      //   promptInstructions,
-      //   promptSkills,
-      //   promptJobs,
-      //   resumeCompanies,
-      // },
     });
+    messageStatus.done("done");
   }
 
   try {
     if (!promptBio) {
-      console.timeLog("sendChatbotMessage", "getting bio");
       promises.push(
         getDocument("homepage").then((homepage) => {
-          console.timeLog("sendChatbotMessage", "got bio");
           promptBio = homepage?.bio ?? "";
         }),
       );
     }
 
     if (!promptInstructions) {
-      console.timeLog("sendChatbotMessage", "getting instructions");
       promises.push(
         getDocument("obringerAssistant").then((a) => {
-          console.timeLog("sendChatbotMessage", "got instructions");
           promptInstructions = a?.systemPrompt ?? "";
           model = models[a?.model ?? "gpt35Turbo"];
         }),
@@ -105,39 +79,29 @@ export async function sendChatbotMessage(
     }
 
     if (!promptSkills) {
-      console.timeLog("sendChatbotMessage", "getting skills");
       promises.push(
         getFormattedSkills().then((skills) => {
-          console.timeLog("sendChatbotMessage", "got skills");
           promptSkills = skills;
         }),
       );
     }
 
     if (!promptJobs || !resumeCompanies) {
-      console.timeLog("sendChatbotMessage", "getting companies");
       promises.push(
         getResumeCompanies().then((companies) => {
-          console.timeLog("sendChatbotMessage", "got companies");
           resumeCompanies = companies;
           promptJobs = getFormattedJobs(resumeCompanies);
         }),
       );
     }
 
-    console.timeLog("sendChatbotMessage", "awaiting promises");
     await Promise.all(promises);
-    console.timeLog("sendChatbotMessage", "promises done");
-    ragStatus.update("generating");
 
-    console.timeLog("sendChatbotMessage", "getting highlights");
     const highlights = await getRelevantCompanyHighlights(
       resumeCompanies,
       message,
     );
-    console.timeLog("sendChatbotMessage", "got highlights");
 
-    console.timeLog("sendChatbotMessage", "getting system prompt");
     const systemPrompt = await getSystemPrompt({
       promptInstructions,
       promptSkills,
@@ -145,49 +109,17 @@ export async function sendChatbotMessage(
       promptBio,
       highlights,
     });
-    console.timeLog("sendChatbotMessage", "got system prompt");
 
-    let streamEvents = 0;
-    console.timeLog("sendChatbotMessage", "streaming UI");
+    messageStatus.update("generating");
+
     const ui = await streamUI({
       model,
       system: systemPrompt,
       messages: aiState.get().messages,
-      temperature: 0.3,
-      initial: <>Loading</>,
+      temperature: 0.5,
+      initial: <>...</>,
       text: async ({ content, done }) => {
-        console.timeLog("sendChatbotMessage", "streaming UI text");
-        streamEventCount.update((streamEvents += 1));
-        console.timeLog("sendChatbotMessage", "streamed UI text");
-
-        if (done) {
-          console.timeLog("sendChatbotMessage", "done");
-          aiState.done({
-            ...aiState.get(),
-            messages: [
-              ...aiState.get().messages,
-              {
-                id: nanoid(),
-                role: "assistant",
-                content,
-              },
-            ],
-            // context: {
-            //   promptBio,
-            //   promptInstructions,
-            //   promptSkills,
-            //   promptJobs,
-            //   resumeCompanies,
-            // },
-          });
-          console.timeLog("sendChatbotMessage", "aiState done");
-          ragStatus.done("done");
-          console.timeLog("sendChatbotMessage", "ragStatus done");
-          streamEventCount.done((streamEvents += 1));
-
-          console.timeEnd("sendChatbotMessage");
-        }
-
+        if (done) endResponse(content);
         return await parseMarkdown(content);
       },
       tools: {
@@ -196,8 +128,7 @@ export async function sendChatbotMessage(
           If they just want to view bob's background, don't run the tool.`,
           parameters: z.object({}),
           generate: async function () {
-            ragStatus.done("done");
-            closeAIState("[Showing Resume Tool]");
+            endResponse("[Showing Resume Tool]");
             return (
               <div className="justify-middle flex flex-col gap-4 align-middle md:flex-row">
                 <ResumeCard />
@@ -222,8 +153,7 @@ export async function sendChatbotMessage(
 
             const contactInfo = await getAllContactInfo();
 
-            ragStatus.update("generating");
-            streamEventCount.update((streamEvents += 1));
+            messageStatus.update("generating");
 
             const specificContactInfo = contactInfo.find(
               (c) =>
@@ -231,17 +161,13 @@ export async function sendChatbotMessage(
             );
 
             if (specificContactInfo) {
-              ragStatus.done("done");
-              streamEventCount.done((streamEvents += 1));
-              closeAIState(
+              endResponse(
                 `[Showing Contact Tool with ${specificContactInfo} contact info]`,
               );
               return <ContactCard contactInfo={specificContactInfo} />;
             }
 
-            ragStatus.done("done");
-            streamEventCount.done((streamEvents += 1));
-            closeAIState("[Showing Contact Tool with all contact info]");
+            endResponse("[Showing Contact Tool with all contact info]");
 
             return (
               <div className="flex h-full flex-col items-center justify-center gap-4">
@@ -255,12 +181,10 @@ export async function sendChatbotMessage(
       },
     });
 
-    console.timeLog("sendChatbotMessage", "returning");
     return {
-      ragStatus: ragStatus.value,
-      streamEventCount: streamEventCount.value,
+      messageStatus: messageStatus.value,
       message: {
-        ui: ui.value,
+        display: ui.value,
         role: "assistant",
         id: nanoid(),
       },

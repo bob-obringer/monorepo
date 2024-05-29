@@ -4,7 +4,7 @@ import { cx } from "@bob-obringer/design-system";
 import { useEffect } from "react";
 
 import { FooterNav } from "@/app/(app-layout)/_layout/app-footer/footer-nav";
-import { useChatbot } from "@/features/ai-chatbot/client/chatbot-inner-context";
+import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import { ChatbotBody } from "@/features/ai-chatbot/components/chatbot-body";
 import { ChatbotForm } from "@/features/ai-chatbot/components/chatbot-form";
 

@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { env } from "@/config/client";
 import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { getDocument } from "@/services/sanity-io/get-document";
-import { ChatbotContextProvider } from "@/features/ai-chatbot/client/chatbot-context";
+import { ChatbotContextProvider } from "@/features/ai-chatbot/context/chatbot-context";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, subtitle } = (await getDocument("homepage")) ?? {};

@@ -2,11 +2,8 @@
 
 import {
   createContext,
-  Dispatch,
   FormEvent,
   ReactNode,
-  RefObject,
-  SetStateAction,
   useContext,
   useEffect,
   useRef,
@@ -16,27 +13,13 @@ import { nanoid } from "ai";
 import { readStreamableValue, useActions, useUIState } from "ai/rsc";
 import { useAppUI } from "@/features/ui/app-ui-state-context";
 import {
-  ChatbotVercelAIContext,
-  ChatbotVercelUIMessage,
-  RagStatus,
-  SendChatbotMessageResponse,
+  ChatbotContext,
+  ChatbotUIMessage,
+  MessageStatus,
 } from "@/features/ai-chatbot/types";
+import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 
-export type ChatbotContext = {
-  isOpen: boolean;
-  close: () => void;
-  open: () => void;
-  messages: ChatbotVercelUIMessage[];
-  ragStatus: RagStatus;
-  setRagStatus: Dispatch<SetStateAction<RagStatus>>;
-  streamEventCount: number;
-  onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  inputRef: RefObject<HTMLInputElement>;
-  inputValue: string;
-  setInputValue: (value: string) => void;
-};
-
-export const ChatbotInnerContext = createContext<ChatbotContext | undefined>(
+const ChatbotInnerContext = createContext<ChatbotContext | undefined>(
   undefined,
 );
 
@@ -51,17 +34,16 @@ export function ChatbotInnerContextProvider({
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [messages, setMessages] = useUIState<ChatbotVercelAIContext>();
-  const { sendChatbotMessage } = useActions<ChatbotVercelAIContext>();
+  const [messages, setMessages] = useUIState<ChatbotAIContext>();
+  const { sendChatbotMessage } = useActions<ChatbotAIContext>();
 
-  const [ragStatus, setRagStatus] = useState<RagStatus>("idle");
-  const [streamEventCount, setStreamEventCount] = useState(0);
+  const [messageStatus, setMessageStatus] = useState<MessageStatus>("idle");
 
   useEffect(() => {
-    if (ragStatus !== "idle") {
+    if (messageStatus !== "idle") {
       open();
     }
-  }, [ragStatus]);
+  }, [messageStatus]);
 
   function close() {
     document.body.style.overflow = "auto";
@@ -83,54 +65,43 @@ export function ChatbotInnerContextProvider({
     // initialize things
     setInputValue("");
     open();
-    // alert(viewportWidth);
     if ((viewportWidth ?? 0) < 768) {
-      // alert("blur");
       console.log({ inputRef });
       inputRef.current?.blur();
     }
-    setRagStatus("retrieving");
 
     // create a stub for the response, keep updating this
     // as the response is streamed back
-    const currentAssistantResponse: ChatbotVercelUIMessage = {
+    const currentAssistantResponse: ChatbotUIMessage = {
       id: nanoid(),
       role: "assistant",
-      ui: "",
+      display: <>Loading</>,
     };
 
     // add the new messages to the chat
-    setMessages((prev: Array<ChatbotVercelUIMessage>) => [
+    setMessages((prev: Array<ChatbotUIMessage>) => [
       ...prev,
-      { id: nanoid(), role: "user", ui: inputValue },
+      { id: nanoid(), role: "user", display: inputValue },
       currentAssistantResponse,
     ]);
 
     // send the message to the server
     // todo: this response should be validated at runtime
-    const resp: SendChatbotMessageResponse | null =
-      await sendChatbotMessage(inputValue);
+    const resp = await sendChatbotMessage(inputValue);
     if (!resp) {
       // todo: handle this
       throw new Error("No response from server");
     }
 
     // read the stream values and update when they're ready
-    dontBlock(
-      async () => {
-        for await (const value of readStreamableValue(resp.ragStatus)) {
-          if (value) setRagStatus(value);
-        }
-      },
-      async () => {
-        for await (const value of readStreamableValue(resp.streamEventCount)) {
-          if (value) setStreamEventCount(value);
-        }
-      },
-    );
+    dontBlock(async () => {
+      for await (const value of readStreamableValue(resp.messageStatus)) {
+        if (value) setMessageStatus(value);
+      }
+    });
 
-    setMessages((prev: Array<ChatbotVercelUIMessage>) => [
-      ...prev.slice(0, -1),
+    setMessages((existingConversation: Array<ChatbotUIMessage>) => [
+      ...existingConversation.slice(0, -1),
       resp.message,
     ]);
   }
@@ -148,9 +119,8 @@ export function ChatbotInnerContextProvider({
         close,
         open,
         messages,
-        ragStatus,
-        setRagStatus,
-        streamEventCount,
+        messageStatus,
+        setMessageStatus,
         onFormSubmit,
         inputValue,
         setInputValue,
