@@ -1,5 +1,11 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.3.3
+
+### Patch Changes
+
+- a208168: revamped ai fetching
+
 ## 0.3.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @bob-obringer/nextjs-sanity-image
 
+## 0.1.2
+
+### Patch Changes
+
+- a208168: revamped ai fetching
+
 ## 0.1.1
 
 ### Patch Changes
