@@ -1,4 +1,4 @@
-import { NextJsSanityImage } from "@bob-obringer/nextjs-sanity-image";
+import { NextJsSanityImage } from "@bob-obringer/nextjs-sanity-io-image";
 
 import { ContactInfoWithAsset } from "@/features/sanity-io/queries/contact-info";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

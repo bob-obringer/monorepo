@@ -2,11 +2,6 @@ import { z } from "zod";
 
 const envSchema = z.object({
   name: z.enum(["development", "production", "preview"]),
-  aws: z.object({
-    bucketName: z.string(),
-    accessKeyId: z.string(),
-    secretAccessKey: z.string(),
-  }),
   anthropic: z.object({
     apiKey: z.string(),
   }),
@@ -24,17 +19,19 @@ const envSchema = z.object({
     dataset: z.string(),
     webhookSecret: z.string(),
   }),
+  vercel: z.object({
+    blobReadWriteToken: z.string(),
+    kvUrl: z.string(),
+    kvRestApiReadOnlyToken: z.string(),
+    kvRestApiToken: z.string(),
+    kvRestApiUrl: z.string(),
+  }),
 });
 
 const name = process.env.VERCEL_ENV || "development";
 
 export const env = envSchema.parse({
   name,
-  aws: {
-    bucketName: process.env.AWS_BUCKET_NAME,
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
   anthropic: {
     apiKey: process.env.ANTHROPIC_API_KEY,
   },
@@ -51,5 +48,12 @@ export const env = envSchema.parse({
     projectId: process.env.SANITY_STUDIO_PROJECT_ID,
     dataset: name === "production" ? "production" : "development",
     webhookSecret: process.env.SANITY_WEBHOOK_SECRET,
+  },
+  vercel: {
+    blobReadWriteToken: process.env.BLOB_READ_WRITE_TOKEN,
+    kvUrl: process.env.KV_URL,
+    kvRestApiReadOnlyToken: process.env.KV_REST_API_READ_ONLY_TOKEN,
+    kvRestApiToken: process.env.KV_REST_API_TOKEN,
+    kvRestApiUrl: process.env.KV_REST_API_URL,
   },
 });

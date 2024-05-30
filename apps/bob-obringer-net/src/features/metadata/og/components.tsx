@@ -1,15 +1,12 @@
 import { ReactNode } from "react";
 import { ImageResponse } from "next/og";
-import { config } from "@/config";
-
-function loadFont(name: string, style: string) {
-  return fetch(`${config.cdnUrl}fonts/${name}/${name}-${style}.ttf`).then(
-    (res) => res.arrayBuffer(),
-  );
-}
+import { vercelBlob } from "@/services/vercel-blob";
 
 export async function OgImageWrapper(children: ReactNode) {
-  const displayFont = await loadFont("YsabeauSC", "Bold");
+  const displayFont = await vercelBlob.download(
+    "fonts/YsabeauSC/YsabeauSC-Bold.ttf",
+  );
+  const background = await vercelBlob.getFileInfo("images/og-background.png");
 
   return new ImageResponse(
     (
@@ -26,7 +23,7 @@ export async function OgImageWrapper(children: ReactNode) {
         <img
           style={{ position: "absolute" }}
           alt="Bob Obringer"
-          src={`${config.cdnUrl}images/og-background.png`}
+          src={background?.url}
         />
         {children}
       </div>

@@ -1,0 +1,19 @@
+{
+  "name": "@bob-obringer/vercel-data",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@bob-obringer/http-errors": "workspace:*",
+    "@vercel/blob": "^0.23.3",
+    "neverthrow": "workspace:*"
+  }
+}

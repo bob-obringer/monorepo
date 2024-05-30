@@ -70,23 +70,22 @@ export function ChatbotInnerContextProvider({
       inputRef.current?.blur();
     }
 
-    // create a stub for the response, keep updating this
-    // as the response is streamed back
-    const currentAssistantResponse: ChatbotUIMessage = {
+    const newMessage = {
       id: nanoid(),
       role: "assistant",
-      display: <>Loading</>,
-    };
+      ui: <>Thinking...</>,
+    } as ChatbotUIMessage;
 
     // add the new messages to the chat
     setMessages((prev: Array<ChatbotUIMessage>) => [
       ...prev,
-      { id: nanoid(), role: "user", display: inputValue },
-      currentAssistantResponse,
+      { id: nanoid(), role: "user", ui: inputValue },
+      newMessage,
     ]);
 
     // send the message to the server
     // todo: this response should be validated at runtime
+    setMessageStatus("retrieving");
     const resp = await sendChatbotMessage(inputValue);
     if (!resp) {
       // todo: handle this
@@ -100,10 +99,7 @@ export function ChatbotInnerContextProvider({
       }
     });
 
-    setMessages((existingConversation: Array<ChatbotUIMessage>) => [
-      ...existingConversation.slice(0, -1),
-      resp.message,
-    ]);
+    newMessage.ui = resp.ui;
   }
 
   useEffect(() => {

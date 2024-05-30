@@ -1,6 +1,6 @@
-import { ResumeCompanyHighlight } from "@/services/sanity-io/sanity-types";
 import groq from "groq";
-import { sanityClient } from "@/services/sanity-io/sanity-client";
+import { sanityIoClient } from "@/services/sanity-io-client";
+import { ResumeCompanyHighlight } from "@bob-obringer/sanity-io-types";
 
 /*
   Get Skills By Id
@@ -70,5 +70,5 @@ const resumeSkillQuery = groq`*[_type == "resumeSkill"]{
 }`;
 
 export async function getResumeSkills() {
-  return await sanityClient.fetch<Array<ResumeSkill>>(resumeSkillQuery);
+  return await sanityIoClient.fetch<Array<ResumeSkill>>(resumeSkillQuery);
 }

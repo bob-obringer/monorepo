@@ -1,34 +1,34 @@
 import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
-import { getResumeSkills } from "@/features/sanity-io/queries/resume-skills";
+import { ResumeSkill } from "@/features/sanity-io/queries/resume-skills";
 import { pinecone } from "@/services/pinecone";
 
-export async function getSystemPrompt({
-  promptInstructions,
-  promptSkills,
-  promptJobs,
-  promptBio,
+export function getSystemPrompt({
+  systemPromptInstructions,
+  formattedSkills,
+  formattedJobs,
+  bio,
   highlights,
 }: {
-  promptInstructions: string | null;
-  promptSkills: string | null;
-  promptJobs: string | null;
-  promptBio: string | null;
-  highlights: string | null;
+  systemPromptInstructions?: string | null;
+  formattedSkills?: string | null;
+  formattedJobs?: string | null;
+  bio?: string | null;
+  highlights?: string | null;
 }) {
   return `
-${promptInstructions}
+${systemPromptInstructions}
 
 Skills:
-${promptSkills}
+${formattedSkills}
 
 Career History:
-${promptJobs}
+${formattedJobs}
 
 Career Highlights:
 ${highlights}
 
 Biography:
-${promptBio}  
+${bio}  
 
 FINAL INSTRUCTIONS:
 When returning markdown, do not wrap with any html or other content that specifically marks
@@ -55,9 +55,7 @@ export function getFormattedJobs(resumeCompanies: ResumeCompany[]) {
     .join("\n");
 }
 
-export async function getFormattedSkills() {
-  const resumeSkills = await getResumeSkills();
-
+export function getFormattedSkills(resumeSkills: Array<ResumeSkill>) {
   const skillsByCategory: Record<string, string[]> = {};
   for (const skill of resumeSkills) {
     const category = skill.category?.name ?? "Uncategorized";

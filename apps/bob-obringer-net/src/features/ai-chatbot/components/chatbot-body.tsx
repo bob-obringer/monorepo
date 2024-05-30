@@ -50,7 +50,7 @@ export function ChatbotBody() {
               isLastMessage={m.id === lastMessage?.id}
               isLoading={["retrieving", "generating"].includes(messageStatus)}
             >
-              {m.display}
+              {m.ui}
             </Message>
           </div>
         );

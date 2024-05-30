@@ -32,7 +32,7 @@ export type ChatbotAIState = {
 export type ChatbotUIMessage = Omit<CoreMessage, "content"> & {
   id: string;
   role: MessageRole;
-  display: ReactNode;
+  ui: ReactNode;
 };
 
 export type ChatbotUIState = Array<ChatbotUIMessage>;
@@ -44,11 +44,7 @@ export type MessageStatus = "idle" | "retrieving" | "generating" | "done";
 
 export type SendChatbotMessageResponse = {
   messageStatus: StreamableValue<MessageStatus>;
-  message: {
-    id: string;
-    role: "user" | "assistant";
-    display: ReactNode;
-  };
+  ui: ReactNode;
 };
 
 export type ChatbotActions = {
