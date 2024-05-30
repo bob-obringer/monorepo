@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.5.1
+
+### Patch Changes
+
+- a208168: revamped ai fetching
+
 ## 0.5.0
 
 ### Minor Changes

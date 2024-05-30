@@ -1,5 +1,24 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.13.0
+
+### Minor Changes
+
+- a208168: removed s3
+- a208168: moved to vercel blob
+- a208168: added rate limiting
+
+### Patch Changes
+
+- a208168: revamped ai fetching
+- Updated dependencies [a208168]
+- Updated dependencies [a208168]
+- Updated dependencies [a208168]
+  - @bob-obringer/sanity-io-types@0.0.2
+  - @bob-obringer/nextjs-sanity-io-image@0.1.2
+  - @bob-obringer/nextjs-sanity-io-webhooks@0.3.3
+  - @bob-obringer/vercel-data@0.1.0
+
 ## 0.12.2
 
 ### Patch Changes

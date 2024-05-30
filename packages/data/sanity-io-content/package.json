@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/sanity-io-content",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "scripts": {
     "build": "mkdir -p ./.temp && sanity build && pnpm build:extract && pnpm build:typegen",

@@ -1,5 +1,12 @@
 # @bob-obringer/api-obringer-net
 
+## 0.3.0
+
+### Minor Changes
+
+- a208168: removed s3
+- a208168: moved to vercel blob
+
 ## 0.2.1
 
 ### Patch Changes

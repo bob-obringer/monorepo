@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/nextjs-sanity-io-webhooks",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": false,
   "description": "Declaritive Sanity.io webhook route generator",
   "keywords": [
