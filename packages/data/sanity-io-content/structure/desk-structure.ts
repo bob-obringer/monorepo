@@ -47,5 +47,13 @@ export function structure(
             .schemaType("obringerAssistant")
             .documentId("obringerAssistant"),
         ),
+      S.listItem()
+        .title("Chatbot Config")
+        .child(
+          S.document()
+            .title("Chatbot Config")
+            .schemaType("chatbotConfig")
+            .documentId("chatbotConfig"),
+        ),
     ]);
 }

@@ -1,14 +1,12 @@
 {
-  "name": "@bob-obringer/sanity-io",
+  "name": "@bob-obringer/sanity-io-content",
   "version": "0.5.0",
   "private": true,
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
   "scripts": {
-    "build:extract": "mkdir -p build && sanity schema extract --path ./build/sanity.schema.json --workspace=production",
-    "build:manual": "sanity build && pnpm build:extract && pnpm build:typegen && tsc -p tsconfig.package.json",
+    "build": "mkdir -p ./.temp && sanity build && pnpm build:extract && pnpm build:typegen",
+    "build:extract": "sanity schema extract --path ./.temp/sanity.schema.json --workspace=production",
     "build:typegen": "sanity typegen generate",
-    "clean": "rimraf dist build node_modules .sanity",
+    "clean": "rimraf dist .temp node_modules .sanity",
     "deploy:development": "dotenv -e .env.development -- sanity deploy --workspace=development",
     "deploy:production": "dotenv -e .env.production -- sanity deploy --workspace=production",
     "dev": "sanity dev",
@@ -20,10 +18,10 @@
   "dependencies": {
     "@sanity/cross-dataset-duplicator": "1.3.0",
     "@sanity/orderable-document-list": "1.2.1",
-    "@sanity/vision": "3.42.1",
+    "@sanity/vision": "3.44.0",
     "react": "workspace:*",
     "react-dom": "workspace:*",
-    "sanity": "3.42.1",
+    "sanity": "3.44.0",
     "styled-components": "6.1.9",
     "zod": "workspace:*"
   },

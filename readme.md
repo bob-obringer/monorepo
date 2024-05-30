@@ -25,7 +25,7 @@ A collection of HTTP error classes representing the standard HTTP status codes.
 
 A simple wrapper around the PostHog JS library to make it easier to use with Next.js.
 
-### [@bob-obringer/nextjs-sanity-image](public-packages/nextjs-sanity-image)
+### [@bob-obringer/nextjs-sanity-image](public-packages/nextjs-sanity-io-image)
 
 A Next.js Image component that works with Sanity.io image data, optimizations and supports transformations.
 

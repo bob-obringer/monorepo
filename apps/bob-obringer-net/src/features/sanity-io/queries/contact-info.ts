@@ -1,9 +1,6 @@
-import {
-  ContactInfo,
-  SanityImageAsset,
-} from "@/services/sanity-io/sanity-types";
 import groq from "groq";
-import { sanityClient } from "@/services/sanity-io/sanity-client";
+import { sanityIoClient } from "@/services/sanity-io-client";
+import { ContactInfo, SanityImageAsset } from "@bob-obringer/sanity-io-types";
 
 const contactInfoQuery = groq`*[_type == "contactInfo"] | order(orderRank asc) {
   _id,
@@ -17,7 +14,7 @@ const contactInfoQuery = groq`*[_type == "contactInfo"] | order(orderRank asc) {
 }`;
 
 export async function getAllContactInfo() {
-  return await sanityClient.fetch<Array<ContactInfoWithAsset>>(
+  return await sanityIoClient.fetch<Array<ContactInfoWithAsset>>(
     contactInfoQuery,
   );
 }

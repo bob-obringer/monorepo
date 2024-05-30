@@ -1,5 +1,5 @@
 import { Text } from "@bob-obringer/design-system";
-import { getDocument } from "@/services/sanity-io/get-document";
+import { getDocument } from "@/services/sanity-io-client";
 import { notFound } from "next/navigation";
 
 export default async function Home() {

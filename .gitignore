@@ -21,6 +21,7 @@ next-env.d.ts
 storybook-static
 .eslintcache
 .temp/
+generated/
 
 # debug
 npm-debug.log*

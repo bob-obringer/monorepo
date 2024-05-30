@@ -41,4 +41,4 @@ yarn-error.log*
 CHANGELOG.md
 
 # apps
-/packages/data/sanity-io/types/
+/packages/data/sanity-io-content/types/

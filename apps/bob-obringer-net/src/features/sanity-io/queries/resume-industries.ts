@@ -1,4 +1,4 @@
-import { sanityClient } from "@/services/sanity-io/sanity-client";
+import { sanityIoClient } from "@/services/sanity-io-client";
 import groq from "groq";
 
 let _industriesById: Map<string, string | null>;
@@ -13,7 +13,7 @@ export async function getIndustryById(id?: string) {
 }
 
 async function getResumeIndustries() {
-  return await sanityClient.fetch<Array<{ _id: string; name: string | null }>>(
-    groq`*[_type == "resumeIndustry"]{ _id, name }`,
-  );
+  return await sanityIoClient.fetch<
+    Array<{ _id: string; name: string | null }>
+  >(groq`*[_type == "resumeIndustry"]{ _id, name }`);
 }

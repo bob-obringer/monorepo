@@ -6,7 +6,7 @@ import {
 } from "@bob-obringer/http-errors";
 import { type MutationOperation, type SanityDocument } from "@sanity/client";
 import type { ReadableStream } from "node:stream/web";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 type SanityWebhookHandler<T extends SanityDocument = SanityDocument> = {
   documentType: string;
@@ -15,10 +15,17 @@ type SanityWebhookHandler<T extends SanityDocument = SanityDocument> = {
   | {
       handler: (doc: T, operation?: MutationOperation) => Promise<void>;
       revalidatePath?: string | Array<string>;
+      revalidateTag?: string | Array<string>;
     }
   | {
       handler?: (doc: T, operation?: MutationOperation) => Promise<void>;
       revalidatePath: string | Array<string>;
+      revalidateTag?: string | Array<string>;
+    }
+  | {
+      handler?: (doc: T, operation?: MutationOperation) => Promise<void>;
+      revalidatePath?: string | Array<string>;
+      revalidateTag: string | Array<string>;
     }
 );
 
@@ -48,6 +55,7 @@ export function createSanityWebhook<T extends SanityDocument>({
           handler,
           documentType,
           revalidatePath: _revalidatePath,
+          revalidateTag: _revalidateTag,
         } of handlers) {
           if (!isTargetDocumentType<T>(doc, documentType)) continue;
 
@@ -64,6 +72,14 @@ export function createSanityWebhook<T extends SanityDocument>({
               : [_revalidatePath];
             for (const path of paths) revalidatePath(path);
           }
+
+          if (_revalidateTag) {
+            const tags = Array.isArray(_revalidateTag)
+              ? _revalidateTag
+              : [_revalidateTag];
+            for (const tag of tags) revalidateTag(tag);
+          }
+
           if (handler) await handler(doc, sanityOperation);
         }
         return new Response("OK", { status: 200 });

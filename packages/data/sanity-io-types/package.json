@@ -1,0 +1,16 @@
+{
+  "name": "@bob-obringer/sanity-io-types",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "devDependencies": {
+    "@bob-obringer/sanity-io-content": "workspace:*"
+  }
+}

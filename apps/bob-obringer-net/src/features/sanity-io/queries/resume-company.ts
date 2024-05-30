@@ -1,9 +1,9 @@
 import groq from "groq";
-import { sanityClient } from "@/services/sanity-io/sanity-client";
+import { sanityIoClient } from "@/services/sanity-io-client";
 import {
   SanityImageAsset,
   ResumeCompany as SanityResumeCompany,
-} from "@/services/sanity-io/sanity-types";
+} from "@bob-obringer/sanity-io-types";
 import { SanityDocument } from "@sanity/client";
 
 export type ResumeCompany = Omit<
@@ -56,7 +56,7 @@ const resumeCompaniesQuery = groq`*[_type == "resumeCompany"]{
 } | order(startDate desc)`;
 
 export async function getResumeCompanies() {
-  return await sanityClient.fetch<ResumeCompany[]>(resumeCompaniesQuery);
+  return await sanityIoClient.fetch<ResumeCompany[]>(resumeCompaniesQuery);
 }
 
 /*
@@ -89,7 +89,7 @@ const resumeCompanyQuery = groq`*[_type == "resumeCompany" && slug == $slug]{
 }`;
 
 export async function getResumeCompany({ slug }: { slug: string }) {
-  const companies = await sanityClient.fetch<Array<ResumeCompany>>(
+  const companies = await sanityIoClient.fetch<Array<ResumeCompany>>(
     resumeCompanyQuery,
     { slug },
   );
