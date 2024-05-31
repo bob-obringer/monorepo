@@ -1,55 +1,99 @@
 "use client";
 
 import "@/features/ai-chatbot/components/chatbot.css";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, RefObject, useEffect, useRef } from "react";
 
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import {
-  faCheck,
   faInfoCircle,
-  faPauseCircle,
   faRobot,
-  faSpinner,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { MessageRole } from "@/features/ai-chatbot/types";
+import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
 import { cx, Text } from "@bob-obringer/design-system";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
 
-export function ChatbotBody() {
-  const { messages, messageStatus } = useChatbot();
+export function ChatbotBody({
+  scrollerRef,
+}: {
+  scrollerRef: RefObject<HTMLDivElement>;
+}) {
+  const { messages, chatbotStatus } = useChatbot();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView();
-  };
+  const resizeRef = useRef<HTMLDivElement | null>(null);
+
+  const isManuallyScrolled = useRef(false);
+
+  useEffect(() => {
+    if (
+      chatbotStatus === "idle" ||
+      chatbotStatus === "pending" ||
+      chatbotStatus === "active"
+    ) {
+      isManuallyScrolled.current = false;
+    }
+  }, [chatbotStatus, messages.length]);
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+
+    const handleScroll = () => {
+      if (
+        scroller &&
+        scroller.scrollTop < scroller.scrollHeight - scroller.clientHeight
+      ) {
+        isManuallyScrolled.current = true;
+      } else if (
+        scroller &&
+        scroller.scrollTop === scroller.scrollHeight - scroller.clientHeight
+      ) {
+        isManuallyScrolled.current = false;
+      }
+    };
+
+    scroller?.addEventListener("scroll", handleScroll);
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (!isManuallyScrolled.current) {
+        messagesEndRef.current?.scrollIntoView();
+      }
+    });
+
+    const resizeDiv = resizeRef.current;
+    if (resizeDiv) {
+      resizeObserver.observe(resizeDiv);
+    }
+
+    return () => {
+      scroller?.removeEventListener("scroll", handleScroll);
+      if (resizeDiv) {
+        resizeObserver.unobserve(resizeDiv);
+      }
+    };
+  }, [scrollerRef]);
 
   const lastMessage = messages[messages.length - 1];
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messageStatus, messages.length]);
-
-  useEffect(() => {
-    let interval: number = 0;
-    if (messageStatus !== "idle") {
-      interval = setInterval(scrollToBottom, 10) as unknown as number;
-    } else if (interval) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  });
-
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" ref={resizeRef}>
+      <Text
+        as="div"
+        className={"px-5 text-center"}
+        color="secondary"
+        variant="body-small"
+      >
+        {`I'm an AI ChatBot with an occasional wild streak.
+        While I'm powered by facts, I sometimes sprinkle in a dash of
+        imagination. Double-check anything important, and let's enjoy the
+        conversation!`}
+      </Text>
+      <hr className="border-[#ffffff22]" />
       {messages.map((m) => {
         return (
           <div key={m.id} className="whitespace-pre-wrap">
-            <Message
-              role={m.role}
-              isLastMessage={m.id === lastMessage?.id}
-              isLoading={["retrieving", "generating"].includes(messageStatus)}
-            >
+            <Message message={m} isLastMessage={m.id === lastMessage?.id}>
               {m.ui}
             </Message>
           </div>
@@ -69,7 +113,7 @@ const messageRoleInfo = {
   },
   assistant: {
     icon: faRobot,
-    roleName: "obringer.net Assistant",
+    roleName: "Bob's ChatBot",
     className: "bg-opacity-5 bg-[#ffffff]",
     titleClassName: "text-color-secondary",
   },
@@ -83,25 +127,31 @@ const messageRoleInfo = {
 
 function Message({
   children,
-  role,
+  message,
   isLastMessage = false,
-  isLoading = false,
 }: {
   children: ReactNode;
-  role: MessageRole;
+  message: ChatbotUIMessage;
   isLastMessage?: boolean;
-  isLoading?: boolean;
 }) {
-  const { className } = messageRoleInfo[role];
-  const isActiveMessage = isLastMessage && isLoading;
+  const { chatbotStatus } = useChatbot();
+  const { className } = messageRoleInfo[message.role];
+  const isActive = isLastMessage && chatbotStatus === "active";
 
   return (
     <div className={cx(className, "relative overflow-x-hidden")}>
-      <div className="flex flex-col gap-5 p-5">
-        <MessageTitle isLastMessage={isLastMessage} messageRole={role} />
-        <div>{children}</div>
+      <div className={"flex flex-col gap-5 p-5"}>
+        <MessageTitle isLastMessage={isLastMessage} message={message} />
+        <div
+          className={cx(
+            message.status === "cancelled" && "text-color-warning opacity-50",
+            message.status === "error" && "text-color-negative",
+          )}
+        >
+          {children}
+        </div>
       </div>
-      {isActiveMessage && (
+      {isActive && (
         <div className="loading-color-bar-wrapper">
           <div className="loading-color-bar" />
         </div>
@@ -111,13 +161,13 @@ function Message({
 }
 
 function MessageTitle({
-  messageRole,
+  message,
   isLastMessage,
 }: {
-  messageRole: MessageRole;
+  message: ChatbotUIMessage;
   isLastMessage: boolean;
 }) {
-  const { icon, roleName, titleClassName } = messageRoleInfo[messageRole];
+  const { icon, roleName, titleClassName } = messageRoleInfo[message.role];
 
   return (
     <div
@@ -128,77 +178,7 @@ function MessageTitle({
     >
       <FontAwesomeIcon icon={icon} size="lg" />
       <div className="typography-title-medium flex-1">{roleName}</div>
-      {isLastMessage && <MessageState />}
-    </div>
-  );
-}
-
-function MessageState() {
-  const { messageStatus, setMessageStatus } = useChatbot();
-
-  const [hide, setHide] = useState(false);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (messageStatus === "done") {
-      timeout = setTimeout(() => {
-        setHide(true);
-        setMessageStatus("idle");
-      }, 2000);
-    }
-    return () => clearTimeout(timeout);
-  }, [messageStatus, setMessageStatus]);
-
-  return (
-    <div
-      className={cx(
-        "flex flex-col items-center space-y-1 transition-opacity duration-500 md:flex-row md:justify-center md:space-x-2 md:space-y-0",
-        hide ? "opacity-0" : "opacity-75",
-      )}
-    >
-      <Text
-        as="div"
-        variant="label-mono-small"
-        className={cx(
-          "flex items-center gap-2 transition-colors md:flex-row-reverse",
-          "text-color-tertiary",
-          messageStatus === "retrieving" && "text-color-primary",
-          (messageStatus === "generating" || messageStatus === "done") &&
-            "text-[#66CC66]",
-        )}
-      >
-        <div>Retrieving</div>
-        <FontAwesomeIcon
-          icon={messageStatus === "retrieving" ? faSpinner : faCheck}
-          size="lg"
-          spin={messageStatus === "retrieving"}
-          className="w-4"
-        />
-      </Text>
-      <Text
-        as="div"
-        variant="label-mono-small"
-        className={cx(
-          "flex items-center gap-2 transition-colors md:flex-row-reverse",
-          "text-color-tertiary",
-          messageStatus === "generating" && "text-color-primary",
-          messageStatus === "done" && "text-[#66CC66]",
-        )}
-      >
-        <div>Generating</div>
-        <FontAwesomeIcon
-          icon={
-            ["done", "idle"].includes(messageStatus)
-              ? faCheck
-              : messageStatus === "generating"
-                ? faSpinner
-                : faPauseCircle
-          }
-          size="lg"
-          spin={messageStatus === "generating"}
-          className="w-4"
-        />
-      </Text>
+      {isLastMessage && <ChatbotMessageStatusIndicator message={message} />}
     </div>
   );
 }

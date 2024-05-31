@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ResumeCard, ResumeLinkCard } from "@/features/resume/resume-card";
+import { ResumeCard, ResumeLinkCard } from "@/components/resume-card";
 import { RenderTool } from "@/features/ai-chatbot/tools/types";
 
 export function resumeTool({

@@ -17,7 +17,7 @@ type SanityImageAsset = {
  * This type is used to type check the 'sanityImage' prop of the SanityImage component.
  * It includes the asset of the image.
  */
-type SanityImageField = {
+export type SanityImageField = {
   asset?: SanityImageAsset;
   _type: "image";
 };
