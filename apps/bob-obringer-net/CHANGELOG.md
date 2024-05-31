@@ -1,5 +1,18 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.14.0
+
+### Minor Changes
+
+- d193188: major chatbot improvements
+
+### Patch Changes
+
+- Updated dependencies [d193188]
+  - @bob-obringer/theme@0.1.0
+  - @bob-obringer/nextjs-sanity-io-image@0.2.0
+  - @bob-obringer/design-system@0.1.1
+
 ## 0.13.0
 
 ### Minor Changes
