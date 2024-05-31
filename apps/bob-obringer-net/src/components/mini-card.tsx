@@ -26,7 +26,7 @@ export function MiniCard({ href, iconName, logo, label, text }: CardProps) {
         <FontAwesomeIcon size="2x" width="2rem" icon={icons[`fa${iconName}`]} />
       )}
       {logo && (
-        <div className="overflow-hiden h-8 w-8 rounded-full">
+        <div className="overflow-hiden h-8 w-8">
           <NextJsSanityImage
             width={64}
             height={64}

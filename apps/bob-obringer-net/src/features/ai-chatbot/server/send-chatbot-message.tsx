@@ -25,6 +25,8 @@ import { ChatbotConfig, Homepage } from "@bob-obringer/sanity-io-types";
 import { models } from "@/services/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
 import { parseLLMMarkdown } from "@/features/ai-chatbot/server/parse-markdown";
+import { resumeTool } from "@/features/ai-chatbot/tools/resume";
+import { contactTool } from "@/features/ai-chatbot/tools/contact";
 
 export async function sendChatbotMessage({
   message,
@@ -101,10 +103,10 @@ export async function sendChatbotMessage({
         if (done) endStreams(content);
         return parseLLMMarkdown(content);
       },
-      // tools: {
-      //   resume: resumeTool({ endStreams }),
-      //   contact: contactTool({ endStreams }),
-      // },
+      tools: {
+        resume: resumeTool({ endStreams }),
+        contact: contactTool({ endStreams }),
+      },
       abortSignal: abortController.signal,
     });
 

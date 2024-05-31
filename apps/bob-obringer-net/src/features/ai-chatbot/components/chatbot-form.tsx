@@ -52,7 +52,7 @@ export function ChatbotForm() {
             Cancel
           </ChatbotButton>
         )}
-        {["idle", "done"].includes(chatbotStatus) && isOpen && (
+        {!inputValue && ["idle", "done"].includes(chatbotStatus) && isOpen && (
           <ChatbotButton
             type="button"
             onClick={() => {

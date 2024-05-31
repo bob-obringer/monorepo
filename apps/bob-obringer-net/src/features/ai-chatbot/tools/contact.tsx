@@ -37,7 +37,7 @@ the contactMethod to "all methods".`,
       endStreams("[Showing Contact Tool with all contact info]");
 
       return (
-        <div className="flex h-full flex-col items-center justify-center gap-4">
+        <div className="flex h-full flex-col gap-4">
           {contactInfo.map((contact) => (
             <ContactCard key={contact._id} contactInfo={contact} />
           ))}
