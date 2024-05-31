@@ -1,5 +1,11 @@
 # @bob-obringer/theme
 
+## 0.1.0
+
+### Minor Changes
+
+- d193188: major chatbot improvements
+
 ## 0.0.5
 
 ### Patch Changes

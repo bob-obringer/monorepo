@@ -1,5 +1,11 @@
 # @bob-obringer/nextjs-sanity-image
 
+## 0.2.0
+
+### Minor Changes
+
+- d193188: major chatbot improvements
+
 ## 0.1.2
 
 ### Patch Changes
