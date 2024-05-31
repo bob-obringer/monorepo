@@ -5,8 +5,8 @@ export function ResumeCard() {
     <MiniCard
       href="https://api.obringer.net/resume"
       label="PDF"
-      text={"Bob's Resume"}
-      iconName="faFileLines"
+      text={"Download Bob's Resume"}
+      iconName="FileLines"
     />
   );
 }
@@ -16,8 +16,8 @@ export function ResumeLinkCard() {
     <MiniCard
       href="https://bob.obringer.net/resume"
       label="Web"
-      text={"Bob's Experience Page"}
-      iconName="faHistory"
+      text={"View Bob's Experience"}
+      iconName="History"
     />
   );
 }
