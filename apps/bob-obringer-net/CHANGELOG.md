@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.14.1
+
+### Patch Changes
+
+- 96881ce: additional streaming fixes
+
 ## 0.14.0
 
 ### Minor Changes
