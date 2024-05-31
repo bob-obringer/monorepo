@@ -1,7 +1,7 @@
 "use client";
 
 import { cx } from "@bob-obringer/design-system";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { FooterNav } from "@/app/(app-layout)/_layout/app-footer/footer-nav";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
@@ -23,6 +23,8 @@ export function AppFooter({ className }: { className?: string }) {
     };
   }, [isOpen, close]);
 
+  const chatbotScrollerRef = useRef<HTMLDivElement>(null);
+
   return (
     <div
       className={cx(
@@ -32,9 +34,12 @@ export function AppFooter({ className }: { className?: string }) {
         isOpen ? "z-20 h-svh bg-[#0D141F]" : "h-36 md:h-40",
       )}
     >
-      <div className={cx(!isOpen && "hidden", "w-full flex-1 overflow-scroll")}>
+      <div
+        ref={chatbotScrollerRef}
+        className={cx(!isOpen && "hidden", "w-full flex-1 overflow-scroll")}
+      >
         <div className="mx-auto w-full max-w-screen-md flex-1 overflow-hidden text-balance px-2 pb-28 pt-5 md:px-5 md:pb-44">
-          <ChatbotBody />
+          <ChatbotBody scrollerRef={chatbotScrollerRef} />
         </div>
       </div>
       <footer

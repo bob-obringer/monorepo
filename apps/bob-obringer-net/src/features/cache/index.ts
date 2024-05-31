@@ -5,7 +5,3 @@ type CacheKey = "sanity:skills" | "sanity:companies";
 export function cache(fn: () => Promise<unknown>, key: CacheKey) {
   return unstable_cache(async () => await fn(), [key], { tags: [key] })();
 }
-
-export function revalidateTag(tag: CacheKey) {
-  revalidateTag(tag);
-}

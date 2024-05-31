@@ -12,7 +12,7 @@ export const themeConfig = {
     fontWeight: {
       "weight-normal": "400",
       "weight-medium": "500",
-      "weight-bold": "700",
+      "weight-bold": "600",
     },
     fontSize: {
       "size-xs": "12px",

@@ -8,18 +8,13 @@ import {
 } from "@/features/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io-client";
 import { createStreamableValue, getMutableAIState, streamUI } from "ai/rsc";
-import {
-  getFormattedJobs,
-  getFormattedSkills,
-  getRelevantCompanyHighlights,
-  getSystemPrompt,
-} from "@/features/ai-chatbot/server/chatbot-system-prompt";
+import { getSystemPrompt } from "@/features/ai-chatbot/server/chatbot-system-prompt";
 import { nanoid } from "ai";
 import {
-  MessageStatus,
-  SendChatbotMessageResponse,
+  SendChatbotMessageActionResponse,
+  SendChatbotMessageActionStatus,
+  SendChatbotMessageProps,
 } from "@/features/ai-chatbot/types";
-import { parseMarkdown } from "@/helpers/markdown/parse-markdown";
 import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 import { cache } from "@/features/cache";
 import {
@@ -29,45 +24,51 @@ import {
 import { ChatbotConfig, Homepage } from "@bob-obringer/sanity-io-types";
 import { models } from "@/services/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
-import { resumeTool } from "@/features/ai-chatbot/tools/resume";
-import { contactTool } from "@/features/ai-chatbot/tools/contact";
+import { parseLLMMarkdown } from "@/features/ai-chatbot/server/parse-markdown";
 
-export async function sendChatbotMessage(
-  message: string,
-): Promise<SendChatbotMessageResponse | null> {
-  const messageStatus = createStreamableValue<MessageStatus>("retrieving");
+export async function sendChatbotMessage({
+  message,
+  messageId,
+}: SendChatbotMessageProps): Promise<SendChatbotMessageActionResponse | null> {
+  const statusStream =
+    createStreamableValue<SendChatbotMessageActionStatus>("retrieving");
 
   // Rate Limit
   const { success } = await rateLimit();
   if (!success) {
-    messageStatus.done("done");
+    statusStream.done("success");
     return {
-      messageStatus: messageStatus.value,
-      ui: "You're sending messages too quickly.  Please slow down.",
+      status: statusStream.value,
+      ui: <>{`You're sending messages too quickly.  Please slow down.`}</>,
+      id: nanoid(),
     };
   }
 
   const aiState = getMutableAIState<ChatbotAIContext>();
 
   // When we end the response, we need to close all streams
-  function endStreams(content: string) {
+  function endStreams(
+    content: string,
+    status: SendChatbotMessageActionStatus = "success",
+  ) {
     aiState.done({
       ...aiState.get(),
       messages: [
         ...aiState.get().messages,
-        { id: nanoid(), role: "user", content: content },
+        { id: nanoid(), role: "assistant", content: content },
       ],
     });
-    messageStatus.done("done");
+    statusStream.done(status);
   }
 
+  const abortController = new AbortController();
   try {
     // Add user message to ai state
     aiState.update({
       ...aiState.get(),
       messages: [
         ...aiState.get().messages,
-        { id: nanoid(), role: "user", content: message },
+        { id: messageId, role: "user", content: message },
       ],
     });
 
@@ -79,19 +80,15 @@ export async function sendChatbotMessage(
       cache(getResumeCompanies, "sanity:companies"),
     ])) as [Homepage, ChatbotConfig, Array<ResumeSkill>, Array<ResumeCompany>];
 
-    // todo: just add this to the context, we don't need to rag companies
-    const highlights = await getRelevantCompanyHighlights(companies, message);
-
     // construct this from our system prompt
     const systemPrompt = getSystemPrompt({
       systemPromptInstructions: chatbotConfig.systemPromptInstructions,
-      formattedSkills: getFormattedSkills(skills),
-      formattedJobs: getFormattedJobs(companies),
+      skills,
+      companies,
       bio: homepage.bio,
-      highlights,
     });
 
-    messageStatus.update("generating");
+    statusStream.update("generating");
 
     // create ui stream
     const ui = await streamUI({
@@ -102,24 +99,28 @@ export async function sendChatbotMessage(
       initial: <>Thinking...</>,
       text: async ({ content, done }) => {
         if (done) endStreams(content);
-        const html = parseMarkdown(content);
-        return <div>{html}</div>;
+        return parseLLMMarkdown(content);
       },
-      tools: {
-        resume: resumeTool({ endStreams }),
-        contact: contactTool({ endStreams }),
-      },
+      // tools: {
+      //   resume: resumeTool({ endStreams }),
+      //   contact: contactTool({ endStreams }),
+      // },
+      abortSignal: abortController.signal,
     });
 
     return {
-      messageStatus: messageStatus.value,
-      ui: ui.value,
+      status: statusStream.value,
+      ui: <>{ui.value}</>,
+      id: nanoid(),
     };
   } catch (e) {
-    messageStatus.done("done");
+    console.error(e);
+    endStreams("[Responded with an error]", "error");
+    abortController.abort();
     return {
-      messageStatus: messageStatus.value,
-      ui: "An error occurred.  Please try again.",
+      status: statusStream.value,
+      ui: <>An error occurred. Please try again.</>,
+      id: nanoid(),
     };
   }
 }

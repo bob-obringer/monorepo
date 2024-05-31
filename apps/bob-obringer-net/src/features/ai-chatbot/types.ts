@@ -1,11 +1,5 @@
 import { CoreMessage } from "ai";
-import {
-  Dispatch,
-  FormEvent,
-  ReactNode,
-  RefObject,
-  SetStateAction,
-} from "react";
+import { FormEvent, ReactElement, RefObject } from "react";
 import { StreamableValue } from "ai/rsc";
 
 /*
@@ -29,10 +23,20 @@ export type ChatbotAIState = {
 /*
   Vercel UI State
  */
+export type ChatbotStatus =
+  | "idle"
+  | "pending"
+  | "active"
+  | "cancelling"
+  | "done";
+
+export type MessageStatus = SendChatbotMessageActionStatus | "cancelled";
+
 export type ChatbotUIMessage = Omit<CoreMessage, "content"> & {
   id: string;
   role: MessageRole;
-  ui: ReactNode;
+  ui: ReactElement;
+  status: MessageStatus;
 };
 
 export type ChatbotUIState = Array<ChatbotUIMessage>;
@@ -40,17 +44,27 @@ export type ChatbotUIState = Array<ChatbotUIMessage>;
 /*
   Actions
  */
-export type MessageStatus = "idle" | "retrieving" | "generating" | "done";
+export type SendChatbotMessageActionStatus =
+  | "retrieving"
+  | "generating"
+  | "success"
+  | "error";
 
-export type SendChatbotMessageResponse = {
-  messageStatus: StreamableValue<MessageStatus>;
-  ui: ReactNode;
+export type SendChatbotMessageActionResponse = {
+  status: StreamableValue<SendChatbotMessageActionStatus>;
+  ui: ReactElement;
+  id: string;
+};
+
+export type SendChatbotMessageProps = {
+  message: string;
+  messageId: string;
 };
 
 export type ChatbotActions = {
   sendChatbotMessage: (
-    message: string,
-  ) => Promise<SendChatbotMessageResponse | null>;
+    props: SendChatbotMessageProps,
+  ) => Promise<SendChatbotMessageActionResponse | null>;
 };
 
 /*
@@ -61,10 +75,13 @@ export type ChatbotContext = {
   close: () => void;
   open: () => void;
   messages: ChatbotUIMessage[];
-  messageStatus: MessageStatus;
-  setMessageStatus: Dispatch<SetStateAction<MessageStatus>>;
+  chatbotStatus: ChatbotStatus;
+  // setMessageStatus: Dispatch<SetStateAction<MessageStatus>>;
+  setChatbotStatus: (status: ChatbotStatus) => void;
+  cancel: () => void;
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   inputRef: RefObject<HTMLInputElement>;
   inputValue: string;
   setInputValue: (value: string) => void;
+  clearChat: () => void;
 };

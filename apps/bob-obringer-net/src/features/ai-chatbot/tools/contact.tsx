@@ -1,5 +1,5 @@
 import { RenderTool } from "@/features/ai-chatbot/tools/types";
-import { ContactCard } from "@/features/contacts/contact-card";
+import { ContactCard } from "@/components/contact-card";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { z } from "zod";
 

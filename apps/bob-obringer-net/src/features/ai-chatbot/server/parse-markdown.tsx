@@ -1,4 +1,4 @@
-import { marked } from "marked";
+import { marked, RendererObject } from "marked";
 import convertStringToReactNode from "html-react-parser";
 
 const headingLevels = [
@@ -10,7 +10,7 @@ const headingLevels = [
   "text-size-xs",
 ];
 
-const renderer = {
+const llmMarkdownRenderer: RendererObject = {
   heading(text: string, level: number) {
     return `<h${level} data-markdown class="${headingLevels[level - 1]} mt-4 mb-1 font-weight-bold">${text}</h${level}>`;
   },
@@ -23,11 +23,20 @@ const renderer = {
   hr() {
     return `<hr data-markdown class="border border-[#cccccc33] my-4" />`;
   },
+  code(code: string) {
+    return `<code data-markdown class="font-family-mono">${code}</code>`;
+  },
+  strong(text: string) {
+    return `<strong data-markdown class="font-weight-bold">${text}</strong>`;
+  },
+  paragraph(text: string) {
+    return `<p data-markdown class="block">${text}</p>`;
+  },
 };
 
-marked.use({ renderer });
+marked.use({ renderer: llmMarkdownRenderer });
 
-export async function parseMarkdown(markdown: string) {
+export async function parseLLMMarkdown(markdown: string) {
   const html = await marked.parse(markdown);
   return convertStringToReactNode(html);
 }

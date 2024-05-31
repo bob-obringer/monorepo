@@ -10,12 +10,17 @@ import {
   useState,
 } from "react";
 import { nanoid } from "ai";
-import { readStreamableValue, useActions, useUIState } from "ai/rsc";
+import {
+  readStreamableValue,
+  useActions,
+  useAIState,
+  useUIState,
+} from "ai/rsc";
 import { useAppUI } from "@/features/ui/app-ui-state-context";
 import {
   ChatbotContext,
   ChatbotUIMessage,
-  MessageStatus,
+  ChatbotStatus,
 } from "@/features/ai-chatbot/types";
 import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 
@@ -34,16 +39,19 @@ export function ChatbotInnerContextProvider({
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [_, setAiState] = useAIState<ChatbotAIContext>();
   const [messages, setMessages] = useUIState<ChatbotAIContext>();
+  const [chatbotStatus, setChatbotStatus] = useState<ChatbotStatus>("idle");
+
+  const activeAssistantMessageIdRef = useRef<string | null>(null);
+
   const { sendChatbotMessage } = useActions<ChatbotAIContext>();
 
-  const [messageStatus, setMessageStatus] = useState<MessageStatus>("idle");
-
   useEffect(() => {
-    if (messageStatus !== "idle") {
+    if (chatbotStatus !== "idle") {
       open();
     }
-  }, [messageStatus]);
+  }, [chatbotStatus]);
 
   function close() {
     document.body.style.overflow = "auto";
@@ -55,6 +63,31 @@ export function ChatbotInnerContextProvider({
     setIsOpen(true);
   }
 
+  function cancel() {
+    setChatbotStatus("cancelling");
+
+    setMessages((messages: Array<ChatbotUIMessage>) => {
+      const lastMessage = messages[messages.length - 1];
+      return [
+        ...messages.slice(0, -1),
+        {
+          id: lastMessage?.id ?? nanoid(),
+          ui: <>You cancelled my response</>,
+          status: "cancelled",
+          role: "assistant",
+        },
+      ];
+    });
+  }
+
+  function clearChat() {
+    setAiState({
+      id: nanoid(),
+      messages: [],
+    });
+    setMessages([]);
+  }
+
   /*
     Submit the user prompt
    */
@@ -62,51 +95,76 @@ export function ChatbotInnerContextProvider({
     // VERY IMPORTANT, otherwise the browser closes the stream
     e.preventDefault();
 
+    if (chatbotStatus === "active") {
+      cancel();
+      return;
+    }
+
     // initialize things
     setInputValue("");
     open();
     if ((viewportWidth ?? 0) < 768) {
-      console.log({ inputRef });
       inputRef.current?.blur();
     }
 
+    // create the new message
+    const messageId = nanoid();
     const newMessage = {
-      id: nanoid(),
+      id: messageId,
       role: "assistant",
       ui: <>Thinking...</>,
+      status: "retrieving",
     } as ChatbotUIMessage;
 
     // add the new messages to the chat
     setMessages((prev: Array<ChatbotUIMessage>) => [
       ...prev,
-      { id: nanoid(), role: "user", ui: inputValue },
+      { id: nanoid(), role: "user", ui: <>{inputValue}</>, status: "success" },
       newMessage,
     ]);
 
-    // send the message to the server
-    // todo: this response should be validated at runtime
-    setMessageStatus("retrieving");
-    const resp = await sendChatbotMessage(inputValue);
+    setChatbotStatus("pending");
+
+    /*
+      Send the message to the server action
+     */
+    const resp = await sendChatbotMessage({ message: inputValue, messageId });
     if (!resp) {
-      // todo: handle this
-      throw new Error("No response from server");
+      newMessage.ui = <>Error: No response from server</>;
+      newMessage.status = "error";
+      return;
     }
+    activeAssistantMessageIdRef.current = resp.id;
 
     // read the stream values and update when they're ready
     dontBlock(async () => {
-      for await (const value of readStreamableValue(resp.messageStatus)) {
-        if (value) setMessageStatus(value);
+      for await (const value of readStreamableValue(resp.status)) {
+        // this lets us submit a new request before an old cancelled request
+        // is finished.  We stop processing updates fromt the cancelled request
+        if (!value || activeAssistantMessageIdRef.current !== resp.id) {
+          return;
+        }
+
+        // if the existing message has been cancelled, don't update the status
+        if (newMessage.status !== "cancelled") {
+          newMessage.status = value;
+        }
+
+        // update the chat status
+        if (["retrieving", "generating"].includes(value)) {
+          setChatbotStatus("active");
+        }
+        if (["success", "error"].includes(value)) {
+          setChatbotStatus("done");
+          setTimeout(() => {
+            setChatbotStatus("idle");
+          }, 2500);
+        }
       }
     });
 
     newMessage.ui = resp.ui;
   }
-
-  useEffect(() => {
-    if (isOpen) {
-      inputRef.current?.focus();
-    }
-  }, [isOpen]);
 
   return (
     <ChatbotInnerContext.Provider
@@ -115,12 +173,14 @@ export function ChatbotInnerContextProvider({
         close,
         open,
         messages,
-        messageStatus,
-        setMessageStatus,
+        chatbotStatus,
+        setChatbotStatus,
+        cancel,
         onFormSubmit,
         inputValue,
         setInputValue,
         inputRef,
+        clearChat,
       }}
     >
       {children}

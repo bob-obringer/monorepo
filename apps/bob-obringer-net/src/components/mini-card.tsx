@@ -1,38 +1,43 @@
-import { NextJsSanityImage } from "@bob-obringer/nextjs-sanity-io-image";
-
-import { ContactInfoWithAsset } from "@/features/sanity-io/queries/contact-info";
+import { Text } from "@bob-obringer/design-system";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
-import { Text } from "@bob-obringer/design-system";
+import {
+  NextJsSanityImage,
+  SanityImageField,
+} from "@bob-obringer/nextjs-sanity-io-image";
 
-export function ContactCard({
-  contactInfo,
-}: {
-  contactInfo: ContactInfoWithAsset;
-}) {
-  const { contactMethod, text, icon, url, logo } = contactInfo;
+interface CardProps {
+  href: string;
+  iconName?: string;
+  label: string;
+  text: string;
+  logo?: SanityImageField;
+}
+
+export function MiniCard({ href, iconName, logo, label, text }: CardProps) {
   return (
     <a
-      href={url}
+      href={href}
+      target="_blank"
       className="flex w-full max-w-72 items-center gap-4 rounded border border-[#ffffff11] bg-[#ffffff11] px-4 py-2"
     >
-      {icon && (
+      {iconName && (
         // @ts-expect-error can't index icons like this
-        <FontAwesomeIcon size="2x" width="2rem" icon={icons[`fa${icon}`]} />
+        <FontAwesomeIcon size="2x" width="2rem" icon={icons[`fa${iconName}`]} />
       )}
       {logo && (
         <div className="overflow-hiden h-8 w-8 rounded-full">
           <NextJsSanityImage
             width={64}
             height={64}
-            alt={contactMethod ?? ""}
+            alt={label}
             sanityImage={logo}
           />
         </div>
       )}
       <div>
         <Text as="div" variant="label-small" color="secondary">
-          {contactMethod}
+          {label}
         </Text>
         <Text as="div" variant="body-large">
           {text}

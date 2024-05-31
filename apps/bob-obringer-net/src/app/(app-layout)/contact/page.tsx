@@ -1,4 +1,4 @@
-import { ContactCard } from "@/features/contacts/contact-card";
+import { ContactCard } from "@/components/contact-card";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { Metadata } from "next";
 
