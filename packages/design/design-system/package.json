@@ -21,12 +21,12 @@
   },
   "devDependencies": {
     "@bob-obringer/theme": "workspace:*",
-    "react": "workspace:*",
-    "react-dom": "workspace:*",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tailwindcss": "workspace:*"
   },
   "peerDependencies": {
-    "react": "workspace:*",
-    "react-dom": "workspace:*"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

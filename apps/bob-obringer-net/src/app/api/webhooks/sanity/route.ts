@@ -9,7 +9,11 @@ const { POST } = createSanityWebhook({
       documentType: "resumeCompany",
       operations: ["create", "update"],
       handler: handleResumeCompanyCreateOrUpdate,
-      revalidatePath: "/experience",
+      revalidatePath: [
+        "/experience",
+        "/experience/[slug]",
+        "(app-layout)/experience/[slug]",
+      ],
       revalidateTag: "sanity:companies",
     },
     {

@@ -28,10 +28,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "next": "workspace:*",
+    "next": "14.2.3",
     "posthog-js": "workspace:*",
-    "react": "workspace:*",
-    "react-dom": "workspace:*"
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "peerDependencies": {
     "next": ">=14.2",
