@@ -30,7 +30,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "tailwindcss": "workspace:*"
+    "tailwindcss": "3.4.3"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.4"

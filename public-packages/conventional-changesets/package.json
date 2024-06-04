@@ -27,11 +27,10 @@
     "build": "tsc",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
-    "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "zbuild": "tsc && tsc -p tsconfig.cli.json"
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "commander": "workspace:*",
+    "commander": "12.1.0",
     "conventional-commits-parser": "5.0.0"
   },
   "devDependencies": {

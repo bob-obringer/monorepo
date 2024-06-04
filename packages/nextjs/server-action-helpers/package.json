@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "@bob-obringer/http-errors": "workspace:*",
-    "neverthrow": "workspace:*"
+    "neverthrow": "6.2.2"
   }
 }
