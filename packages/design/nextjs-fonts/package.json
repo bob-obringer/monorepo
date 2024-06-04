@@ -12,9 +12,9 @@
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
-    "next": "workspace:*"
+    "next": "14.2.3"
   },
   "peerDependencies": {
-    "next": "workspace:*"
+    "next": "^14.2.3"
   }
 }

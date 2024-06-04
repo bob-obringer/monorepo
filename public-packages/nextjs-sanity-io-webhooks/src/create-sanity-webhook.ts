@@ -70,7 +70,7 @@ export function createSanityWebhook<T extends SanityDocument>({
             const paths = Array.isArray(_revalidatePath)
               ? _revalidatePath
               : [_revalidatePath];
-            for (const path of paths) revalidatePath(path);
+            for (const path of paths) revalidatePath(path, "page");
           }
 
           if (_revalidateTag) {

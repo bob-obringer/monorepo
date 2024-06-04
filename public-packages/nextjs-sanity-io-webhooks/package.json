@@ -32,10 +32,10 @@
     "@sanity/webhook": "4.0.4"
   },
   "devDependencies": {
-    "next": "workspace:*"
+    "next": "14.2.3"
   },
   "peerDependencies": {
-    "next": ">=4"
+    "next": ">=14"
   },
   "publishConfig": {
     "access": "public"

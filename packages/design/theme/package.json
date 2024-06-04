@@ -13,6 +13,6 @@
   "dependencies": {
     "@bob-obringer/tw-color-schemes": "workspace:*",
     "@radix-ui/colors": "3.0.0",
-    "tailwindcss": "workspace:*"
+    "tailwindcss": "3.4.3"
   }
 }

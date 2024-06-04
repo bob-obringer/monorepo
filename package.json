@@ -17,20 +17,20 @@
     "@bob-obringer/conventional-changesets": "workspace:*",
     "@bob-obringer/eslint-plugin": "workspace:*",
     "@bob-obringer/tsconfig": "workspace:*",
-    "@changesets/cli": "2.27.1",
+    "@changesets/cli": "2.27.5",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/types": "^19.0.3",
-    "@types/node": "20.12.8",
-    "@types/react": "18.3.2",
+    "@types/node": "20.14.1",
+    "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "commitlint": "^19.3.0",
     "eslint": "8.57.0",
     "eslint-config-turbo": "1.13.3",
     "husky": "9.0.11",
-    "lint-staged": "15.2.2",
-    "prettier": "3.2.5",
+    "lint-staged": "15.2.5",
+    "prettier": "3.3.0",
     "prettier-plugin-packagejson": "2.5.0",
-    "prettier-plugin-tailwindcss": "0.5.14",
+    "prettier-plugin-tailwindcss": "0.6.1",
     "rimraf": "5.0.7",
     "tsx": "4.9.3",
     "turbo": "1.13.3",
@@ -40,17 +40,5 @@
   "engines": {
     "node": ">=20.10.0",
     "pnpm": ">=8.15.7"
-  },
-  "pnpm": {
-    "overrides": {
-      "commander": "12.0.0",
-      "neverthrow": "6.2.1",
-      "next": "14.2.3",
-      "posthog-js": "1.131.4",
-      "react": "18.3.1",
-      "react-dom": "18.3.1",
-      "tailwindcss": "3.4.3",
-      "zod": "3.23.8"
-    }
   }
 }

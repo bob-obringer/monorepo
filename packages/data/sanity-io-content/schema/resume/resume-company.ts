@@ -33,6 +33,11 @@ export const resumeCompany = defineType({
       type: "string",
     },
     {
+      name: "isConsultant",
+      title: "Consultant",
+      type: "boolean",
+    },
+    {
       name: "industry",
       title: "Industry",
       type: "reference",

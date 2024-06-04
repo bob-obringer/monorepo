@@ -14,6 +14,6 @@
   "dependencies": {
     "@bob-obringer/ai-embedding": "workspace:*",
     "@pinecone-database/pinecone": "2.2.1",
-    "neverthrow": "workspace:*"
+    "neverthrow": "6.2.2"
   }
 }

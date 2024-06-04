@@ -67,7 +67,9 @@ export default async function ResumePage({
               <CategorizedGroup title="Size">
                 {Number(company.size).toLocaleString()}
               </CategorizedGroup>
-              <CategorizedGroup title={startDate === endDate ? "In" : "From"}>
+              <CategorizedGroup
+                title={`${company.isConsultant ? "Consultant" : "Employee"} ${startDate === endDate ? "In" : "From"}`}
+              >
                 <Text variant="body-medium" color="secondary">
                   {startDate}
                   {endDate !== startDate ? ` to ${endDate}` : ""}
@@ -86,16 +88,18 @@ function CategorizedGroup({
   children,
 }: {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <div className="flex flex-col space-y-1">
       <Text as="h4" variant="label-small" color="tertiary">
         {title}
       </Text>
-      <Text variant="body-medium" color="secondary">
-        {children}
-      </Text>
+      {children && (
+        <Text variant="body-medium" color="secondary">
+          {children}
+        </Text>
+      )}
     </div>
   );
 }
