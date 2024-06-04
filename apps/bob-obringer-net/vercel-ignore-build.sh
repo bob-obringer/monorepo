@@ -9,6 +9,7 @@ fi
 
 echo "RUNNING"
 git log -1 --pretty=oneline --abbrev-commit
+git log -1 --pretty=oneline --abbrev-commit | grep -w "[\skip vercel ci\]"
 
 if git log -1 --pretty=oneline --abbrev-commit | grep -w "[\skip vercel ci\]"; then
   echo "Commit message contains '[skip vercel ci]', skipping build."
