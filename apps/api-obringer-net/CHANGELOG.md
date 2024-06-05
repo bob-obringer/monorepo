@@ -1,5 +1,11 @@
 # @bob-obringer/api-obringer-net
 
+## 0.5.0
+
+### Minor Changes
+
+- dd5305c: added resume downloads to experience page
+
 ## 0.4.0
 
 ### Minor Changes

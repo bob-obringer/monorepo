@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.16.0
+
+### Minor Changes
+
+- dd5305c: added resume downloads to experience page
+
 ## 0.15.0
 
 ### Minor Changes
