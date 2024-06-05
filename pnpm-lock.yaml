@@ -93,6 +93,9 @@ importers:
         specifier: 3.23.8
         version: 3.23.8
     devDependencies:
+      '@bob-obringer/sanity-io-types':
+        specifier: workspace:*
+        version: link:../../packages/data/sanity-io-types
       '@bob-obringer/tsconfig':
         specifier: workspace:*
         version: link:../../public-packages/tsconfig

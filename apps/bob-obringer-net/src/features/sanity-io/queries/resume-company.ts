@@ -10,21 +10,21 @@ export type ResumeCompany = Omit<
   SanityResumeCompany,
   "highlights" | "industry"
 > & {
-  logo: SanityImageAsset | null;
+  logo: SanityImageAsset;
   industry: {
-    name: string | null;
-  } | null;
+    name: string;
+  };
   highlights: Array<{
     _key: string;
-    text: string | null;
+    text: string;
     skills: Array<{
-      name: string | null;
+      name: string;
       category: {
-        name: string | null;
-        orderRank: string | null;
-      } | null;
-    }> | null;
-  }> | null;
+        name: string;
+        orderRank: string;
+      };
+    }>;
+  }>;
 } & SanityDocument;
 
 /*

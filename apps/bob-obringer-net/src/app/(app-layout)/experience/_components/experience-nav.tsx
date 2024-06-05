@@ -1,6 +1,5 @@
 import { cx } from "@bob-obringer/design-system";
-import { ExperienceList } from "@/app/(app-layout)/experience/experience-list";
-import { ExperienceUseAiCopy } from "@/app/(app-layout)/experience/experience-use-ai-copy";
+import { ExperienceList } from "@/app/(app-layout)/experience/_components/experience-list";
 import { getResumeCompanies } from "@/features/sanity-io/queries/resume-company";
 
 export async function ExperienceNav({ className }: { className?: string }) {
@@ -13,7 +12,6 @@ export async function ExperienceNav({ className }: { className?: string }) {
         "mx-auto w-full max-w-md overflow-scroll pl-2 has-[>_.flex-row]:max-w-full md:max-w-md lg:pl-0",
       )}
     >
-      <ExperienceUseAiCopy />
       <ExperienceList resumeCompanies={resumeCompanies} />
     </nav>
   );

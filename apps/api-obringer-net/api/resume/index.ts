@@ -1,16 +1,24 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import PDFDocument from "pdfkit";
 import {
+  getFeaturedResumeSkills,
   getHomepage,
   getResumeCompanies,
-} from "../_services/sanity-io/queries/resume-company.js";
+} from "../_services/sanity-io/queries.js";
 import { vercelBlob } from "../_services/vercel-blob.js";
 
 function inch(n: number) {
   return n * 72;
 }
 
-const margin = inch(0.75);
+function qinch(n: number) {
+  return n * 18;
+}
+
+const margin = qinch(3);
+
+const firstColumnWidth = 336;
+const secondColumnX = margin + firstColumnWidth + qinch(2);
 
 async function registerFonts(
   doc: typeof PDFDocument,
@@ -33,9 +41,13 @@ export default async function handler(
   _req: VercelRequest,
   res: VercelResponse,
 ) {
+  const homepage = await getHomepage();
+  const companies = await getResumeCompanies();
+  const featuredSkills = await getFeaturedResumeSkills();
+
   const doc = new PDFDocument({
     size: "LETTER",
-    margins: { top: margin, left: margin, right: margin, bottom: 0 },
+    margins: { top: margin, left: margin, right: qinch(2), bottom: 0 },
   });
 
   await registerFonts(doc, [
@@ -50,38 +62,71 @@ export default async function handler(
   doc
     .font("body", 12)
     .fillColor([40, 112, 189])
-    .text("bob.obringer.net", margin, margin, {
-      align: "right",
-      baseline: "hanging",
+    .text("bob.obringer.net", secondColumnX, margin + inch(0.3), {
+      link: "https://bob.obringer.net",
       lineGap: 4,
     })
     .text("bob@obringer.net", {
-      align: "right",
-      baseline: "hanging",
       lineGap: 4,
     })
     .fillColor("black")
-    .text("917-656-1685", {
-      align: "right",
-      baseline: "hanging",
-    });
+    .text("917-656-1685");
 
   // Name and Title
   doc
     .font("heading", 42)
-    .text("Bob Obringer", margin, margin, { baseline: "hanging" })
-    .moveUp(0.2)
+    .text(homepage.title ?? "", margin, margin)
     .font("heading", 24)
-    .text("Product Architect", {
+    .text(homepage.subtitle ?? "", {
       baseline: "hanging",
     });
 
   // get resume
-  const homepage = await getHomepage();
-  doc.moveDown(1);
-  doc.font("body", 14).text(homepage.bio, { lineGap: 8 });
 
-  const companies = await getResumeCompanies();
+  doc.moveDown(1);
+  const currentY = doc.y;
+
+  // First column
+  doc
+    .font("body", 12)
+    .text(homepage.bio ?? "", { lineGap: 8, width: firstColumnWidth });
+
+  doc.text("", secondColumnX, currentY);
+
+  // Second column
+  for (const category of featuredSkills) {
+    doc.font("title", 9).fillColor("black", 0.4).text(category.name);
+    doc.moveDown(0.4);
+    doc
+      .font("body", 10)
+      .fillColor("black", 1)
+      .text(Array.from(category.skills).join(", "), {
+        lineGap: 3,
+      });
+    doc.moveDown(1);
+  }
+
+  const bottomMargin = inch(11) - margin;
+  doc
+    .moveTo(margin, bottomMargin)
+    .lineTo(inch(8.5) - margin, bottomMargin)
+    .strokeColor("lightgray")
+    .stroke();
+
+  doc.text("", margin, bottomMargin + qinch(0.5));
+  doc
+    .font("body", 9)
+    .fillColor("gray")
+    .text(
+      "Talk to my chatbot at bob.obringer.net for a more complete list of skills and experience",
+      {
+        align: "center",
+        link: "https://bob.obringer.net",
+        continued: true,
+      },
+    );
+
+  doc.text("", margin, doc.y);
 
   doc.addPage();
 
