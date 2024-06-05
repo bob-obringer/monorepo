@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.6.0
+
+### Minor Changes
+
+- e38bfbe: added new resume featured skills
+
 ## 0.5.1
 
 ### Patch Changes

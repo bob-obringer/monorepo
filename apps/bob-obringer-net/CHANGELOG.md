@@ -1,5 +1,15 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.15.0
+
+### Minor Changes
+
+- e38bfbe: added new resume featured skills
+
+### Patch Changes
+
+- @bob-obringer/sanity-io-types@0.0.2
+
 ## 0.14.1
 
 ### Patch Changes
