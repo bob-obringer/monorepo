@@ -91,7 +91,7 @@ type Skill = {
   };
 };
 
-type CategorizedSkill = {
+export type CategorizedSkill = {
   name: string;
   skills: Set<string>;
 };
