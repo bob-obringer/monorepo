@@ -17,9 +17,28 @@ export const resumeSkill = defineType({
       to: [{ type: "resumeSkillCategory" }],
     },
     {
+      name: "isFeatured",
+      title: "Is Featured",
+      type: "boolean",
+    },
+    {
       name: "orderRank",
       type: "string",
       hidden: true,
     },
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "category.name",
+      isFeatured: "isFeatured",
+    },
+    prepare({ title, subtitle, isFeatured }) {
+      return {
+        title,
+        subtitle,
+        media: <span>{isFeatured ? "✅" : "🎫"}</span>,
+      };
+    },
+  },
 });

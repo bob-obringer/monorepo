@@ -15,25 +15,30 @@ export function ExperienceList({
   const selectedCompany = segments[0];
 
   return (
-    <ul
-      className={cx(
-        "flex md:space-y-1 md:px-0",
-        selectedCompany && "flex-row space-x-1 md:flex-col md:space-x-0",
-        !selectedCompany && "flex-col",
-      )}
-    >
-      {resumeCompanies.map((company) => (
-        <ExperienceListItem key={company._id} company={company} />
-      ))}
-    </ul>
+    <>
+      <ul className="border-b-color-tertiary mb-1.5 border-b py-1.5">
+        <ExperienceListItem />
+      </ul>
+      <ul
+        className={cx(
+          "flex md:space-y-1 md:px-0",
+          selectedCompany && "flex-row space-x-1 md:flex-col md:space-x-0",
+          !selectedCompany && "flex-col",
+        )}
+      >
+        {resumeCompanies.map((company) => (
+          <ExperienceListItem key={company._id} company={company} />
+        ))}
+      </ul>
+    </>
   );
 }
 
-function ExperienceListItem({ company }: { company: ResumeCompany }) {
+function ExperienceListItem({ company }: { company?: ResumeCompany } = {}) {
   const segments = useSelectedLayoutSegments();
   const slug = segments[0];
 
-  const isSelected = slug === company.slug;
+  const isSelected = slug === company?.slug;
 
   return (
     <li
@@ -44,21 +49,19 @@ function ExperienceListItem({ company }: { company: ResumeCompany }) {
           : "",
       )}
     >
-      <ExperienceItemLink href={`/experience/${company.slug}`}>
-        <Text
-          as="div"
-          variant={slug ? "body-medium" : "body-large"}
-          className="line-clamp-1"
-        >
-          {company.name}
+      <ExperienceItemLink
+        href={company ? `/experience/${company.slug}` : "/experience"}
+      >
+        <Text as="div" variant="body-medium" className="line-clamp-1">
+          {company?.name ?? "Bob Obringer"}
         </Text>
         <Text
           as="div"
-          variant={slug ? "body-small" : "body-medium"}
+          variant="body-small"
           color="secondary"
           className="line-clamp-1"
         >
-          {company.position}
+          {company?.position ?? "Product Engineer"}
         </Text>
       </ExperienceItemLink>
     </li>
