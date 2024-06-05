@@ -30,16 +30,14 @@ export default async function ResumePage({
   if (!company) return notFound();
 
   return (
-    <div className="space-y-5 px-5 pb-8 md:pl-0">
-      <div className="flex items-center justify-between space-x-4">
-        <div>
-          <Text as="h3" variant="title-large">
-            {company.name}
-          </Text>
-          <Text as="h4" variant="title-medium" color="secondary">
-            {company.position}
-          </Text>
-        </div>
+    <main className="space-y-5 px-5 pb-8 md:pl-0">
+      <div>
+        <Text as="h3" variant="title-large">
+          {company.name}
+        </Text>
+        <Text as="h4" variant="title-medium" color="secondary">
+          {company.position}
+        </Text>
       </div>
 
       <hr className="h-px border-0 bg-[#ffffff22]" />
@@ -64,7 +62,7 @@ export default async function ResumePage({
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
