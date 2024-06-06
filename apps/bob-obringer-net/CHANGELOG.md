@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.17.0
+
+### Minor Changes
+
+- c2546e3: new homepage
+
 ## 0.16.0
 
 ### Minor Changes
