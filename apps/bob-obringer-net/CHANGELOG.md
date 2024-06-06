@@ -1,5 +1,15 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.18.0
+
+### Minor Changes
+
+- f420f77: moved more config to cms
+
+### Patch Changes
+
+- @bob-obringer/sanity-io-types@0.0.2
+
 ## 0.17.0
 
 ### Minor Changes

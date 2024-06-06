@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.7.0
+
+### Minor Changes
+
+- f420f77: moved more config to cms
+
 ## 0.6.0
 
 ### Minor Changes

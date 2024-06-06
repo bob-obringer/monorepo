@@ -1,5 +1,11 @@
 # @bob-obringer/api-obringer-net
 
+## 0.6.0
+
+### Minor Changes
+
+- f420f77: moved more config to cms
+
 ## 0.5.0
 
 ### Minor Changes
