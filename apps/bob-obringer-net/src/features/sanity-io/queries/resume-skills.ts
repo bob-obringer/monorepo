@@ -17,7 +17,8 @@ const resumeSkillQuery = groq`*[_type == "resumeSkill"]{
   name,
   orderRank,
   category->{
-    name
+    name,
+    orderRank
   }
 } | order(orderRank asc)`;
 
@@ -33,7 +34,8 @@ const featuredResumeSkillQuery = groq`*[_type == "resumeSkill" && isFeatured == 
   name,
   orderRank,
   category->{
-    name
+    name,
+    orderRank
   }
 } | order(orderRank asc)`;
 
