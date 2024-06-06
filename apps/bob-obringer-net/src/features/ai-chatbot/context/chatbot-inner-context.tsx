@@ -94,7 +94,10 @@ export function ChatbotInnerContextProvider({
   async function onFormSubmit(e: FormEvent<HTMLFormElement>) {
     // VERY IMPORTANT, otherwise the browser closes the stream
     e.preventDefault();
+    await submitMessage(inputValue);
+  }
 
+  async function submitMessage(messageText: string) {
     if (chatbotStatus === "active") {
       cancel();
       return;
@@ -119,7 +122,7 @@ export function ChatbotInnerContextProvider({
     // add the new messages to the chat
     setMessages((prev: Array<ChatbotUIMessage>) => [
       ...prev,
-      { id: nanoid(), role: "user", ui: <>{inputValue}</>, status: "success" },
+      { id: nanoid(), role: "user", ui: <>{messageText}</>, status: "success" },
       newMessage,
     ]);
 
@@ -128,7 +131,7 @@ export function ChatbotInnerContextProvider({
     /*
       Send the message to the server action
      */
-    const resp = await sendChatbotMessage({ message: inputValue, messageId });
+    const resp = await sendChatbotMessage({ message: messageText, messageId });
     if (!resp) {
       newMessage.ui = <>Error: No response from server</>;
       newMessage.status = "error";
@@ -177,6 +180,7 @@ export function ChatbotInnerContextProvider({
         setChatbotStatus,
         cancel,
         onFormSubmit,
+        submitMessage,
         inputValue,
         setInputValue,
         inputRef,

@@ -84,7 +84,7 @@ export function ChatbotBody({
         color="secondary"
         variant="body-small"
       >
-        {`I'm an AI ChatBot with an occasional wild streak.
+        {`I'm a chatbot with an occasional wild streak.
         While I'm powered by facts, I sometimes sprinkle in a dash of
         imagination. Double-check anything important, and let's enjoy the
         conversation!`}

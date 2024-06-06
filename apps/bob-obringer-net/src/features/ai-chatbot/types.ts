@@ -76,10 +76,10 @@ export type ChatbotContext = {
   open: () => void;
   messages: ChatbotUIMessage[];
   chatbotStatus: ChatbotStatus;
-  // setMessageStatus: Dispatch<SetStateAction<MessageStatus>>;
   setChatbotStatus: (status: ChatbotStatus) => void;
   cancel: () => void;
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  submitMessage: (text: string) => void;
   inputRef: RefObject<HTMLInputElement>;
   inputValue: string;
   setInputValue: (value: string) => void;

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { AppFooter } from "@/app/(app-layout)/_layout/app-footer";
-import { AppHeader } from "@/app/(app-layout)/app-header";
+import { AppHeader } from "@/app/(app-layout)/_layout/app-header";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
