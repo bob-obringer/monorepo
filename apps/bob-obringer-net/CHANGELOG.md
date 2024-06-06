@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.18.1
+
+### Patch Changes
+
+- e3c516c: fixed sorting on skills categories
+
 ## 0.18.0
 
 ### Minor Changes
