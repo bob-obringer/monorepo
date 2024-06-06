@@ -6,6 +6,7 @@ import {
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { CompanySkills } from "@/app/(app-layout)/experience/_components/experience-skills";
+import { ExperiencePageBody } from "@/app/(app-layout)/experience/_layout/experience-page-body";
 
 export async function generateMetadata({
   params: { slug },
@@ -30,18 +31,10 @@ export default async function ResumePage({
   if (!company) return notFound();
 
   return (
-    <main className="space-y-5 px-5 pb-8 md:pl-0">
-      <div>
-        <Text as="h3" variant="title-large">
-          {company.name}
-        </Text>
-        <Text as="h4" variant="title-medium" color="secondary">
-          {company.position}
-        </Text>
-      </div>
-
-      <hr className="h-px border-0 bg-[#ffffff22]" />
-      <div className="flex flex-1 flex-col space-y-10 md:flex-row md:space-x-10 md:space-y-0">
+    <ExperiencePageBody
+      title={company.name ?? ""}
+      subtitle={company.position ?? ""}
+      body={
         <ul className="flex-[2] space-y-5">
           {company.highlights?.map((highlight) => (
             <Text
@@ -54,15 +47,17 @@ export default async function ResumePage({
             </Text>
           ))}
         </ul>
-        <div className="flex flex-1 flex-col space-y-5">
+      }
+      sidebar={
+        <>
           <CompanySkills company={company} />
-          <hr className="h-px border-0 bg-[#ffffff22]" />
+          <hr className="border-color-tertiary my-4" />
           <div className="flex flex-col space-y-5">
             <CompanyMeta company={company} />
           </div>
-        </div>
-      </div>
-    </main>
+        </>
+      }
+    />
   );
 }
 
