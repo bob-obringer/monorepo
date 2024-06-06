@@ -39,37 +39,38 @@ export function ExperienceSkills({ skills }: { skills: Skills }) {
 
 type Skill = {
   name: string;
+  orderRank: string;
   category: {
     name: string;
+    orderRank: string;
   };
 };
 
 type CategorizedSkill = {
   name: string;
+  orderRank: string;
   skills: Set<string>;
 };
 
 export function getCategorizedSkills(
   skills: Array<Skill>,
 ): Array<CategorizedSkill> {
-  return skills.filter(isNotNull).reduce(
-    (acc, { name, category }) => {
+  return skills
+    .filter(isNotNull)
+    .reduce((acc, { name, category }) => {
       const categoryName = category.name;
 
       const existingCategory = acc.find((item) => item.name === categoryName);
       if (!existingCategory) {
         acc.push({
           name: categoryName,
+          orderRank: category.orderRank,
           skills: new Set([name]),
         });
       } else {
         existingCategory.skills.add(name);
       }
       return acc;
-    },
-    [] as Array<{
-      name: string;
-      skills: Set<string>;
-    }>,
-  );
+    }, [] as Array<CategorizedSkill>)
+    .sort((a, b) => a.orderRank.localeCompare(b.orderRank));
 }
