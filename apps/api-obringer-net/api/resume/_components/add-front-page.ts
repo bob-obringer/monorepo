@@ -1,6 +1,6 @@
 import { CategorizedSkill } from "../../_services/sanity-io/queries.js";
 import { inch, linkColor, margin, PDF, qinch, resetY } from "./helpers.js";
-import { Homepage } from "@bob-obringer/sanity-io-types";
+import { AboutBob } from "@bob-obringer/sanity-io-types";
 import { font } from "./create-document.js";
 import { addFooter } from "./add-footer.js";
 
@@ -9,7 +9,7 @@ const secondColumnX = margin + firstColumnWidth + qinch(2);
 
 export function addFrontPage(
   doc: PDF,
-  homepage: Homepage,
+  aboutBob: AboutBob,
   featuredSkills: Array<CategorizedSkill>,
 ) {
   doc
@@ -25,16 +25,16 @@ export function addFrontPage(
     .text("917-656-1685")
     // Name / Title
     .font(font.heading, 42)
-    .text(homepage.title ?? "", margin, margin)
+    .text(aboutBob.name ?? "", margin, margin)
     .font(font.heading, 24)
-    .text(homepage.subtitle ?? "")
+    .text(aboutBob.title ?? "")
     .moveDown(1);
 
   const currentY = doc.y;
   doc
     // Bio column
     .font(font.body, 12)
-    .text(homepage.bio ?? "", { lineGap: 8, width: firstColumnWidth })
+    .text(aboutBob.bio ?? "", { lineGap: 8, width: firstColumnWidth })
     // Move to skills column
     .text("", secondColumnX, currentY);
 

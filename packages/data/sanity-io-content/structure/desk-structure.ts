@@ -1,8 +1,7 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/structure";
 import {
-  chatbotConfigListItem,
+  configItem,
   contactInfoListItem,
-  homepageListItem,
   resumeCompaniesListItem,
   resumeSkillCategoriesListItem,
   resumeSkillsListItem,
@@ -17,8 +16,9 @@ export function structure(
     .id("bob-obringer-net")
     .items([
       S.divider(),
-      homepageListItem(S),
-      chatbotConfigListItem(S),
+      configItem(S, "About Bob", "aboutBob"),
+      configItem(S, "Homepage", "homepage"),
+      configItem(S, "Chatbot Config", "chatbotConfig"),
       S.divider(),
       contactInfoListItem(S, context),
       S.divider(),

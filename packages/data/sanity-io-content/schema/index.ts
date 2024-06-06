@@ -6,6 +6,7 @@ import { resumeIndustry } from "./resume/resume-industry";
 import { chatbotConfig } from "./chatbot-config";
 import { homepage } from "./homepage";
 import { contactInfo } from "./contact-info";
+import { aboutBob } from "./about-bob";
 
 export const schemaTypes = [
   resumeSkillCategory,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   chatbotConfig,
   homepage,
   contactInfo,
+  aboutBob,
 ];

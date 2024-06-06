@@ -1,15 +1,24 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/structure";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
-export function homepageListItem(S: StructureBuilder) {
+export function configItem(
+  S: StructureBuilder,
+  title: string,
+  schemaType: string,
+) {
   return S.listItem()
-    .title("Homepage")
+    .title(title)
     .child(
-      S.document()
-        .title("Homepage")
-        .schemaType("homepage")
-        .documentId("homepage"),
+      S.document().title(title).schemaType(schemaType).documentId(schemaType),
     );
+}
+
+export function homepageListItem(S: StructureBuilder) {
+  return configItem(S, "Homepage", "homepage");
+}
+
+export function chatbotConfigListItem(S: StructureBuilder) {
+  return configItem(S, "Chatbot Config", "chatbotConfig");
 }
 
 export function contactInfoListItem(
@@ -62,15 +71,4 @@ export function resumeSkillsListItem(
     S,
     context,
   });
-}
-
-export function chatbotConfigListItem(S: StructureBuilder) {
-  return S.listItem()
-    .title("Chatbot Config")
-    .child(
-      S.document()
-        .title("Chatbot Config")
-        .schemaType("chatbotConfig")
-        .documentId("chatbotConfig"),
-    );
 }

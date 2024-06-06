@@ -1,7 +1,11 @@
 import { createClient } from "@sanity/client";
 import { env } from "@/config/server";
 import groq from "groq";
-import { Homepage, ChatbotConfig } from "@bob-obringer/sanity-io-types";
+import {
+  Homepage,
+  ChatbotConfig,
+  AboutBob,
+} from "@bob-obringer/sanity-io-types";
 import { revalidateTag, unstable_cache } from "next/cache";
 
 export const sanityIoClient = createClient({
@@ -14,6 +18,7 @@ export const sanityIoClient = createClient({
 type DocumentTypes = {
   homepage: Homepage;
   chatbotConfig: ChatbotConfig;
+  aboutBob: AboutBob;
 };
 
 type DocumentId = keyof DocumentTypes;
