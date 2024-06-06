@@ -37,9 +37,9 @@ export function getFormattedJobs(resumeCompanies: ResumeCompany[]) {
           start === end ? `In ${start}` : `From ${start} to ${endText}`;
 
         return `${startEnd}, Bob worked in the ${industry?.name} industry at ${name}, 
-      with approximately ${size} employees, as a ${position}.
-      He worked on the following projects:
-      ${highlights?.map(({ text }) => `- ${text}`).join("\n")}`;
+with approximately ${size} employees, as a ${position}.
+He worked on the following projects:
+${highlights?.map(({ text, narrative }) => `- ${text}${narrative ? `\n\n${narrative}` : ""}\n`).join("\n")}`;
       },
     )
     .join("\n");

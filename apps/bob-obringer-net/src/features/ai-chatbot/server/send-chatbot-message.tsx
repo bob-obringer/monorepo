@@ -16,12 +16,11 @@ import {
   SendChatbotMessageProps,
 } from "@/features/ai-chatbot/types";
 import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
-import { cache } from "@/features/cache";
 import {
   getResumeSkills,
   ResumeSkill,
 } from "@/features/sanity-io/queries/resume-skills";
-import { ChatbotConfig, Homepage } from "@bob-obringer/sanity-io-types";
+import { AboutBob, ChatbotConfig } from "@bob-obringer/sanity-io-types";
 import { models } from "@/services/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
 import { parseLLMMarkdown } from "@/features/ai-chatbot/server/parse-markdown";
@@ -75,19 +74,19 @@ export async function sendChatbotMessage({
     });
 
     // grab content from cms to construct our system prompt
-    const [homepage, chatbotConfig, skills, companies] = (await Promise.all([
-      getDocument("homepage"),
+    const [aboutBob, chatbotConfig, skills, companies] = (await Promise.all([
+      getDocument("aboutBob"),
       getDocument("chatbotConfig"),
-      cache(getResumeSkills, "sanity:skills"),
-      cache(getResumeCompanies, "sanity:companies"),
-    ])) as [Homepage, ChatbotConfig, Array<ResumeSkill>, Array<ResumeCompany>];
+      getResumeSkills(),
+      getResumeCompanies(),
+    ])) as [AboutBob, ChatbotConfig, Array<ResumeSkill>, Array<ResumeCompany>];
 
     // construct this from our system prompt
     const systemPrompt = getSystemPrompt({
       systemPromptInstructions: chatbotConfig.systemPromptInstructions,
       skills,
       companies,
-      bio: homepage.bio,
+      bio: aboutBob.bio,
     });
 
     statusStream.update("generating");

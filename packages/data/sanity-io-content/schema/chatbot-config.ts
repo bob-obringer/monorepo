@@ -11,6 +11,11 @@ export const chatbotConfig = defineType({
       type: "text",
     },
     {
+      name: "inputFieldPlaceholder",
+      title: "Input Field Placeholder",
+      type: "string",
+    },
+    {
       name: "model",
       title: "LLM Model",
       type: "string",
@@ -23,6 +28,12 @@ export const chatbotConfig = defineType({
           { title: "Anthropic Opus", value: "anthropicOpus" },
         ],
       },
+    },
+    {
+      name: "suggestedQuestions",
+      title: "Suggested Questions",
+      type: "array",
+      of: [{ type: "string" }],
     },
   ],
 });

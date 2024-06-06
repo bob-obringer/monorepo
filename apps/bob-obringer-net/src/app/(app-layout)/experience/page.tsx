@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getDocument } from "@/services/sanity-io-client";
-import { notFound } from "next/navigation";
 import { Text } from "@bob-obringer/design-system";
 import { getFeaturedResumeSkills } from "@/features/sanity-io/queries/resume-skills";
 import { ExperiencePageBody } from "@/app/(app-layout)/experience/_layout/experience-page-body";
@@ -12,16 +11,14 @@ export const metadata: Metadata = {
 };
 
 export default async function ResumePage() {
-  const homepage = await getDocument("homepage");
-  if (!homepage) return notFound();
-
+  const aboutBob = await getDocument("aboutBob");
   const featuredSkills = await getFeaturedResumeSkills();
 
   return (
     <ExperiencePageBody
       title={"Bob's Biography"}
-      subtitle={homepage.subtitle ?? ""}
-      body={homepage.bio?.split("\n\n").map((paragraph, index) => (
+      subtitle={aboutBob?.title ?? ""}
+      body={aboutBob?.bio?.split("\n\n").map((paragraph, index) => (
         <Text key={index} as="p" variant="body-large" className="mb-4">
           {paragraph}
         </Text>

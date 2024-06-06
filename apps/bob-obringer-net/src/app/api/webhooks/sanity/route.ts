@@ -35,6 +35,12 @@ const { POST } = createSanityWebhook({
       revalidateTag: "sanity:document:homepage",
     },
     {
+      documentType: "aboutBob",
+      operations: ["create", "update", "delete"],
+      revalidatePath: "/",
+      revalidateTag: "sanity:document:aboutBob",
+    },
+    {
       documentType: "chatbotConfig",
       operations: ["create", "update", "delete"],
       revalidateTag: "sanity:document:chatbotConfig",

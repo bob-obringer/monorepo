@@ -11,6 +11,11 @@ export const resumeCompanyHighlight = defineType({
       type: "text",
     },
     {
+      name: "narrative",
+      title: "Narrative",
+      type: "text",
+    },
+    {
       name: "skills",
       title: "Skills",
       type: "array",

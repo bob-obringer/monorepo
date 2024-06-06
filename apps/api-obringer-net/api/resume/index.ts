@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import {
+  getAboutBob,
   getFeaturedResumeSkills,
-  getHomepage,
   getResumeCompanies,
 } from "../_services/sanity-io/queries.js";
 import { createDocument } from "./_components/create-document.js";
@@ -12,12 +12,12 @@ export default async function handler(
   _req: VercelRequest,
   res: VercelResponse,
 ) {
-  const homepage = await getHomepage();
+  const aboutBob = await getAboutBob();
   const featuredSkills = await getFeaturedResumeSkills();
   const companies = await getResumeCompanies();
 
   const doc = await createDocument();
-  addFrontPage(doc, homepage, featuredSkills);
+  addFrontPage(doc, aboutBob, featuredSkills);
   doc.addPage();
   addCompanies(doc, companies);
 

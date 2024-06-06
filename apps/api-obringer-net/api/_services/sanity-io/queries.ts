@@ -5,7 +5,7 @@ import {
   SanityImageAsset,
   ResumeCompany as SanityResumeCompany,
   ResumeSkill,
-  Homepage,
+  AboutBob,
 } from "@bob-obringer/sanity-io-types";
 
 export type ResumeCompany = Omit<
@@ -61,8 +61,8 @@ export async function getResumeCompanies() {
   return await sanityClient.fetch<Array<ResumeCompany>>(resumeCompaniesQuery);
 }
 
-export async function getHomepage() {
-  return await sanityClient.fetch<Homepage>(groq`*[_type == "homepage"][0]`);
+export async function getAboutBob() {
+  return await sanityClient.fetch<AboutBob>(groq`*[_type == "aboutBob"][0]`);
 }
 
 /*
