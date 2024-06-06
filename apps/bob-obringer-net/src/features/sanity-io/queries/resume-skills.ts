@@ -7,8 +7,10 @@ import { sanityIoClient } from "@/services/sanity-io-client";
 export type ResumeSkill = {
   _id: string;
   name: string;
+  orderRank: string;
   category: {
     name: string;
+    orderRank: string;
   };
 };
 
