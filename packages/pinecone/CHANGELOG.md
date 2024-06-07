@@ -1,5 +1,13 @@
 # @bob-obringer/ai-pinecone
 
+## 0.2.2
+
+### Patch Changes
+
+- e78e4be: simplified package structure
+- Updated dependencies [e78e4be]
+  - @bob-obringer/vector-embedding@0.1.2
+
 ## 0.2.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @bob-obringer/vercel-storage
 
+## 0.1.1
+
+### Patch Changes
+
+- e78e4be: simplified package structure
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,5 +1,22 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.18.4
+
+### Patch Changes
+
+- e78e4be: simplified package structure
+- Updated dependencies [e78e4be]
+- Updated dependencies [e78e4be]
+  - @bob-obringer/design-system@0.1.2
+  - @bob-obringer/nextjs-fonts@0.0.3
+  - @bob-obringer/pinecone@0.2.2
+  - @bob-obringer/sanity-io-types@0.0.3
+  - @bob-obringer/theme@0.1.1
+  - @bob-obringer/vector-embedding@0.1.2
+  - @bob-obringer/vercel-storage@0.1.1
+  - @bob-obringer/nextjs-posthog@0.2.1
+  - @bob-obringer/nextjs-sanity-io-image@0.2.0
+
 ## 0.18.3
 
 ### Patch Changes
