@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.18.2
+
+### Patch Changes
+
+- a7e9225: fixed broken build
+
 ## 0.18.1
 
 ### Patch Changes
