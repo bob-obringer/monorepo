@@ -1,5 +1,12 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.19.1
+
+### Patch Changes
+
+- 9a7fbd1: using correct after function
+- 9a7fbd1: final chatbot log fixes
+
 ## 0.19.0
 
 ### Minor Changes
