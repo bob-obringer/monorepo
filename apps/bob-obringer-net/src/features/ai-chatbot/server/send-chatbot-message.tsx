@@ -27,7 +27,7 @@ import { resumeTool } from "@/features/ai-chatbot/tools/resume";
 import { contactTool } from "@/features/ai-chatbot/tools/contact";
 import { Markdown } from "@/features/markdown/markdown";
 import { vercelBlob } from "@/services/vercel-blob";
-import { after } from "node:test";
+import { unstable_after as after } from "next/server";
 
 export async function sendChatbotMessage({
   message,
@@ -50,7 +50,7 @@ export async function sendChatbotMessage({
   const aiState = getMutableAIState<ChatbotAIContext>();
 
   // When we end the response, we need to close all streams
-  function endStreams(
+  async function endStreams(
     content: string,
     status: SendChatbotMessageActionStatus = "success",
   ) {
