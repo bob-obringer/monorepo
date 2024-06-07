@@ -13,7 +13,7 @@
   "devDependencies": {
     "@bob-obringer/sanity-io-types": "workspace:*",
     "@bob-obringer/tsconfig": "workspace:*",
-    "@bob-obringer/vercel-data": "workspace:*",
+    "@bob-obringer/vercel-storage": "workspace:*",
     "@types/express": "^4.17.21",
     "@types/pdfkit": "^0.13.4",
     "@vercel/node": "3.1.5"

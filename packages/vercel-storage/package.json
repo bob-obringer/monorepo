@@ -1,5 +1,5 @@
 {
-  "name": "@bob-obringer/vercel-data",
+  "name": "@bob-obringer/vercel-storage",
   "version": "0.1.0",
   "private": true,
   "type": "module",

@@ -1,4 +1,4 @@
-# @bob-obringer/vercel-data
+# @bob-obringer/vercel-storage
 
 ## 0.1.0
 

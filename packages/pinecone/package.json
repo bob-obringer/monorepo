@@ -1,18 +1,19 @@
 {
-  "name": "@bob-obringer/ai-embedding",
-  "version": "0.1.1",
+  "name": "@bob-obringer/pinecone",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist node_modules",
+    "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "neverthrow": "6.2.2",
-    "zod": "3.23.8"
+    "@bob-obringer/vector-embedding": "workspace:*",
+    "@pinecone-database/pinecone": "2.2.2",
+    "neverthrow": "6.2.2"
   }
 }
