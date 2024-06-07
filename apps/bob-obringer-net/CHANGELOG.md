@@ -1,5 +1,16 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.19.0
+
+### Minor Changes
+
+- 5760635: capturing chats
+
+### Patch Changes
+
+- Updated dependencies [5760635]
+  - @bob-obringer/vercel-storage@0.2.0
+
 ## 0.18.4
 
 ### Patch Changes

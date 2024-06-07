@@ -1,5 +1,11 @@
 # @bob-obringer/vercel-storage
 
+## 0.2.0
+
+### Minor Changes
+
+- 5760635: capturing chats
+
 ## 0.1.1
 
 ### Patch Changes
