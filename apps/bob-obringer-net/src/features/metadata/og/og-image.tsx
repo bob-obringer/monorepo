@@ -1,4 +1,5 @@
 import { Div, OgImageWrapper } from "@/features/metadata/og/components";
+import { getDocument } from "@/services/sanity-io-client";
 
 function splitTitleIntoLines(routeTitle?: string): string[] | null {
   if (!routeTitle) return null;
@@ -26,6 +27,7 @@ export async function OgImage({
   parentTitle?: string;
   title?: string;
 } = {}) {
+  const aboutBob = await getDocument("aboutBob");
   const titleLines = splitTitleIntoLines(title);
 
   return OgImageWrapper(
@@ -49,10 +51,10 @@ export async function OgImage({
       {title && (
         <>
           <Div fontSize={60} top={475} left={740}>
-            Bob Obringer
+            {aboutBob?.name}
           </Div>
           <Div fontSize={30} top={540} left={665} secondary>
-            Product Engineer and Architect
+            {aboutBob?.title}
           </Div>
         </>
       )}
@@ -60,10 +62,10 @@ export async function OgImage({
       {!title && (
         <>
           <Div fontSize={100} top={40} left={90}>
-            Bob Obringer
+            {aboutBob?.name}
           </Div>
           <Div fontSize={50} top={150} left={95} secondary>
-            Product Engineer and Architect
+            {aboutBob?.title}
           </Div>
         </>
       )}
