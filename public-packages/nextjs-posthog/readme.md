@@ -1,6 +1,6 @@
-# @bob-obringer/posthog-nextjs
+# NextJS Posthog Wrapper
 
-This package is a wrapper around the [PostHog](https://posthog.com/) analytics library for the Next.js App Router.
+This package is a wrapper around the [Posthog](https://posthog.com/) analytics library for the Next.js App Router.
 
 It simplifies posthog setup and enables event tracking.
 

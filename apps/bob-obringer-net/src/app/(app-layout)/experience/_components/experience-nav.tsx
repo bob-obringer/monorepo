@@ -1,8 +1,10 @@
 import { cx } from "@bob-obringer/design-system";
 import { getResumeCompanies } from "@/features/sanity-io/queries/resume-company";
 import { ExperienceNavListItem } from "@/app/(app-layout)/experience/_components/experience-nav-list-item";
+import { getDocument } from "@/services/sanity-io-client";
 
 export async function ExperienceNav({ className }: { className?: string }) {
+  const aboutBob = await getDocument("aboutBob");
   const resumeCompanies = await getResumeCompanies();
 
   return (
@@ -17,8 +19,8 @@ export async function ExperienceNav({ className }: { className?: string }) {
         <ExperienceNavListItem
           url={"/experience"}
           slug=""
-          title={"Bob Obringer"}
-          subtitle={"Product Engineer"}
+          title={"Background"}
+          subtitle={aboutBob?.title}
         />
       </ul>
       <Divider className="ml-1 md:ml-0" />

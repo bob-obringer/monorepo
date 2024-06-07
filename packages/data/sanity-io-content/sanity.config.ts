@@ -5,6 +5,7 @@ import { crossDatasetDuplicator } from "@sanity/cross-dataset-duplicator";
 import { schemaTypes } from "./schema";
 import { structure } from "./structure/desk-structure";
 import { env } from "./env";
+import { markdownSchema } from "sanity-plugin-markdown";
 
 function createDuplicator() {
   return crossDatasetDuplicator({
@@ -20,7 +21,12 @@ export default defineConfig([
     basePath: "/production",
     title: "Production",
     dataset: "production",
-    plugins: [structureTool({ structure }), visionTool(), createDuplicator()],
+    plugins: [
+      structureTool({ structure }),
+      visionTool(),
+      markdownSchema(),
+      createDuplicator(),
+    ],
     projectId: env.projectId,
     schema: { types: schemaTypes },
   },
@@ -29,7 +35,7 @@ export default defineConfig([
     basePath: "/development",
     title: "Development",
     dataset: "development",
-    plugins: [structureTool({ structure }), visionTool()],
+    plugins: [structureTool({ structure }), markdownSchema(), visionTool()],
     projectId: env.projectId,
     schema: { types: schemaTypes },
   },

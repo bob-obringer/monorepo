@@ -1,7 +1,7 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/structure";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
-export function configItem(
+export function configListItem(
   S: StructureBuilder,
   title: string,
   schemaType: string,
@@ -13,52 +13,26 @@ export function configItem(
     );
 }
 
-export function homepageListItem(S: StructureBuilder) {
-  return configItem(S, "Homepage", "homepage");
-}
-
-export function chatbotConfigListItem(S: StructureBuilder) {
-  return configItem(S, "Chatbot Config", "chatbotConfig");
-}
-
-export function contactInfoListItem(
+export function reordableListItem(
   S: StructureBuilder,
   context: StructureResolverContext,
+  title: string,
+  type: string,
 ) {
   return orderableDocumentListDeskItem({
-    type: "contactInfo",
-    title: "Contact Info",
+    type,
+    title,
     S,
     context,
   });
 }
 
-export function resumeCompaniesListItem(S: StructureBuilder) {
-  return S.documentTypeListItem("resumeCompany").title("Resume Companies");
-}
-
-export function resumeSkillCategoriesListItem(
+export function listItem(
   S: StructureBuilder,
-  context: StructureResolverContext,
+  title: string,
+  schemaType: string,
 ) {
-  return orderableDocumentListDeskItem({
-    type: "resumeSkillCategory",
-    title: "Resume Skill Categories",
-    S,
-    context,
-  });
-}
-
-export function skillItemsByCategory(
-  S: StructureBuilder,
-  context: StructureResolverContext,
-) {
-  return orderableDocumentListDeskItem({
-    type: "resumeSkillCategory",
-    title: "Resume Skill Categories",
-    S,
-    context,
-  });
+  return S.documentTypeListItem(schemaType).title(title);
 }
 
 export function resumeSkillsListItem(

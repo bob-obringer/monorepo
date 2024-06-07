@@ -1,8 +1,6 @@
-# @bob-obringer/tsconfig
+# TypeScript Configuration
 
-## Description
-
-This library is a collection of TypeScript configuration packages.
+This library is a collection of TypeScript configuration files.
 
 It is designed to provide a set of modern and strict base configurations for
 different types of TypeScript projects.
@@ -25,13 +23,11 @@ yarn add --dev @bob-obringer/tsconfig
 
 The library includes several TypeScript configurations for different types of projects:
 
+- `tsconfig.app.json`
+- `tsconfig.app.dom.json`
 - `tsconfig.base.json`
-- `tsconfig.library-base.json`
-- `node-app/tsconfig.json`
-- `nextjs-app/tsconfig.json`
-- `isomorphic-library/tsconfig.json`
-- `frontend-library/tsconfig.json`
-- `backend-library/tsconfig.json`
+- `tsconfig.library.json`
+- `tsconfig.library.dom.json`
 
 To use a configuration, extend your `tsconfig.json` file like so:
 
@@ -51,29 +47,6 @@ Extend whichever configuration is appropriate for your project
 Unfortunately, typescript treats paths as relative to to the tsconfig file that
 defines the paths, so they must be included in each individual package.
 
-## NextJS
-
-NextJS requires some additional configuration. To use the `nextjs-app`
-configuration, use the following configuration:
-
-```json
-{
-  "extends": ["@bob-obringer/tsconfig/nextjs-app/tsconfig.json"],
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
-}
-```
-
 ## Development and Debug Configurations
 
 In addition to each of the standard configurations, there are `dev` and
@@ -83,7 +56,7 @@ In addition to each of the standard configurations, there are `dev` and
 
 ```json
 {
-  "extends": "@bob-obringer/tsconfig/isomorphic-library/tsconfig.dev.json",
+  "extends": "@bob-obringer/tsconfig/debug/tsconfig.app.dom.json",
   "compilerOptions": {
     "outDir": "./dist"
   },

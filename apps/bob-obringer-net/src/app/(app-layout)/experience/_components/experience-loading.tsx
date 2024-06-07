@@ -8,14 +8,27 @@ export function BodyTextSmallLoader() {
   return <div className="bg-color-secondary mb-1 h-4 w-full rounded-full" />;
 }
 
-export function ExperienceLoading() {
+export function ExperienceLoading({ hideHeader }: { hideHeader?: boolean }) {
   return (
     <ExperiencePageBody
-      title={<div className="bg-color-secondary mb-1 h-8 w-64 rounded-lg" />}
-      subtitle={<div className="bg-color-secondary h-5 w-96 rounded-full" />}
+      title={
+        !hideHeader && (
+          <div className="bg-color-secondary mb-1 h-8 w-64 rounded-lg" />
+        )
+      }
+      subtitle={
+        !hideHeader && (
+          <div className="bg-color-secondary h-5 w-96 rounded-full" />
+        )
+      }
       body={
         <>
           <BodyTextLoader />
+          <BodyTextLoader />
+          <BodyTextLoader />
+          <BodyTextLoader />
+          <BodyTextLoader />
+          <br />
           <BodyTextLoader />
           <BodyTextLoader />
           <br />

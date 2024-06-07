@@ -1,4 +1,4 @@
-# NextJs Sanity Image
+# NextJs Sanity.io Image
 
 This package provides a wrapper around the [Next.js Image](https://nextjs.org/docs/api-reference/next/image) component to display images directly from Sanity.io, including all Next.js props and optimizations, and Sanity.io transforms.
 

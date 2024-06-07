@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 import {
   faAddressCard,
-  faCubesStacked,
-  faHistory,
-  faUser,
+  faBriefcaseClock,
+  faHouse,
+  faTasks,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { cx, Text } from "@bob-obringer/design-system";
@@ -13,9 +13,9 @@ import { useSelectedLayoutSegments } from "next/navigation";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 
 const menuItems = [
-  { href: "", icon: faUser, text: "Bob" },
-  { href: "experience", icon: faHistory, text: "Experience" },
-  { href: "stack", icon: faCubesStacked, text: "Stack" },
+  { href: "", icon: faHouse, text: "Home" },
+  { href: "experience", icon: faBriefcaseClock, text: "Experience" },
+  { href: "projects", icon: faTasks, text: "Projects" },
   { href: "contact", icon: faAddressCard, text: "Contact" },
 ];
 

@@ -16,8 +16,6 @@ export default async function ResumePage() {
 
   return (
     <ExperiencePageBody
-      title={"Bob's Biography"}
-      subtitle={aboutBob?.title ?? ""}
       body={aboutBob?.bio?.split("\n\n").map((paragraph, index) => (
         <Text key={index} as="p" variant="body-large" className="mb-4">
           {paragraph}

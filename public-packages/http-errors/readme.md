@@ -1,4 +1,4 @@
-# @bob-obringer/http-errors
+# HTTP Errors
 
 A collection of HTTP Error Classes.
 
