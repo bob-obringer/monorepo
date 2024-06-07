@@ -1,7 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["ANTHROPIC_API_KEY"],
+  "globalEnv": [
+    "ANTHROPIC_API_KEY",
+    "VOYAGER_API_KEY",
+    "PINECONE_API_KEY",
+    "OPEN_AI_API_KEY",
+    "SANITY_STUDIO_PROJECT_ID",
+    "SANITY_WEBHOOK_SECRET"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
