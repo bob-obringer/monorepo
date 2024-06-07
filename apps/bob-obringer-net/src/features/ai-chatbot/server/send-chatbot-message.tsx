@@ -23,9 +23,10 @@ import {
 import { AboutBob, ChatbotConfig } from "@bob-obringer/sanity-io-types";
 import { models } from "@/services/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
-import { parseLLMMarkdown } from "@/features/ai-chatbot/server/parse-markdown";
 import { resumeTool } from "@/features/ai-chatbot/tools/resume";
 import { contactTool } from "@/features/ai-chatbot/tools/contact";
+import { Markdown } from "@/features/markdown/markdown";
+import { vercelBlob } from "@/services/vercel-blob";
 
 export async function sendChatbotMessage({
   message,
@@ -59,6 +60,10 @@ export async function sendChatbotMessage({
         { id: nanoid(), role: "assistant", content: content },
       ],
     });
+    void vercelBlob.upload(
+      `chatbot/conversation/${aiState.get().id}.json`,
+      JSON.stringify(aiState.get().messages, null, 2),
+    );
     statusStream.done(status);
   }
 
@@ -100,7 +105,7 @@ export async function sendChatbotMessage({
       initial: <>Thinking...</>,
       text: async ({ content, done }) => {
         if (done) endStreams(content);
-        return parseLLMMarkdown(content);
+        return <Markdown markdown={content} />;
       },
       tools: {
         resume: resumeTool({ endStreams }),

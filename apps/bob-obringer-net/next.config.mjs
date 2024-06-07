@@ -4,6 +4,9 @@ import { withLogtail } from "@logtail/next";
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {
+  experimental: {
+    after: true,
+  },
   async rewrites() {
     return [
       {

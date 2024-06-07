@@ -1,4 +1,10 @@
-import { list, type ListBlobResultBlob } from "@vercel/blob";
+import {
+  put,
+  list,
+  type ListBlobResultBlob,
+  type PutBlobResult,
+} from "@vercel/blob";
+import { Readable } from "stream";
 
 export class VercelBlob {
   private readonly token: string;
@@ -27,4 +33,21 @@ export class VercelBlob {
       })
       .then((response) => response.arrayBuffer());
   }
+
+  async upload(path: string, file: PutBody): Promise<PutBlobResult> {
+    return put(path, file, {
+      token: this.token,
+      addRandomSuffix: false,
+      access: "public",
+    });
+  }
 }
+
+type PutBody =
+  | string
+  | Readable
+  | Buffer
+  | Blob
+  | ArrayBuffer
+  | ReadableStream
+  | File;
