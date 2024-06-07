@@ -5,12 +5,14 @@
   "scripts": {
     "build": "turbo build",
     "clean": "turbo clean && rimraf node_modules",
+    "deploy": "turbo run deploy",
     "deploy:original": "turbo run deploy --filter=docs^...",
     "dev": "turbo dev --concurrency=30",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "generate-changeset": "pnpm --filter @bob-obringer/conventional-changeset run generate-changeset",
     "lint": "turbo lint",
     "prepare": "husky",
+    "release": "changeset publish",
     "release:original": "turbo run build --filter=docs^... && changeset publish"
   },
   "devDependencies": {
