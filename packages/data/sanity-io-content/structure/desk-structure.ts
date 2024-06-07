@@ -1,11 +1,5 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/structure";
-import {
-  configItem,
-  contactInfoListItem,
-  resumeCompaniesListItem,
-  resumeSkillCategoriesListItem,
-  resumeSkillsListItem,
-} from "./list-items";
+import { configListItem, listItem, reordableListItem } from "./list-items";
 
 export function structure(
   S: StructureBuilder,
@@ -16,14 +10,21 @@ export function structure(
     .id("bob-obringer-net")
     .items([
       S.divider(),
-      configItem(S, "About Bob", "aboutBob"),
-      configItem(S, "Homepage", "homepage"),
-      configItem(S, "Chatbot Config", "chatbotConfig"),
+      configListItem(S, "About Bob", "aboutBob"),
+      configListItem(S, "Chatbot Config", "chatbotConfig"),
+      // todo: this really belongs in "about bob"
+      reordableListItem(S, context, "Contact Info", "contactInfo"),
       S.divider(),
-      contactInfoListItem(S, context),
+      configListItem(S, "Homepage", "homepage"),
+      listItem(S, "Content Page", "contentPage"),
       S.divider(),
-      resumeCompaniesListItem(S),
-      resumeSkillCategoriesListItem(S, context),
-      resumeSkillsListItem(S, context),
+      listItem(S, "Resume Companies", "resumeCompany"),
+      reordableListItem(
+        S,
+        context,
+        "Resume Skill Categories",
+        "resumeSkillCategory",
+      ),
+      reordableListItem(S, context, "Resume Skills", "resumeSkill"),
     ]);
 }

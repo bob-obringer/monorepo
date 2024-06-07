@@ -1,4 +1,4 @@
-# conventional-changeset
+# conventional-changesets
 
 This package helps to automate the process of independently bumping semantic versions of multiple packages within a monorepo.
 
@@ -50,7 +50,7 @@ This package provides both a CLI and a programmatic interface which take two opt
 
 The output is a collection of changeset markdown files sent to a `.changeset` folder in the root of the repository.
 
-For an example of how it's used, see the [`.github/workflows/get-changesets.yml`](./.github/workflows/get-changesets.yml) file in this repository.
+For an example of how it's used, see the [`.github/workflows/generate-changeset.yml`](./.github/workflows/generate-changeset.yml) file in this repository.
 
 ### CLI
 

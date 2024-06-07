@@ -6,6 +6,7 @@ const titles: Record<string, string> = {
   experience: "Experience",
   stack: "Stack",
   contact: "Contact",
+  projects: "Projects",
 };
 
 export function PageTitle() {
