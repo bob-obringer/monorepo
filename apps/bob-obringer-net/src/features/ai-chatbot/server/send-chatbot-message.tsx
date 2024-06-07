@@ -50,7 +50,7 @@ export async function sendChatbotMessage({
   const aiState = getMutableAIState<ChatbotAIContext>();
 
   // When we end the response, we need to close all streams
-  async function endStreams(
+  function endStreams(
     content: string,
     status: SendChatbotMessageActionStatus = "success",
   ) {
