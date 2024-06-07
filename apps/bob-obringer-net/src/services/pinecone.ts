@@ -1,6 +1,6 @@
-import { PineconeService } from "@bob-obringer/ai-pinecone";
+import { PineconeService } from "@bob-obringer/pinecone";
 import { env } from "@/config/server";
-import { VoyageAiEmbedding } from "@bob-obringer/ai-embedding";
+import { VoyageAiEmbedding } from "@bob-obringer/vector-embedding";
 
 export const pinecone = new PineconeService({
   apiKey: env.pinecone.apiKey,

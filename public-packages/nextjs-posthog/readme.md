@@ -7,15 +7,15 @@ It simplifies posthog setup and enables event tracking.
 ## Installation
 
 ```bash
-pnpm install @bob-obringer/posthog-nextjs
+pnpm install @bob-obringer/nextjs-posthog
 ```
 
 ```bash
-npm install @bob-obringer/posthog-nextjs
+npm install @bob-obringer/nextjs-posthog
 ```
 
 ```bash
-yarn add @bob-obringer/posthog-nextjs
+yarn add @bob-obringer/nextjs-posthog
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ wrapped around your NextJS application (generally with other providers)
 
 ```tsx
 import { type ReactNode } from "react";
-import { PosthogProvider } from "@bob-obringer/posthog-nextjs";
+import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { env } from "@/config/client";
 
 export default function RootLayout({ children }: { children: ReactNode }) {

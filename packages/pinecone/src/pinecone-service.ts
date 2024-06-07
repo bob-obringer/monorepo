@@ -5,7 +5,7 @@ import {
   type RecordId,
   type RecordMetadata,
 } from "@pinecone-database/pinecone";
-import type { EmbeddingService } from "@bob-obringer/ai-embedding";
+import type { EmbeddingService } from "@bob-obringer/vector-embedding";
 import { ResultAsync } from "neverthrow";
 
 export class PineconeService {

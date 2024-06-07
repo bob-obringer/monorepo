@@ -5,15 +5,15 @@ This package provides a wrapper around the [Next.js Image](https://nextjs.org/do
 ## Installation
 
 ```bash
-pnpm install @bob-obringer/nextjs-sanity-image
+pnpm install @bob-obringer/nextjs-sanity-io-image
 ```
 
 ```bash
-npm install @bob-obringer/nextjs-sanity-image
+npm install @bob-obringer/nextjs-sanity-io-image
 ```
 
 ```bash
-yarn add @bob-obringer/nextjs-sanity-image
+yarn add @bob-obringer/nextjs-sanity-io-image
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ yarn add @bob-obringer/nextjs-sanity-image
 Here's a basic example of how to use the `NextJsSanityImage` component in a React component:
 
 ```jsx
-import { NextJsSanityImage } from "@bob-obringer/nextjs-sanity-image";
+import { NextJsSanityImage } from "@bob-obringer/nextjs-sanity-io-image";
 
 function MyComponent({ sanityImageData }) {
   return (
