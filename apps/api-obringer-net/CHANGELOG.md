@@ -1,5 +1,12 @@
 # @bob-obringer/api-obringer-net
 
+## 0.6.1
+
+### Patch Changes
+
+- e78e4be: fixed broken workflows
+- e78e4be: simplified package structure
+
 ## 0.6.0
 
 ### Minor Changes

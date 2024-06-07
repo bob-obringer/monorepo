@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.7.1
+
+### Patch Changes
+
+- e78e4be: simplified package structure
+
 ## 0.7.0
 
 ### Minor Changes

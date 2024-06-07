@@ -1,5 +1,11 @@
 # @bob-obringer/ai-embedding
 
+## 0.1.2
+
+### Patch Changes
+
+- e78e4be: simplified package structure
+
 ## 0.1.1
 
 ### Patch Changes
