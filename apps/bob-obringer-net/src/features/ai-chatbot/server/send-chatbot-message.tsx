@@ -27,6 +27,7 @@ import { resumeTool } from "@/features/ai-chatbot/tools/resume";
 import { contactTool } from "@/features/ai-chatbot/tools/contact";
 import { Markdown } from "@/features/markdown/markdown";
 import { vercelBlob } from "@/services/vercel-blob";
+import { unstable_after as after } from "next/server";
 
 export async function sendChatbotMessage({
   message,
@@ -60,10 +61,13 @@ export async function sendChatbotMessage({
         { id: nanoid(), role: "assistant", content: content },
       ],
     });
-    void vercelBlob.upload(
-      `chatbot/conversation/${aiState.get().id}.json`,
-      JSON.stringify(aiState.get().messages, null, 2),
-    );
+    console.log("Uploading to chatbot");
+    after(async () => {
+      await vercelBlob.upload(
+        `chatbot/${aiState.get().id}.json`,
+        JSON.stringify(aiState.get().messages, null, 2),
+      );
+    });
     statusStream.done(status);
   }
 
