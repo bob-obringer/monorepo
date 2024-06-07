@@ -7,7 +7,12 @@
     "PINECONE_API_KEY",
     "OPEN_AI_API_KEY",
     "SANITY_STUDIO_PROJECT_ID",
-    "SANITY_WEBHOOK_SECRET"
+    "SANITY_WEBHOOK_SECRET",
+    "BLOB_READ_WRITE_TOKEN",
+    "KV_URL",
+    "KV_REST_API_READ_ONLY_TOKEN",
+    "KV_REST_API_TOKEN",
+    "KV_REST_API_URL"
   ],
   "tasks": {
     "build": {
