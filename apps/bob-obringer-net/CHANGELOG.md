@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.18.3
+
+### Patch Changes
+
+- 7d5fdcd: added missing env vars from turbo config
+
 ## 0.18.2
 
 ### Patch Changes
