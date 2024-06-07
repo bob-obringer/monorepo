@@ -3,5 +3,10 @@ import { Markdown } from "@/features/markdown/markdown";
 
 export default async function Projects() {
   const markdown = await getContentPage("projects");
-  return <Markdown className="p-5" markdown={markdown?.content ?? ""} />;
+  return (
+    <Markdown
+      className="mx-auto max-w-screen-md p-5"
+      markdown={markdown?.content ?? ""}
+    />
+  );
 }
