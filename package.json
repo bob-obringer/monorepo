@@ -11,7 +11,7 @@
     "generate-changeset": "pnpm --filter @bob-obringer/conventional-changeset run generate-changeset",
     "lint": "turbo lint",
     "prepare": "husky",
-    "release": "turbo run build --filter=docs^... && changeset publish"
+    "release:original": "turbo run build --filter=docs^... && changeset publish"
   },
   "devDependencies": {
     "@bob-obringer/conventional-changesets": "workspace:*",
