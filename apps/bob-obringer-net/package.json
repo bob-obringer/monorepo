@@ -6,7 +6,7 @@
     "analyze": "ANALYZE=true next build",
     "build": "next build",
     "clean": "rimraf .next node_modules",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "lint": "next lint",
     "start": "next start"
   },

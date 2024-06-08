@@ -11,11 +11,11 @@ import { getDocument } from "@/services/sanity-io-client";
 import { ChatbotContextProvider } from "@/features/ai-chatbot/context/chatbot-context";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, subtitle } = (await getDocument("homepage")) ?? {};
+  const { title, name } = (await getDocument("aboutBob")) ?? {};
 
   return {
-    title,
-    description: subtitle,
+    title: name,
+    description: title,
     applicationName: "bob.obringer.net",
     authors: [{ name: "Bob Obringer", url: "https://bob.obringer.net" }],
     keywords: [
@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={bobObringerFontClasses}>
-      <body className="bg text">
+      <body className="bg-color-secondary text">
         <PosthogProvider
           token={env.posthog.key}
           host={env.posthog.host}

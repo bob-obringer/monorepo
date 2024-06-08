@@ -61,7 +61,6 @@ export async function sendChatbotMessage({
         { id: nanoid(), role: "assistant", content: content },
       ],
     });
-    console.log("Uploading to chatbot");
     after(async () => {
       await vercelBlob.upload(
         `chatbot/${aiState.get().id}.json`,

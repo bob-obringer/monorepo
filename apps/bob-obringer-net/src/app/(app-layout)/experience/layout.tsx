@@ -6,7 +6,7 @@ export default function ResumeLayout({ children }: { children: ReactNode }) {
   return (
     <div
       className={cx(
-        "mx-auto flex w-full max-w-screen-lg flex-col space-y-2",
+        "bg-color-secondary mx-auto flex w-full max-w-screen-lg flex-col space-y-2",
         "md:flex-row md:justify-center md:space-x-5 md:space-y-0 md:px-5",
       )}
     >

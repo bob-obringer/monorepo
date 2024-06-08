@@ -113,7 +113,7 @@ const messageRoleInfo = {
   },
   assistant: {
     icon: faRobot,
-    roleName: "Bob's ChatBot",
+    roleName: "Bob's Chatbot",
     className: "bg-opacity-5 bg-[#ffffff]",
     titleClassName: "text-color-secondary",
   },

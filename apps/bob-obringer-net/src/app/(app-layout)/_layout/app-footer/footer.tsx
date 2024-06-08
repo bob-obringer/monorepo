@@ -43,8 +43,8 @@ export function Footer({
       className={cx(
         className,
         "fixed bottom-0 flex w-full flex-col items-center justify-between overflow-hidden",
-        "bg-opacity-50 backdrop-blur-2xl transition-all duration-300 ease-in-out",
-        isOpen ? "z-20 h-svh bg-[#0D141F]" : "h-36 md:h-40",
+        "bg-color-primary bg-opacity-100 backdrop-blur-2xl transition-all duration-300 ease-in-out",
+        isOpen ? "z-20 h-svh bg-[#0D141F] bg-opacity-50" : "h-36 md:h-40",
         isHome && !isOpen ? "z-20 h-[60svh] md:h-[60svh]" : "",
       )}
     >

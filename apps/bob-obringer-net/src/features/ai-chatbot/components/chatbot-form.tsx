@@ -31,7 +31,7 @@ export function ChatbotForm() {
       <div className="bg-color-secondary flex w-full items-center space-x-1 rounded border border-[#333333] p-2 shadow-xl focus:outline-1 md:space-x-2">
         <input
           ref={inputRef}
-          className="bg-color-transparent min-w-24 flex-1 p-0 pl-2 shadow-xl focus:outline-0"
+          className="bg-color-transparent min-w-24 flex-1 p-0 pl-2 shadow-lg focus:outline-0"
           value={inputValue}
           placeholder="Ask me about Bob!"
           onChange={handleInputChange}
