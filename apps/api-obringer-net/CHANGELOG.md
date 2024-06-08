@@ -1,5 +1,11 @@
 # @bob-obringer/api-obringer-net
 
+## 0.6.2
+
+### Patch Changes
+
+- 24027c1: fixed sorting on resume pdf
+
 ## 0.6.1
 
 ### Patch Changes
