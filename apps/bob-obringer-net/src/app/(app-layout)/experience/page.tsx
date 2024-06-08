@@ -21,7 +21,20 @@ export default async function ResumePage() {
           {paragraph}
         </Text>
       ))}
-      sidebar={<ExperienceSkills skills={featuredSkills} />}
+      sidebar={
+        <>
+          <ExperienceSkills skills={featuredSkills} />
+          {/*<hr className="border-color-tertiary my-4" />*/}
+          <Text
+            as="p"
+            variant="body-small"
+            color="tertiary"
+            className="mt-4 text-balance"
+          >
+            Additional skills available under each company and in the chatbot
+          </Text>
+        </>
+      }
     />
   );
 }
