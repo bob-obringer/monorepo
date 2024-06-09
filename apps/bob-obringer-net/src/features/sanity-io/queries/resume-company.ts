@@ -17,7 +17,8 @@ export type ResumeCompany = Omit<
   highlights: Array<{
     _key: string;
     text: string;
-    narrative: string;
+    additionalInformation: string;
+    additionalInformationForChatbot: string;
     skills: Array<{
       name: string;
       category: {
@@ -46,7 +47,8 @@ const resumeCompaniesQuery = groq`*[_type == "resumeCompany"]{
   highlights[]{
     _key,
     text,
-    narrative,
+    additionalInformation,
+    additionalInformationForChatbot,
     skills[]->{
       name,
       category->{
@@ -80,7 +82,8 @@ const resumeCompanyQuery = groq`*[_type == "resumeCompany" && slug == $slug]{
   highlights[] {
     _id,
     text,
-    narrative,
+    additionalInformation,
+    additionalInformationForChatbot,
     skills[]->{
       name,
       category->{

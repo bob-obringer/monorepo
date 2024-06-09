@@ -16,6 +16,16 @@ export const resumeCompanyHighlight = defineType({
       type: "text",
     },
     {
+      name: "additionalInformation",
+      title: "Additional Information",
+      type: "text",
+    },
+    {
+      name: "additionalInformationForChatbot",
+      title: "Additional Information for Chatbot",
+      type: "text",
+    },
+    {
       name: "skills",
       title: "Skills",
       type: "array",
