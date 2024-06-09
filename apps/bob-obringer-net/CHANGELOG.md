@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.21.0
+
+### Minor Changes
+
+- ad604bf: added quotes to chatbot
+
 ## 0.20.0
 
 ### Minor Changes
