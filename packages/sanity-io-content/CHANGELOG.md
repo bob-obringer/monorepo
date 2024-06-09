@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.8.0
+
+### Minor Changes
+
+- 7c0420c: added additional info fields to company highlights
+
 ## 0.7.1
 
 ### Patch Changes
