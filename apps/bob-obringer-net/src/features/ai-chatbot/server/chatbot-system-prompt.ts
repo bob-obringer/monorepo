@@ -29,20 +29,57 @@ ${getFormattedJobs(companies)}
 export function getFormattedJobs(resumeCompanies: ResumeCompany[]) {
   return resumeCompanies
     .map(
-      ({ startDate, endDate, industry, name, position, size, highlights }) => {
+      ({
+        startDate,
+        endDate,
+        industry,
+        name,
+        position,
+        size,
+        highlights,
+        isConsultant,
+        summary,
+      }) => {
         const start = startDate?.substring(0, 4);
         const end = endDate?.substring(0, 4);
         const endText = endDate ? end : "today";
         const startEnd =
           start === end ? `In ${start}` : `From ${start} to ${endText}`;
+        const employeeTypeText = isConsultant ? "a consultant" : "an employee";
+        const summaryText = summary
+          ? `\nSummary of Bob's time there: ${summary}`
+          : "";
+        const highlightText = highlights
+          ?.map(
+            ({
+              text,
+              additionalInformation,
+              additionalInformationForChatbot,
+            }) => {
+              // todo: we should pull additional in from vector db instead
+              //  of shoving everything into the context
+              const additionalInfo = additionalInformation
+                ? `\n${additionalInformation}`
+                : "";
+              const additionalInfoForChatbot = additionalInformationForChatbot
+                ? `\n${additionalInformationForChatbot}`
+                : "";
 
-        return `${startEnd}, Bob worked in the ${industry?.name} industry at ${name}, 
+              return `- ${text}${additionalInfo}${additionalInfoForChatbot}`;
+            },
+          )
+          .join("\n");
+
+        return `
+${startEnd}, Bob worked as ${employeeTypeText} in the ${industry?.name} industry at ${name}, 
 with approximately ${size} employees, as a ${position}.
+${summaryText}
+
 He worked on the following projects:
-${highlights?.map(({ text, narrative }) => `- ${text}${narrative ? `\n\n${narrative}` : ""}\n`).join("\n")}`;
+${highlightText}`;
       },
     )
-    .join("\n");
+    .join("\n\n");
 }
 
 export function getFormattedSkills(resumeSkills: Array<ResumeSkill>) {
