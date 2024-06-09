@@ -34,6 +34,9 @@ const renderer: RendererObject = {
   link(href: string, _: string | null | undefined, text: string) {
     return `<a data-markdown href="${href}" class="text-color-link hover:text-color-link-hover transition-colors hover:underline">${text}</a>`;
   },
+  blockquote(quote: string): string {
+    return `<blockquote data-markdown class="border-l-4 border-[#cccccc33] pl-4 pt-2 italic">${quote}</blockquote>`;
+  },
 };
 
 export const markdownParser = marked.use({ renderer });

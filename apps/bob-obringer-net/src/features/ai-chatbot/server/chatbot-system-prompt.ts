@@ -47,7 +47,7 @@ export function getFormattedJobs(resumeCompanies: ResumeCompany[]) {
           start === end ? `In ${start}` : `From ${start} to ${endText}`;
         const employeeTypeText = isConsultant ? "a consultant" : "an employee";
         const summaryText = summary
-          ? `\nSummary of Bob's time there: ${summary}`
+          ? `\nBob's thoughts about his time there: ${summary}`
           : "";
         const highlightText = highlights
           ?.map(
