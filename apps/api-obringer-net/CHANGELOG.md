@@ -1,5 +1,15 @@
 # @bob-obringer/api-obringer-net
 
+## 0.7.0
+
+### Minor Changes
+
+- 7c0420c: added additional info fields to company highlights
+
+### Patch Changes
+
+- 7c0420c: fixed broken groq query
+
 ## 0.6.2
 
 ### Patch Changes

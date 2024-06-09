@@ -1,5 +1,15 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.20.0
+
+### Minor Changes
+
+- 7c0420c: added additional info fields to company highlights
+
+### Patch Changes
+
+- @bob-obringer/sanity-io-types@0.0.3
+
 ## 0.19.1
 
 ### Patch Changes
