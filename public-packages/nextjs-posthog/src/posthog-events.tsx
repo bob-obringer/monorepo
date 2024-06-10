@@ -18,14 +18,15 @@ export function PosthogEventRecorder({
   const searchParams = useSearchParams();
   const posthog = usePostHog();
 
-  let url = window.origin + pathname;
-  if (searchParams.toString()) {
-    url = url + `?${searchParams.toString()}`;
-  }
-
   // record page view
   useEffect(() => {
     if (!pathname || !posthog || !capturePageView) return;
+
+    let url = window.origin + pathname;
+    if (searchParams.toString()) {
+      url = url + `?${searchParams.toString()}`;
+    }
+
     posthog.capture("$pageview", { $current_url: url });
   }, [pathname, searchParams, posthog]);
 
