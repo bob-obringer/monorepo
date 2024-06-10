@@ -25,9 +25,9 @@ import { models } from "@/services/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
 import { resumeTool } from "@/features/ai-chatbot/tools/resume";
 import { contactTool } from "@/features/ai-chatbot/tools/contact";
-import { Markdown } from "@/features/markdown/markdown";
 import { vercelBlob } from "@/services/vercel-blob";
 import { unstable_after as after } from "next/server";
+import { Markdown } from "@/features/markdown/markdown";
 
 export async function sendChatbotMessage({
   message,
@@ -104,10 +104,12 @@ export async function sendChatbotMessage({
       model: models[chatbotConfig.model ?? "gpt35Turbo"],
       system: systemPrompt,
       messages: aiState.get().messages,
-      temperature: 0.5,
+      temperature: 0.4,
       initial: <>Thinking...</>,
       text: async ({ content, done }) => {
-        if (done) endStreams(content);
+        if (done) {
+          endStreams(content);
+        }
         return <Markdown markdown={content} />;
       },
       tools: {
