@@ -8,8 +8,13 @@ import {
 import { ChangeEvent, ReactNode } from "react";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import { cx } from "@bob-obringer/design-system";
+import { ChatbotConfig } from "@bob-obringer/sanity-io-types";
 
-export function ChatbotForm() {
+export function ChatbotForm({
+  chatbotConfig,
+}: {
+  chatbotConfig: ChatbotConfig;
+}) {
   const {
     isOpen,
     close,
@@ -33,7 +38,7 @@ export function ChatbotForm() {
           ref={inputRef}
           className="bg-color-transparent min-w-24 flex-1 p-0 pl-2 focus:outline-0"
           value={inputValue}
-          placeholder="Ask me about Bob!"
+          placeholder={chatbotConfig.inputFieldPlaceholder}
           onChange={handleInputChange}
         />
         {inputValue && chatbotStatus === "idle" && (
