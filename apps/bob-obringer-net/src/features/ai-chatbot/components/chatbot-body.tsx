@@ -13,6 +13,7 @@ import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
 import { cx, Text } from "@bob-obringer/design-system";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
+import { ErrorBoundary } from "react-error-boundary";
 
 export function ChatbotBody({
   scrollerRef,
@@ -148,7 +149,9 @@ function Message({
             message.status === "error" && "text-color-negative",
           )}
         >
-          {children}
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            {children}
+          </ErrorBoundary>
         </div>
       </div>
       {isActive && (
