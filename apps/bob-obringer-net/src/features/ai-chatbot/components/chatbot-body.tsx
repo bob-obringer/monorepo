@@ -1,19 +1,12 @@
 "use client";
 
 import "@/features/ai-chatbot/components/chatbot.css";
-import { ReactNode, RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import {
-  faInfoCircle,
-  faRobot,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
-import { cx, Text } from "@bob-obringer/design-system";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
-import { ErrorBoundary } from "react-error-boundary";
+
+import { Text } from "@bob-obringer/design-system";
+import { ChatbotMessage } from "@/features/ai-chatbot/components/chatbot-message";
 
 export function ChatbotBody({
   scrollerRef,
@@ -94,94 +87,16 @@ export function ChatbotBody({
       {messages.map((m) => {
         return (
           <div key={m.id} className="whitespace-pre-wrap">
-            <Message message={m} isLastMessage={m.id === lastMessage?.id}>
+            <ChatbotMessage
+              message={m}
+              isLastMessage={m.id === lastMessage?.id}
+            >
               {m.ui}
-            </Message>
+            </ChatbotMessage>
           </div>
         );
       })}
       <div ref={messagesEndRef} className="pb-6" />
-    </div>
-  );
-}
-
-const messageRoleInfo = {
-  user: {
-    icon: faUser,
-    roleName: "You",
-    className: "",
-    titleClassName: "text-color-secondary",
-  },
-  assistant: {
-    icon: faRobot,
-    roleName: "Bob's Chatbot",
-    className: "bg-opacity-5 bg-[#ffffff]",
-    titleClassName: "text-color-secondary",
-  },
-  _info: {
-    icon: faInfoCircle,
-    roleName: "About obringer.net Assistant",
-    className: "bg-[#7e451e] bg-opacity-20",
-    titleClassName: "text-color-warning",
-  },
-};
-
-function Message({
-  children,
-  message,
-  isLastMessage = false,
-}: {
-  children: ReactNode;
-  message: ChatbotUIMessage;
-  isLastMessage?: boolean;
-}) {
-  const { chatbotStatus } = useChatbot();
-  const { className } = messageRoleInfo[message.role];
-  const isActive = isLastMessage && chatbotStatus === "active";
-
-  return (
-    <div className={cx(className, "relative overflow-x-hidden")}>
-      <div className={"flex flex-col gap-5 p-5"}>
-        <MessageTitle isLastMessage={isLastMessage} message={message} />
-        <div
-          className={cx(
-            message.status === "cancelled" && "text-color-warning opacity-50",
-            message.status === "error" && "text-color-negative",
-          )}
-        >
-          <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            {children}
-          </ErrorBoundary>
-        </div>
-      </div>
-      {isActive && (
-        <div className="loading-color-bar-wrapper">
-          <div className="loading-color-bar" />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function MessageTitle({
-  message,
-  isLastMessage,
-}: {
-  message: ChatbotUIMessage;
-  isLastMessage: boolean;
-}) {
-  const { icon, roleName, titleClassName } = messageRoleInfo[message.role];
-
-  return (
-    <div
-      className={cx(
-        titleClassName,
-        "flex items-center justify-between space-x-3 text-sm",
-      )}
-    >
-      <FontAwesomeIcon icon={icon} size="lg" />
-      <div className="typography-title-medium flex-1">{roleName}</div>
-      {isLastMessage && <ChatbotMessageStatusIndicator message={message} />}
     </div>
   );
 }

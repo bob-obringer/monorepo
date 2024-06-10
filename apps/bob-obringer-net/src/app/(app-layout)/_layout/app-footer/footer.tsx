@@ -8,13 +8,14 @@ import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context"
 import { ChatbotBody } from "@/features/ai-chatbot/components/chatbot-body";
 import { ChatbotForm } from "@/features/ai-chatbot/components/chatbot-form";
 import { useSelectedLayoutSegments } from "next/navigation";
+import { ChatbotConfig } from "@bob-obringer/sanity-io-types";
 
 export function Footer({
   className,
-  chatTips,
+  chatbotConfig,
 }: {
   className?: string;
-  chatTips: Array<string>;
+  chatbotConfig: ChatbotConfig;
 }) {
   const { isOpen, close, submitMessage } = useChatbot();
   const segments = useSelectedLayoutSegments();
@@ -65,9 +66,12 @@ export function Footer({
       >
         <div className="mx-auto flex h-full w-full max-w-screen-md flex-col items-center justify-between px-5">
           <div className="w-full">
-            <ChatbotForm />
+            <ChatbotForm chatbotConfig={chatbotConfig} />
             {!isOpen && isHome && (
-              <Carousel onAskClick={handleAskClick} strings={chatTips} />
+              <Carousel
+                onAskClick={handleAskClick}
+                strings={chatbotConfig.suggestedQuestions ?? []}
+              />
             )}
           </div>
           <FooterNav />

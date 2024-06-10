@@ -4,10 +4,5 @@ import { getDocument } from "@/services/sanity-io-client";
 export async function AppFooter({ className }: { className?: string }) {
   const chatbotConfig = await getDocument("chatbotConfig");
 
-  return (
-    <Footer
-      className={className}
-      chatTips={chatbotConfig?.suggestedQuestions ?? []}
-    />
-  );
+  return <Footer className={className} chatbotConfig={chatbotConfig!} />;
 }

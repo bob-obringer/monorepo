@@ -141,23 +141,30 @@ export function ChatbotInnerContextProvider({
 
     // read the stream values and update when they're ready
     dontBlock(async () => {
-      for await (const value of readStreamableValue(resp.status)) {
+      for await (const streamingStatus of readStreamableValue(resp.status)) {
         // this lets us submit a new request before an old cancelled request
         // is finished.  We stop processing updates fromt the cancelled request
-        if (!value || activeAssistantMessageIdRef.current !== resp.id) {
+        if (
+          !streamingStatus ||
+          activeAssistantMessageIdRef.current !== resp.id
+        ) {
           return;
         }
 
+        console.log("newMessage.status", newMessage.status);
         // if the existing message has been cancelled, don't update the status
-        if (newMessage.status !== "cancelled") {
-          newMessage.status = value;
+        if (
+          newMessage.status !== "cancelled" &&
+          newMessage.status !== "error"
+        ) {
+          newMessage.status = streamingStatus;
         }
 
         // update the chat status
-        if (["retrieving", "generating"].includes(value)) {
+        if (["retrieving", "generating"].includes(streamingStatus)) {
           setChatbotStatus("active");
         }
-        if (["success", "error"].includes(value)) {
+        if (["success", "error"].includes(streamingStatus)) {
           setChatbotStatus("done");
           setTimeout(() => {
             setChatbotStatus("idle");
