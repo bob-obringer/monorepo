@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/bob-obringer-net",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true next build",

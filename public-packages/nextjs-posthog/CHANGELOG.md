@@ -1,5 +1,12 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.2.2
+
+### Patch Changes
+
+- 5ebed57: fixed posthog reference to window (#151)
+- 5ebed57: fixed posthog reference to window
+
 ## 0.2.1
 
 ### Patch Changes

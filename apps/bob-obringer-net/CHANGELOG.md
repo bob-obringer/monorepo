@@ -1,5 +1,17 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.21.1
+
+### Patch Changes
+
+- 48b8b99: improvements to chatbot arch
+- 48b8b99: improvements to chatbot arch (#154)
+- 5ebed57: fixing chatbot errors
+- 5ebed57: fixing chatbot errors (#150)
+- Updated dependencies [5ebed57]
+- Updated dependencies [5ebed57]
+  - @bob-obringer/nextjs-posthog@0.2.2
+
 ## 0.21.0
 
 ### Minor Changes
