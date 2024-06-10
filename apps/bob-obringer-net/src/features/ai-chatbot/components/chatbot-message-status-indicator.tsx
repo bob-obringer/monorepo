@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { cx, Text } from "@bob-obringer/design-system";
 import { ReactNode } from "react";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ChatbotMessageStatusIndicator({
@@ -24,9 +23,15 @@ export function ChatbotMessageStatusIndicator({
   if (status === "cancelled") {
     return (
       <MessageStateWrapper isIdle={isIdle}>
-        <MessageStateItem className="text-color-warning" icon={faCancel}>
-          Cancelling
-        </MessageStateItem>
+        <MessageStateItem isCancelling>Cancelling</MessageStateItem>
+      </MessageStateWrapper>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <MessageStateWrapper isIdle={isIdle}>
+        <MessageStateItem isDone>Failed</MessageStateItem>
       </MessageStateWrapper>
     );
   }
@@ -38,24 +43,10 @@ export function ChatbotMessageStatusIndicator({
 
   return (
     <MessageStateWrapper isIdle={isIdle}>
-      <MessageStateItem
-        className={cx(
-          isRetrieving && "text-color-primary",
-          isRetrieved && "text-[#66CC66]",
-        )}
-        icon={isRetrieving ? faSpinner : isRetrieved ? faCheck : faPauseCircle}
-        spin={isRetrieving}
-      >
+      <MessageStateItem isDone={isRetrieved} isActive={isRetrieving}>
         Retrieving
       </MessageStateItem>
-      <MessageStateItem
-        className={cx(
-          isGenerating && "text-color-primary",
-          isGenerated && "text-[#66CC66]",
-        )}
-        icon={isGenerated ? faCheck : isGenerating ? faSpinner : faPauseCircle}
-        spin={isGenerating}
-      >
+      <MessageStateItem isDone={isGenerated} isActive={isGenerating}>
         Generating
       </MessageStateItem>
     </MessageStateWrapper>
@@ -83,14 +74,14 @@ function MessageStateWrapper({
 
 function MessageStateItem({
   children,
-  className,
-  icon,
-  spin,
+  isDone,
+  isActive,
+  isCancelling,
 }: {
   children: ReactNode;
-  className?: string;
-  icon: IconProp;
-  spin?: boolean;
+  isDone?: boolean;
+  isActive?: boolean;
+  isCancelling?: boolean;
 }) {
   return (
     <Text
@@ -99,11 +90,26 @@ function MessageStateItem({
       className={cx(
         "flex items-center gap-2 transition-colors md:flex-row-reverse",
         "text-color-tertiary",
-        className,
+        isCancelling && "text-color-warning",
+        isActive && "text-color-primary",
+        isDone && "text-[#66CC66]",
       )}
     >
       {children}
-      <FontAwesomeIcon icon={icon} size="lg" spin={spin} className="w-4" />
+      <FontAwesomeIcon
+        icon={
+          isCancelling
+            ? faCancel
+            : isActive
+              ? faSpinner
+              : isDone
+                ? faCheck
+                : faPauseCircle
+        }
+        size="lg"
+        spin={isActive}
+        className="w-4"
+      />
     </Text>
   );
 }
