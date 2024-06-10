@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://bob.obringer.net/sitemap.xml",
+    sitemap: "https://bob.obringer.net/sitemap",
   };
 }
