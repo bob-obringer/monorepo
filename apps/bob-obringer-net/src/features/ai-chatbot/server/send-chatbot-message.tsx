@@ -7,20 +7,12 @@ import {
   ResumeCompany,
 } from "@/features/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io-client";
-import {
-  createStreamableUI,
-  createStreamableValue,
-  getMutableAIState,
-  streamUI,
-} from "ai/rsc";
+import { streamUI } from "ai/rsc";
 import { getSystemPrompt } from "@/features/ai-chatbot/server/chatbot-system-prompt";
-import { nanoid } from "ai";
 import {
   SendChatbotMessageActionResponse,
-  SendChatbotMessageActionStatus,
   SendChatbotMessageProps,
 } from "@/features/ai-chatbot/types";
-import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 import {
   getResumeSkills,
   ResumeSkill,
@@ -28,74 +20,53 @@ import {
 import { AboutBob, ChatbotConfig } from "@bob-obringer/sanity-io-types";
 import { models } from "@/services/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
-import { resumeTool } from "@/features/ai-chatbot/tools/resume";
-import { contactTool } from "@/features/ai-chatbot/tools/contact";
-import { vercelBlob } from "@/services/vercel-blob";
-import { unstable_after as after } from "next/server";
-import { Markdown } from "@/features/markdown/markdown";
-import { ReactNode } from "react";
+import { resumeTool } from "@/features/ai-chatbot/tools/resume-tool";
+import { contactTool } from "@/features/ai-chatbot/tools/contact-tool";
+import { getMessageContext } from "@/features/ai-chatbot/server/get-message-context";
+import { chatTextRenderer } from "@/features/ai-chatbot/tools/chat-text-renderer";
 
+/**
+ * Server action to send the chatbot message
+ * @param message The user message to send
+ * @param messageId The id of the user message (already created on client)
+ */
 export async function sendChatbotMessage({
   message,
   messageId,
-}: SendChatbotMessageProps): Promise<SendChatbotMessageActionResponse | null> {
-  const uiStream = createStreamableUI(<>Thinking...</>);
-  const statusStream =
-    createStreamableValue<SendChatbotMessageActionStatus>("retrieving");
+}: SendChatbotMessageProps): Promise<SendChatbotMessageActionResponse> {
+  const context = getMessageContext();
 
   // Rate Limit
-  const { success } = await rateLimit();
+  const { success } = await rateLimit(25, "5m");
   if (!success) {
-    statusStream.done("success");
+    context.endResponse({
+      aiContent: "You're sending messages too quickly.  Please slow down.",
+      uiContent: (
+        <>{`You're sending messages too quickly.  Please slow down.`}</>
+      ),
+      status: "error",
+    });
     return {
-      status: statusStream.value,
-      ui: <>{`You're sending messages too quickly.  Please slow down.`}</>,
-      id: nanoid(),
+      status: context.statusStream.value,
+      ui: <>{context.uiStream.value}</>,
+      id: context.id,
     };
   }
 
-  const aiState = getMutableAIState<ChatbotAIContext>();
-
-  // When we end the response, we need to close all streams
-  function endStreams({
-    aiContent,
-    uiContent,
-    status = "success",
-  }: {
-    aiContent: string;
-    uiContent: ReactNode;
-    status?: SendChatbotMessageActionStatus;
-  }) {
-    uiStream.done(uiContent);
-    statusStream.done(status);
-    aiState.done({
-      ...aiState.get(),
-      messages: [
-        ...aiState.get().messages,
-        { id: nanoid(), role: "assistant", content: aiContent },
-      ],
-    });
-    after(async () => {
-      await vercelBlob.upload(
-        `chatbot/${aiState.get().id}.json`,
-        JSON.stringify(aiState.get().messages, null, 2),
-      );
-    });
-    return null;
-  }
-
+  // If we catch an error, we'll abort the stream
   const abortController = new AbortController();
+
   try {
     // Add user message to ai state
-    aiState.update({
-      ...aiState.get(),
+    context.aiState.update({
+      ...context.aiState.get(),
       messages: [
-        ...aiState.get().messages,
+        ...context.aiState.get().messages,
         { id: messageId, role: "user", content: message },
       ],
     });
 
-    // grab content from cms to construct our system prompt
+    // grab everything from the cms
     const [aboutBob, chatbotConfig, skills, companies] = (await Promise.all([
       getDocument("aboutBob"),
       getDocument("chatbotConfig"),
@@ -103,7 +74,7 @@ export async function sendChatbotMessage({
       getResumeCompanies(),
     ])) as [AboutBob, ChatbotConfig, Array<ResumeSkill>, Array<ResumeCompany>];
 
-    // construct this from our system prompt
+    // construct our system prompt
     const systemPrompt = getSystemPrompt({
       systemPromptInstructions: chatbotConfig.systemPromptInstructions,
       skills,
@@ -111,51 +82,39 @@ export async function sendChatbotMessage({
       bio: aboutBob.bio,
     });
 
-    // create ui stream
-    let updateCount = 0;
+    /*
+      We create the UI stream here but we don't use the response directly.
+      
+      Some models (gpt4o) can return very long streams with many small chunks that
+      the client hits a recurrsion limit.  Instead, we send the results of the `text`
+      and `tools` functions to our own stream that we can update at our own pace.
+     */
     await streamUI({
-      model: models[chatbotConfig.model ?? "gpt35Turbo"],
+      model: models[chatbotConfig.model ?? "anthropicHaiku"],
       system: systemPrompt,
-      messages: aiState.get().messages,
-      temperature: 0.4,
+      messages: context.aiState.get().messages,
+      temperature: chatbotConfig.temperature,
       initial: <>Thinking...</>,
-      text: async ({ content, done }) => {
-        if (done) {
-          return endStreams({
-            aiContent: content,
-            uiContent: <Markdown markdown={content} />,
-          });
-        }
-        updateCount += 1;
-        if (updateCount % 3 === 0) {
-          uiStream.update(<Markdown markdown={content} />);
-        }
-        return null;
-      },
+      text: chatTextRenderer(context),
       tools: {
-        resume: resumeTool({ endStreams }),
-        contact: contactTool({ endStreams, uiStream }),
+        resume: resumeTool(context),
+        contact: contactTool(context),
       },
       abortSignal: abortController.signal,
     });
-
-    return {
-      status: statusStream.value,
-      ui: <>{uiStream.value}</>,
-      id: nanoid(),
-    };
   } catch (e) {
     console.error(e);
     abortController.abort();
-    endStreams({
+    context.endResponse({
       aiContent: "[Responded with an error]",
       uiContent: "<>An error occurred. Please try again.</>",
       status: "error",
     });
-    return {
-      status: statusStream.value,
-      ui: <>An error occurred. Please try again.</>,
-      id: nanoid(),
-    };
   }
+
+  return {
+    status: context.statusStream.value,
+    ui: <>{context.uiStream.value}</>,
+    id: context.id,
+  };
 }
