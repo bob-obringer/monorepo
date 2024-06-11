@@ -82,6 +82,8 @@ export async function sendChatbotMessage({
       bio: aboutBob.bio,
     });
 
+    context.statusStream.update("generating");
+
     /*
       We create the UI stream here but we don't use the response directly.
       
