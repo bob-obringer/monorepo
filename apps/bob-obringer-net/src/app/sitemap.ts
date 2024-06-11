@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     (company) =>
       ({
         url: `https://bob.obringer.net/experience/${company.slug}`,
-        lastModified: company._updatedAt,
+        lastModified: new Date(),
         changeFrequency: "daily",
         priority: 0.5,
       }) as SitemapPage,
@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.2,
     },
     {
-      url: "https://acme.com/experience",
+      url: "https://bob.obringer.net/experience",
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,

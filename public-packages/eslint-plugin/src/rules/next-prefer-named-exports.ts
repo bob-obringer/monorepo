@@ -10,6 +10,8 @@ const nextJsDefaultExports = [
   /manifest\.ts/,
   /opengraph-image\.tsx$/,
   /twitter-image\.tsx$/,
+  /sitemap\.ts$/,
+  /robots\.ts$/,
 ];
 
 const rule: TSESLint.RuleModule<"preferNamedExports"> = {
