@@ -16,6 +16,12 @@ const initialUI = <>Thinking...</>;
 export function getMessageContext(): MessageContext {
   // The AI state used to store messages to include with the chat
   const aiState = getMutableAIState<ChatbotAIContext>();
+  if (aiState.get().messages.length === 0) {
+    aiState.update({
+      id: `${Date.now()}:${nanoid()}`,
+      messages: [],
+    });
+  }
 
   // the stream from the `streamUI` call comes back too quickly with some models
   // and can cause a recursion error on the client.  Instead, we create a separate
@@ -47,7 +53,7 @@ export function getMessageContext(): MessageContext {
     });
     after(async () => {
       await vercelBlob.upload(
-        `chatbot/${Date.now()}:${aiState.get().id}.json`,
+        `chatbot/${aiState.get().id}.json`,
         JSON.stringify(aiState.get().messages, null, 2),
       );
     });
