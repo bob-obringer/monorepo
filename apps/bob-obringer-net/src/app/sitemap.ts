@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.2,
     },
     {
-      url: "https://acme.com/experience",
+      url: "https://bob.obringer.net/experience",
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
