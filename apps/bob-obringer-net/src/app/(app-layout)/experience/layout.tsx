@@ -15,5 +15,3 @@ export default function ResumeLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-
-export const revalidate = 600;

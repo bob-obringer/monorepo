@@ -105,5 +105,3 @@ function CategorizedGroup({
     </div>
   );
 }
-
-export const revalidate = 600;
