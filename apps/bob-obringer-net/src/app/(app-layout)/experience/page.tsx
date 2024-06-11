@@ -38,3 +38,5 @@ export default async function ResumePage() {
     />
   );
 }
+
+export const revalidate = 600;
