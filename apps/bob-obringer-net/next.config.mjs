@@ -6,6 +6,7 @@ import { withLogtail } from "@logtail/next";
 let nextConfig = {
   experimental: {
     after: true,
+    ppr: true,
   },
   async rewrites() {
     return [
