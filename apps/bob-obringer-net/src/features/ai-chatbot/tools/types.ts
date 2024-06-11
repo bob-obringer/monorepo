@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import { z } from "zod";
+import { createStreamableUI } from "ai/rsc";
+import { SendChatbotMessageActionStatus } from "@/features/ai-chatbot/types";
 
 type Streamable = ReactNode | Promise<ReactNode>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,3 +25,11 @@ export type RenderTool<PARAMETERS extends z.ZodTypeAny = any> = {
     ]
   >;
 };
+
+export type EndStreams = (props: {
+  aiContent: string;
+  uiContent: ReactNode;
+  status?: SendChatbotMessageActionStatus;
+}) => null;
+
+export type UIStream = ReturnType<typeof createStreamableUI>;

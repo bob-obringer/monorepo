@@ -151,7 +151,6 @@ export function ChatbotInnerContextProvider({
           return;
         }
 
-        console.log("newMessage.status", newMessage.status);
         // if the existing message has been cancelled, don't update the status
         if (
           newMessage.status !== "cancelled" &&
