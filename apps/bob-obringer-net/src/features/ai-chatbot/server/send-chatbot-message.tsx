@@ -7,7 +7,12 @@ import {
   ResumeCompany,
 } from "@/features/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io-client";
-import { createStreamableValue, getMutableAIState, streamUI } from "ai/rsc";
+import {
+  createStreamableUI,
+  createStreamableValue,
+  getMutableAIState,
+  streamUI,
+} from "ai/rsc";
 import { getSystemPrompt } from "@/features/ai-chatbot/server/chatbot-system-prompt";
 import { nanoid } from "ai";
 import {
@@ -28,11 +33,13 @@ import { contactTool } from "@/features/ai-chatbot/tools/contact";
 import { vercelBlob } from "@/services/vercel-blob";
 import { unstable_after as after } from "next/server";
 import { Markdown } from "@/features/markdown/markdown";
+import { ReactNode } from "react";
 
 export async function sendChatbotMessage({
   message,
   messageId,
 }: SendChatbotMessageProps): Promise<SendChatbotMessageActionResponse | null> {
+  const uiStream = createStreamableUI(<>Thinking...</>);
   const statusStream =
     createStreamableValue<SendChatbotMessageActionStatus>("retrieving");
 
@@ -50,15 +57,22 @@ export async function sendChatbotMessage({
   const aiState = getMutableAIState<ChatbotAIContext>();
 
   // When we end the response, we need to close all streams
-  function endStreams(
-    content: string,
-    status: SendChatbotMessageActionStatus = "success",
-  ) {
+  function endStreams({
+    aiContent,
+    uiContent,
+    status = "success",
+  }: {
+    aiContent: string;
+    uiContent: ReactNode;
+    status?: SendChatbotMessageActionStatus;
+  }) {
+    uiStream.done(uiContent);
+    statusStream.done(status);
     aiState.done({
       ...aiState.get(),
       messages: [
         ...aiState.get().messages,
-        { id: nanoid(), role: "assistant", content: content },
+        { id: nanoid(), role: "assistant", content: aiContent },
       ],
     });
     after(async () => {
@@ -67,7 +81,7 @@ export async function sendChatbotMessage({
         JSON.stringify(aiState.get().messages, null, 2),
       );
     });
-    statusStream.done(status);
+    return null;
   }
 
   const abortController = new AbortController();
@@ -97,10 +111,9 @@ export async function sendChatbotMessage({
       bio: aboutBob.bio,
     });
 
-    statusStream.update("generating");
-
     // create ui stream
-    const ui = await streamUI({
+    let updateCount = 0;
+    await streamUI({
       model: models[chatbotConfig.model ?? "gpt35Turbo"],
       system: systemPrompt,
       messages: aiState.get().messages,
@@ -108,26 +121,37 @@ export async function sendChatbotMessage({
       initial: <>Thinking...</>,
       text: async ({ content, done }) => {
         if (done) {
-          endStreams(content);
+          return endStreams({
+            aiContent: content,
+            uiContent: <Markdown markdown={content} />,
+          });
         }
-        return <Markdown markdown={content} />;
+        updateCount += 1;
+        if (updateCount % 3 === 0) {
+          uiStream.update(<Markdown markdown={content} />);
+        }
+        return null;
       },
       tools: {
         resume: resumeTool({ endStreams }),
-        contact: contactTool({ endStreams }),
+        contact: contactTool({ endStreams, uiStream }),
       },
       abortSignal: abortController.signal,
     });
 
     return {
       status: statusStream.value,
-      ui: <>{ui.value}</>,
+      ui: <>{uiStream.value}</>,
       id: nanoid(),
     };
   } catch (e) {
     console.error(e);
-    endStreams("[Responded with an error]", "error");
     abortController.abort();
+    endStreams({
+      aiContent: "[Responded with an error]",
+      uiContent: "<>An error occurred. Please try again.</>",
+      status: "error",
+    });
     return {
       status: statusStream.value,
       ui: <>An error occurred. Please try again.</>,
