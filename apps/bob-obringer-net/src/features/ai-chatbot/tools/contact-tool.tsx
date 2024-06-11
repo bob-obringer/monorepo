@@ -1,19 +1,9 @@
-import {
-  EndStreams,
-  RenderTool,
-  UIStream,
-} from "@/features/ai-chatbot/tools/types";
 import { ContactCard } from "@/components/contact-card";
 import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
 import { z } from "zod";
+import { RenderTool, MessageContext } from "@/features/ai-chatbot/tools/types";
 
-export function contactTool({
-  uiStream,
-  endStreams,
-}: {
-  uiStream: UIStream;
-  endStreams: EndStreams;
-}): RenderTool {
+export function contactTool(context: MessageContext): RenderTool {
   return {
     description: "If the user wants to communicate with bob, run this tool",
     parameters: z.object({
@@ -25,7 +15,7 @@ the contactMethod to "all methods".`,
       ),
     }),
     generate: async function ({ contactMethod }) {
-      uiStream.update(<div>Looking up contact info</div>);
+      context.uiStream.update(<div>Looking up contact info</div>);
 
       const contactInfo = await getAllContactInfo();
 
@@ -34,13 +24,15 @@ the contactMethod to "all methods".`,
       );
 
       if (specificContactInfo) {
-        return endStreams({
+        return context.endResponse({
+          status: "success",
           aiContent: `[Showing Contact Tool with ${specificContactInfo} contact info]`,
           uiContent: <ContactCard contactInfo={specificContactInfo} />,
         });
       }
 
-      return endStreams({
+      return context.endResponse({
+        status: "success",
         aiContent: `[Showing Contact Tool with all contact info]`,
         uiContent: (
           <div className="flex h-full flex-col gap-4">

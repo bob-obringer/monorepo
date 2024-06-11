@@ -30,6 +30,11 @@ export const chatbotConfig = defineType({
       },
     },
     {
+      name: "temperature",
+      title: "Temperature",
+      type: "number",
+    },
+    {
       name: "suggestedQuestions",
       title: "Suggested Questions",
       type: "array",

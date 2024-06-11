@@ -2,13 +2,15 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
 import { headers } from "next/headers";
 
-const rateLimiter = new Ratelimit({
-  redis: kv,
-  limiter: Ratelimit.fixedWindow(5, "30s"),
-});
+type Unit = "ms" | "s" | "m" | "h" | "d";
+type Duration = `${number} ${Unit}` | `${number}${Unit}`;
 
-export function rateLimit() {
+export function rateLimit(tokens: number, duration: Duration) {
   const h = headers();
   const ip = h.get("x-real-ip") ?? h.get("x-forwarded-for");
-  return rateLimiter.limit(ip ?? "anonymous");
+
+  return new Ratelimit({
+    redis: kv,
+    limiter: Ratelimit.slidingWindow(tokens, duration),
+  }).limit(ip ?? "anonymous");
 }
