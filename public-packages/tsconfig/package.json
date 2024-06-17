@@ -16,6 +16,6 @@
   "license": "MIT",
   "author": "Bob Obringer <bob@obringer.net>",
   "files": [
-    "**/*tsconfig.json"
+    "**/tsconfig*.json"
   ]
 }

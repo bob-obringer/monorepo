@@ -1,0 +1,33 @@
+{
+  "name": "cli",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "bin": "dist/cli.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.tsx",
+    "start": "node dist/cli.js"
+  },
+  "dependencies": {
+    "ansi": "^0.3.1",
+    "commander": "12.1.0",
+    "figlet": "^1.7.0",
+    "gradient-string": "^2.0.2",
+    "ink": "5.0.1",
+    "ink-select-input": "^6.0.0",
+    "react": "18.3.1",
+    "strip": "^3.0.0"
+  },
+  "devDependencies": {
+    "@sindresorhus/tsconfig": "5.0.0",
+    "@types/figlet": "^1.5.8",
+    "@types/gradient-string": "^1.1.6",
+    "@types/react": "18.3.3",
+    "ink-testing-library": "4.0.0",
+    "typescript": "5.4.5"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
