@@ -1,5 +1,37 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.0
+
+### Minor Changes
+
+- 11d7cb2: added robots and sitemap
+- 403cbbd: added robots and sitemap 3 (#161)
+- f1fe3a1: improved caching
+- 11d7cb2: added robots and sitemap (#159)
+- f1fe3a1: improved caching (#166)
+- 403cbbd: added robots and sitemap 3
+- 33cd272: added robots and sitemap (#156)
+- f1fe3a1: improved caching (#167)
+- 33cd272: added robots and sitemap
+- f1fe3a1: improved caching
+
+### Patch Changes
+
+- 4a9163d: fixed twitter image
+- 4b7509f: fixed chat id creation (#169)
+- 9aef49f: fixed cachine (#171)
+- 35dea60: fixed broken streams
+- 4b7509f: fixed chat id creation
+- 56cd168: disabled ppr
+- 9aef49f: fixed cachine
+- 110ee6a: cleaned up chatbot
+- 110ee6a: cleaned up chatbot (#164)
+- 4a9163d: fixed twitter image (#177)
+- 37184a0: restored generating state
+- 37184a0: restored generating state (#175)
+- 56cd168: disabled ppr (#173)
+  - @bob-obringer/sanity-io-types@0.0.3
+
 ## 0.21.1
 
 ### Patch Changes

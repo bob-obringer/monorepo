@@ -1,5 +1,12 @@
 # @bob-obringer/eslint-plugin
 
+## 0.5.0
+
+### Minor Changes
+
+- 11d7cb2: added robots and sitemap
+- 11d7cb2: added robots and sitemap (#159)
+
 ## 0.4.1
 
 ### Patch Changes
