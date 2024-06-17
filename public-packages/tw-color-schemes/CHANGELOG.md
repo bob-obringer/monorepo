@@ -1,5 +1,12 @@
 # @bob-obringer/tw-color-schemes
 
+## 0.1.2
+
+### Patch Changes
+
+- 0b5f895: added dist folders to published packages (#182)
+- 0b5f895: added dist folders to published packages
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.2.3
+
+### Patch Changes
+
+- 0b5f895: added dist folders to published packages (#182)
+- 0b5f895: added dist folders to published packages
+
 ## 0.2.2
 
 ### Patch Changes

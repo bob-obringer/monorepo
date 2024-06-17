@@ -1,5 +1,15 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.3.4
+
+### Patch Changes
+
+- 0b5f895: added dist folders to published packages (#182)
+- 0b5f895: added dist folders to published packages
+- Updated dependencies [0b5f895]
+- Updated dependencies [0b5f895]
+  - @bob-obringer/http-errors@0.3.1
+
 ## 0.3.3
 
 ### Patch Changes
