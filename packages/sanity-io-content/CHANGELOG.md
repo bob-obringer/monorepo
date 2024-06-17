@@ -1,5 +1,12 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.8.1
+
+### Patch Changes
+
+- 110ee6a: cleaned up chatbot
+- 110ee6a: cleaned up chatbot (#164)
+
 ## 0.8.0
 
 ### Minor Changes

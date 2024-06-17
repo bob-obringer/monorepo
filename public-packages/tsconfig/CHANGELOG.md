@@ -1,5 +1,11 @@
 # @bob-obringer/tsconfig
 
+## 0.2.2
+
+### Patch Changes
+
+- b63734d: fixed files for tsconfig package.json
+
 ## 0.2.1
 
 ### Patch Changes
