@@ -23,6 +23,9 @@
   "bin": {
     "generate-changeset": "./dist/cli.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist node_modules",
