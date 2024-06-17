@@ -1,5 +1,12 @@
 # @bob-obringer/tw-color-schemes
 
+## 0.1.3
+
+### Patch Changes
+
+- 14492be: manually bump color schemes
+- 14492be: manually bump color schemes (#190)
+
 ## 0.1.2
 
 ### Patch Changes

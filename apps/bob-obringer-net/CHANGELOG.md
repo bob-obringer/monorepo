@@ -1,5 +1,12 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.2
+
+### Patch Changes
+
+- @bob-obringer/theme@0.1.3
+- @bob-obringer/design-system@0.1.2
+
 ## 0.22.1
 
 ### Patch Changes
