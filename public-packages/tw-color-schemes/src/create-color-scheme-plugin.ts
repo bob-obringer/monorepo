@@ -5,7 +5,7 @@ import { getColorsByScheme } from "./get-colors-by-scheme";
 import { getColorCssVariables } from "./get-color-css-variables";
 
 export function createColorSchemePlugin<T extends ColorScheme>(
-  base: T,
+  baseScheme: T,
   {
     schemes = {},
     namespace = "twcs",
@@ -14,10 +14,10 @@ export function createColorSchemePlugin<T extends ColorScheme>(
     namespace?: string;
   } = {},
 ) {
-  const baseColorConfig = getColorConfig({ baseScheme: base, namespace });
+  const baseColorConfig = getColorConfig({ baseScheme, namespace });
 
   const colorsByScheme = getColorsByScheme({
-    baseScheme: base,
+    baseScheme,
     schemes,
   });
 
