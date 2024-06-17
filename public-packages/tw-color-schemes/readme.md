@@ -97,7 +97,7 @@ export default function Root() {
   return (
     <body className="awesome-color-scheme">
       ...
-      <div className="text-color-primary">I'm awesome text 😀</div>
+      <div className="text-color-primary">I'm awesome text 😀🔥</div>
       <div className="light-color-scheme">
         <div className="text-color-primary">I'm less awesome text 😔</div>
       </div>
