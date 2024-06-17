@@ -1,5 +1,12 @@
 # @bob-obringer/nextjs-sanity-image
 
+## 0.2.1
+
+### Patch Changes
+
+- 0b5f895: added dist folders to published packages (#182)
+- 0b5f895: added dist folders to published packages
+
 ## 0.2.0
 
 ### Minor Changes

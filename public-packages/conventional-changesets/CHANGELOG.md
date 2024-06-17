@@ -1,5 +1,12 @@
 # @bob-obringer/conventional-changeset
 
+## 0.3.2
+
+### Patch Changes
+
+- 0b5f895: added dist folders to published packages (#182)
+- 0b5f895: added dist folders to published packages
+
 ## 0.3.1
 
 ### Patch Changes

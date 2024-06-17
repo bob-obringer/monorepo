@@ -1,5 +1,19 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.1
+
+### Patch Changes
+
+- Updated dependencies [0b5f895]
+- Updated dependencies [0b5f895]
+  - @bob-obringer/http-errors@0.3.1
+  - @bob-obringer/nextjs-posthog@0.2.3
+  - @bob-obringer/nextjs-sanity-io-image@0.2.1
+  - @bob-obringer/nextjs-sanity-io-webhooks@0.3.4
+  - @bob-obringer/vercel-storage@0.2.1
+  - @bob-obringer/theme@0.1.2
+  - @bob-obringer/design-system@0.1.2
+
 ## 0.22.0
 
 ### Minor Changes

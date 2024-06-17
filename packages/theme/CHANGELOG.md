@@ -1,5 +1,13 @@
 # @bob-obringer/theme
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [0b5f895]
+- Updated dependencies [0b5f895]
+  - @bob-obringer/tw-color-schemes@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
