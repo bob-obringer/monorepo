@@ -1,5 +1,13 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.8
+
+### Patch Changes
+
+- Updated dependencies [9a5a27d]
+- Updated dependencies [9a5a27d]
+  - @bob-obringer/components@0.0.6
+
 ## 0.22.7
 
 ### Patch Changes
