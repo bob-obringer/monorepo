@@ -1,5 +1,12 @@
 # cli
 
+## 0.1.2
+
+### Patch Changes
+
+- 219c438: fixed builds (#198)
+- 219c438: fixed builds
+
 ## 0.1.1
 
 ### Patch Changes
