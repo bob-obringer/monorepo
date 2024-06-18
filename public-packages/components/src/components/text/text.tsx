@@ -68,6 +68,7 @@ type ValidElement =
   | "q"
   | "cite"
   | "dfn"
+  | "em"
   | "abbr";
 
 export type TextProps<As extends ValidElement> = Omit<
