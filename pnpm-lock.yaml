@@ -235,9 +235,6 @@ importers:
 
   apps/cli:
     dependencies:
-      ansi:
-        specifier: ^0.3.1
-        version: 0.3.1
       commander:
         specifier: 12.1.0
         version: 12.1.0
@@ -256,9 +253,9 @@ importers:
       react:
         specifier: 18.3.1
         version: 18.3.1
-      strip:
-        specifier: ^3.0.0
-        version: 3.0.0
+      strip-ansi:
+        specifier: 0.3.0
+        version: 0.3.0
     devDependencies:
       '@sindresorhus/tsconfig':
         specifier: 5.0.0
@@ -392,7 +389,7 @@ importers:
         version: 0.2.1(tailwindcss@3.4.4)
     devDependencies:
       '@bob-obringer/tw-color-schemes':
-        specifier: workspace:*
+        specifier: 0.1.4
         version: link:../tw-color-schemes
       '@radix-ui/colors':
         specifier: 3.0.0
@@ -500,7 +497,7 @@ importers:
   public-packages/theme:
     dependencies:
       '@bob-obringer/tw-color-schemes':
-        specifier: workspace:*
+        specifier: 0.1.4
         version: link:../tw-color-schemes
       '@radix-ui/colors':
         specifier: 3.0.0
@@ -7200,6 +7197,11 @@ packages:
       environment: 1.1.0
     dev: false
 
+  /ansi-regex@0.2.1:
+    resolution: {integrity: sha512-sGwIGMjhYdW26/IhwK2gkWWI8DRCVO6uj3hYgHT+zD+QL1pa37tM3ujhyfcJIYSbsxp7Gxhy7zrRW/1AHm4BmA==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
@@ -7223,10 +7225,6 @@ packages:
   /ansi-styles@6.2.1:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
-
-  /ansi@0.3.1:
-    resolution: {integrity: sha512-iFY7JCgHbepc0b82yLaw4IMortylNb6wG4kL+4R0C3iv6i+RHGHux/yUX5BTiRvSX/shMnngjR1YyNMnXEFh5A==}
-    dev: false
 
   /ansicolors@0.3.2:
     resolution: {integrity: sha512-QXu7BPrP29VllRxH8GwB7x5iX5qWKAAMLqKQGWTeLWVlNHNOpVMJ91dsxQAIWXpjuW5wqvxu3Jd/nRjrJ+0pqg==}
@@ -15047,6 +15045,14 @@ packages:
     dependencies:
       safe-buffer: 5.2.1
 
+  /strip-ansi@0.3.0:
+    resolution: {integrity: sha512-DerhZL7j6i6/nEnVG0qViKXI0OKouvvpsAiaj7c+LfqZZZxdwZtv8+UiA/w4VUJpT8UzX0pR1dcHOii1GbmruQ==}
+    engines: {node: '>=0.10.0'}
+    hasBin: true
+    dependencies:
+      ansi-regex: 0.2.1
+    dev: false
+
   /strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
     engines: {node: '>=8'}
@@ -15092,10 +15098,6 @@ packages:
   /strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-
-  /strip@3.0.0:
-    resolution: {integrity: sha512-kIPiqRSsGCwWItPLDhuZPQlwX16WjQggT5QS1f5Aam0DSbtPQh8SsIkbBxLm+835qb1Q0OoQnvrhJ0oplIup8Q==}
-    dev: false
 
   /style-mod@4.1.2:
     resolution: {integrity: sha512-wnD1HyVqpJUI2+eKZ+eo1UwghftP6yuFheBqqe+bWCotBjC2K1YnteJILRMs3SM4V/0dLEW1SC27MWP5y+mwmw==}
