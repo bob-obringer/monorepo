@@ -1,5 +1,12 @@
 # @bob-obringer/eslint-plugin
 
+## 0.5.2
+
+### Patch Changes
+
+- 9676f51: bumped versions (#195)
+- 9676f51: bumped versions
+
 ## 0.5.1
 
 ### Patch Changes
