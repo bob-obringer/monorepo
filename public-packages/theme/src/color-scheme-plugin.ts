@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/colors";
 
 // todo: handle radix alpha colors (like #FFFFFF88)
+
 export const colorSchemePlugin = createColorSchemePlugin({
   background: {
     default: mauveDark.mauve1,
@@ -40,7 +41,7 @@ export const colorSchemePlugin = createColorSchemePlugin({
     warning: rubyDark.ruby11,
     link: skyDark.sky9,
     linkHover: skyDark.sky10,
-    disabled: "rgba(255, 255, 255, 0.19)",
+    disabled: "rgba(255, 255, 255, 0.2)",
     // Buttons
     button: mauveDark.mauve1,
     buttonSecondary: mauveDark.mauve9,
