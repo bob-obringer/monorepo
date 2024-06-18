@@ -1,5 +1,12 @@
 # @bob-obringer/components
 
+## 0.0.6
+
+### Patch Changes
+
+- 9a5a27d: added react-jsx to components
+- 9a5a27d: added react-jsx to components (#217)
+
 ## 0.0.5
 
 ### Patch Changes
