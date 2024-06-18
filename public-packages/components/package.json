@@ -24,7 +24,7 @@
     "tailwind-variants": "0.2.1"
   },
   "devDependencies": {
-    "@bob-obringer/tw-color-schemes": "0.1.5",
+    "@bob-obringer/tw-color-schemes": "workspace:*",
     "@radix-ui/colors": "3.0.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
