@@ -1,5 +1,13 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.7
+
+### Patch Changes
+
+- Updated dependencies [c7abcfd]
+- Updated dependencies [c7abcfd]
+  - @bob-obringer/components@0.0.5
+
 ## 0.22.6
 
 ### Patch Changes
