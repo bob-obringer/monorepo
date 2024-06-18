@@ -1,5 +1,18 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.6
+
+### Patch Changes
+
+- Updated dependencies [79334d7]
+- Updated dependencies [79334d7]
+- Updated dependencies [79334d7]
+  - @bob-obringer/nextjs-posthog@0.2.4
+  - @bob-obringer/nextjs-sanity-io-image@0.2.2
+  - @bob-obringer/nextjs-sanity-io-webhooks@0.3.5
+  - @bob-obringer/theme@0.0.5
+  - @bob-obringer/components@0.0.4
+
 ## 0.22.5
 
 ### Patch Changes

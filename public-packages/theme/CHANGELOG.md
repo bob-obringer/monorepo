@@ -1,5 +1,14 @@
 # @bob-obringer/theme
 
+## 0.0.5
+
+### Patch Changes
+
+- 79334d7: fixed broken lock file (#212)
+- 79334d7: fixed broken lock file
+- Updated dependencies [79334d7]
+  - @bob-obringer/tw-color-schemes@0.1.5
+
 ## 0.0.4
 
 ### Patch Changes
