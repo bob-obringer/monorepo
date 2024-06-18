@@ -1,5 +1,12 @@
 # @bob-obringer/conventional-changeset
 
+## 0.3.3
+
+### Patch Changes
+
+- 89ddaba: bumped versions (#203)
+- 89ddaba: bumped versions
+
 ## 0.3.2
 
 ### Patch Changes

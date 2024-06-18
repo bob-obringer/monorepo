@@ -1,5 +1,12 @@
 # @bob-obringer/nextjs-sanity-image
 
+## 0.2.2
+
+### Patch Changes
+
+- 89ddaba: bumped versions (#203)
+- 89ddaba: bumped versions
+
 ## 0.2.1
 
 ### Patch Changes
