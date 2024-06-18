@@ -1,5 +1,12 @@
 # @bob-obringer/components
 
+## 0.0.5
+
+### Patch Changes
+
+- c7abcfd: added jsx preserve to components (#214)
+- c7abcfd: added jsx preserve to components
+
 ## 0.0.4
 
 ### Patch Changes
