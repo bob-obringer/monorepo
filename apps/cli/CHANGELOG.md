@@ -1,5 +1,12 @@
 # cli
 
+## 0.1.1
+
+### Patch Changes
+
+- 3671234: opened several packages
+- 3671234: opened several packages (#192)
+
 ## 0.1.0
 
 ### Minor Changes

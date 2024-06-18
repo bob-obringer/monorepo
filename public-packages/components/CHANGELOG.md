@@ -1,5 +1,12 @@
 # @bob-obringer/design-system
 
+## 0.0.2
+
+### Patch Changes
+
+- 3671234: opened several packages
+- 3671234: opened several packages (#192)
+
 ## 0.1.2
 
 ### Patch Changes
