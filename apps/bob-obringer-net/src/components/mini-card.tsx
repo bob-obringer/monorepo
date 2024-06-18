@@ -1,4 +1,4 @@
-import { Text } from "@bob-obringer/design-system";
+import { Text } from "@bob-obringer/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as icons from "@fortawesome/free-solid-svg-icons";
 import {

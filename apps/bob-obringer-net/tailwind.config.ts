@@ -10,7 +10,7 @@ import reactAria from "tailwindcss-react-aria-components";
 export default {
   ...themeConfig,
   content: [
-    "./node_modules/@bob-obringer/design-system/dist/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@bob-obringer/components/dist/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   plugins: [themePlugin, colorSchemePlugin, reactAria],

@@ -6,7 +6,7 @@ import {
   faPauseCircle,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
-import { cx, Text } from "@bob-obringer/design-system";
+import { cx, Text } from "@bob-obringer/components";
 import { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

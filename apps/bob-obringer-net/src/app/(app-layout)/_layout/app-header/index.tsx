@@ -1,4 +1,4 @@
-import { Text } from "@bob-obringer/design-system";
+import { Text } from "@bob-obringer/components";
 import { PageTitle } from "@/app/(app-layout)/_layout/app-header/page-title";
 import { Header } from "@/app/(app-layout)/_layout/app-header/header";
 import { getDocument } from "@/services/sanity-io-client";

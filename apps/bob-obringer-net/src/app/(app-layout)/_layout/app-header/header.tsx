@@ -1,6 +1,6 @@
 "use client";
 
-import { cx } from "@bob-obringer/design-system";
+import { cx } from "@bob-obringer/components";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import { ReactNode } from "react";
