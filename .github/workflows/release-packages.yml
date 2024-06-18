@@ -33,6 +33,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build package
+        run: pnpm build
+        continue-on-error: true
+
       - name: Run Changesets
         uses: changesets/action@v1
         id: changesets
