@@ -22,23 +22,16 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist node_modules",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
-  "dependencies": {},
   "devDependencies": {
     "tailwindcss": "3.4.4"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.4"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
