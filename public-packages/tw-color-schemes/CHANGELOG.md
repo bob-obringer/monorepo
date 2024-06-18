@@ -1,5 +1,12 @@
 # @bob-obringer/tw-color-schemes
 
+## 0.1.5
+
+### Patch Changes
+
+- 89ddaba: bumped versions (#203)
+- 89ddaba: bumped versions
+
 ## 0.1.4
 
 ### Patch Changes

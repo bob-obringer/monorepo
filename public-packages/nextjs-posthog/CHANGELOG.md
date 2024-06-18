@@ -1,5 +1,12 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.2.4
+
+### Patch Changes
+
+- 89ddaba: bumped versions (#203)
+- 89ddaba: bumped versions
+
 ## 0.2.3
 
 ### Patch Changes

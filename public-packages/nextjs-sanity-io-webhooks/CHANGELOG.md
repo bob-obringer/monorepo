@@ -1,5 +1,12 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.3.5
+
+### Patch Changes
+
+- 89ddaba: bumped versions (#203)
+- 89ddaba: bumped versions
+
 ## 0.3.4
 
 ### Patch Changes
