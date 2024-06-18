@@ -1,7 +1,7 @@
 "use client";
 
 import { HTMLAttributeAnchorTarget } from "react";
-import { cx, Text } from "@bob-obringer/design-system";
+import { cx, Text } from "@bob-obringer/components";
 import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 

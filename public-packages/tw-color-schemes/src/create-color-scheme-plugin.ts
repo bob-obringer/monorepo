@@ -49,3 +49,5 @@ export function createColorSchemePlugin<T extends ColorScheme>(
     },
   );
 }
+
+export type ColorSchemePlugin = ReturnType<typeof createColorSchemePlugin>;

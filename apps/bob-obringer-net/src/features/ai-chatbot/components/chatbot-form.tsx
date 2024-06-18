@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, ReactNode } from "react";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import { cx } from "@bob-obringer/design-system";
+import { cx } from "@bob-obringer/components";
 import { ChatbotConfig } from "@bob-obringer/sanity-io-types";
 
 export function ChatbotForm({

@@ -1,4 +1,4 @@
-import { Text } from "@bob-obringer/design-system";
+import { Text } from "@bob-obringer/components";
 import {
   getResumeCompany,
   ResumeCompany,

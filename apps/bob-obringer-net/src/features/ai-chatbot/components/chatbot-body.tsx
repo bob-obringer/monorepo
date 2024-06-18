@@ -5,7 +5,7 @@ import { RefObject, useEffect, useRef } from "react";
 
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 
-import { Text } from "@bob-obringer/design-system";
+import { Text } from "@bob-obringer/components";
 import { ChatbotMessage } from "@/features/ai-chatbot/components/chatbot-message";
 
 export function ChatbotBody({

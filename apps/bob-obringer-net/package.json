@@ -13,7 +13,7 @@
   "dependencies": {
     "@ai-sdk/anthropic": "0.0.19",
     "@ai-sdk/openai": "0.0.24",
-    "@bob-obringer/design-system": "workspace:*",
+    "@bob-obringer/components": "workspace:*",
     "@bob-obringer/http-errors": "workspace:*",
     "@bob-obringer/nextjs-fonts": "workspace:*",
     "@bob-obringer/nextjs-posthog": "workspace:*",

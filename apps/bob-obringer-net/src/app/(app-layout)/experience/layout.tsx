@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { ExperienceNav } from "@/app/(app-layout)/experience/_components/experience-nav";
-import { cx } from "@bob-obringer/design-system";
+import { cx } from "@bob-obringer/components";
 
 export default function ResumeLayout({ children }: { children: ReactNode }) {
   return (

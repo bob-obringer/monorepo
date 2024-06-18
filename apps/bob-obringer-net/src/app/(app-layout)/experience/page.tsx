@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getDocument } from "@/services/sanity-io-client";
-import { Text } from "@bob-obringer/design-system";
+import { Text } from "@bob-obringer/components";
 import { getFeaturedResumeSkills } from "@/features/sanity-io/queries/resume-skills";
 import { ExperiencePageBody } from "@/app/(app-layout)/experience/_layout/experience-page-body";
 import { ExperienceSkills } from "@/app/(app-layout)/experience/_components/experience-skills";

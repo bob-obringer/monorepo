@@ -1,6 +1,6 @@
 "use client";
 
-import { cx, Text } from "@bob-obringer/design-system";
+import { cx, Text } from "@bob-obringer/components";
 import { useEffect, useRef, useState } from "react";
 
 import { FooterNav } from "@/app/(app-layout)/_layout/app-footer/footer-nav";

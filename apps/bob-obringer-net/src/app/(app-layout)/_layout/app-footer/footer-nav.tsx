@@ -6,7 +6,7 @@ import {
   faTasks,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { cx, Text } from "@bob-obringer/design-system";
+import { cx, Text } from "@bob-obringer/components";
 import NextLink from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelectedLayoutSegments } from "next/navigation";
