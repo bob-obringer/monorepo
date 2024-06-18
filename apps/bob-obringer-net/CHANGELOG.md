@@ -1,5 +1,16 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.22.3
+
+### Patch Changes
+
+- 3671234: opened several packages
+- 3671234: opened several packages (#192)
+- Updated dependencies [3671234]
+- Updated dependencies [3671234]
+  - @bob-obringer/components@0.0.2
+  - @bob-obringer/theme@0.0.2
+
 ## 0.22.2
 
 ### Patch Changes

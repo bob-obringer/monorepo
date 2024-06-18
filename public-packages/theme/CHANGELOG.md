@@ -1,5 +1,15 @@
 # @bob-obringer/theme
 
+## 0.0.2
+
+### Patch Changes
+
+- 3671234: opened several packages
+- 3671234: opened several packages (#192)
+- Updated dependencies [3671234]
+- Updated dependencies [3671234]
+  - @bob-obringer/tw-color-schemes@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
