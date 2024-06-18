@@ -1,4 +1,4 @@
-import { cx } from "@bob-obringer/design-system";
+import { cx } from "@bob-obringer/components";
 import { getResumeCompanies } from "@/features/sanity-io/queries/resume-company";
 import { ExperienceNavListItem } from "@/app/(app-layout)/experience/_components/experience-nav-list-item";
 import { getDocument } from "@/services/sanity-io-client";

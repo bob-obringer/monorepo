@@ -6,7 +6,7 @@ import {
 import { ReactNode } from "react";
 import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import { cx } from "@bob-obringer/design-system";
+import { cx } from "@bob-obringer/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
 

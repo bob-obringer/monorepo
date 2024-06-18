@@ -1,4 +1,4 @@
-import { cx, Text } from "@bob-obringer/design-system";
+import { cx, Text } from "@bob-obringer/components";
 import { ReactNode } from "react";
 
 export function ExperiencePageBody({

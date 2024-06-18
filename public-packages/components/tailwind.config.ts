@@ -1,8 +1,4 @@
-import {
-  colorSchemePlugin,
-  themeConfig,
-  themePlugin,
-} from "@bob-obringer/theme";
+import { colorSchemePlugin, themeConfig, themePlugin } from "./dev/theme";
 
 /** @type {import('tailwindcss').Config} */
 export default {

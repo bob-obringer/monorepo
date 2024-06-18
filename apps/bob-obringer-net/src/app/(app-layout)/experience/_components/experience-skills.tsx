@@ -1,5 +1,5 @@
 import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
-import { Text } from "@bob-obringer/design-system";
+import { Text } from "@bob-obringer/components";
 
 function isNotNull<T>(value: T): value is NonNullable<T> {
   return value !== null && value !== undefined;

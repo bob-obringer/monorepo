@@ -1,11 +1,15 @@
 {
-  "name": "@bob-obringer/design-system",
-  "version": "0.1.2",
-  "private": true,
-  "description": "Bob Obringer Design System",
+  "name": "@bob-obringer/components",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Components for Bob Obringer's projects",
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist node_modules",
@@ -20,10 +24,11 @@
     "tailwind-variants": "0.2.1"
   },
   "devDependencies": {
-    "@bob-obringer/theme": "workspace:*",
+    "@bob-obringer/tw-color-schemes": "workspace:*",
+    "@radix-ui/colors": "3.0.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "tailwindcss": "3.4.3"
+    "tailwindcss": "3.4.4"
   },
   "peerDependencies": {
     "react": "^18.3.1",
