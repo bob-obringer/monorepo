@@ -1,5 +1,12 @@
 # @bob-obringer/theme
 
+## 0.1.0
+
+### Minor Changes
+
+- 51e6a2f: removed font-weight from typography classes
+- 51e6a2f: removed font-weight from typography classes (#220)
+
 ## 0.0.5
 
 ### Patch Changes
