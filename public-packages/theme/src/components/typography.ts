@@ -8,11 +8,6 @@ const {
 
 const {
   theme: {
-    fontWeight: {
-      ["weight-normal"]: weightNormal,
-      ["weight-medium"]: weightMedium,
-      ["weight-bold"]: weightBold,
-    },
     fontFamily: {
       "family-body": bodyArray,
       "family-expanded": expandedArray,
@@ -37,7 +32,6 @@ const fontFamilyBody = bodyArray.join(", ");
 const displayBase = {
   "line-height": lineHeight.none,
   "font-family": fontFamilyExpanded,
-  "font-weight": weightBold,
 };
 const display = {
   ".typography-display-large": { ...displayBase, "font-size": size3XL },
@@ -48,7 +42,6 @@ const display = {
 const headingBase = {
   "line-height": lineHeight.none,
   "font-family": fontFamilyExpanded,
-  "font-weight": weightBold,
 };
 const heading = {
   ".typography-headline-large": { ...headingBase, "font-size": sizeXL },
@@ -59,7 +52,6 @@ const heading = {
 const titleBase = {
   "line-height": lineHeight.tight,
   "font-family": fontFamilyBody,
-  "font-weight": weightMedium,
 };
 const title = {
   ".typography-title-large": { ...titleBase, "font-size": sizeLG },
@@ -114,7 +106,6 @@ const labelMono = {
 const bodyBase = {
   "line-height": lineHeight.normal,
   "font-family": fontFamilyBody,
-  "font-weight": weightNormal,
 };
 
 const body = {
