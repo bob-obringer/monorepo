@@ -18,6 +18,7 @@
     "tw": "postcss src/tailwind.css -o dist/output.css"
   },
   "dependencies": {
+    "@bob-obringer/tw-color-schemes": "workspace:*",
     "@radix-ui/react-slot": "1.0.2",
     "clsx": "2.1.1",
     "react-aria-components": "1.2.1",
@@ -25,7 +26,6 @@
     "tailwind-variants": "0.2.1"
   },
   "devDependencies": {
-    "@bob-obringer/tw-color-schemes": "workspace:*",
     "@radix-ui/colors": "3.0.0",
     "postcss": "8.4.38",
     "postcss-cli": "^11.0.0",
