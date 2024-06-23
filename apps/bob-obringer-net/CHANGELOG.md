@@ -1,5 +1,23 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.23.0
+
+### Minor Changes
+
+- 533c106: upgraded components package with default theme
+
+### Patch Changes
+
+- ec07d09: fixed icon size
+- 068e34b: fixed broken resume link (#229)
+- ec07d09: fixed icon size (#227)
+- 068e34b: fixed broken resume link
+- Updated dependencies [533c106]
+- Updated dependencies [533c106]
+  - @bob-obringer/nextjs-fonts@0.1.0
+  - @bob-obringer/components@0.1.0
+  - @bob-obringer/sanity-io-types@0.0.3
+
 ## 0.22.9
 
 ### Patch Changes
