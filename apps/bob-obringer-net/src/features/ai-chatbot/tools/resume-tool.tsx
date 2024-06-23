@@ -12,7 +12,7 @@ export function resumeTool(context: MessageContext): RenderTool {
         status: "success",
         aiContent: "[Showing Resume Cards]",
         uiContent: (
-          <div className="justify-middle flex flex-col gap-4 align-middle md:flex-row">
+          <div className="justify-middle flex flex-col gap-2 align-middle md:flex-row">
             <ResumeCard />
             <ResumeLinkCard />
           </div>

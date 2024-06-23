@@ -35,7 +35,7 @@ the contactMethod to "all methods".`,
         status: "success",
         aiContent: `[Showing Contact Tool with all contact info]`,
         uiContent: (
-          <div className="flex h-full flex-col gap-4">
+          <div className="flex h-full flex-col gap-2">
             {contactInfo.map((contact) => (
               <ContactCard key={contact._id} contactInfo={contact} />
             ))}
