@@ -1,5 +1,11 @@
 # @bob-obringer/components
 
+## 0.1.0
+
+### Minor Changes
+
+- 533c106: upgraded components package with default theme
+
 ## 0.0.6
 
 ### Patch Changes

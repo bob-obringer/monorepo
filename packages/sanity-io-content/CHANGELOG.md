@@ -1,5 +1,11 @@
 # @bob-obringer/bob-obringer-net-cms
 
+## 0.9.0
+
+### Minor Changes
+
+- 533c106: upgraded components package with default theme
+
 ## 0.8.1
 
 ### Patch Changes

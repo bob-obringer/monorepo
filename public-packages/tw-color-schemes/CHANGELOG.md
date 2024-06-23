@@ -1,5 +1,11 @@
 # @bob-obringer/tw-color-schemes
 
+## 0.2.0
+
+### Minor Changes
+
+- 533c106: upgraded components package with default theme
+
 ## 0.1.5
 
 ### Patch Changes
