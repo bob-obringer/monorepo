@@ -1,10 +1,11 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
-  faSquareCaretDown,
-  faSquareCaretUp,
-} from "@fortawesome/free-solid-svg-icons";
+  faChevronUp,
+  faChevronDown,
+} from "@awesome.me/kit-8a94ae437c/icons/sharp/solid";
 import { ChangeEvent, ReactNode } from "react";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import { cx } from "@bob-obringer/components";
@@ -33,10 +34,10 @@ export function ChatbotForm({
 
   return (
     <form onSubmit={onFormSubmit} className="w-full">
-      <div className="bg-color-secondary border-color-secondary flex w-full items-center space-x-1 rounded border p-2 shadow-xl focus:outline-1 md:space-x-2">
+      <div className="bg-color-secondary border-color-secondary focus:bg-color-primary flex h-12 w-full items-center gap-x-1 rounded border px-3 shadow-xl md:space-x-2">
         <input
           ref={inputRef}
-          className="bg-color-transparent min-w-24 flex-1 p-0 pl-2 focus:outline-0"
+          className="bg-color-transparent min-w-24 flex-1 p-0 focus:outline-0"
           value={inputValue}
           placeholder={chatbotConfig.inputFieldPlaceholder}
           onChange={handleInputChange}
@@ -44,7 +45,9 @@ export function ChatbotForm({
         {inputValue && chatbotStatus === "idle" && (
           <ChatbotButton
             type="submit"
-            className="bg-[#1B537B] text-[#75C7F0] hover:bg-[#1F6692]"
+            className={
+              "text-color-positive hover:text-color-positive-secondary"
+            }
           >
             Ask
           </ChatbotButton>
@@ -52,7 +55,9 @@ export function ChatbotForm({
         {["active", "pending"].includes(chatbotStatus) && (
           <ChatbotButton
             type="submit"
-            className="bg-[#7B531B] text-[#F5C770] hover:bg-[#9F6612]"
+            className={
+              "text-color-warning hover:text-color-warning-secondary transition-colors"
+            }
           >
             Cancel
           </ChatbotButton>
@@ -64,14 +69,16 @@ export function ChatbotForm({
               clearChat();
               inputRef.current?.focus();
             }}
-            className={cx("bg-[#7B7B73] text-[#F0F5F7] hover:bg-[#9F9296]")}
+            className={
+              "text-color-secondary hover:text-color-primary transition-colors"
+            }
           >
-            Clear
+            New Chat
           </ChatbotButton>
         )}
         <FontAwesomeIcon
           role="button"
-          icon={isOpen ? faSquareCaretDown : faSquareCaretUp}
+          icon={isOpen ? faChevronDown : faChevronUp}
           onClick={
             isOpen
               ? close
@@ -80,7 +87,7 @@ export function ChatbotForm({
                   inputRef.current?.focus();
                 }
           }
-          className="text-color-secondary hover:text-color-primary h-8 w-8 cursor-pointer transition-colors"
+          className="text-color-secondary hover:text-color-primary cursor-pointer transition-colors"
         />
       </div>
     </form>
@@ -103,7 +110,7 @@ function ChatbotButton({
       type={type}
       onClick={onClick}
       className={cx(
-        "typography-label-small !font-weight-bold h-[29px] rounded p-0 px-2 transition-colors md:px-4",
+        "typography-label-small !font-weight-bold h-[29px] rounded p-2 transition-colors",
         className,
       )}
     >

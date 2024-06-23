@@ -17,8 +17,7 @@ export const models = {
   gpt35Turbo: openAI("gpt-3.5-turbo"),
   gpt4o: openAI("gpt-4o"),
   anthropicHaiku: anthropic("claude-3-haiku-20240307"),
-  anthropicSonnet: anthropic("claude-3-sonnet-20240229"),
-  anthropicOpus: anthropic("claude-3-opus-20240229"),
+  anthropicSonnet: anthropic("claude-3-5-sonnet-20240620"),
 };
 
 export type Models = (typeof models)[keyof typeof models];

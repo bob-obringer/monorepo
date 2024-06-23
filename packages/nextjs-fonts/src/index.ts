@@ -3,7 +3,7 @@ import { Montserrat, Reddit_Mono, Ysabeau_SC } from "next/font/google";
 const display = Ysabeau_SC({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-expanded",
+  variable: "--font-display",
 });
 
 const body = Montserrat({

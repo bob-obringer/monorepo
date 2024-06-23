@@ -24,9 +24,9 @@ li[data-markdown] {
   padding-bottom: 2px;
 }
 
-li[data-markdown]::marker {
-  color: #ffffffAA;
-}
+/*li[data-markdown]::marker {*/
+/*  color: #ffffffAA;*/
+/*}*/
 
 p[data-markdown] {
   padding-bottom: 8px;
@@ -36,6 +36,6 @@ ul[data-markdown] p {
   padding-bottom: 0;
 }
 
-li[data-markdown] ul li::marker {
-  color: #ffffff44;
-}
+/*li[data-markdown] ul li::marker {*/
+/*  color: #ffffff44;*/
+/*}*/

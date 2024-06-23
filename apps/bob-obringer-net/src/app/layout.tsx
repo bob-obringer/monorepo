@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={bobObringerFontClasses}>
-      <body className="bg-color-secondary text">
+      <body className="bg-color-tertiary text">
         <PosthogProvider
           token={env.posthog.key}
           host={env.posthog.host}

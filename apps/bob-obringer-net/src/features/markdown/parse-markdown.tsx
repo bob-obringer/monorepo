@@ -17,10 +17,10 @@ const renderer: RendererObject = {
     return `<${ordered ? "ol" : "ul"} data-markdown>${body}</${ordered ? "ol" : "ul"}>`;
   },
   listitem(text: string) {
-    return `<li data-markdown class="text-size-md list-disc list-inside">${text}</li>`;
+    return `<li data-markdown class="text-size-md list-disc list-inside marker:text-color-primary">${text}</li>`;
   },
   hr() {
-    return `<hr data-markdown class="border border-[#cccccc33] my-4" />`;
+    return `<hr data-markdown class="border border-color-secondary my-4" />`;
   },
   code(code: string) {
     return `<code data-markdown class="font-family-mono">${code}</code>`;
@@ -35,7 +35,7 @@ const renderer: RendererObject = {
     return `<a data-markdown href="${href}" class="text-color-link hover:text-color-link-hover transition-colors hover:underline">${text}</a>`;
   },
   blockquote(quote: string): string {
-    return `<blockquote data-markdown class="border-l-4 border-[#cccccc33] pl-4 pt-2 italic">${quote}</blockquote>`;
+    return `<blockquote data-markdown class="border-l-4 border-color-tertiary mb-2 pl-4 pt-2 italic">${quote}</blockquote>`;
   },
 };
 

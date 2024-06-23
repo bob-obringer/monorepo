@@ -24,25 +24,30 @@ export function ExperienceNavListItem({
   return (
     <li
       className={cx(
-        "w-full min-w-40 rounded transition-colors md:min-w-0",
-        isSelected
-          ? "bg-[#112840] outline outline-1 -outline-offset-1 outline-[#154467]"
-          : "hover:bg-[#112840] hover:bg-opacity-25 hover:outline hover:outline-1 hover:-outline-offset-1 hover:outline-[#154467]",
+        "bg-color-transparent group w-full min-w-40 rounded transition-colors md:min-w-0",
+        isSelected ? "bg-color-primary" : "hover:bg-color-secondary",
       )}
     >
-      <NextLink
-        href={url}
-        target={target}
-        className="text-color-link hover:text-color-link-hover block p-2 transition-colors duration-300 ease-in-out"
-      >
-        <Text as="div" variant="body-medium" className="line-clamp-1">
+      <NextLink href={url} target={target} className="block p-2">
+        <Text
+          as="div"
+          variant="body-medium"
+          className={cx(
+            "line-clamp-1 transition-colors",
+            isSelected ? "text-color-primary" : "text-color-secondary",
+            "group-hover:text-color-primary",
+          )}
+        >
           {title}
         </Text>
         <Text
           as="div"
           variant="body-small"
-          color="secondary"
-          className="line-clamp-1"
+          className={cx(
+            "line-clamp-1 transition-colors",
+            isSelected ? "text-color-secondary" : "text-color-tertiary",
+            "group-hover:text-color-secondary",
+          )}
         >
           {subtitle}
         </Text>

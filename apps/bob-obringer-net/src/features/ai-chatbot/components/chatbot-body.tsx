@@ -83,7 +83,7 @@ export function ChatbotBody({
         imagination. Double-check anything important, and let's enjoy the
         conversation!`}
       </Text>
-      <hr className="border-[#ffffff22]" />
+      <hr className="border-color-tertiary" />
       {messages.map((m) => {
         return (
           <div key={m.id} className="whitespace-pre-wrap">

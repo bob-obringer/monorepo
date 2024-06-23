@@ -71,14 +71,11 @@ function getColorVariants({
             ?.split(",")[3]
             ?.trim() ?? alpha;
       }
+      const variant = toKebabCase(variantName);
       return {
         ...acc,
-        [variantName === "default"
-          ? "DEFAULT"
-          : `color-${toKebabCase(variantName)}`]:
-          `rgb(var(--${namespace}-${colorName}-${toKebabCase(
-            variantName,
-          )}) / ${alpha})`,
+        [variant === "default" ? "DEFAULT" : `color-${variant}`]:
+          `rgb(var(--${namespace}-${colorName}-${variant}) / ${alpha})`,
       };
     },
     {},

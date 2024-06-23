@@ -27,9 +27,15 @@ export const contactInfo = defineType({
       type: "string",
     },
     {
-      name: "logo",
-      title: "Logo",
-      type: "image",
+      name: "iconSubset",
+      title: "Icon Subset",
+      type: "string",
+      options: {
+        list: [
+          { title: "Brands", value: "fab" },
+          { title: "Solid", value: "fass" },
+        ],
+      },
     },
     {
       name: "orderRank",

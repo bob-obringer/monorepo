@@ -8,9 +8,7 @@ const contactInfoQuery = groq`*[_type == "contactInfo"] | order(orderRank asc) {
   text,
   url,
   icon,
-  logo{
-    asset->
-  }
+  iconSubset
 }`;
 
 export async function getAllContactInfo() {
@@ -20,6 +18,7 @@ export async function getAllContactInfo() {
 }
 
 export type ContactInfoWithAsset = ContactInfo & {
+  iconSubset?: "fab" | "fass";
   logo?: {
     asset?: SanityImageAsset;
   };

@@ -2,8 +2,8 @@ export const BASE_SCHEMA_NAME = "base";
 
 export function getSelector(schemeName: string) {
   return schemeName === BASE_SCHEMA_NAME
-    ? ":root, .base-color-scheme"
-    : `.${schemeName}-color-scheme`;
+    ? ":root, .default-color-mode"
+    : `.${schemeName}-color-mode`;
 }
 
 export function convertHexToRgb(hex: string) {
@@ -27,7 +27,7 @@ export function convertHexToRgb(hex: string) {
     g = parseInt(hex.substring(2, 4), 16);
     b = parseInt(hex.substring(4, 6), 16);
   } else {
-    throw new Error("Invalid input color");
+    throw new Error(`Invalid input color: ${hex}`);
   }
 
   return [r, g, b] as const;
@@ -70,5 +70,5 @@ export function deepMerge<T>(obj1: T, obj2: Partial<T>): T {
 }
 
 export function toKebabCase(str: string) {
-  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }

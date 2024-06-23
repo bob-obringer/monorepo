@@ -1,30 +1,27 @@
 import { Text } from "@bob-obringer/components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as icons from "@fortawesome/free-solid-svg-icons";
 import {
   NextJsSanityImage,
   SanityImageField,
 } from "@bob-obringer/nextjs-sanity-io-image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
 interface CardProps {
   href: string;
-  iconName?: string;
+  icon?: IconDefinition;
   label: string;
   text: string;
   logo?: SanityImageField;
 }
 
-export function MiniCard({ href, iconName, logo, label, text }: CardProps) {
+export function MiniCard({ href, icon, logo, label, text }: CardProps) {
   return (
     <a
       href={href}
       target="_blank"
-      className="flex w-full max-w-72 items-center gap-4 rounded border border-[#ffffff11] bg-[#ffffff11] px-4 py-2"
+      className="bg-color-secondary hover:bg-color-primary flex w-full max-w-72 items-center gap-4 rounded border px-4 py-2 transition-colors"
     >
-      {iconName && (
-        // @ts-expect-error can't index icons like this
-        <FontAwesomeIcon size="2x" width="2rem" icon={icons[`fa${iconName}`]} />
-      )}
+      {icon && <FontAwesomeIcon size="2x" width="2rem" icon={icon} />}
       {logo && (
         <div className="overflow-hiden h-8 w-8">
           <NextJsSanityImage
