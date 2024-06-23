@@ -25,7 +25,6 @@ export const chatbotConfig = defineType({
           { title: "GPT-4o", value: "gpt4o" },
           { title: "Anthropic Haiku", value: "anthropicHaiku" },
           { title: "Anthropic Sonnet", value: "anthropicSonnet" },
-          { title: "Anthropic Opus", value: "anthropicOpus" },
         ],
       },
     },

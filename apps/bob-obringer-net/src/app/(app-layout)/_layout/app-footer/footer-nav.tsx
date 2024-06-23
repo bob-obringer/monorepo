@@ -1,22 +1,22 @@
 import { ReactNode } from "react";
-import {
-  faAddressCard,
-  faBriefcaseClock,
-  faHouse,
-  faTasks,
-  IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
 import { cx, Text } from "@bob-obringer/components";
 import NextLink from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
+import {
+  faCode,
+  faBookUser,
+  faHomeUser,
+  faDriversLicense,
+} from "@awesome.me/kit-8a94ae437c/icons/duotone/solid";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
 const menuItems = [
-  { href: "", icon: faHouse, text: "Home" },
-  { href: "experience", icon: faBriefcaseClock, text: "Experience" },
-  { href: "projects", icon: faTasks, text: "Projects" },
-  { href: "contact", icon: faAddressCard, text: "Contact" },
+  { href: "", icon: faHomeUser, text: "Home" },
+  { href: "experience", icon: faBookUser, text: "Experience" },
+  { href: "projects", icon: faCode, text: "Projects" },
+  { href: "contact", icon: faDriversLicense, text: "Contact" },
 ];
 
 export function FooterNav() {
@@ -60,8 +60,8 @@ function MenuItem({
       asChild
       className={cx(
         isActive
-          ? "bg-[#112840] outline outline-1 -outline-offset-1 outline-[#154467] transition-colors"
-          : "text-color-secondary hover:text-color-primary",
+          ? "bg-color-tertiary shadow-lg transition-colors"
+          : "hover:text-color-secondary text-color-tertiary",
         "typography-label-small flex min-w-20 flex-col items-center space-y-2 rounded p-2 transition-colors duration-300 ease-in-out",
       )}
     >

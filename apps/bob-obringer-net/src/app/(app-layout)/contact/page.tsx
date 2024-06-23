@@ -11,7 +11,7 @@ export default async function ContactPage() {
   const contacts = await getAllContactInfo();
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 pt-20">
+    <div className="flex h-full flex-col items-center justify-center gap-2 pt-10">
       {contacts.map((contactInfo) => (
         <ContactCard key={contactInfo._id} contactInfo={contactInfo} />
       ))}

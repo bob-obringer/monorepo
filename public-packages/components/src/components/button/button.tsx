@@ -123,8 +123,15 @@ function Button(
   { style, color, size, className, ...componentProps }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
-  const classes = buttonVariants({ className, style, color, size });
-  return <AriaButton {...componentProps} className={classes} ref={ref} />;
+  // const classes = buttonVariants({ className, style, color, size });
+  return (
+    <AriaButton
+      {...componentProps}
+      className="lightMode-color-scheme typography-label-mono-small"
+      // className={classes}
+      ref={ref}
+    />
+  );
 }
 
 const _Button = forwardRef(Button);

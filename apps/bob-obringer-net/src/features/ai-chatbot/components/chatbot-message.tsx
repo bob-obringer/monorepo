@@ -1,8 +1,7 @@
 import {
-  faInfoCircle,
   faRobot,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+  faUserVisor,
+} from "@awesome.me/kit-8a94ae437c/icons/duotone/solid";
 import { ReactNode } from "react";
 import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
@@ -12,22 +11,17 @@ import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/
 
 const messageRoleInfo = {
   user: {
-    icon: faUser,
+    icon: faUserVisor,
     roleName: "You",
     className: "",
-    titleClassName: "text-color-secondary",
+    titleClassName: "text-color-tertiary",
   },
   assistant: {
     icon: faRobot,
     roleName: "Bob's Chatbot",
-    className: "bg-opacity-5 bg-[#ffffff]",
-    titleClassName: "text-color-secondary",
-  },
-  _info: {
-    icon: faInfoCircle,
-    roleName: "About obringer.net Assistant",
-    className: "bg-[#7e451e] bg-opacity-20",
-    titleClassName: "text-color-warning",
+    className:
+      "bg-color-contrast bg-opacity-5 border-color-secondary border rounded-lg",
+    titleClassName: "text-color-tertiary",
   },
 };
 
@@ -79,11 +73,11 @@ function MessageTitle({
     <div
       className={cx(
         titleClassName,
-        "flex items-center justify-between space-x-3 text-sm",
+        "flex items-center justify-between space-x-3",
       )}
     >
       <FontAwesomeIcon icon={icon} size="lg" />
-      <div className="typography-title-medium flex-1">{roleName}</div>
+      <div className="typography-title-small flex-1">{roleName}</div>
       {isLastMessage && <ChatbotMessageStatusIndicator message={message} />}
     </div>
   );

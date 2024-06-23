@@ -1,11 +1,12 @@
 import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import {
-  faCancel,
+  faClose,
   faCheck,
   faPauseCircle,
   faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@awesome.me/kit-8a94ae437c/icons/sharp/solid";
+
 import { cx, Text } from "@bob-obringer/components";
 import { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -92,14 +93,14 @@ function MessageStateItem({
         "text-color-tertiary",
         isCancelling && "text-color-warning",
         isActive && "text-color-primary",
-        isDone && "text-[#66CC66]",
+        isDone && "text-color-positive",
       )}
     >
       {children}
       <FontAwesomeIcon
         icon={
           isCancelling
-            ? faCancel
+            ? faClose
             : isActive
               ? faSpinner
               : isDone

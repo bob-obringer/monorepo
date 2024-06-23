@@ -20,7 +20,7 @@ export function Header({
     <header
       className={cx(
         className,
-        "bg-color-primary border-color-tertiary border-opacity-1 border-b transition-all duration-300",
+        "bg-color-primary border-color-tertiary border-b transition-all duration-300",
         "mb-5 flex h-28 flex-col items-center justify-end px-5 pb-5",
         isHome && !isOpen ? "h-[40svh] border-opacity-0" : "",
       )}
