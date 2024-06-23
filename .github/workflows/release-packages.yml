@@ -32,6 +32,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+        env:
+          FONTAWESOME_NPM_TOKEN: ${{ secrets.FONTAWESOME_NPM_TOKEN }}
 
       - name: Build package
         run: pnpm build
