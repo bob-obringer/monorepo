@@ -18,7 +18,6 @@ export function MiniCard({ href, icon, logo, label, text }: CardProps) {
   return (
     <a
       href={href}
-      target="_blank"
       className="bg-color-secondary hover:bg-color-primary flex w-full max-w-72 items-center gap-4 rounded border px-4 py-2 transition-colors"
     >
       {icon && <FontAwesomeIcon size="2x" width="2rem" icon={icon} />}
