@@ -79,6 +79,7 @@ export function ChatbotForm({
         <FontAwesomeIcon
           role="button"
           icon={isOpen ? faChevronDown : faChevronUp}
+          size="sm"
           onClick={
             isOpen
               ? close
@@ -87,7 +88,7 @@ export function ChatbotForm({
                   inputRef.current?.focus();
                 }
           }
-          className="text-color-secondary hover:text-color-primary cursor-pointer transition-colors"
+          className="text-color-secondary hover:text-color-primary cursor-pointer px-1 py-2 transition-colors"
         />
       </div>
     </form>
