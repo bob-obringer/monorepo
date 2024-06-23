@@ -16,7 +16,7 @@ export function ResumeCard() {
 export function ResumeLinkCard() {
   return (
     <MiniCard
-      href="https://bob.obringer.net/resume"
+      href="https://bob.obringer.net/experience"
       label="Web"
       text={"View Bob's Experience"}
       icon={faBookUser}
