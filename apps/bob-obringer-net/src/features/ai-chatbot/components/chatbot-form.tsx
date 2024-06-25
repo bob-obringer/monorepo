@@ -79,7 +79,7 @@ export function ChatbotForm({
         <FontAwesomeIcon
           role="button"
           icon={isOpen ? faChevronDown : faChevronUp}
-          size="sm"
+          height="16px"
           onClick={
             isOpen
               ? close
