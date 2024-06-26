@@ -145,5 +145,4 @@ Hopefully someday this process could be built directly into our monorepo tools, 
 
 ## TODO:
 
-- **Make it Robust**: This isn't the most robust package, but it gets the job done.
 - **Customizable Configuration**: Provide a flexible configuration system that allows you to define the mapping between conventional commit types and upgrade types.
