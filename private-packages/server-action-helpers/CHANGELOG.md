@@ -1,5 +1,13 @@
 # @bob-obringer/server-action-helpers
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [4b3d5da]
+- Updated dependencies [4b3d5da]
+  - @bob-obringer/http-errors@0.4.1
+
 ## 0.2.0
 
 ### Minor Changes

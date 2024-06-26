@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/tw-color-schemes",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "description": "Helps manage tailwind color schemes",
   "keywords": [

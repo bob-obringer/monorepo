@@ -1,5 +1,11 @@
 # @bob-obringer/nextjs-sanity-image
 
+## 0.3.1
+
+### Patch Changes
+
+- 4b3d5da: refactored all the packages
+
 ## 0.3.0
 
 ### Minor Changes

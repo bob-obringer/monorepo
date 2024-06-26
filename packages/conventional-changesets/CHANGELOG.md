@@ -1,5 +1,13 @@
 # @bob-obringer/conventional-changeset
 
+## 0.4.1
+
+### Patch Changes
+
+- 4b3d5da: testing cangesets (#244)
+- 4b3d5da: testing cangesets
+- 4b3d5da: refactored all the packages
+
 ## 0.4.0
 
 ### Minor Changes
