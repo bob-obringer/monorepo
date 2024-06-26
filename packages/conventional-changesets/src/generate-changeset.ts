@@ -33,16 +33,16 @@ const bumpMap: Record<string, UpgradeType> = {
 export async function generateChangeset({
   productionBranch = "main",
   integrationBranch = "develop",
-  packagePaths = ["packages"],
+  packageFolders = ["packages"],
 }: {
   productionBranch?: string;
   integrationBranch?: string;
-  packagePaths?: string[];
+  packageFolders?: Array<string>;
 } = {}): Promise<void> {
   const versionBumpCommits = getVersionBumpCommitsSinceMain({
     productionBranch,
     integrationBranch,
-    packagePaths,
+    packageFolders,
   });
   await createChangesets(versionBumpCommits);
 }
@@ -54,11 +54,11 @@ export async function generateChangeset({
 function getVersionBumpCommitsSinceMain({
   productionBranch,
   integrationBranch,
-  packagePaths,
+  packageFolders,
 }: {
   productionBranch: string;
   integrationBranch: string;
-  packagePaths: Array<string>;
+  packageFolders: Array<string>;
 }): CommitInfo[] {
   const delimiter = "<!--|COMMIT|-->";
   return execSync(
@@ -68,7 +68,7 @@ function getVersionBumpCommitsSinceMain({
     .trim()
     .split(delimiter)
     .slice(0, -1)
-    .map((commitText) => parseCommit({ commitText, packagePaths }))
+    .map((commitText) => parseCommit({ commitText, packageFolders }))
     .filter(
       ({ upgradeType, changedPackages }) =>
         upgradeType !== null && changedPackages.length > 0,
@@ -83,10 +83,10 @@ function getVersionBumpCommitsSinceMain({
  */
 function parseCommit({
   commitText,
-  packagePaths,
+  packageFolders,
 }: {
   commitText: string;
-  packagePaths: Array<string>;
+  packageFolders: Array<string>;
 }): CommitInfo {
   const commit = commitText.trim();
   const sha = commit.substring(0, 40);
@@ -99,7 +99,7 @@ function parseCommit({
   const upgradeType = isBreakingChange
     ? "major"
     : bumpMap[commitMessage.type ?? ""] || "none";
-  const changedPackages = getChangedPackagesForCommit({ sha, packagePaths });
+  const changedPackages = getChangedPackagesForCommit({ sha, packageFolders });
   return {
     changedPackages,
     sha,
@@ -116,10 +116,10 @@ function parseCommit({
  */
 function getChangedPackagesForCommit({
   sha,
-  packagePaths,
+  packageFolders,
 }: {
   sha: string;
-  packagePaths: Array<string>;
+  packageFolders: Array<string>;
 }): string[] {
   // Get the list of changed files in the commit using git diff
   const changedFiles = execSync(
@@ -128,7 +128,7 @@ function getChangedPackagesForCommit({
     .toString()
     .trim()
     .split("\n")
-    .filter((file) => packagePaths.some((p) => file.startsWith(p)));
+    .filter((file) => packageFolders.some((p) => file.startsWith(p)));
 
   const changedPackages = new Set<string>();
   const processedPaths = new Set<string>();
