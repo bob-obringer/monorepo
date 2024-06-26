@@ -17,6 +17,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "cache": true,
       "outputs": [
         ".next/**",
         "!.next/cache/**",
@@ -24,7 +25,7 @@
         "storybook-static/**"
       ]
     },
-    "build:local": {
+    "zzzzzbuild:local": {
       "dependsOn": ["^build"],
       "cache": true
     },
