@@ -16,7 +16,6 @@
 "@bob-obringer/nextjs-sanity-io-webhooks": none
 "@bob-obringer/tsconfig": none
 "@bob-obringer/tw-color-schemes": none
-"glacier": none
 ---
 
 feat: upgraded typescript
