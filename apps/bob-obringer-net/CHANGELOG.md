@@ -1,5 +1,28 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.24.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
+### Patch Changes
+
+- 6dd58d5: fixed icon scaling when page loads
+- Updated dependencies [634b8e0]
+- Updated dependencies [c56c7e2]
+- Updated dependencies [634b8e0]
+  - @bob-obringer/nextjs-fonts@0.2.0
+  - @bob-obringer/pinecone@0.3.0
+  - @bob-obringer/sanity-io-types@0.1.0
+  - @bob-obringer/vector-embedding@0.2.0
+  - @bob-obringer/vercel-storage@0.3.0
+  - @bob-obringer/components@0.2.0
+  - @bob-obringer/http-errors@0.4.0
+  - @bob-obringer/nextjs-posthog@0.3.0
+  - @bob-obringer/nextjs-sanity-io-image@0.3.0
+  - @bob-obringer/nextjs-sanity-io-webhooks@0.4.0
+
 ## 0.23.0
 
 ### Minor Changes

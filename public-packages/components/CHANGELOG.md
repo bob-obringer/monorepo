@@ -1,5 +1,18 @@
 # @bob-obringer/components
 
+## 0.2.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
+### Patch Changes
+
+- c56c7e2: made tw-color-schemes bundled dep
+- Updated dependencies [634b8e0]
+- Updated dependencies [634b8e0]
+  - @bob-obringer/tw-color-schemes@0.3.0
+
 ## 0.1.0
 
 ### Minor Changes

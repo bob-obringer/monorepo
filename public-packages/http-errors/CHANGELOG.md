@@ -1,5 +1,11 @@
 # @bob-obringer/http-errors
 
+## 0.4.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
 ## 0.3.1
 
 ### Patch Changes
