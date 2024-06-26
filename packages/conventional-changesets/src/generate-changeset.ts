@@ -69,7 +69,10 @@ function getVersionBumpCommitsSinceMain({
     .split(delimiter)
     .slice(0, -1)
     .map((commitText) => parseCommit({ commitText, packagePaths }))
-    .filter(({ upgradeType }) => upgradeType !== null);
+    .filter(
+      ({ upgradeType, changedPackages }) =>
+        upgradeType !== null && changedPackages.length > 0,
+    );
 }
 
 /**
