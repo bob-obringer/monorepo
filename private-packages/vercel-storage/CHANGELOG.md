@@ -1,5 +1,13 @@
 # @bob-obringer/vercel-storage
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [4b3d5da]
+- Updated dependencies [4b3d5da]
+  - @bob-obringer/http-errors@0.4.1
+
 ## 0.3.0
 
 ### Minor Changes

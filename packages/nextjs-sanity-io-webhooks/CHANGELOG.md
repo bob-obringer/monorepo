@@ -1,5 +1,14 @@
 # @bob-obringer/sanity-io-webhooks
 
+## 0.4.1
+
+### Patch Changes
+
+- 4b3d5da: refactored all the packages
+- Updated dependencies [4b3d5da]
+- Updated dependencies [4b3d5da]
+  - @bob-obringer/http-errors@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes
