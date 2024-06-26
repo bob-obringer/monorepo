@@ -1,9 +1,3 @@
 {
-  "extends": "@bob-obringer/tsconfig/tsconfig.library.dom.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "jsx": "react-jsx"
-  },
-  "include": ["src/**/*.ts*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+  "extends": "@bob-obringer/tsconfig/tsconfig.library.dom.json"
 }

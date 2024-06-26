@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "${configDir}/dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2022",
@@ -20,5 +21,12 @@
     "noImplicitOverride": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true
-  }
+  },
+  "include": ["${configDir}/src/**/*.ts*"],
+  "exclude": [
+    "${configDir}/node_modules",
+    "${configDir}/dist",
+    "${configDir}/**/*.test.ts",
+    "${configDir}/**/*.spec.ts"
+  ]
 }
