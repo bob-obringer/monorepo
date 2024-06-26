@@ -46,6 +46,8 @@ jobs:
           git checkout develop
 
       - name: Run @bob-obringer/conventional-changesets
+        env:
+          FONTAWESOME_NPM_TOKEN: ${{ secrets.FONTAWESOME_NPM_TOKEN }}
         run: |
           pnpm install
           ./node_modules/.bin/generate-changeset

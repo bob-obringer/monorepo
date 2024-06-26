@@ -33,13 +33,16 @@ const bumpMap: Record<string, UpgradeType> = {
 export async function generateChangeset({
   productionBranch = "main",
   integrationBranch = "develop",
+  packagePaths = ["packages"],
 }: {
   productionBranch?: string;
   integrationBranch?: string;
+  packagePaths?: string[];
 } = {}): Promise<void> {
   const versionBumpCommits = getVersionBumpCommitsSinceMain({
     productionBranch,
     integrationBranch,
+    packagePaths,
   });
   await createChangesets(versionBumpCommits);
 }
@@ -51,9 +54,11 @@ export async function generateChangeset({
 function getVersionBumpCommitsSinceMain({
   productionBranch,
   integrationBranch,
+  packagePaths,
 }: {
   productionBranch: string;
   integrationBranch: string;
+  packagePaths: Array<string>;
 }): CommitInfo[] {
   const delimiter = "<!--|COMMIT|-->";
   return execSync(
@@ -63,16 +68,23 @@ function getVersionBumpCommitsSinceMain({
     .trim()
     .split(delimiter)
     .slice(0, -1)
-    .map(parseCommit)
+    .map((commitText) => parseCommit({ commitText, packagePaths }))
     .filter(({ upgradeType }) => upgradeType !== null);
 }
 
 /**
  * Parses a commit message and extracts relevant information.
  * @param commitText The commit message text.
+ * @param packagePaths
  * @returns A CommitInfo object containing parsed commit information.
  */
-function parseCommit(commitText: string): CommitInfo {
+function parseCommit({
+  commitText,
+  packagePaths,
+}: {
+  commitText: string;
+  packagePaths: Array<string>;
+}): CommitInfo {
   const commit = commitText.trim();
   const sha = commit.substring(0, 40);
   const message = commit.substring(40).trim();
@@ -84,7 +96,7 @@ function parseCommit(commitText: string): CommitInfo {
   const upgradeType = isBreakingChange
     ? "major"
     : bumpMap[commitMessage.type ?? ""] || "none";
-  const changedPackages = getChangedPackagesForCommit(sha);
+  const changedPackages = getChangedPackagesForCommit({ sha, packagePaths });
   return {
     changedPackages,
     sha,
@@ -99,10 +111,21 @@ function parseCommit(commitText: string): CommitInfo {
  * @param commitSha The SHA of the commit.
  * @returns An array of changed package names.
  */
-function getChangedPackagesForCommit(commitSha: string): string[] {
+function getChangedPackagesForCommit({
+  sha,
+  packagePaths,
+}: {
+  sha: string;
+  packagePaths: Array<string>;
+}): string[] {
   // Get the list of changed files in the commit using git diff
-  const gitDiff = `git diff --name-only --diff-filter=d ${commitSha}^ ${commitSha}`;
-  const changedFiles = execSync(gitDiff).toString().trim().split("\n");
+  const changedFiles = execSync(
+    `git diff --name-only --diff-filter=d ${sha}^ ${sha}`,
+  )
+    .toString()
+    .trim()
+    .split("\n")
+    .filter((file) => packagePaths.some((p) => file.startsWith(p)));
 
   const changedPackages = new Set<string>();
   const processedPaths = new Set<string>();
