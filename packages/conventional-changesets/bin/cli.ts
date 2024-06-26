@@ -1,7 +1,7 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
 import { Command } from "commander";
-import { generateChangeset } from "./generate-changeset.js";
+import { generateChangeset } from "../src";
 
 const program = new Command();
 

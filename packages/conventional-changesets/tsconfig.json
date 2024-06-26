@@ -2,5 +2,6 @@
   "extends": ["@bob-obringer/tsconfig/tsconfig.library.json"],
   "compilerOptions": {
     "verbatimModuleSyntax": false
-  }
+  },
+  "include": ["src/**/*", "bin/**/*"]
 }
