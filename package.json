@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:packages": "turbo build --filter=...\\\"packages/*\\\"",
     "clean": "turbo clean && rimraf node_modules",
     "deploy": "turbo run deploy",
     "deploy:original": "turbo run deploy --filter=docs^...",

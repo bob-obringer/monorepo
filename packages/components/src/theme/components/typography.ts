@@ -74,6 +74,7 @@ export function typography({
     "line-height": lineHeight.none,
     "font-family": fontFamilyBody!,
     "letter-spacing": letterSpacing.wide,
+    "font-weight": weightNormal!,
   };
 
   const label = {
@@ -112,6 +113,7 @@ export function typography({
   const bodyBase = {
     "line-height": lineHeight.normal,
     "font-family": fontFamilyBody!,
+    "font-weight": weightNormal!,
   };
 
   const body = {
