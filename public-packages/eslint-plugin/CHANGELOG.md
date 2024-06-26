@@ -1,5 +1,11 @@
 # @bob-obringer/eslint-plugin
 
+## 0.6.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
 ## 0.5.3
 
 ### Patch Changes

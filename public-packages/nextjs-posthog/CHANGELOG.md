@@ -1,5 +1,11 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.3.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
 ## 0.2.4
 
 ### Patch Changes

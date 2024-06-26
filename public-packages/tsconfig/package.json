@@ -1,6 +1,6 @@
 {
   "name": "@bob-obringer/tsconfig",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A collection of strict typescript configurations for my projects",
   "keywords": [
     "typescript",

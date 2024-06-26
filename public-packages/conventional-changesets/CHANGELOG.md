@@ -1,5 +1,11 @@
 # @bob-obringer/conventional-changeset
 
+## 0.4.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
 ## 0.3.3
 
 ### Patch Changes

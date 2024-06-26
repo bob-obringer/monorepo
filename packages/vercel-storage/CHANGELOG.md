@@ -1,5 +1,17 @@
 # @bob-obringer/vercel-storage
 
+## 0.3.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
+### Patch Changes
+
+- Updated dependencies [634b8e0]
+- Updated dependencies [634b8e0]
+  - @bob-obringer/http-errors@0.4.0
+
 ## 0.2.1
 
 ### Patch Changes

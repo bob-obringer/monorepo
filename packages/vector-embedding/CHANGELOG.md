@@ -1,5 +1,11 @@
 # @bob-obringer/ai-embedding
 
+## 0.2.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @bob-obringer/nextjs-fonts
 
+## 0.2.0
+
+### Minor Changes
+
+- 634b8e0: upgraded typescript
+
 ## 0.1.0
 
 ### Minor Changes
