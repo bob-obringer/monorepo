@@ -1,6 +1,4 @@
 ---
-"@bob-obringer/api-obringer-net": none
-"@bob-obringer/bob-obringer-net": none
 "@bob-obringer/nextjs-fonts": none
 "@bob-obringer/pinecone": none
 "@bob-obringer/sanity-io-types": none
