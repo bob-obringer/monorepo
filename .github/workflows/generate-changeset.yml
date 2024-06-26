@@ -59,13 +59,14 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git add .changeset
-          #git diff-index --quiet HEAD --
+          git diff-index --quiet HEAD
           # Check if there are changes to commit
           if git diff-index --quiet HEAD --; then
           # No changes to commit
             echo "No changes to commit"
           else
           # Changes to commit
+            echo "Committing changes"
             git commit -m 'ci: update changeset [skip vercel ci]'
             git push
           fi        
