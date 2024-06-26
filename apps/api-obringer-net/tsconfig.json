@@ -1,30 +1,12 @@
 {
+  "extend": "@bob-obringer/tsconfig/tsconfig.app.json",
   "compilerOptions": {
     "outDir": "./dist",
     "module": "NodeNext",
     "lib": ["es2022"],
     "incremental": true,
     "declaration": true,
-    "declarationMap": true,
-
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noUnusedParameters": true,
-    "useUnknownInCatchVariables": true
+    "declarationMap": true
   },
-  "include": ["api/**/*.ts*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+  "include": ["api/**/*.ts*"]
 }
