@@ -62,9 +62,9 @@ jobs:
           git add .changeset
           # Check if there are changes to commit
           if git diff-index HEAD; then
-            echo "No changes to commit"
-          else
             echo "Committing changes"
             git commit -m 'ci: update changeset [skip vercel ci]'
             git push
+          else
+            echo "No changes to commit"
           fi        
