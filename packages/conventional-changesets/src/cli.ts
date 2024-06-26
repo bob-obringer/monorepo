@@ -8,11 +8,15 @@ const program = new Command();
 program
   .option("-p, --production-branch <branch>", "Production branch")
   .option("-i, --integration-branch <branch>", "Integration branch")
+  .option("-f, --package-folders <paths>", "Package folders", (value) => {
+    return value.split(",");
+  })
   .action((options) => {
-    const { production, integration } = options;
+    const { productionBranch, integrationBranch, packageFolders } = options;
     generateChangeset({
-      productionBranch: production,
-      integrationBranch: integration,
+      productionBranch,
+      integrationBranch,
+      packageFolders,
     }).catch((error) => {
       console.error("An error occurred:", error);
       process.exit(1);
