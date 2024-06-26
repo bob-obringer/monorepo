@@ -21,10 +21,11 @@
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "generate-changeset": "./dist/cli.js"
+    "generate-changeset": "./bin/cli.ts"
   },
   "files": [
-    "dist"
+    "dist",
+    ".bin"
   ],
   "scripts": {
     "build": "tsc",
@@ -37,6 +38,7 @@
     "conventional-commits-parser": "5.0.0"
   },
   "devDependencies": {
-    "@types/conventional-commits-parser": "^5.0.0"
+    "@types/conventional-commits-parser": "^5.0.0",
+    "tsx": "4.15.7"
   }
 }
