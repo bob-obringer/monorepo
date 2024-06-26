@@ -25,10 +25,6 @@
         "storybook-static/**"
       ]
     },
-    "zzzzzbuild:local": {
-      "dependsOn": ["^build"],
-      "cache": true
-    },
     "clean": {
       "cache": false
     },

@@ -1,4 +1,4 @@
 packages:
   - "apps/*"
-  - "packages/**"
-  - "private-packages/**"
+  - "packages/*"
+  - "private-packages/*"
