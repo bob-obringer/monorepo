@@ -8,10 +8,7 @@
     "moduleResolution": "Bundler",
     "jsx": "preserve",
     "noEmit": true,
-    "incremental": true,
-    "paths": {
-      "@/*": ["${configDir}/*"]
-    }
+    "incremental": true
   },
   "include": [
     "${configDir}/next-env.d.ts",
