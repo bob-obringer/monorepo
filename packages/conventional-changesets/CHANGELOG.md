@@ -1,5 +1,17 @@
 # @bob-obringer/conventional-changeset
 
+## 0.5.0
+
+### Minor Changes
+
+- 52790f3: added package-folders option to changesets cli (#250)
+- 52790f3: added package-folders option to changesets cli
+
+### Patch Changes
+
+- 9a2db4a: improved conventional-changesets cli (#252)
+- 9a2db4a: improved conventional-changesets cli
+
 ## 0.4.1
 
 ### Patch Changes

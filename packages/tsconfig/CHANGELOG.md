@@ -1,5 +1,12 @@
 # @bob-obringer/tsconfig
 
+## 0.4.0
+
+### Minor Changes
+
+- d4f3895: added nextjs tsconfig
+- d4f3895: added nextjs tsconfig (#256)
+
 ## 0.3.1
 
 ### Patch Changes
