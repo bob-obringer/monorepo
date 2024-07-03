@@ -1,15 +1,14 @@
 {
-  "name": "@bob-obringer/nextjs-posthog",
-  "version": "0.3.1",
+  "name": "@bob-obringer/nextjs-fonts",
+  "version": "0.2.0",
   "private": false,
-  "description": "Bob Obringer NextJS Posthog Client",
   "keywords": [
     "posthog",
     "nextjs",
     "analytics",
     "bob-obringer"
   ],
-  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/nextjs-posthog",
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/nextjs-fonts",
   "bugs": "https://github.com/bob-obringer/monorepo/issues",
   "repository": {
     "type": "git",
@@ -20,26 +19,16 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist node_modules .turbo",
     "dev": "tsc -w -p tsconfig.dev.json",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
-  "dependencies": {},
   "devDependencies": {
-    "next": "14.2.3",
-    "posthog-js": "1.136.5",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "next": "14.2.3"
   },
   "peerDependencies": {
-    "next": ">=14.2",
-    "posthog-js": ">=1.136",
-    "react": ">=18.2",
-    "react-dom": ">=18.2"
+    "next": "^14.2.3"
   }
 }

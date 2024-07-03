@@ -131,7 +131,7 @@ importers:
         version: link:../../packages/http-errors
       '@bob-obringer/nextjs-fonts':
         specifier: workspace:*
-        version: link:../../private-packages/nextjs-fonts
+        version: link:../../packages/nextjs-fonts
       '@bob-obringer/nextjs-posthog':
         specifier: workspace:*
         version: link:../../packages/nextjs-posthog
@@ -359,6 +359,12 @@ importers:
 
   packages/http-errors: {}
 
+  packages/nextjs-fonts:
+    devDependencies:
+      next:
+        specifier: 14.2.3
+        version: 14.2.3(react-dom@19.0.0-rc-38e3b23483-20240529(react@19.0.0-rc-38e3b23483-20240529))(react@19.0.0-rc-38e3b23483-20240529)
+
   packages/nextjs-posthog:
     devDependencies:
       next:
@@ -413,12 +419,6 @@ importers:
       tailwindcss:
         specifier: 3.4.4
         version: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.2))
-
-  private-packages/nextjs-fonts:
-    devDependencies:
-      next:
-        specifier: 14.2.3
-        version: 14.2.3(react-dom@19.0.0-rc-38e3b23483-20240529(react@19.0.0-rc-38e3b23483-20240529))(react@19.0.0-rc-38e3b23483-20240529)
 
   private-packages/pinecone:
     dependencies:
@@ -12711,7 +12711,7 @@ snapshots:
 
   '@swc/helpers@0.3.17':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@swc/helpers@0.5.11':
     dependencies:

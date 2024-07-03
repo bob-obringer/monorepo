@@ -18,7 +18,7 @@ const mono = Reddit_Mono({
   variable: "--font-mono",
 });
 
-export const bobObringerFontClasses = [
+export const fontClasses = [
   body.className,
   body.variable,
   display.variable,
