@@ -12,6 +12,7 @@ const nextJsDefaultExports = [
   /twitter-image\.tsx$/,
   /sitemap\.ts$/,
   /robots\.ts$/,
+  /tailwind\.config\.ts$/,
 ];
 
 const rule: TSESLint.RuleModule<"preferNamedExports"> = {
