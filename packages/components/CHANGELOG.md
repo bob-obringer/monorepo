@@ -1,5 +1,17 @@
 # @bob-obringer/components
 
+## 0.4.0
+
+### Minor Changes
+
+- d97770d: added ability to create entire tailwind config
+- d97770d: added ability to create entire tailwind config (#269)
+
+### Patch Changes
+
+- 1261e73: improved componentsContent path (#267)
+- 1261e73: improved componentsContent path
+
 ## 0.3.1
 
 ### Patch Changes
