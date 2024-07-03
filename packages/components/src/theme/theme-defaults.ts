@@ -5,11 +5,12 @@ import type {
   ComponentsFontWeights,
 } from "./types";
 import colorPalette from "./color-palette.json";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 export const defaultFontFamilies: ComponentsFontFamilies = {
-  body: "sans-serif",
-  display: "sans-serif",
-  mono: "monospace",
+  body: ["var(--font-body)", ...fontFamily.sans].join(", "),
+  display: ["var(--font-display)", ...fontFamily.sans].join(", "),
+  mono: ["var(--font-mono)", ...fontFamily.mono].join(", "),
 };
 
 export const defaultFontWeights: ComponentsFontWeights = {
