@@ -6,10 +6,10 @@ const componentsContent =
 
 function createTailwindConfig({
   contentFolders,
-  theme,
+  theme = {},
 }: {
   contentFolders: Array<string>;
-  theme: ComponentsThemeConfig;
+  theme?: ComponentsThemeConfig;
 }): Config {
   return {
     content: [
