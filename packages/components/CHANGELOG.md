@@ -1,5 +1,12 @@
 # @bob-obringer/components
 
+## 0.3.0
+
+### Minor Changes
+
+- 6a8c0ee: simplified theme creation (#259)
+- 6a8c0ee: simplified theme creation
+
 ## 0.2.1
 
 ### Patch Changes

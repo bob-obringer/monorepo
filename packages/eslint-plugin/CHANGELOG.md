@@ -1,5 +1,12 @@
 # @bob-obringer/eslint-plugin
 
+## 0.6.2
+
+### Patch Changes
+
+- 6a8c0ee: eslint plugin now allows default tailwind export (#260)
+- 6a8c0ee: eslint plugin now allows default tailwind export
+
 ## 0.6.1
 
 ### Patch Changes
