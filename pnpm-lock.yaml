@@ -207,9 +207,6 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-38e3b23483-20240529
         version: 19.0.0-rc-38e3b23483-20240529(react@19.0.0-rc-38e3b23483-20240529)
-      react-error-boundary:
-        specifier: ^4.0.13
-        version: 4.0.13(react@19.0.0-rc-38e3b23483-20240529)
       server-only:
         specifier: 0.0.1
         version: 0.0.1
@@ -229,9 +226,6 @@ importers:
       tailwindcss:
         specifier: 3.4.4
         version: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.2))
-      tailwindcss-react-aria-components:
-        specifier: 1.1.3
-        version: 1.1.3(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.2)))
 
   apps/cli:
     dependencies:
@@ -282,8 +276,8 @@ importers:
         specifier: workspace:*
         version: link:../tw-color-schemes
       '@radix-ui/react-slot':
-        specifier: 1.0.2
-        version: 1.0.2(@types/react@18.3.3)(react@18.3.1)
+        specifier: 1.1.0
+        version: 1.1.0(@types/react@18.3.3)(react@18.3.1)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -301,11 +295,11 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       postcss:
-        specifier: 8.4.38
-        version: 8.4.38
+        specifier: 8.4.39
+        version: 8.4.39
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(jiti@1.21.0)(postcss@8.4.38)(tsx@4.15.7)
+        version: 11.0.0(jiti@1.21.0)(postcss@8.4.39)(tsx@4.15.7)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -315,6 +309,9 @@ importers:
       tailwindcss:
         specifier: 3.4.4
         version: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.2))
+      tailwindcss-react-aria-components:
+        specifier: 1.1.3
+        version: 1.1.3(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.2)))
 
   packages/conventional-changesets:
     dependencies:
@@ -1243,10 +1240,6 @@ packages:
 
   '@babel/regjsgen@0.8.0':
     resolution: {integrity: sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==}
-
-  '@babel/runtime@7.24.6':
-    resolution: {integrity: sha512-Ja18XcETdEl5mzzACGd+DKgaGJzPTCow7EglgwTmHdwokzDFYh/MHua6lU6DV/hjF2IaOJ4oX2nqnjG7RElKOw==}
-    engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.24.7':
     resolution: {integrity: sha512-UwgBRMjJP+xv857DCngvqXI3Iq6J4v0wXmwc6sapg+zyhbwmQX67LUEFrkK5tbyJ30jGuG3ZvWpBiB9LCy1kWw==}
@@ -2553,20 +2546,20 @@ packages:
   '@radix-ui/colors@3.0.0':
     resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
 
-  '@radix-ui/react-compose-refs@1.0.1':
-    resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
+  '@radix-ui/react-compose-refs@1.1.0':
+    resolution: {integrity: sha512-b4inOtiaOnYf9KWyO3jAeeCG6FeyfY6ldiEPanbUjWd+xIk5wZeHa8yVwmrJ2vderhu/BQvzCrJI0lHd+wIiqw==}
     peerDependencies:
       '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
 
-  '@radix-ui/react-slot@1.0.2':
-    resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
+  '@radix-ui/react-slot@1.1.0':
+    resolution: {integrity: sha512-FUCf5XMfmW4dtYl69pdS4DbxKy8nj4M7SafBgPllysxmdachynNflAdp/gCsnYWNDnge6tI9onzMp5ARYc1KNw==}
     peerDependencies:
       '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -7399,6 +7392,10 @@ packages:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.4.39:
+    resolution: {integrity: sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==}
+    engines: {node: ^10 || ^12 || >=14}
+
   posthog-js@1.136.5:
     resolution: {integrity: sha512-jLmR9HX7/zR/EfJ+7Fl6ivvBKJdmaFiB8mhdEITIPWpXVgGRvp3u5JuvlNXPW9r1pfux8qoPJCtsqHP+uv73gw==}
 
@@ -7610,11 +7607,6 @@ packages:
     resolution: {integrity: sha512-vP90YBhTjAZhY17JiYmY82NnTOjYLEcw1JB12jcaee3YRg8yRtOaq7fNgD+xc7nFJhKhyV/BI7sHeN0SelVB+Q==}
     peerDependencies:
       react: 19.0.0-rc-38e3b23483-20240529
-
-  react-error-boundary@4.0.13:
-    resolution: {integrity: sha512-b6PwbdSv8XeOSYvjt8LpgpKrZ0yGdtZokYwkwV2wlcZbxgopHX/hgPl5VgpnoVOWd868n1hktM8Qm4b+02MiLQ==}
-    peerDependencies:
-      react: '>=16.13.1'
 
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
@@ -10000,10 +9992,6 @@ snapshots:
 
   '@babel/regjsgen@0.8.0': {}
 
-  '@babel/runtime@7.24.6':
-    dependencies:
-      regenerator-runtime: 0.14.1
-
   '@babel/runtime@7.24.7':
     dependencies:
       regenerator-runtime: 0.14.1
@@ -11195,17 +11183,15 @@ snapshots:
 
   '@radix-ui/colors@3.0.0': {}
 
-  '@radix-ui/react-compose-refs@1.0.1(@types/react@18.3.3)(react@18.3.1)':
+  '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.24.7
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.3
 
-  '@radix-ui/react-slot@1.0.2(@types/react@18.3.3)(react@18.3.1)':
+  '@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.24.7
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.3.3)(react@18.3.1)
+      '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@18.3.1)
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.3
@@ -13254,7 +13240,7 @@ snapshots:
       '@vue/shared': 3.4.30
       estree-walker: 2.0.2
       magic-string: 0.30.10
-      postcss: 8.4.38
+      postcss: 8.4.39
       source-map-js: 1.2.0
 
   '@vue/compiler-ssr@3.4.30':
@@ -17081,7 +17067,7 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-cli@11.0.0(jiti@1.21.0)(postcss@8.4.38)(tsx@4.15.7):
+  postcss-cli@11.0.0(jiti@1.21.0)(postcss@8.4.39)(tsx@4.15.7):
     dependencies:
       chokidar: 3.6.0
       dependency-graph: 0.11.0
@@ -17089,9 +17075,9 @@ snapshots:
       get-stdin: 9.0.0
       globby: 14.0.1
       picocolors: 1.0.1
-      postcss: 8.4.38
-      postcss-load-config: 5.1.0(jiti@1.21.0)(postcss@8.4.38)(tsx@4.15.7)
-      postcss-reporter: 7.1.0(postcss@8.4.38)
+      postcss: 8.4.39
+      postcss-load-config: 5.1.0(jiti@1.21.0)(postcss@8.4.39)(tsx@4.15.7)
+      postcss-reporter: 7.1.0(postcss@8.4.39)
       pretty-hrtime: 1.0.3
       read-cache: 1.0.0
       slash: 5.1.0
@@ -17120,13 +17106,13 @@ snapshots:
       postcss: 8.4.38
       ts-node: 10.9.1(@types/node@20.14.9)(typescript@5.5.2)
 
-  postcss-load-config@5.1.0(jiti@1.21.0)(postcss@8.4.38)(tsx@4.15.7):
+  postcss-load-config@5.1.0(jiti@1.21.0)(postcss@8.4.39)(tsx@4.15.7):
     dependencies:
       lilconfig: 3.1.1
       yaml: 2.4.2
     optionalDependencies:
       jiti: 1.21.0
-      postcss: 8.4.38
+      postcss: 8.4.39
       tsx: 4.15.7
 
   postcss-nested@6.0.1(postcss@8.4.38):
@@ -17134,10 +17120,10 @@ snapshots:
       postcss: 8.4.38
       postcss-selector-parser: 6.0.16
 
-  postcss-reporter@7.1.0(postcss@8.4.38):
+  postcss-reporter@7.1.0(postcss@8.4.39):
     dependencies:
       picocolors: 1.0.1
-      postcss: 8.4.38
+      postcss: 8.4.39
       thenby: 1.3.4
 
   postcss-selector-parser@6.0.16:
@@ -17154,6 +17140,12 @@ snapshots:
       source-map-js: 1.2.0
 
   postcss@8.4.38:
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.0.1
+      source-map-js: 1.2.0
+
+  postcss@8.4.39:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.1
@@ -17379,11 +17371,6 @@ snapshots:
     dependencies:
       react: 19.0.0-rc-38e3b23483-20240529
       scheduler: 0.25.0-rc-38e3b23483-20240529
-
-  react-error-boundary@4.0.13(react@19.0.0-rc-38e3b23483-20240529):
-    dependencies:
-      '@babel/runtime': 7.24.6
-      react: 19.0.0-rc-38e3b23483-20240529
 
   react-fast-compare@3.2.2: {}
 
@@ -18969,7 +18956,7 @@ snapshots:
   vite@4.5.3(@types/node@20.14.9):
     dependencies:
       esbuild: 0.18.20
-      postcss: 8.4.38
+      postcss: 8.4.39
       rollup: 3.29.4
     optionalDependencies:
       '@types/node': 20.14.9
