@@ -1,5 +1,14 @@
 # @bob-obringer/bob-obringer-net
 
+## 0.24.6
+
+### Patch Changes
+
+- Updated dependencies [774679c]
+- Updated dependencies [774679c]
+  - @bob-obringer/nextjs-fonts@0.3.0
+  - @bob-obringer/nextjs-posthog@0.4.0
+
 ## 0.24.5
 
 ### Patch Changes
