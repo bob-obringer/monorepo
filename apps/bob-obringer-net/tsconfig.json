@@ -1,19 +1,16 @@
 {
-  "extends": "@bob-obringer/tsconfig/tsconfig.app.dom.json",
+  "extends": "@bob-obringer/tsconfig/tsconfig.nextjs.app.json",
   "compilerOptions": {
-    "noEmit": true,
-    "moduleResolution": "bundler",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "incremental": true,
-    "module": "esnext",
-    "jsx": "preserve"
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+  "include": [
+    "${configDir}/next-env.d.ts",
+    "${configDir}/next.config.js",
+    "${configDir}/**/*.ts",
+    "${configDir}/**/*.tsx",
+    "${configDir}/.next/types/**/*.ts",
+    ".next/types/**/*.ts"
+  ]
 }
