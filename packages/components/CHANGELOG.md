@@ -1,5 +1,12 @@
 # @bob-obringer/components
 
+## 0.3.1
+
+### Patch Changes
+
+- f7df984: fixed dependencies (#263)
+- f7df984: fixed dependencies
+
 ## 0.3.0
 
 ### Minor Changes

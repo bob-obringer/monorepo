@@ -1,5 +1,11 @@
 # @bob-obringer/tsconfig
 
+## 0.4.1
+
+### Patch Changes
+
+- f7df984: fixed nextjs tsconfig
+
 ## 0.4.0
 
 ### Minor Changes
