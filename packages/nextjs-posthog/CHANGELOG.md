@@ -1,5 +1,12 @@
 # @bob-obringer/posthog-nextjs
 
+## 0.4.0
+
+### Minor Changes
+
+- 774679c: made fonts package public
+- 774679c: made fonts package public (#274)
+
 ## 0.3.1
 
 ### Patch Changes

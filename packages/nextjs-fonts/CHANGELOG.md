@@ -1,5 +1,12 @@
 # @bob-obringer/nextjs-fonts
 
+## 0.3.0
+
+### Minor Changes
+
+- 774679c: made fonts package public
+- 774679c: made fonts package public (#274)
+
 ## 0.2.0
 
 ### Minor Changes
