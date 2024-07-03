@@ -1,5 +1,12 @@
 # @bob-obringer/components
 
+## 0.4.1
+
+### Patch Changes
+
+- 4e0a3f7: fixed default theme for createTailwindConfig
+- 4e0a3f7: fixed default theme for createTailwindConfig (#271)
+
 ## 0.4.0
 
 ### Minor Changes
