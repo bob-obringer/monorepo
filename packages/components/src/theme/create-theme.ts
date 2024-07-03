@@ -15,6 +15,7 @@ import {
   defaultFontWeights,
 } from "./theme-defaults";
 import { typography } from "./components/typography";
+import reactAria from "tailwindcss-react-aria-components";
 
 type ComponentsThemeConfig = {
   colors?: Record<string, unknown>;
@@ -64,7 +65,7 @@ export function createTheme(themeConfig: ComponentsThemeConfig = {}) {
     },
   );
 
-  return [themePlugin, colorSchemePlugin];
+  return [themePlugin, colorSchemePlugin, reactAria];
 }
 
 function prefixKeys<T extends Record<string, unknown>>(
