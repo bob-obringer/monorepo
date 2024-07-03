@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { ReactNode } from "react";
-import { bobObringerFontClasses } from "@bob-obringer/nextjs-fonts";
 import { AppUIProvider } from "@/features/ui/app-ui-state-context";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
@@ -9,6 +8,7 @@ import { env } from "@/config/client";
 import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { getDocument } from "@/services/sanity-io-client";
 import { ChatbotContextProvider } from "@/features/ai-chatbot/context/chatbot-context";
+import { fontClasses } from "@bob-obringer/nextjs-fonts";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, name } = (await getDocument("aboutBob")) ?? {};
@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={bobObringerFontClasses}>
+    <html lang="en" className={fontClasses}>
       <body className="bg-color-tertiary text">
         <PosthogProvider
           token={env.posthog.key}
