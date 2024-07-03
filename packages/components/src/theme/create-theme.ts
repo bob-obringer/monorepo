@@ -17,7 +17,7 @@ import {
 import { typography } from "./components/typography";
 import reactAria from "tailwindcss-react-aria-components";
 
-type ComponentsThemeConfig = {
+export type ComponentsThemeConfig = {
   colors?: Record<string, unknown>;
   colorModes?: Record<string, ComponentsColorScheme>;
   fontFamily?: ComponentsFontFamilies;
