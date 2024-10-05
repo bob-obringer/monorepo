@@ -31,9 +31,9 @@ export const defaultFontSizes: ComponentsFontSizes = {
 
 export const defaultDarkMode: ComponentsColorScheme = {
   background: {
-    DEFAULT: colorPalette["blue-100"].darkest,
-    primary: colorPalette["blue-100"].darkest,
-    secondary: colorPalette["blue-200"].darkest,
+    DEFAULT: colorPalette["green-100"].darkest,
+    primary: colorPalette["green-100"].darkest,
+    secondary: colorPalette["green-200"].darkest,
     tertiary: colorPalette["blue-300"].darkest,
     positive: colorPalette["green-400"].darkest,
     positiveSecondary: colorPalette["green-500"].darkest,
