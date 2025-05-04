@@ -1,5 +1,4 @@
 import type { Result as NeverthrowResult } from "neverthrow";
-import type { HttpStatusCode } from "@bob-obringer/http-errors";
 
 export type InnerServerActionResult<R> = NeverthrowResult<R, Error> | R;
 
@@ -8,13 +7,18 @@ export type ServerActionSuccessResponse<R> = {
   value: R;
 };
 
+/**
+ * An error returned by a server action
+ */
+export type ServerActionError = {
+  readonly message: string;
+  readonly name: string;
+  readonly statusCode: number;
+};
+
 export type ServerActionErrorResponse = {
   success: false;
-  error: {
-    message: string;
-    name: string;
-    statusCode: HttpStatusCode;
-  };
+  error: ServerActionError;
 };
 
 export type ServerActionResponse<R> =

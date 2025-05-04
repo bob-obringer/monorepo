@@ -1,5 +1,5 @@
-import type { ColorsByScheme, ColorScheme } from "./types";
-import { getColorValue, getSelector, toKebabCase } from "./utilities";
+import type { ColorsByScheme, ColorScheme } from "./types.js";
+import { getColorValue, getSelector, toKebabCase } from "./utilities.js";
 
 type Variables = {
   [variableName: string]: string;

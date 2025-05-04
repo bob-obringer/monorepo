@@ -1,5 +1,5 @@
-import type { ColorVariants, ColorScheme } from "./types";
-import { toKebabCase } from "./utilities";
+import type { ColorVariants, ColorScheme } from "./types.js";
+import { toKebabCase } from "./utilities.js";
 
 type ThemeColors = {
   [colorName: string]: {

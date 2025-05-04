@@ -1,8 +1,8 @@
-import plugin from "tailwindcss/plugin";
-import type { AdditionalSchemesByName, ColorScheme } from "./types";
-import { getColorConfig } from "./get-color-config";
-import { getColorsByScheme } from "./get-colors-by-scheme";
-import { getColorCssVariables } from "./get-color-css-variables";
+import plugin from "tailwindcss/plugin.js";
+import type { AdditionalSchemesByName, ColorScheme } from "./types.js";
+import { getColorConfig } from "./get-color-config.js";
+import { getColorsByScheme } from "./get-colors-by-scheme.js";
+import { getColorCssVariables } from "./get-color-css-variables.js";
 
 export type CreateColorSchemePluginOptions = {
   schemes?: AdditionalSchemesByName<ColorScheme>;

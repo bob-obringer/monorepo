@@ -26,6 +26,9 @@ importers:
       '@commitlint/types':
         specifier: 19.0.3
         version: 19.0.3
+      '@types/http-errors':
+        specifier: ^2.0.4
+        version: 2.0.4
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -44,6 +47,9 @@ importers:
       eslint-config-turbo:
         specifier: 2.0.5
         version: 2.0.5(eslint@8.57.0)
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
       husky:
         specifier: 9.0.11
         version: 9.0.11
@@ -398,9 +404,6 @@ importers:
 
   packages/nextjs-sanity-io-webhooks:
     dependencies:
-      '@bob-obringer/http-errors':
-        specifier: workspace:*
-        version: link:../http-errors
       '@sanity/client':
         specifier: 6.18.2
         version: 6.18.2
@@ -480,9 +483,6 @@ importers:
 
   private-packages/server-action-helpers:
     dependencies:
-      '@bob-obringer/http-errors':
-        specifier: workspace:*
-        version: link:../../packages/http-errors
       neverthrow:
         specifier: 6.2.2
         version: 6.2.2

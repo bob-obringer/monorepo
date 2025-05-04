@@ -1,9 +1,5 @@
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
-import {
-  HttpErrorBadRequest,
-  HttpErrorForbidden,
-  unstable_getErrorResponse,
-} from "@bob-obringer/http-errors";
+import createHttpError, { HttpError } from "http-errors";
 import { type MutationOperation, type SanityDocument } from "@sanity/client";
 import type { ReadableStream } from "node:stream/web";
 import { revalidatePath, revalidateTag } from "next/cache";
@@ -29,6 +25,28 @@ type SanityWebhookHandler<T extends SanityDocument = SanityDocument> = {
     }
 );
 
+function getErrorResponse(error: unknown): Response {
+  const httpError =
+    error instanceof HttpError
+      ? error
+      : createHttpError(
+          500,
+          error instanceof Error ? error.message : "Unknown Error",
+        );
+
+  return Response.json(
+    {
+      success: false,
+      error: {
+        name: httpError.name,
+        message: httpError.message,
+        statusCode: httpError.statusCode,
+      },
+    },
+    { status: httpError.statusCode, statusText: httpError.name },
+  );
+}
+
 export function createSanityWebhook<T extends SanityDocument>({
   handlers,
   secret,
@@ -42,7 +60,7 @@ export function createSanityWebhook<T extends SanityDocument>({
       try {
         doc = await verifyBody(req, secret);
       } catch (e) {
-        return unstable_getErrorResponse(e);
+        return getErrorResponse(e);
       }
 
       const sanityOperation = req.headers.get(
@@ -60,7 +78,8 @@ export function createSanityWebhook<T extends SanityDocument>({
           if (!isTargetDocumentType<T>(doc, documentType)) continue;
 
           const ops = Array.isArray(operations) ? operations : [operations];
-          if (!ops.includes(sanityOperation)) continue;
+          // Handle case where operations might be undefined
+          if (operations && !ops.includes(sanityOperation)) continue;
 
           console.log(
             `Sanity Webhook: ${sanityOperation} ${doc._type} (${doc._id})`,
@@ -84,7 +103,7 @@ export function createSanityWebhook<T extends SanityDocument>({
         }
         return new Response("OK", { status: 200 });
       } catch (e) {
-        return unstable_getErrorResponse(e);
+        return getErrorResponse(e);
       }
     },
   };
@@ -98,15 +117,15 @@ function isTargetDocumentType<T extends SanityDocument>(
 }
 
 async function verifyBody(req: Request, secret: string) {
-  if (!req.body) throw new HttpErrorBadRequest("Missing Body");
+  if (!req.body) throw createHttpError(400, "Missing Body");
 
   const signature = req.headers.get(SIGNATURE_HEADER_NAME);
-  if (!signature) throw new HttpErrorForbidden("Missing Signature");
+  if (!signature) throw createHttpError(403, "Missing Signature");
 
   const body = await readBody(req.body);
   const isValidRequest = await isValidSignature(body, signature, secret);
 
-  if (!isValidRequest) throw new HttpErrorForbidden("Invalid Signature");
+  if (!isValidRequest) throw createHttpError(403, "Invalid Signature");
 
   return JSON.parse(body) as SanityDocument;
 }

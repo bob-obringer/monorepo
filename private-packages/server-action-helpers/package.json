@@ -12,7 +12,6 @@
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@bob-obringer/http-errors": "workspace:*",
     "neverthrow": "6.2.2"
   }
 }

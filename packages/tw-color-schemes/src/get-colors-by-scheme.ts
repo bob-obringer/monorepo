@@ -2,8 +2,8 @@ import type {
   AdditionalColorScheme,
   ColorsByScheme,
   ColorScheme,
-} from "./types";
-import { BASE_SCHEMA_NAME, deepMerge } from "./utilities";
+} from "./types.js";
+import { BASE_SCHEMA_NAME, deepMerge } from "./utilities.js";
 
 /**
  * This function returns the core colors

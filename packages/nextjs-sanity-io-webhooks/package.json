@@ -30,7 +30,6 @@
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@bob-obringer/http-errors": "workspace:*",
     "@sanity/client": "6.18.2",
     "@sanity/webhook": "4.0.4"
   },

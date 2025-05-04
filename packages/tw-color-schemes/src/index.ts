@@ -1,2 +1,2 @@
-export * from "./create-color-scheme-plugin";
-export * from "./types";
+export * from "./create-color-scheme-plugin.js";
+export * from "./types.js";

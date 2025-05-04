@@ -1,7 +1,4 @@
-import {
-  HttpError,
-  HttpErrorInternalServerError,
-} from "@bob-obringer/http-errors";
+import createHttpError, { HttpError } from "http-errors";
 import type { Result as NeverthrowResult } from "neverthrow";
 import type {
   InnerServerActionFunction,
@@ -33,11 +30,15 @@ export class ServerActionClient {
   // todo: it would be great if we could return the actual error
   //  info in dev mode
   private handleError(err: unknown): ServerActionErrorResponse {
-    const { message, name, statusCode } =
-      err instanceof HttpError ? err : new HttpErrorInternalServerError();
+    const httpError = err instanceof HttpError ? err : createHttpError(500);
+
     return {
       success: false,
-      error: { message, name, statusCode },
+      error: {
+        message: httpError.message,
+        name: httpError.name,
+        statusCode: httpError.statusCode,
+      },
     };
   }
 
