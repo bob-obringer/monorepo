@@ -1,23 +1,14 @@
 {
   "name": "@bob-obringer/eslint-plugin",
-  "version": "0.6.2",
-  "private": false,
-  "description": "ESLint plugin for Bob Obringer's projects",
-  "keywords": [
-    "eslint",
-    "eslint-plugin",
-    "bob-obringer"
-  ],
-  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/eslint-plugin",
-  "bugs": "https://github.com/bob-obringer/monorepo/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bob-obringer/monorepo.git"
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
-  "license": "MIT",
-  "author": "Bob Obringer <bob@obringer.net>",
-  "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -28,18 +19,24 @@
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "7.8.0",
-    "@typescript-eslint/utils": "7.8.0",
-    "eslint-config-next": "14.2.3",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-config-turbo": "1.13.3",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-unused-imports": "3.2.0"
+    "@eslint/eslintrc": "3.3.1",
+    "@eslint/js": "9.26.0",
+    "@next/eslint-plugin-next": "15.3.1",
+    "@typescript-eslint/eslint-plugin": "8.31.1",
+    "@typescript-eslint/parser": "8.31.1",
+    "@typescript-eslint/utils": "8.31.1",
+    "eslint-config-next": "15.3.1",
+    "eslint-config-prettier": "10.1.2",
+    "eslint-config-turbo": "2.5.2",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-unused-imports": "4.1.4"
   },
   "devDependencies": {
-    "eslint": "8.57.0"
-  },
-  "peerDependencies": {
-    "eslint": ">=8"
+    "@bob-obringer/tsconfig": "workspace:*",
+    "@types/node": "22.15.3",
+    "eslint": "9.26.0",
+    "typescript": "5.8.3"
   }
 }

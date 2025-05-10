@@ -1,8 +1,7 @@
-import { TSESLint } from "@typescript-eslint/utils";
-import path from "path";
+import type { Rule } from "eslint";
+import path from "node:path";
 
-const rule: TSESLint.RuleModule<"unexpectedProcessEnv", [string]> = {
-  defaultOptions: ["config"],
+export const noProcessEnvRule: Rule.RuleModule = {
   meta: {
     type: "suggestion",
     docs: {
@@ -15,35 +14,39 @@ const rule: TSESLint.RuleModule<"unexpectedProcessEnv", [string]> = {
     schema: [
       {
         type: "string",
+        description: "The name of the config folder",
       },
     ],
     messages: {
       unexpectedProcessEnv: "Unexpected use of process.env.",
     },
   },
-
   create(context) {
     const [configFolderPattern = "config"] = context.options;
+
     return {
       MemberExpression(node) {
-        const { object, property, computed } = node;
-        const isIdentifier =
-          object.type === "Identifier" && property.type === "Identifier";
+        const { object, property } = node;
 
         if (
-          isIdentifier &&
-          object?.name === "process" &&
-          !computed &&
-          property?.name === "env"
+          object.type === "Identifier" &&
+          property.type === "Identifier" &&
+          object.name === "process" &&
+          !node.computed &&
+          property.name === "env"
         ) {
           const filename = context.filename;
-          if (!filename.includes(path.sep + configFolderPattern + path.sep)) {
-            context.report({ node, messageId: "unexpectedProcessEnv" });
+          const isConfigFolder = filename.includes(path.sep + configFolderPattern + path.sep);
+          const isNextConfig = filename.includes("next.config");
+
+          if (!isConfigFolder && !isNextConfig) {
+            context.report({
+              node,
+              messageId: "unexpectedProcessEnv",
+            });
           }
         }
       },
     };
   },
 };
-
-module.exports = rule;

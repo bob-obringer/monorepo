@@ -1,8 +1,8 @@
-import { Text } from "@bob-obringer/components";
+import { Div } from "@bob-obringer/design-system";
 import {
   NextJsSanityImage,
   SanityImageField,
-} from "@bob-obringer/nextjs-sanity-io-image";
+} from "@bob-obringer/nextjs-sanity-io/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
@@ -18,8 +18,9 @@ export function MiniCard({ href, icon, logo, label, text }: CardProps) {
   return (
     <a
       href={href}
-      className="bg-color-secondary hover:bg-color-primary flex w-full max-w-72 items-center gap-4 rounded border px-4 py-2 transition-colors"
+      className="border-foreground/10 bg-background hover:bg-bg-highlight flex w-full max-w-72 items-center gap-4 rounded-lg border px-4 py-2 transition-colors"
     >
+      {/* @ts-expect-error todo: fixme */}
       {icon && <FontAwesomeIcon size="2x" width="2rem" icon={icon} />}
       {logo && (
         <div className="overflow-hiden h-8 w-8">
@@ -32,12 +33,10 @@ export function MiniCard({ href, icon, logo, label, text }: CardProps) {
         </div>
       )}
       <div>
-        <Text as="div" variant="label-small" color="secondary">
+        <Div variant="label" color="subtle">
           {label}
-        </Text>
-        <Text as="div" variant="body-large">
-          {text}
-        </Text>
+        </Div>
+        <Div variant="body-medium">{text}</Div>
       </div>
     </a>
   );

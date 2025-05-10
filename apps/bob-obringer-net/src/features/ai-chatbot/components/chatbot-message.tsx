@@ -5,9 +5,10 @@ import {
 import { ReactNode } from "react";
 import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import { cx } from "@bob-obringer/components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
+import { cn } from "@/helpers/cn";
+import { Div } from "@bob-obringer/design-system";
 
 const messageRoleInfo = {
   user: {
@@ -19,8 +20,7 @@ const messageRoleInfo = {
   assistant: {
     icon: faRobot,
     roleName: "Bob's Chatbot",
-    className:
-      "bg-color-contrast bg-opacity-5 border-color-secondary border rounded-lg",
+    className: "bg-bg-highlight/60 border-foreground/10 border rounded-lg",
     titleClassName: "text-color-tertiary",
   },
 };
@@ -39,13 +39,13 @@ export function ChatbotMessage({
   const isActive = isLastMessage && chatbotStatus === "active";
 
   return (
-    <div className={cx(className, "relative overflow-x-hidden")}>
+    <div className={cn(className, "relative overflow-x-hidden")}>
       <div className={"flex flex-col gap-5 p-5"}>
         <MessageTitle isLastMessage={isLastMessage} message={message} />
         <div
-          className={cx(
-            message.status === "cancelled" && "text-color-warning opacity-50",
-            message.status === "error" && "text-color-negative",
+          className={cn(
+            message.status === "cancelled" && "text-warning opacity-50",
+            message.status === "error" && "text-destructive",
           )}
         >
           {children}
@@ -70,15 +70,16 @@ function MessageTitle({
   const { icon, roleName, titleClassName } = messageRoleInfo[message.role];
 
   return (
-    <div
-      className={cx(
+    <Div
+      variant="title"
+      className={cn(
         titleClassName,
         "flex items-center justify-between space-x-3",
       )}
     >
       <FontAwesomeIcon icon={icon} size="lg" />
-      <div className="typography-title-small flex-1">{roleName}</div>
+      <Div className="flex-1">{roleName}</Div>
       {isLastMessage && <ChatbotMessageStatusIndicator message={message} />}
-    </div>
+    </Div>
   );
 }

@@ -8,8 +8,9 @@ import {
 } from "@awesome.me/kit-8a94ae437c/icons/sharp/solid";
 import { ChangeEvent, ReactNode } from "react";
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-import { cx } from "@bob-obringer/components";
 import { ChatbotConfig } from "@bob-obringer/sanity-io-types";
+import { cn } from "@/helpers/cn";
+import { Typography } from "@bob-obringer/design-system";
 
 export function ChatbotForm({
   chatbotConfig,
@@ -34,7 +35,7 @@ export function ChatbotForm({
 
   return (
     <form onSubmit={onFormSubmit} className="w-full">
-      <div className="bg-color-secondary border-color-secondary focus:bg-color-primary flex h-12 w-full items-center gap-x-1 rounded border px-3 shadow-xl md:space-x-2">
+      <div className="bg-bg-alternate border-foreground/10 focus:bg-bg-highlight flex h-12 w-full items-center gap-x-1 rounded-lg border px-3 shadow-xl md:space-x-2">
         <input
           ref={inputRef}
           className="bg-color-transparent min-w-24 flex-1 p-0 focus:outline-0"
@@ -56,7 +57,7 @@ export function ChatbotForm({
           <ChatbotButton
             type="submit"
             className={
-              "text-color-warning hover:text-color-warning-secondary transition-colors"
+              "text-warning hover:text-color-warning-secondary transition-colors"
             }
           >
             Cancel
@@ -70,7 +71,7 @@ export function ChatbotForm({
               inputRef.current?.focus();
             }}
             className={
-              "text-color-secondary hover:text-color-primary transition-colors"
+              "text-text-subtle hover:text-foreground transition-colors"
             }
           >
             New Chat
@@ -107,15 +108,17 @@ function ChatbotButton({
   onClick?: () => void;
 }) {
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={cx(
-        "typography-label-small !font-weight-bold h-[29px] rounded p-2 transition-colors",
-        className,
-      )}
-    >
-      {children}
-    </button>
+    <Typography variant="label" asChild bold>
+      <button
+        type={type}
+        onClick={onClick}
+        className={cn(
+          "flex h-[29px] items-center justify-center rounded p-2 transition-colors",
+          className,
+        )}
+      >
+        {children}
+      </button>
+    </Typography>
   );
 }

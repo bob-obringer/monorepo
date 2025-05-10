@@ -5,13 +5,13 @@ import { RefObject, useEffect, useRef } from "react";
 
 import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 
-import { Text } from "@bob-obringer/components";
+import { Div } from "@bob-obringer/design-system";
 import { ChatbotMessage } from "@/features/ai-chatbot/components/chatbot-message";
 
 export function ChatbotBody({
   scrollerRef,
 }: {
-  scrollerRef: RefObject<HTMLDivElement>;
+  scrollerRef: RefObject<HTMLDivElement | null>;
 }) {
   const { messages, chatbotStatus } = useChatbot();
 
@@ -71,19 +71,14 @@ export function ChatbotBody({
   const lastMessage = messages[messages.length - 1];
 
   return (
-    <div className="space-y-4" ref={resizeRef}>
-      <Text
-        as="div"
-        className={"px-5 text-center"}
-        color="secondary"
-        variant="body-small"
-      >
+    <div className="space-y-4 text-pretty" ref={resizeRef}>
+      <Div className={"px-5 text-center"} color="subtle" variant="body-small">
         {`I'm a chatbot with an occasional wild streak.
         While I'm powered by facts, I sometimes sprinkle in a dash of
         imagination. Double-check anything important, and let's enjoy the
         conversation!`}
-      </Text>
-      <hr className="border-color-tertiary" />
+      </Div>
+      <hr className="border-foreground/10" />
       {messages.map((m) => {
         return (
           <div key={m.id} className="whitespace-pre-wrap">

@@ -1,7 +1,0 @@
-{
-  "extends": "@bob-obringer/tsconfig/tsconfig.library.dom.json",
-  "compilerOptions": {
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext"
-  }
-}

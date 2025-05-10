@@ -1,3 +1,0 @@
-{
-  "extends": "@bob-obringer/tsconfig/dev/tsconfig.library.dom.json"
-}

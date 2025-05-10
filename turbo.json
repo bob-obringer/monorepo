@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": [
     "ANTHROPIC_API_KEY",
@@ -7,12 +8,20 @@
     "PINECONE_API_KEY",
     "OPEN_AI_API_KEY",
     "SANITY_STUDIO_PROJECT_ID",
+    "SANITY_STUDIO_DATASET",
     "SANITY_WEBHOOK_SECRET",
     "BLOB_READ_WRITE_TOKEN",
     "KV_URL",
     "KV_REST_API_READ_ONLY_TOKEN",
     "KV_REST_API_TOKEN",
-    "KV_REST_API_URL"
+    "KV_REST_API_URL",
+    "AWS_BUCKET_NAME",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY",
+    "LOGTAIL_SOURCE_TOKEN",
+    "FONTAWESOME_NPM_TOKEN",
+    "XAI_API_KEY",
+    "GOOGLE_AI_API_KEY"
   ],
   "tasks": {
     "build": {

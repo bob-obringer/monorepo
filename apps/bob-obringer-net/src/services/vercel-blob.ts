@@ -1,6 +1,6 @@
-import { env } from "@/config/server";
+import { secrets } from "@/app-core/config/secrets";
 import { VercelBlob } from "@bob-obringer/vercel-storage";
 
 export const vercelBlob = new VercelBlob({
-  token: env.vercel.blobReadWriteToken,
+  token: secrets.vercel.blobReadWriteToken,
 });

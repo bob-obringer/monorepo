@@ -1,7 +1,3 @@
 {
-  "extends": ["@bob-obringer/tsconfig/tsconfig.library.json"],
-  "compilerOptions": {
-    "module": "CommonJS",
-    "verbatimModuleSyntax": false
-  }
+  "extends": ["@bob-obringer/tsconfig/tsconfig.library.json"]
 }

@@ -5,7 +5,7 @@ import {
   ChatbotUIState,
   ChatbotAIState,
 } from "@/features/ai-chatbot/types";
-import { nanoid } from "nanoid";
+import { generateId } from "ai";
 import { sendChatbotMessage } from "@/features/ai-chatbot/server/send-chatbot-message";
 import { createAI } from "ai/rsc";
 
@@ -33,7 +33,7 @@ const ChatbotAIContextProvider = createAI<
   ChatbotActions
 >({
   initialAIState: {
-    id: nanoid(),
+    id: generateId(),
     messages: [],
   },
   initialUIState: [],

@@ -33,7 +33,7 @@ To use a configuration, extend your `tsconfig.json` file like so:
 
 ```json
 {
-  "extends": "@bob-obringer/tsconfig/isomorphic-library/tsconfig.json",
+  "extends": "@bob-obringer/tsconfig/tsconfig.library.json",
   "compilerOptions": {
     "outDir": "./dist"
   },

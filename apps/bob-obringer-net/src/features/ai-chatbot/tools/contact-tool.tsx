@@ -1,5 +1,5 @@
 import { ContactCard } from "@/components/contact-card";
-import { getAllContactInfo } from "@/features/sanity-io/queries/contact-info";
+import { getAllContactInfo } from "@/integrations/sanity-io/queries/contact-info";
 import { z } from "zod";
 import { RenderTool, MessageContext } from "@/features/ai-chatbot/tools/types";
 
@@ -11,7 +11,7 @@ export function contactTool(context: MessageContext): RenderTool {
         `If you can infer that the user is looking for "x", "linkedin", "email", or "phone",
 set the contactMethod parameter to the exact value. Remember, Twitter is X.
 If you can't tell exactly how they want to communicate with us, set
-the contactMethod to "all methods".`,
+the contactMethod to "all methods".  Don't run this unless the user explicityly asks to contact bob.`,
       ),
     }),
     generate: async function ({ contactMethod }) {

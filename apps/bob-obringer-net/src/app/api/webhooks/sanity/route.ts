@@ -1,9 +1,9 @@
-import { createSanityWebhook } from "@bob-obringer/nextjs-sanity-io-webhooks";
-import { env } from "@/config/server";
-import { ResumeCompany } from "@/features/sanity-io/queries/resume-company";
+import { createSanityWebhook } from "@bob-obringer/nextjs-sanity-io/webhooks";
+import { secrets } from "@/app-core/config/secrets";
+import { ResumeCompany } from "@/integrations/sanity-io/queries/resume-company";
 
 const { POST } = createSanityWebhook({
-  secret: env.sanity.webhookSecret,
+  secret: secrets.sanity.webhookSecret,
   handlers: [
     {
       documentType: "resumeCompany",
@@ -55,6 +55,7 @@ const { POST } = createSanityWebhook({
 
 export { POST };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function handleResumeCompanyCreateOrUpdate(_company: ResumeCompany) {
   //
 }

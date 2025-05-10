@@ -1,0 +1,3 @@
+{
+  "extends": "@bob-obringer/tsconfig/dev/tsconfig.app.dom.json"
+}

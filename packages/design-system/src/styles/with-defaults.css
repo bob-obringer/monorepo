@@ -1,0 +1,10 @@
+/* 
+ * Bob Obringer Design System - Default Configuration
+ * Includes all necessary styles with light and dark mode support
+ */
+@import "./tailwind-config.css";
+@import "./light-color-mode.css";
+@import "./dark-color-mode.css";
+
+/* This is needed to load rules included in the bundled js in the dist folder */
+@source "..";

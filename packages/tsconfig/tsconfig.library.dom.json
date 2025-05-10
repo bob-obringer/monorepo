@@ -2,9 +2,6 @@
   "extends": "./tsconfig.library.json",
   "compilerOptions": {
     "lib": ["es2022", "dom", "dom.iterable"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "target": "ES2022",
     "jsx": "react-jsx"
   }
 }

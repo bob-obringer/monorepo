@@ -7,9 +7,10 @@ import {
   faSpinner,
 } from "@awesome.me/kit-8a94ae437c/icons/sharp/solid";
 
-import { cx, Text } from "@bob-obringer/components";
+import { Div } from "@bob-obringer/design-system";
 import { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { cn } from "@/helpers/cn";
 
 export function ChatbotMessageStatusIndicator({
   message,
@@ -63,7 +64,7 @@ function MessageStateWrapper({
 }) {
   return (
     <div
-      className={cx(
+      className={cn(
         "flex flex-col items-center space-y-1 transition-opacity duration-500 md:flex-row md:justify-center md:space-x-2 md:space-y-0",
         isIdle ? "opacity-0" : "opacity-75",
       )}
@@ -85,10 +86,9 @@ function MessageStateItem({
   isCancelling?: boolean;
 }) {
   return (
-    <Text
-      as="div"
-      variant="label-mono-small"
-      className={cx(
+    <Div
+      variant="label"
+      className={cn(
         "flex items-center gap-2 transition-colors md:flex-row-reverse",
         "text-color-tertiary",
         isCancelling && "text-color-warning",
@@ -111,6 +111,6 @@ function MessageStateItem({
         spin={isActive}
         className="w-4"
       />
-    </Text>
+    </Div>
   );
 }
