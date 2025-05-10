@@ -1,11 +1,8 @@
 {
   "extends": "./tsconfig.app.dom.json",
-  "display": "bob-obringer next.js tsconfig",
+  "display": "bobs next.js tsconfig",
   "compilerOptions": {
-    "lib": ["es2022", "dom", "dom.iterable"],
     "plugins": [{ "name": "next" }],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
     "jsx": "preserve",
     "noEmit": true,
     "incremental": true

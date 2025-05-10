@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@bob-obringer/vector-embedding": "workspace:*",
-    "@pinecone-database/pinecone": "2.2.2",
-    "neverthrow": "6.2.2"
+    "@pinecone-database/pinecone": "5.1.2",
+    "neverthrow": "8.2.0"
   }
 }

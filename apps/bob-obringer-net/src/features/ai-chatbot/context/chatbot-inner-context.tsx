@@ -9,7 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { nanoid } from "ai";
+import { generateId } from "ai";
 import {
   readStreamableValue,
   useActions,
@@ -39,6 +39,7 @@ export function ChatbotInnerContextProvider({
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setAiState] = useAIState<ChatbotAIContext>();
   const [messages, setMessages] = useUIState<ChatbotAIContext>();
   const [chatbotStatus, setChatbotStatus] = useState<ChatbotStatus>("idle");
@@ -71,7 +72,7 @@ export function ChatbotInnerContextProvider({
       return [
         ...messages.slice(0, -1),
         {
-          id: lastMessage?.id ?? nanoid(),
+          id: lastMessage?.id ?? generateId(),
           ui: <>You cancelled my response</>,
           status: "cancelled",
           role: "assistant",
@@ -82,7 +83,7 @@ export function ChatbotInnerContextProvider({
 
   function clearChat() {
     setAiState({
-      id: nanoid(),
+      id: generateId(),
       messages: [],
     });
     setMessages([]);
@@ -111,7 +112,7 @@ export function ChatbotInnerContextProvider({
     }
 
     // create the new message
-    const messageId = nanoid();
+    const messageId = generateId();
     const newMessage = {
       id: messageId,
       role: "assistant",
@@ -122,7 +123,12 @@ export function ChatbotInnerContextProvider({
     // add the new messages to the chat
     setMessages((prev: Array<ChatbotUIMessage>) => [
       ...prev,
-      { id: nanoid(), role: "user", ui: <>{messageText}</>, status: "success" },
+      {
+        id: generateId(),
+        role: "user",
+        ui: <>{messageText}</>,
+        status: "success",
+      },
       newMessage,
     ]);
 

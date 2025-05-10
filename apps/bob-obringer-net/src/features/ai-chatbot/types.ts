@@ -80,7 +80,7 @@ export type ChatbotContext = {
   cancel: () => void;
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
   submitMessage: (text: string) => void;
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   inputValue: string;
   setInputValue: (value: string) => void;
   clearChat: () => void;

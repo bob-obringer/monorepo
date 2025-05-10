@@ -1,14 +1,42 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { ReactNode } from "react";
-import { AppUIProvider } from "@/features/ui/app-ui-state-context";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import { env } from "@/config/client";
-import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
+// import { Analytics } from "@vercel/analytics/react";
+// import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { getDocument } from "@/services/sanity-io-client";
+
+import { Montserrat, Reddit_Mono, Ysabeau_SC } from "next/font/google";
+import { HeaderServer } from "@/app/_/layout/app-header/header-server";
+import { AppFooter } from "@/app/_/layout/app-footer";
+import { cn } from "@/helpers/cn";
+import { AppUIProvider } from "@/features/ui/app-ui-state-context";
 import { ChatbotContextProvider } from "@/features/ai-chatbot/context/chatbot-context";
-import { fontClasses } from "@bob-obringer/nextjs-fonts";
+
+const display = Ysabeau_SC({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const body = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+const mono = Reddit_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
+const fontClasses = [
+  body.className,
+  body.variable,
+  display.variable,
+  mono.variable,
+].join(" ");
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, name } = (await getDocument("aboutBob")) ?? {};
@@ -38,19 +66,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={fontClasses}>
-      <body className="bg-color-tertiary text">
-        <PosthogProvider
+    <html lang="en" className={cn(fontClasses, "dark-color-mode")}>
+      <body className="!bg-bg-alternate min-h-svh">
+        {/* <PosthogProvider
           token={env.posthog.key}
           host={env.posthog.host}
           enabled={env.name === "production"}
-        >
-          <AppUIProvider>
-            <ChatbotContextProvider>{children}</ChatbotContextProvider>
-          </AppUIProvider>
-        </PosthogProvider>
-        <SpeedInsights />
-        <Analytics />
+        > */}
+        <AppUIProvider>
+          <ChatbotContextProvider>
+            <HeaderServer />
+            <div className="pb-40 md:pb-44">{children}</div>
+            <AppFooter />
+          </ChatbotContextProvider>
+        </AppUIProvider>
+        {/* </PosthogProvider> */}
+        {/* <SpeedInsights />
+        <Analytics /> */}
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import { OgImage } from "@/features/metadata/og/og-image";
+import { OgImage } from "@/features/page/metadata/og-image";
 
 export async function GET() {
   return OgImage({

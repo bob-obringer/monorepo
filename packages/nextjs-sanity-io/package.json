@@ -1,0 +1,59 @@
+{
+  "name": "@bob-obringer/nextjs-sanity-io",
+  "version": "0.3.1",
+  "private": false,
+  "description": "NextJS Sanity.io",
+  "keywords": [
+    "sanity.io",
+    "nextjs",
+    "images",
+    "bob-obringer"
+  ],
+  "homepage": "https://github.com/bob-obringer/monorepo/tree/develop/public-packages/nextjs-sanity-io",
+  "bugs": "https://github.com/bob-obringer/monorepo/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bob-obringer/monorepo.git"
+  },
+  "license": "MIT",
+  "author": "Bob Obringer <bob@obringer.net>",
+  "type": "module",
+  "exports": {
+    "./image": {
+      "import": "./dist/image/index.js",
+      "types": "./dist/image/index.d.ts"
+    },
+    "./webhooks": {
+      "import": "./dist/webhooks/index.js",
+      "types": "./dist/webhooks/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules",
+    "dev": "tsc -w -p tsconfig.dev.json",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@sanity/client": "7.2.1",
+    "@sanity/webhook": "4.0.4",
+    "http-errors": "2.0.0",
+    "zod": "3.24.4"
+  },
+  "devDependencies": {
+    "@types/http-errors": "^2.0.4",
+    "@types/react": "^19.1.3",
+    "@types/react-dom": "19.1.3",
+    "next": "15.3.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "peerDependencies": {
+    "next": ">=15.3.2",
+    "react": ">=19.1.0",
+    "react-dom": ">19.1.0"
+  }
+}

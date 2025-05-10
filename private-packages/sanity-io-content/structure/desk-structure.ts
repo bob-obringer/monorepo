@@ -1,5 +1,5 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/structure";
-import { configListItem, listItem, reordableListItem } from "./list-items";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
 export function structure(
   S: StructureBuilder,
@@ -13,18 +13,40 @@ export function structure(
       configListItem(S, "About Bob", "aboutBob"),
       configListItem(S, "Chatbot Config", "chatbotConfig"),
       // todo: this really belongs in "about bob"
-      reordableListItem(S, context, "Contact Info", "contactInfo"),
-      S.divider(),
-      configListItem(S, "Homepage", "homepage"),
-      listItem(S, "Content Page", "contentPage"),
-      S.divider(),
-      listItem(S, "Resume Companies", "resumeCompany"),
-      reordableListItem(
+      orderableDocumentListDeskItem({
         S,
         context,
-        "Resume Skill Categories",
-        "resumeSkillCategory",
-      ),
-      reordableListItem(S, context, "Resume Skills", "resumeSkill"),
+        title: "Contact Info",
+        type: "contactInfo",
+      }),
+      S.divider(),
+      configListItem(S, "Homepage", "homepage"),
+      S.documentTypeListItem("contentPage").title("Content Pages"),
+      S.divider(),
+      S.documentTypeListItem("resumeCompany").title("Resume Companies"),
+      orderableDocumentListDeskItem({
+        S,
+        context,
+        title: "Resume Skill Categories",
+        type: "resumeSkillCategory",
+      }),
+      orderableDocumentListDeskItem({
+        S,
+        context,
+        title: "Resume Skills",
+        type: "resumeSkill",
+      }),
     ]);
+}
+
+function configListItem(
+  S: StructureBuilder,
+  title: string,
+  schemaType: string,
+) {
+  return S.listItem()
+    .title(title)
+    .child(
+      S.document().title(title).schemaType(schemaType).documentId(schemaType),
+    );
 }

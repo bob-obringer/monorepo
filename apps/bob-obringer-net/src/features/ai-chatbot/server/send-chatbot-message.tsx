@@ -5,7 +5,7 @@ import "server-only";
 import {
   getResumeCompanies,
   ResumeCompany,
-} from "@/features/sanity-io/queries/resume-company";
+} from "@/integrations/sanity-io/queries/resume-company";
 import { getDocument } from "@/services/sanity-io-client";
 import { streamUI } from "ai/rsc";
 import { getSystemPrompt } from "@/features/ai-chatbot/server/chatbot-system-prompt";
@@ -16,9 +16,9 @@ import {
 import {
   getResumeSkills,
   ResumeSkill,
-} from "@/features/sanity-io/queries/resume-skills";
+} from "@/integrations/sanity-io/queries/resume-skills";
 import { AboutBob, ChatbotConfig } from "@bob-obringer/sanity-io-types";
-import { models } from "@/services/llms";
+import { models } from "@/integrations/llms";
 import { rateLimit } from "@/features/ai-chatbot/server/rate-limit";
 import { resumeTool } from "@/features/ai-chatbot/tools/resume-tool";
 import { contactTool } from "@/features/ai-chatbot/tools/contact-tool";
@@ -92,10 +92,11 @@ export async function sendChatbotMessage({
       and `tools` functions to our own stream that we can update at our own pace.
      */
     await streamUI({
-      model: models[chatbotConfig.model ?? "anthropicHaiku"],
+      //model: models[chatbotConfig.model ?? "anthropicHaiku"],
+      model: models.xAIGrok3,
       system: systemPrompt,
       messages: context.aiState.get().messages,
-      temperature: chatbotConfig.temperature,
+      temperature: 0.7, //chatbotConfig.temperature,
       initial: <>Thinking...</>,
       text: chatTextRenderer(context),
       tools: {

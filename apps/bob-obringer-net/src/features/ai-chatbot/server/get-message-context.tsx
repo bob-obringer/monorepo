@@ -6,8 +6,8 @@ import {
 import { ChatbotAIContext } from "@/features/ai-chatbot/context/chatbot-context";
 import { SendChatbotMessageActionStatus } from "@/features/ai-chatbot/types";
 import { ReactNode } from "react";
-import { nanoid } from "ai";
-import { unstable_after as after } from "next/server";
+import { generateId } from "ai";
+import { after } from "next/server";
 import { vercelBlob } from "@/services/vercel-blob";
 import { MessageContext } from "@/features/ai-chatbot/tools/types";
 
@@ -18,7 +18,7 @@ export function getMessageContext(): MessageContext {
   const aiState = getMutableAIState<ChatbotAIContext>();
   if (aiState.get().messages.length === 0) {
     aiState.update({
-      id: `${Date.now()}:${nanoid()}`,
+      id: `${Date.now()}:${generateId()}`,
       messages: [],
     });
   }
@@ -48,7 +48,7 @@ export function getMessageContext(): MessageContext {
       ...aiState.get(),
       messages: [
         ...aiState.get().messages,
-        { id: nanoid(), role: "assistant", content: aiContent },
+        { id: generateId(), role: "assistant", content: aiContent },
       ],
     });
     after(async () => {
@@ -66,6 +66,6 @@ export function getMessageContext(): MessageContext {
     statusStream,
     endResponse,
     chunkCount: 0,
-    id: nanoid(),
+    id: generateId(),
   };
 }

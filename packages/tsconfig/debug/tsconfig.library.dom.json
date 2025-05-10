@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.library.dom.json",
+  "extends": "../tsconfig.library.dom.json",
   "compilerOptions": {
     "pretty": true,
     "sourceMap": true,

@@ -1,5 +1,5 @@
+import { getResumeCompanies } from "@/integrations/sanity-io/queries/resume-company";
 import { MetadataRoute } from "next";
-import { getResumeCompanies } from "@/features/sanity-io/queries/resume-company";
 
 type SitemapPage = MetadataRoute.Sitemap[0];
 

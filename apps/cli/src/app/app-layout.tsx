@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { Box } from "ink";
 import { Gradient } from "../components/gradient-color.js";
 import { Figlet } from "../components/figlet.js";

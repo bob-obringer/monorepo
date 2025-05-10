@@ -4,8 +4,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2022",
-    "module": "es2022",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
@@ -20,7 +20,8 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noUnusedParameters": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "verbatimModuleSyntax": true
   },
   "include": ["${configDir}/src/**/*.ts*"],
   "exclude": [

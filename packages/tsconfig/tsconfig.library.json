@@ -4,7 +4,6 @@
     "lib": ["es2022"],
     "incremental": true,
     "declaration": true,
-    "declarationMap": true,
-    "verbatimModuleSyntax": true
+    "declarationMap": true
   }
 }

@@ -1,5 +1,5 @@
 import { createClient } from "@sanity/client";
-import { env } from "@/config/server";
+// import { env } from "@/config/server";
 import groq from "groq";
 import {
   Homepage,
@@ -7,10 +7,11 @@ import {
   AboutBob,
 } from "@bob-obringer/sanity-io-types";
 import { revalidateTag, unstable_cache } from "next/cache";
+import { secrets } from "@/app-core/config/secrets";
 
 export const sanityIoClient = createClient({
-  projectId: env.sanity.projectId,
-  dataset: env.sanity.dataset,
+  projectId: secrets.sanity.projectId,
+  dataset: secrets.sanity.dataset,
   useCdn: true,
   apiVersion: "2024-05-15",
 });

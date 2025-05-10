@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/*
+  Shadcn Configuration
+*/
+/* @plugin "tailwindcss-animate"; */
+:root {
+  --radius: 8px;
+}
+
+/*
+    Bob's Theme
+
+    Defines the semantic variables for the Tailwind CSS theme. These variables
+    create a consistent design language across all components.
+  */
+@theme inline {
+  /* Fonts */
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  /*
+    Colors
+  */
+  --color-*: initial;
+
+  /* Brand Colors */
+  --color-brand: #88aaff;
+
+  /* Background Colors */
+  --color-bg-alternate: var(--color-background-alternate);
+  --color-bg-highlight: var(--color-background-highlight);
+  --color-bg-header: var(--color-background-header);
+  --color-bg-footer: var(--color-background-footer);
+
+  /* Foreground Colors */
+  --color-text-subtle: var(--color-foreground-subtle);
+  --color-text-faint: var(--color-foreground-faint);
+
+  /*
+    Shadcn UI Theme
+  */
+
+  /* Border Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Base Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Component Colors */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Brand Colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* UI Colors */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+
+  /* Border & Focus */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Chart Colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Status Colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  :root {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Scrollbar */
+@layer base {
+  :root {
+    --scrollbar-track-color: var(--color-background-alternate);
+    --scrollbar-thumb-color: color-mix(
+      in srgb,
+      var(--color-foreground) 10%,
+      transparent
+    );
+    --scrollbar-size: 12px;
+    --scrollbar-track-size: 10px;
+    --scrollbar-thumb-size: 6px;
+  }
+  * {
+    scrollbar-width: var(--scrollbar-size);
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+  }
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-color);
+    width: var(--scrollbar-track-size);
+    padding: 2px 0;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color);
+    width: var(--scrollbar-thumb-size);
+    height: var(--scrollbar-thumb-size);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-color);
+  }
+
+  /* Rethink this */
+  .scroll-container {
+    scrollbar-gutter: stable;
+  }
+}

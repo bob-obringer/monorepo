@@ -1,5 +1,5 @@
 import { useApp } from "ink";
-import React, { ReactNode, useContext, useState } from "react";
+import React, { type ReactNode, useContext, useState } from "react";
 
 const CliContext = React.createContext<{
   commandName: string | null;
