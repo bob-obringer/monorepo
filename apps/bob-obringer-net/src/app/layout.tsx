@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { ReactNode } from "react";
-// import { SpeedInsights } from "@vercel/speed-insights/next";
-// import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 // import { PosthogProvider } from "@bob-obringer/nextjs-posthog";
 import { getDocument } from "@/services/sanity-io-client";
 
@@ -81,8 +81,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </ChatbotContextProvider>
         </AppUIProvider>
         {/* </PosthogProvider> */}
-        {/* <SpeedInsights />
-        <Analytics /> */}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
