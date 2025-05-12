@@ -20,6 +20,7 @@ export function getMessageContext(): MessageContext {
     aiState.update({
       id: `${Date.now()}:${generateId()}`,
       messages: [],
+      supabaseChatId: null, // Initialize Supabase chat ID to null for new chats
     });
   }
 

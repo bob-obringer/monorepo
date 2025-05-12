@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { generateId } from "ai";
 import {
   readStreamableValue,
@@ -34,25 +35,26 @@ export function ChatbotInnerContextProvider({
   children: ReactNode;
 }) {
   const { viewportWidth } = useAppUI();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const activeAssistantMessageIdRef = useRef<string | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line
   const [_, setAiState] = useAIState<ChatbotAIContext>();
   const [messages, setMessages] = useUIState<ChatbotAIContext>();
   const [chatbotStatus, setChatbotStatus] = useState<ChatbotStatus>("idle");
-
-  const activeAssistantMessageIdRef = useRef<string | null>(null);
-
   const { sendChatbotMessage } = useActions<ChatbotAIContext>();
 
+  // Open chat when status changes from idle
   useEffect(() => {
-    if (chatbotStatus !== "idle") {
-      open();
-    }
+    if (chatbotStatus !== "idle") open();
   }, [chatbotStatus]);
+
+  // Listen for route changes to close the chat context
+  useEffect(close, [pathname]);
 
   function close() {
     document.body.style.overflow = "auto";

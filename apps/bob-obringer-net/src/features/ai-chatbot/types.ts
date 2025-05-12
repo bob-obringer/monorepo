@@ -18,6 +18,7 @@ export type ChatbotAIMessage = CoreMessage & {
 export type ChatbotAIState = {
   id: string;
   messages: ChatbotAIMessage[];
+  supabaseChatId: string | null; // ID of the archived chat in Supabase
 };
 
 /*
