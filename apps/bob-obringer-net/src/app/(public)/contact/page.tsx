@@ -2,7 +2,6 @@ import { ContactCard } from "@/components/contact-card";
 import { getAllContactInfo } from "@/integrations/sanity-io/queries/contact-info";
 import { Metadata } from "next";
 
-export const dynamic = "force-static";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
