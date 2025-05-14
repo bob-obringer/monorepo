@@ -46,6 +46,7 @@ export function ChatbotForm({
           value={input}
           placeholder={chatbotConfig.inputFieldPlaceholder}
           onChange={handleInputChange}
+          autoFocus
         />
         {input && status === "ready" && (
           <ChatbotButton

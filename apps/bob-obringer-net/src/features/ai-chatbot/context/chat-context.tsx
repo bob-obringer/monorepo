@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useChat } from "@ai-sdk/react";
+import { Message, useChat } from "@ai-sdk/react";
 import {
   createContext,
   Dispatch,
@@ -28,7 +28,9 @@ type ChatContextValue = {
   setInput: Dispatch<SetStateAction<string>>;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   stop: () => void;
-  setMessages: Dispatch<SetStateAction<Array<UIMessage>>>;
+  setMessages: (
+    messages: Message[] | ((messages: Message[]) => Message[]),
+  ) => void;
   handleSubmit: (
     event?: {
       preventDefault?: () => void;

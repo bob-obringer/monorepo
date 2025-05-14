@@ -9,7 +9,6 @@ import { getDocument } from "@/services/sanity-io-client";
 import { Montserrat, Reddit_Mono, Ysabeau_SC } from "next/font/google";
 import { cn } from "@/helpers/cn";
 import { AppUIProvider } from "@/features/ui/app-ui-state-context";
-import { ChatbotContextProvider } from "@/features/ai-chatbot/context/chatbot-context";
 import { ChatContextProvider } from "@/features/ai-chatbot/context/chat-context";
 
 const display = Ysabeau_SC({
@@ -73,9 +72,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           enabled={env.name === "production"}
         > */}
         <AppUIProvider>
-          {/* <ChatbotContextProvider> */}
           <ChatContextProvider>{children}</ChatContextProvider>
-          {/* </ChatbotContextProvider> */}
         </AppUIProvider>
         {/* </PosthogProvider> */}
         <SpeedInsights />

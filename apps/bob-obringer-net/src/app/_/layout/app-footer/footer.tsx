@@ -18,7 +18,7 @@ export function Footer({
   chatbotConfig: ChatbotConfig;
 }) {
   // const { isOpen, close, submitMessage } = useChatbot();
-  const { isOpen, close, open, handleSubmit, setInput } = useBobsChatbot();
+  const { isOpen, close, setInput } = useBobsChatbot();
 
   const segments = useSelectedLayoutSegments();
   const isHome = segments.length === 0;
@@ -76,8 +76,8 @@ export function Footer({
       </div>
       <footer
         className={cn(
-          "fixed bottom-0 h-36 w-full flex-col items-center border-t pb-5 pt-3 backdrop-blur-2xl transition-all duration-300 md:h-40",
-          isOpen ? "bg-bg-alternate" : "",
+          "fixed bottom-0 h-36 w-full flex-col items-center border-t pb-5 pt-3 transition-all duration-300 md:h-40",
+          isOpen ? "bg-bg-footer" : "",
           isHome && !isOpen
             ? "border-text-subtle/0 h-[60svh] md:h-[60svh]"
             : "border-text-subtle/20",

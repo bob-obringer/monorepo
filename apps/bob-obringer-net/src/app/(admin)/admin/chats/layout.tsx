@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
 import { supabaseServerClient } from "@/integrations/supabase/server";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { H2, P, Div } from "@bob-obringer/design-system";
+import { NextLayoutProps } from "@/integrations/nextjs/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -10,10 +10,9 @@ export const revalidate = 0;
 export default async function ChatArchivesLayout({
   children,
   params,
-}: {
-  children: ReactNode;
-  params: { id?: string };
-}) {
+}: NextLayoutProps<{ id?: string }>) {
+  const { id } = await params;
+
   // Fetch chats from Supabase
   const { data: chats, error } = await supabaseServerClient
     .from("chats")
@@ -52,7 +51,7 @@ export default async function ChatArchivesLayout({
                   key={chat.id}
                   href={`/admin/chats/${chat.id}`}
                   className={`hover:bg-accent block rounded-md p-3 text-sm ${
-                    params.id === chat.id ? "bg-accent" : ""
+                    id === chat.id ? "bg-accent" : ""
                   }`}
                 >
                   <Div className="truncate font-medium">

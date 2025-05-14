@@ -3,12 +3,12 @@ import { marked } from "marked";
 import { memo, useMemo } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 
-function parseMarkdownIntoBlocks(markdown: string): string[] {
+export function parseMarkdownIntoBlocks(markdown: string): string[] {
   const tokens = marked.lexer(markdown);
   return tokens.map((token) => token.raw);
 }
 
-const components: Components = {
+export const components: Components = {
   h2(props) {
     return <H2 className="mb-2">{props.children}</H2>;
   },
@@ -62,10 +62,7 @@ const components: Components = {
   },
   blockquote(props) {
     return (
-      <blockquote
-        data-markdown
-        className="border-foreground/20 mb-2 border-l-4 pl-4 pt-2 italic"
-      >
+      <blockquote className="border-foreground/20 mb-2 whitespace-normal border-l-4 py-2 pl-4 italic [&>p]:mb-0">
         {props.children}
       </blockquote>
     );

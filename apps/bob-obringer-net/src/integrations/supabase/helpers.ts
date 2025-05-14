@@ -14,13 +14,14 @@ import { supabaseServerClient } from "./server";
  * @returns The UUID of the created chat, or null if creation failed
  */
 export async function createSupabaseChat(
+  id: string,
   title?: string,
   location?: string,
 ): Promise<string | null> {
   try {
     const { data, error } = await supabaseServerClient
       .from("chats")
-      .insert({ title, location })
+      .upsert({ id, title, location }, { onConflict: 'id' })
       .select("id")
       .single();
 

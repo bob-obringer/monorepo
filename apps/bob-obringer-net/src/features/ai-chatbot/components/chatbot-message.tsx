@@ -7,8 +7,7 @@ import { cn } from "@/helpers/cn";
 import { Div } from "@bob-obringer/design-system";
 import { UIMessage } from "ai";
 import { ChatStatus } from "@/features/ai-chatbot/context/chat-context";
-import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
-import { MemoizedMarkdown } from "@/features/markdown/memoized-markdown";
+import { AnimatedMarkdown } from "./animated-markdown";
 import { ContactCard } from "@/components/contact-card";
 import { ContactInfoWithAsset } from "@/integrations/sanity-io/queries/contact-info";
 import { ResumeCard, ResumeLinkCard } from "@/components/resume-card";
@@ -46,17 +45,13 @@ export function ChatbotMessage({
   return (
     <div className={cn(className, "relative overflow-x-hidden")}>
       <div className={"flex flex-col gap-5 p-5"}>
-        <MessageTitle
-          isLastMessage={isLastMessage}
-          message={message}
-          status={status}
-        />
+        <MessageTitle message={message} />
         <div className={cn(status === "error" && "text-destructive")}>
           {message.parts.map((part, index) => {
             if (part.type === "text") {
               return (
-                <MemoizedMarkdown
-                  key={index}
+                <AnimatedMarkdown
+                  key={message.id + "_" + index}
                   id={message.id}
                   content={part.text}
                 />
@@ -91,15 +86,7 @@ export function ChatbotMessage({
   );
 }
 
-function MessageTitle({
-  message,
-  status,
-  isLastMessage,
-}: {
-  message: UIMessage;
-  status: ChatStatus;
-  isLastMessage: boolean;
-}) {
+function MessageTitle({ message }: { message: UIMessage }) {
   if (message.role === "data" || message.role === "system") return null;
 
   const { icon, roleName, titleClassName } = messageRoleInfo[message.role];
@@ -114,7 +101,6 @@ function MessageTitle({
     >
       <FontAwesomeIcon icon={icon} size="lg" />
       <Div className="flex-1">{roleName}</Div>
-      {isLastMessage && <ChatbotMessageStatusIndicator status={status} />}
     </Div>
   );
 }

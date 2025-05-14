@@ -3,7 +3,7 @@
 
 -- Table for Chat Sessions
 CREATE TABLE chats (
-    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    id TEXT PRIMARY KEY NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc', now()),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc', now()),
     title TEXT,
@@ -13,7 +13,7 @@ CREATE TABLE chats (
 -- Table for individual messages
 CREATE TABLE messages (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    chat_id uuid NOT NULL REFERENCES chats(id) ON DELETE CASCADE,
+    chat_id TEXT NOT NULL REFERENCES chats(id) ON DELETE CASCADE,
     role TEXT NOT NULL CHECK (role IN ('user', 'assistant', 'system')),
     content TEXT NOT NULL,
     timestamp TIMESTAMPTZ NOT NULL DEFAULT timezone('utc', now())
