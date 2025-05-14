@@ -9,6 +9,8 @@ import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience
 import { H4, Span, Typography } from "@bob-obringer/design-system";
 import { NextPageProps } from "@/integrations/nextjs/types";
 
+export const revalidate = 86400;
+
 export async function generateMetadata({
   params,
 }: NextPageProps<{ slug: string }>) {
