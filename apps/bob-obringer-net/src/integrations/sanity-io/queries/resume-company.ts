@@ -60,7 +60,13 @@ const resumeCompaniesQuery = groq`*[_type == "resumeCompany"]{
 } | order(startDate desc)`;
 
 export async function getResumeCompanies() {
-  return await sanityIoClient.fetch<ResumeCompany[]>(resumeCompaniesQuery);
+  return unstable_cache(
+    async () => {
+      return await sanityIoClient.fetch<ResumeCompany[]>(resumeCompaniesQuery);
+    },
+    ['sanity:resume-companies'],
+    { tags: ['sanity:resume-companies'] }
+  )();
 }
 
 /*
