@@ -94,10 +94,18 @@ const resumeCompanyQuery = groq`*[_type == "resumeCompany" && slug == $slug]{
   }
 }`;
 
+import { unstable_cache } from "next/cache";
+
 export async function getResumeCompany({ slug }: { slug: string }) {
-  const companies = await sanityIoClient.fetch<Array<ResumeCompany>>(
-    resumeCompanyQuery,
-    { slug },
-  );
-  return companies?.[0];
+  return unstable_cache(
+    async () => {
+      const companies = await sanityIoClient.fetch<Array<ResumeCompany>>(
+        resumeCompanyQuery,
+        { slug },
+      );
+      return companies?.[0];
+    },
+    [`sanity:resume-company:${slug}`],
+    { tags: [`sanity:resume-company:${slug}`] }
+  )();
 }

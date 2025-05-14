@@ -1,11 +1,15 @@
 import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience-page-body";
 
 export function BodyTextLoader() {
-  return <div className="bg-color-tertiary mb-2 h-5 w-full rounded-full" />;
+  return (
+    <div className="bg-foreground/25 mb-2 h-5 w-full animate-pulse rounded-full" />
+  );
 }
 
 export function BodyTextSmallLoader() {
-  return <div className="bg-color-tertiary mb-1 h-4 w-full rounded-full" />;
+  return (
+    <div className="bg-foreground/25 mb-1 h-4 w-full animate-pulse rounded-full" />
+  );
 }
 
 export function ExperienceLoading({ hideHeader }: { hideHeader?: boolean }) {
@@ -13,12 +17,12 @@ export function ExperienceLoading({ hideHeader }: { hideHeader?: boolean }) {
     <ExperiencePageBody
       title={
         !hideHeader && (
-          <div className="bg-color-tertiary mb-1 h-8 w-64 rounded-lg" />
+          <div className="bg-foreground/25 mb-1 h-8 w-64 animate-pulse rounded-lg" />
         )
       }
       subtitle={
         !hideHeader && (
-          <div className="bg-color-tertiary h-5 w-96 rounded-full" />
+          <div className="bg-foreground/25 h-5 w-96 animate-pulse rounded-full" />
         )
       }
       body={
