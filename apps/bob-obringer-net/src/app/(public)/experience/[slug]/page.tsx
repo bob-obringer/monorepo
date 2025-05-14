@@ -4,8 +4,8 @@ import {
 } from "@/integrations/sanity-io/queries/resume-company";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { CompanySkills } from "@/app/experience/_components/experience-skills";
-import { ExperiencePageBody } from "@/app/experience/_layout/experience-page-body";
+import { CompanySkills } from "@/app/(public)/experience/_components/experience-skills";
+import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience-page-body";
 import { H4, Span, Typography } from "@bob-obringer/design-system";
 import { NextPageProps } from "@/integrations/nextjs/types";
 

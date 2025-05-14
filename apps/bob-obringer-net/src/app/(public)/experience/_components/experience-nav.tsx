@@ -1,6 +1,6 @@
 import { cn } from "@/helpers/cn";
 import { getResumeCompanies } from "@/integrations/sanity-io/queries/resume-company";
-import { ExperienceNavListItem } from "@/app/experience/_components/experience-nav-list-item";
+import { ExperienceNavListItem } from "@/app/(public)/experience/_components/experience-nav-list-item";
 import { getDocument } from "@/services/sanity-io-client";
 
 export async function ExperienceNav({ className }: { className?: string }) {

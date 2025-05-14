@@ -20,11 +20,18 @@ export type LinkTextProps = Omit<TypographyProps<HTMLAnchorElement>, "as"> &
 
 export function LinkText({
   hover,
-  color = "neutral-300",
+  color = "subtle",
   className,
   asChild,
   ...props
 }: LinkTextProps) {
   const variantClass = cn(linkVariants({ hover }), className);
-  return <Typography color={color} className={variantClass} asChild={asChild} {...props} />;
+  return (
+    <Typography
+      color={color}
+      className={variantClass}
+      asChild={asChild}
+      {...props}
+    />
+  );
 }

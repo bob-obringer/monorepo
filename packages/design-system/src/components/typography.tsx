@@ -15,13 +15,13 @@ const typographyVariants = cva("", {
   variants: {
     variant: {
       display:
-        "font-display font-bold !leading-[1.0] text-[clamp(3rem,10vw,4.5rem)]",
+        "font-display font-bold !leading-[1.0] text-[clamp(3rem,10vw,4rem)]",
       "heading-1":
-        "font-sans font-semibold !leading-[1.0] text-[clamp(2.25rem,7vw,3.25rem)]",
+        "font-sans font-semibold !leading-[1.0] text-[clamp(1.75rem,7vw,2.75rem)]",
       "heading-2":
-        "font-sans font-semibold !leading-[1.05] text-[clamp(1.5rem,5vw,2.25rem)]",
+        "font-sans font-semibold !leading-[1.05] text-[clamp(1.25rem,5vw,2rem)]",
       "heading-3":
-        "font-sans font-semibold !leading-[1.1] text-[clamp(1.125rem,4vw,1.5rem)]",
+        "font-sans font-semibold !leading-[1.1] text-[clamp(1rem,4vw,1.5rem)]",
       "heading-4":
         "font-sans font-semibold !leading-[1.15] text-[clamp(0.875rem,3vw,1.125rem)]",
       title: "font-sans font-semibold text-lg",
@@ -242,6 +242,23 @@ export function TD({
   ...props
 }: TypographyProps<HTMLTableCellElement>) {
   return <Typography as="td" variant={variant} {...props} />;
+}
+
+export function Strong({
+  variant = "body-medium",
+  semibold = true,
+  ...props
+}: TypographyProps<HTMLSpanElement>) {
+  return (
+    <Typography as="strong" semibold={semibold} variant={variant} {...props} />
+  );
+}
+
+export function LI({
+  variant = "body-medium",
+  ...props
+}: TypographyProps<HTMLLIElement>) {
+  return <Typography as="li" variant={variant} {...props} />;
 }
 
 /**

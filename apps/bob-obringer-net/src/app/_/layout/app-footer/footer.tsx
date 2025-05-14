@@ -2,14 +2,13 @@
 
 import { Span } from "@bob-obringer/design-system";
 import { useEffect, useRef, useState } from "react";
-
 import { FooterNav } from "@/app/_/layout/app-footer/footer-nav";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import { ChatbotBody } from "@/features/ai-chatbot/components/chatbot-body";
 import { ChatbotForm } from "@/features/ai-chatbot/components/chatbot-form";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { ChatbotConfig } from "@bob-obringer/sanity-io-types";
 import { cn } from "@/helpers/cn";
+import { useBobsChatbot } from "@/features/ai-chatbot/context/chat-context";
 
 export function Footer({
   className,
@@ -18,7 +17,8 @@ export function Footer({
   className?: string;
   chatbotConfig: ChatbotConfig;
 }) {
-  const { isOpen, close, submitMessage } = useChatbot();
+  // const { isOpen, close, submitMessage } = useChatbot();
+  const { isOpen, close, setInput } = useBobsChatbot();
 
   const segments = useSelectedLayoutSegments();
   const isHome = segments.length === 0;
@@ -37,8 +37,21 @@ export function Footer({
 
   const chatbotScrollerRef = useRef<HTMLDivElement>(null);
 
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // this is a terrible hack, but the form won't submit properly if I try to do it from here
   function handleAskClick(question: string) {
-    submitMessage(question);
+    setInput(question);
+
+    // Small delay to ensure input is updated
+    setTimeout(() => {
+      const submitButton = formRef.current?.querySelector(
+        'button[type="submit"]',
+      );
+      if (submitButton) {
+        (submitButton as HTMLButtonElement).click();
+      }
+    }, 10);
   }
 
   return (
@@ -63,8 +76,8 @@ export function Footer({
       </div>
       <footer
         className={cn(
-          "fixed bottom-0 h-36 w-full flex-col items-center border-t pb-5 pt-3 backdrop-blur-2xl transition-all duration-300 md:h-40",
-          isOpen ? "bg-bg-alternate" : "",
+          "fixed bottom-0 h-36 w-full flex-col items-center border-t pb-5 pt-3 transition-all duration-300 md:h-40",
+          isOpen ? "bg-bg-footer" : "",
           isHome && !isOpen
             ? "border-text-subtle/0 h-[60svh] md:h-[60svh]"
             : "border-text-subtle/20",
@@ -72,7 +85,7 @@ export function Footer({
       >
         <div className="mx-auto flex h-full w-full max-w-screen-md flex-col items-center justify-between px-5">
           <div className="w-full">
-            <ChatbotForm chatbotConfig={chatbotConfig} />
+            <ChatbotForm chatbotConfig={chatbotConfig} formRef={formRef} />
             {!isOpen && isHome && (
               <MessageCarousel
                 onAskClick={handleAskClick}

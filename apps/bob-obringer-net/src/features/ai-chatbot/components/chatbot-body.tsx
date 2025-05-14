@@ -3,17 +3,16 @@
 import "@/features/ai-chatbot/components/chatbot.css";
 import { RefObject, useEffect, useRef } from "react";
 
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
-
 import { Div } from "@bob-obringer/design-system";
 import { ChatbotMessage } from "@/features/ai-chatbot/components/chatbot-message";
+import { useBobsChatbot } from "@/features/ai-chatbot/context/chat-context";
 
 export function ChatbotBody({
   scrollerRef,
 }: {
   scrollerRef: RefObject<HTMLDivElement | null>;
 }) {
-  const { messages, chatbotStatus } = useChatbot();
+  const { messages, status } = useBobsChatbot();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement | null>(null);
@@ -21,14 +20,10 @@ export function ChatbotBody({
   const isManuallyScrolled = useRef(false);
 
   useEffect(() => {
-    if (
-      chatbotStatus === "idle" ||
-      chatbotStatus === "pending" ||
-      chatbotStatus === "active"
-    ) {
+    if (status === "submitted" || status === "streaming") {
       isManuallyScrolled.current = false;
     }
-  }, [chatbotStatus, messages.length]);
+  }, [status, messages.length]); // todo: messages.length??
 
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -56,15 +51,11 @@ export function ChatbotBody({
     });
 
     const resizeDiv = resizeRef.current;
-    if (resizeDiv) {
-      resizeObserver.observe(resizeDiv);
-    }
+    if (resizeDiv) resizeObserver.observe(resizeDiv);
 
     return () => {
       scroller?.removeEventListener("scroll", handleScroll);
-      if (resizeDiv) {
-        resizeObserver.unobserve(resizeDiv);
-      }
+      if (resizeDiv) resizeObserver.unobserve(resizeDiv);
     };
   }, [scrollerRef]);
 
@@ -84,10 +75,9 @@ export function ChatbotBody({
           <div key={m.id} className="whitespace-pre-wrap">
             <ChatbotMessage
               message={m}
+              status={status}
               isLastMessage={m.id === lastMessage?.id}
-            >
-              {m.ui}
-            </ChatbotMessage>
+            />
           </div>
         );
       })}

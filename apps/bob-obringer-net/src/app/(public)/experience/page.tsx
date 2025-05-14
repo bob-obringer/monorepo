@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { getDocument } from "@/services/sanity-io-client";
 import { P } from "@bob-obringer/design-system";
 import { getFeaturedResumeSkills } from "@/integrations/sanity-io/queries/resume-skills";
-import { ExperiencePageBody } from "@/app/experience/_layout/experience-page-body";
-import { ExperienceSkills } from "@/app/experience/_components/experience-skills";
+import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience-page-body";
+import { ExperienceSkills } from "@/app/(public)/experience/_components/experience-skills";
 
 export const metadata: Metadata = {
   title: "Experience - Bob Obringer",

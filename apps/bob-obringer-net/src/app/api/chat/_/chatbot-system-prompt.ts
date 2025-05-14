@@ -1,17 +1,22 @@
 import { ResumeCompany } from "@/integrations/sanity-io/queries/resume-company";
 import { ResumeSkill } from "@/integrations/sanity-io/queries/resume-skills";
+import { getDocument } from "@/services/sanity-io-client";
+import { getResumeSkills } from "@/integrations/sanity-io/queries/resume-skills";
+import { getResumeCompanies } from "@/integrations/sanity-io/queries/resume-company";
+import { AboutBob, ChatbotConfig } from "@bob-obringer/sanity-io-types";
 
-export function getSystemPrompt({
-  systemPromptInstructions,
-  skills,
-  companies,
-  bio,
-}: {
-  systemPromptInstructions?: string | null;
-  skills: Array<ResumeSkill>;
-  companies: Array<ResumeCompany>;
-  bio?: string | null;
-}) {
+export async function getSystemPrompt() {
+  // grab everything from the cms
+  const [aboutBob, chatbotConfig, skills, companies] = (await Promise.all([
+    getDocument("aboutBob"),
+    getDocument("chatbotConfig"),
+    getResumeSkills(),
+    getResumeCompanies(),
+  ])) as [AboutBob, ChatbotConfig, Array<ResumeSkill>, Array<ResumeCompany>];
+
+  const systemPromptInstructions = chatbotConfig.systemPromptInstructions ?? "";
+  const bio = aboutBob.bio ?? "";
+
   return `
 ${systemPromptInstructions}
 
@@ -97,35 +102,3 @@ export function getFormattedSkills(resumeSkills: Array<ResumeSkill>) {
     })
     .join("\n");
 }
-
-/*
-  For now we're just putting our whole resume in the prompt.
-  Doing rag on this makes more sense when we have more writings to index
-*/
-
-// export async function getRelevantCompanyHighlights(
-//   resumeCompanies: ResumeCompany[],
-//   message: string,
-// ) {
-//   const res = await pinecone.query("resume-company-highlights", message);
-//   if (res.isErr()) {
-//     return null;
-//   }
-//
-//   return res.value.matches
-//     .map(({ id }) => {
-//       const idParts = id.split(":");
-//       const companyId = idParts[1];
-//       const highlightsKey = idParts[3];
-//
-//       const company = resumeCompanies.find(({ _id }) => _id === companyId);
-//       const highlight = company?.highlights?.find(
-//         ({ _key }) => _key === highlightsKey,
-//       );
-//       const skills = (highlight?.skills ?? [])
-//         .map(({ name }) => name)
-//         .join(", ");
-//       return `At ${company?.name} Bob worked on "${highlight?.text}" using ${skills}`;
-//     })
-//     .join("\n\n");
-// }
