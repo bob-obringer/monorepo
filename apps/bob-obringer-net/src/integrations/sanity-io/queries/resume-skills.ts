@@ -1,5 +1,6 @@
 import groq from "groq";
 import { sanityIoClient } from "@/services/sanity-io-client";
+import { unstable_cache } from "next/cache";
 
 /*
   Get Resume Skill
@@ -25,7 +26,13 @@ const resumeSkillQuery = groq`*[_type == "resumeSkill"]{
 } | order(orderRank asc)`;
 
 export async function getResumeSkills() {
-  return await sanityIoClient.fetch<Array<ResumeSkill>>(resumeSkillQuery);
+  return unstable_cache(
+    async () => {
+      return await sanityIoClient.fetch<Array<ResumeSkill>>(resumeSkillQuery);
+    },
+    ['sanity:resume-skills'],
+    { tags: ['sanity:resume-skills'] }
+  )();
 }
 
 /*
@@ -42,7 +49,13 @@ const featuredResumeSkillQuery = groq`*[_type == "resumeSkill" && isFeatured == 
 } | order(orderRank asc)`;
 
 export async function getFeaturedResumeSkills() {
-  return await sanityIoClient.fetch<Array<ResumeSkill>>(
-    featuredResumeSkillQuery,
-  );
+  return unstable_cache(
+    async () => {
+      return await sanityIoClient.fetch<Array<ResumeSkill>>(
+        featuredResumeSkillQuery,
+      );
+    },
+    ['sanity:featured-resume-skills'],
+    { tags: ['sanity:featured-resume-skills'] }
+  )();
 }

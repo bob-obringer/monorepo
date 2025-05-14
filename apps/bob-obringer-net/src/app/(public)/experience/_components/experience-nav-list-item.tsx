@@ -29,7 +29,12 @@ export function ExperienceNavListItem({
         isSelected ? "bg-bg-highlight" : "hover:bg-foreground/5",
       )}
     >
-      <NextLink href={url} target={target} className="group block p-2">
+      <NextLink
+        prefetch={true}
+        href={url}
+        target={target}
+        className="group block p-2"
+      >
         <Div
           color={isSelected ? "bright" : "subtle"}
           semibold

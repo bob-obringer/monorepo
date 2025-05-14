@@ -5,6 +5,9 @@ import { getFeaturedResumeSkills } from "@/integrations/sanity-io/queries/resume
 import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience-page-body";
 import { ExperienceSkills } from "@/app/(public)/experience/_components/experience-skills";
 
+export const dynamic = "force-static";
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: "Experience - Bob Obringer",
   description: "Bob's experience",

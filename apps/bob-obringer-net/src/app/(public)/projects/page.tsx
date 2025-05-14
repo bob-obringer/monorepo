@@ -1,6 +1,9 @@
 import { getContentPage } from "@/integrations/sanity-io/queries/content-pages";
 import { Markdown } from "@/features/markdown/markdown";
 
+export const dynamic = "force-static";
+export const revalidate = 86400;
+
 export default async function Projects() {
   const markdown = await getContentPage("projects");
   return (
