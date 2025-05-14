@@ -9,6 +9,10 @@ import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience
 import { H4, Span, Typography } from "@bob-obringer/design-system";
 import { NextPageProps } from "@/integrations/nextjs/types";
 
+// Force static rendering and caching
+export const dynamic = "force-static";
+export const revalidate = 86400; // Cache for 24 hours (in seconds)
+
 export async function generateMetadata({
   params,
 }: NextPageProps<{ slug: string }>) {
