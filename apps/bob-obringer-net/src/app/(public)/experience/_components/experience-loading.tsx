@@ -1,4 +1,4 @@
-import { ExperiencePageBody } from "@/app/experience/_layout/experience-page-body";
+import { ExperiencePageBody } from "@/app/(public)/experience/_layout/experience-page-body";
 
 export function BodyTextLoader() {
   return <div className="bg-color-tertiary mb-2 h-5 w-full rounded-full" />;

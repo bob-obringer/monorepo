@@ -1,19 +1,29 @@
 ---
 trigger: model_decision
-glob: */**
+glob: **/*
 description: Database or Supabase related rules
 ---
 
 # Supabase Rules
 
+## Important locations
+
+- `apps/bob-obringer-net/supabase/` - contains all of our supabase settings
+- `apps/bob-obringer-net/supabase/migrations` - contains the database migrations
+
 ## Local Development
 
-When working with Supabase locally in the `apps/bob-obringer-net` directory, you can use the following commands:
+## Schema Changes
 
-Please confirm that you are ONLY running these commands locally
+- Any time you make schema changes, make sure you update types in `apps/bob-obringer-net/src/integrations/supabase/types.ts`
 
-1. Reset the local database and reapply all migrations (WARNING: Deletes local data)
+### Migrations
 
-```bash
-supabase db reset
-```
+- We should try to stick to a single migration file per commit
+- If we adjust that script we should reset the database which will reapply all migrations
+
+### Reset
+
+- We should ONLY reset our local database or development branches
+- Please always confirm that you are not running the command against production
+- To completely reset the database, run `supabase db reset`

@@ -6,7 +6,8 @@ CREATE TABLE chats (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc', now()),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc', now()),
-    title TEXT
+    title TEXT,
+    location TEXT
 );
 
 -- Table for individual messages

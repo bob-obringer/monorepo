@@ -2,13 +2,16 @@ import {
   faRobot,
   faUserVisor,
 } from "@awesome.me/kit-8a94ae437c/icons/duotone/solid";
-import { ReactNode } from "react";
-import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
 import { cn } from "@/helpers/cn";
 import { Div } from "@bob-obringer/design-system";
+import { UIMessage } from "ai";
+import { ChatStatus } from "@/features/ai-chatbot/context/chat-context";
+import { ChatbotMessageStatusIndicator } from "@/features/ai-chatbot/components/chatbot-message-status-indicator";
+import { MemoizedMarkdown } from "@/features/markdown/memoized-markdown";
+import { ContactCard } from "@/components/contact-card";
+import { ContactInfoWithAsset } from "@/integrations/sanity-io/queries/contact-info";
+import { ResumeCard, ResumeLinkCard } from "@/components/resume-card";
 
 const messageRoleInfo = {
   user: {
@@ -26,29 +29,57 @@ const messageRoleInfo = {
 };
 
 export function ChatbotMessage({
-  children,
   message,
-  isLastMessage = false,
+  status,
+  isLastMessage,
 }: {
-  children: ReactNode;
-  message: ChatbotUIMessage;
-  isLastMessage?: boolean;
+  message: UIMessage;
+  status: ChatStatus;
+  isLastMessage: boolean;
 }) {
-  const { chatbotStatus } = useChatbot();
+  if (message.role === "system" || message.role === "data") return null;
+
   const { className } = messageRoleInfo[message.role];
-  const isActive = isLastMessage && chatbotStatus === "active";
+  const isActive =
+    isLastMessage && (status === "streaming" || status === "submitted");
 
   return (
     <div className={cn(className, "relative overflow-x-hidden")}>
       <div className={"flex flex-col gap-5 p-5"}>
-        <MessageTitle isLastMessage={isLastMessage} message={message} />
-        <div
-          className={cn(
-            message.status === "cancelled" && "text-warning opacity-50",
-            message.status === "error" && "text-destructive",
-          )}
-        >
-          {children}
+        <MessageTitle
+          isLastMessage={isLastMessage}
+          message={message}
+          status={status}
+        />
+        <div className={cn(status === "error" && "text-destructive")}>
+          {message.parts.map((part, index) => {
+            if (part.type === "text") {
+              return (
+                <MemoizedMarkdown
+                  key={index}
+                  id={message.id}
+                  content={part.text}
+                />
+              );
+            }
+            if (part.type === "tool-invocation") {
+              const { toolName, state } = part.toolInvocation;
+              if (toolName === "contact") {
+                if (state !== "result") return null;
+                return (
+                  <ContactToolResult
+                    key={index}
+                    contactInfo={part.toolInvocation.result}
+                  />
+                );
+              }
+              if (toolName === "resume") {
+                if (state !== "result") return null;
+                return <ResumeToolResult key={index} />;
+              }
+            }
+            return null;
+          })}
         </div>
       </div>
       {isActive && (
@@ -62,11 +93,15 @@ export function ChatbotMessage({
 
 function MessageTitle({
   message,
+  status,
   isLastMessage,
 }: {
-  message: ChatbotUIMessage;
+  message: UIMessage;
+  status: ChatStatus;
   isLastMessage: boolean;
 }) {
+  if (message.role === "data" || message.role === "system") return null;
+
   const { icon, roleName, titleClassName } = messageRoleInfo[message.role];
 
   return (
@@ -79,7 +114,40 @@ function MessageTitle({
     >
       <FontAwesomeIcon icon={icon} size="lg" />
       <Div className="flex-1">{roleName}</Div>
-      {isLastMessage && <ChatbotMessageStatusIndicator message={message} />}
+      {isLastMessage && <ChatbotMessageStatusIndicator status={status} />}
     </Div>
+  );
+}
+
+function ContactToolResult({
+  contactInfo,
+}: {
+  contactInfo: ContactInfoWithAsset | Array<ContactInfoWithAsset>;
+}) {
+  if (Array.isArray(contactInfo)) {
+    return (
+      <div
+        className="grid h-full auto-rows-fr gap-2 sm:auto-rows-min sm:grid-cols-2"
+        style={{ gridAutoFlow: "row dense" }}
+      >
+        {contactInfo.map((contact) => (
+          <ContactCard key={contact._id} contactInfo={contact} />
+        ))}
+      </div>
+    );
+  }
+
+  return <ContactCard contactInfo={contactInfo} />;
+}
+
+function ResumeToolResult() {
+  return (
+    <div
+      className="grid h-full auto-rows-fr gap-2 sm:auto-rows-min sm:grid-cols-2"
+      style={{ gridAutoFlow: "row dense" }}
+    >
+      <ResumeCard />
+      <ResumeLinkCard />
+    </div>
   );
 }

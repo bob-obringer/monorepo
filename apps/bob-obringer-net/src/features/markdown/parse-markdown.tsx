@@ -34,7 +34,11 @@ class CustomRenderer extends marked.Renderer {
   listitem(token: Tokens.ListItem) {
     let content = "";
     if (token.tokens) {
-      content = this.parser.parseInline(token.tokens);
+      try {
+        content = this.parser.parseInline(token.tokens);
+      } catch {
+        content = "";
+      }
     } else if (token.text) {
       content = token.text;
     }
@@ -71,6 +75,9 @@ class CustomRenderer extends marked.Renderer {
     // We use this.parser.parse() as blockquotes can contain other block-level elements.
     const quote = this.parser.parse(token.tokens);
     return `<blockquote data-markdown class="border-l-4 border-foreground/20 mb-2 pl-4 pt-2 italic">${quote}</blockquote>`;
+  }
+  space() {
+    return "";
   }
 }
 

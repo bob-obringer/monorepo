@@ -1,5 +1,3 @@
-import { ChatbotUIMessage } from "@/features/ai-chatbot/types";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
 import {
   faClose,
   faCheck,
@@ -11,46 +9,38 @@ import { Div } from "@bob-obringer/design-system";
 import { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cn } from "@/helpers/cn";
+import { ChatStatus } from "@/features/ai-chatbot/context/chat-context";
 
 export function ChatbotMessageStatusIndicator({
-  message,
+  status,
 }: {
-  message: ChatbotUIMessage;
+  status: ChatStatus;
 }) {
-  const { chatbotStatus } = useChatbot();
-  const { status } = message;
+  // const isIdle = status === "idle";
 
-  const isIdle = chatbotStatus === "idle";
-
-  if (status === "cancelled") {
-    return (
-      <MessageStateWrapper isIdle={isIdle}>
-        <MessageStateItem isCancelling>Cancelling</MessageStateItem>
-      </MessageStateWrapper>
-    );
-  }
+  // if (status === "cancelled") {
+  //   return (
+  //     <MessageStateWrapper isIdle={isIdle}>
+  //       <MessageStateItem isCancelling>Cancelling</MessageStateItem>
+  //     </MessageStateWrapper>
+  //   );
+  // }
 
   if (status === "error") {
     return (
-      <MessageStateWrapper isIdle={isIdle}>
-        <MessageStateItem isDone>Failed</MessageStateItem>
+      <MessageStateWrapper isIdle={true}>
+        <MessageStateItem isDone>Error</MessageStateItem>
       </MessageStateWrapper>
     );
   }
 
-  const isRetrieving = status === "retrieving";
-  const isRetrieved = status === "success" || status === "generating";
-  const isGenerating = status === "generating";
-  const isGenerated = status === "success";
+  const isSubmitted = status === "submitted";
+  const isStreaming = status === "streaming";
 
   return (
-    <MessageStateWrapper isIdle={isIdle}>
-      <MessageStateItem isDone={isRetrieved} isActive={isRetrieving}>
-        Retrieving
-      </MessageStateItem>
-      <MessageStateItem isDone={isGenerated} isActive={isGenerating}>
-        Generating
-      </MessageStateItem>
+    <MessageStateWrapper isIdle={status === "ready"}>
+      <MessageStateItem isActive={isSubmitted}>Submitting</MessageStateItem>
+      <MessageStateItem isActive={isStreaming}>Streaming</MessageStateItem>
     </MessageStateWrapper>
   );
 }

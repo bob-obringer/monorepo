@@ -1,6 +1,9 @@
 import convertStringToReactNode from "html-react-parser";
 import { parseMarkdown } from "@/features/markdown/parse-markdown";
 
+/**
+ * @deprecated
+ */
 export async function Markdown({
   markdown,
   className,

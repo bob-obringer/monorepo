@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ExperienceNav } from "@/app/experience/_components/experience-nav";
+import { ExperienceNav } from "@/app/(public)/experience/_components/experience-nav";
 import { cn } from "@/helpers/cn";
 
 export default function ResumeLayout({ children }: { children: ReactNode }) {

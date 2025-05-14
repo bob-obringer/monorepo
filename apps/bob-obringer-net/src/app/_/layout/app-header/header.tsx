@@ -4,7 +4,7 @@ import { cn } from "@/helpers/cn";
 import { H1, H2 } from "@bob-obringer/design-system";
 import { AboutBob } from "@bob-obringer/sanity-io-types";
 import { useSelectedLayoutSegments } from "next/navigation";
-import { useChatbot } from "@/features/ai-chatbot/context/chatbot-inner-context";
+import { useBobsChatbot } from "@/features/ai-chatbot/context/chat-context";
 
 const titles: Record<string, string> = {
   experience: "Experience",
@@ -20,7 +20,7 @@ export function Header({
   className?: string;
   aboutBob: AboutBob | null;
 }) {
-  const { isOpen } = useChatbot();
+  const { isOpen } = useBobsChatbot();
   const segments = useSelectedLayoutSegments();
   const segment = segments[0] ?? "";
   const isHome = segments.length === 0;
